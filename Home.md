@@ -12,7 +12,12 @@ This wiki is about the technical design of Puttyimages.
 
 - [[Super Like Flow|SuperLikeFlow]]
 - [[User Login Flow|LoginFlow|]]
+- [[Image Upload Flow|ImageUploadFlow]]
 
 ### Ecosystem
 
 - [[Wordpress Plugin|WordpressPlugin]]
+
+### DataFormat
+
+- [[IPLD Format|IPLDFormat]]
