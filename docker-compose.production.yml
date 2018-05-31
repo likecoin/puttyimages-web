@@ -1,0 +1,12 @@
+version: '2'
+
+services:
+  nuxt:
+    extends:
+      file: docker-compose.yml
+      service: nuxt
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    volumes:
+      - /usr/src/app

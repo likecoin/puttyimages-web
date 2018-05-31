@@ -1,0 +1,11 @@
+FROM node:10
+
+COPY . /usr/src/app
+
+WORKDIR /usr/src/app
+
+# TODO: make it multi-build and only run npm install production
+RUN npm install
+RUN npm run build
+
+CMD ["npm", "start"]
