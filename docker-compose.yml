@@ -1,16 +1,16 @@
-version: '2'
+version: '3'
 
 services:
   nuxt:
     build:
       context: .
+    depends_on:
+    - db
+    - ipfs
     ports:
       - "3000:3000"
     volumes:
       - ./:/usr/src/app
-    links:
-      - db
-      - ipfs
     environment:
       HOST: 0.0.0.0
       IPFS_HOST: ipfs
