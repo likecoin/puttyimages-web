@@ -13,6 +13,7 @@ services:
       - ipfs
     environment:
       HOST: 0.0.0.0
+      IPFS_HOST: ipfs
 
   db:
     image: postgres:10.4
