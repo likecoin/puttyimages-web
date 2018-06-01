@@ -15,6 +15,13 @@ services:
       file: docker-compose.yml
       service: db
 
+  ipfs:
+    extends:
+      file: docker-compose.yml
+      service: ipfs
+
 volumes:
   db_data:
+    driver: local
+  ipfs_data:
     driver: local

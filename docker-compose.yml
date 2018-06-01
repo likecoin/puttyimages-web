@@ -10,6 +10,7 @@ services:
       - ./:/usr/src/app
     links:
       - db
+      - ipfs
     environment:
       HOST: 0.0.0.0
 
@@ -20,6 +21,15 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
+  ipfs:
+    image: ipfs/go-ipfs:v0.4.15
+    ports:
+      - "8080:8080"
+    volumes:
+      - ipfs_data:/data/ipfs
+
 volumes:
   db_data:
+    driver: local
+  ipfs_data:
     driver: local
