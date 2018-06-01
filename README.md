@@ -8,6 +8,15 @@ Puttyimegs is an open stock image DApp that live within the
 ``` bash
 $ docker-compose build
 $ docker-compose up
+
+# Migration
+$ docker exec puttyimages-web_nuxt_1 sh -c 'node_modules/.bin/sequelize db:migrate'
+
+# Undo last migration
+$ docker exec puttyimages-web_nuxt_1 sh -c 'node_modules/.bin/sequelize db:migrate:undo'
+
+# Seed data
+$ docker exec puttyimages-web_nuxt_1 sh -c 'node_modules/.bin/sequelize db:seed:all'
 ```
 
 Local files are mount into docker you can modify file in your fs and will
