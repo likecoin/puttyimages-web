@@ -10,3 +10,11 @@ services:
       dockerfile: Dockerfile.production
     volumes:
       - /usr/src/app
+  db:
+    extends:
+      file: docker-compose.yml
+      service: db
+
+volumes:
+  db_data:
+    driver: local
