@@ -1,8 +1,19 @@
 <template>
-  <div>
-    <nuxt/>
-    <my-footer/>
-  </div>
+  <v-app>
+    <v-toolbar>
+      <v-toolbar-title>PuttyImage</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn flat>Login</v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+    <v-content>
+      <v-container fluid>
+        <nuxt/>
+        <my-footer/>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
@@ -20,8 +31,12 @@ export default {
 {
   margin: 0;
   width: 100%;
-  padding: 100px 0;
+  padding: 0;
   text-align: center;
+}
+
+.content {
+  padding-top: 56px !important;
 }
 
 .button, .button:visited

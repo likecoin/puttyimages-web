@@ -4,13 +4,13 @@
     <h1 class="title">
       USERS
     </h1>
-    <ul class="users">
-      <li v-for="(user, index) in users" :key="index" class="user">
-        <nuxt-link :to="{ name: 'id', params: { id: user.id }}">
+    <v-card>
+      <v-list two-line>
+        <v-list-tile v-for="user in users" :key="user.id" nuxt :to="{ name: 'id', params: { id: user.id }}">
           {{ user.name }}
-        </nuxt-link>
-      </li>
-    </ul>
+        </v-list-tile>
+      </v-list>
+    </v-card>
   </section>
 </template>
 
@@ -34,15 +34,5 @@ export default {
 .title
 {
   margin: 30px 0;
-}
-.users
-{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.user
-{
-  margin: 10px 0;
 }
 </style>
