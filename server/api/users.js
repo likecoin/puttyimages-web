@@ -1,26 +1,34 @@
 import { Router } from 'express';
+import sequelize from '../models';
 
 const router = Router();
 
-// Mock Users
-const users = [
-  { name: 'Alexandre' },
-  { name: 'Pooya' },
-  { name: 'Sébastien' },
-];
-
 /* GET users listing. */
-router.get('/users', (req, res) => {
-  res.json(users);
+router.get('/users', async (req, res, next) => {
+  try {
+    const users = await sequelize.user.findAll({ raw: true });
+    res.json(users);
+  } catch (e) {
+    next(e);
+  }
 });
 
 /* GET user by ID. */
-router.get('/users/:id', (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  if (id >= 0 && id < users.length) {
-    res.json(users[id]);
-  } else {
-    res.sendStatus(404);
+router.get('/users/:id', async (req, res, next) => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    if (id >= 0) {
+      const user = await sequelize.user.findById(id, { raw: true });
+      if (user) {
+        res.json(user);
+      } else {
+        res.sendStatus(404);
+      }
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (e) {
+    next(e);
   }
 });
 
