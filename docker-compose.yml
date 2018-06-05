@@ -11,6 +11,7 @@ services:
       - "3000:3000"
     volumes:
       - ./:/usr/src/app
+      - /usr/src/app/node_modules
     environment:
       HOST: 0.0.0.0
       IPFS_HOST: ipfs
