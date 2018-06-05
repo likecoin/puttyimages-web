@@ -5,18 +5,26 @@ Puttyimegs is an open stock image DApp that live within the
 
 ## Development Setup
 
+The suggested way of development environment is docker based. This guide will
+assume you have Docker Community Edition 18+ installed. Please download at 
+[https://store.docker.com](https://store.docker.com) and follow the
+installation instruction.
+
+After you setup docker, fun the following command to setup the docker image
+and basic DB schema. Also kick start the docker container for development.
+
 ``` bash
+# Build the docker images, run it for the first time or you have dependency
+# updates
 $ docker-compose build
+
+# Run the DB migration and reseed the DB for the first time run or after you
+# pull an update.
+$ docker-compose run nuxt npm run sequelize db:migrate
+$ docker-compose run nuxt npm run sequelize db:seed:all
+
+# Kick of the development setup
 $ docker-compose up
-
-# Migration
-$ docker exec puttyimages-web_nuxt_1 sh -c 'node_modules/.bin/sequelize db:migrate'
-
-# Undo last migration
-$ docker exec puttyimages-web_nuxt_1 sh -c 'node_modules/.bin/sequelize db:migrate:undo'
-
-# Seed data
-$ docker exec puttyimages-web_nuxt_1 sh -c 'node_modules/.bin/sequelize db:seed:all'
 ```
 
 Local files are mount into docker you can modify file in your fs and will
