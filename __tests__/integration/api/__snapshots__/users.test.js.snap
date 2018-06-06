@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get user info by id 1`] = `
+Object {
+  "id": 1,
+  "name": "Alexandre",
+}
+`;
+
+exports[`get users list 1`] = `
+Array [
+  Object {
+    "id": 1,
+    "name": "Alexandre",
+  },
+  Object {
+    "id": 2,
+    "name": "Pooya",
+  },
+  Object {
+    "id": 3,
+    "name": "Sébastien",
+  },
+]
+`;

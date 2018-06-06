@@ -1,0 +1,12 @@
+{
+  "presets": [
+    "babel-preset-backpack"
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        ["env"]
+      ]
+    }
+  }
+}

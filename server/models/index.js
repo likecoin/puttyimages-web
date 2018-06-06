@@ -11,13 +11,15 @@ const sequelize = new Sequelize({
 });
 
 const db = {};
+const isTest = global.test !== undefined;
+const modelPath = `${isTest ? '' : '../'}${__dirname}`; // Fix backpack fs path
 
 fs.readdirSync(__dirname).forEach((file) => {
   if (file === 'index.js' || file === 'base.js') {
     return;
   }
 
-  const model = sequelize.import(path.join('../', __dirname, file));
+  const model = sequelize.import(path.join(modelPath, file));
   db[model.name] = model;
 });
 

@@ -12,5 +12,5 @@ module.exports = {
         type: Sequelize.TEXT,
       },
     }),
-  down: queryInterface => queryInterface.dropTable('user'),
+  down: (queryInterface) => queryInterface.dropTable('user'),
 };

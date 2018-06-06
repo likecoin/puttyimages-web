@@ -6,7 +6,7 @@ Puttyimegs is an open stock image DApp that live within the
 ## Development Setup
 
 The suggested way of development environment is docker based. This guide will
-assume you have Docker Community Edition 18+ installed. Please download at 
+assume you have Docker Community Edition 18+ installed. Please download at
 [https://store.docker.com](https://store.docker.com) and follow the
 installation instruction.
 
@@ -20,8 +20,8 @@ $ docker-compose build
 
 # Run the DB migration and reseed the DB for the first time run or after you
 # pull an update.
-$ docker-compose run nuxt npm run sequelize db:migrate
-$ docker-compose run nuxt npm run sequelize db:seed:all
+$ docker-compose run --rm nuxt npm run sequelize db:migrate
+$ docker-compose run --rm nuxt npm run sequelize db:seed:all
 
 # Kick of the development setup
 $ docker-compose up
@@ -29,6 +29,12 @@ $ docker-compose up
 
 Local files are mount into docker you can modify file in your fs and will
 hot reload.
+
+## Test
+
+``` bash
+make test
+```
 
 ## Production
 
