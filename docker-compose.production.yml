@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  nuxt:
+    extends:
+      file: docker-compose.yml
+      service: nuxt
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    volumes:
+      - /usr/src/app
+  db:
+    extends:
+      file: docker-compose.yml
+      service: db
+
+  ipfs:
+    extends:
+      file: docker-compose.yml
+      service: ipfs
+
+volumes:
+  db_data:
+    driver: local
+  ipfs_data:
+    driver: local

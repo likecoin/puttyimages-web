@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  nuxt:
+    build:
+      context: .
+    depends_on:
+    - db
+    - ipfs
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      HOST: 0.0.0.0
+      IPFS_HOST: ipfs
+
+  db:
+    image: postgres:10.4
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  ipfs:
+    image: ipfs/go-ipfs:v0.4.15
+    ports:
+      - "8080:8080"
+    volumes:
+      - ipfs_data:/data/ipfs
+
+volumes:
+  db_data:
+    driver: local
+  ipfs_data:
+    driver: local
