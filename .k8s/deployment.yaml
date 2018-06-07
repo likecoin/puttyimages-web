@@ -1,0 +1,176 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ipfs-pv-claim
+  namespace: likecoin
+  labels:
+    app: puttyimage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pgsql-pv-claim
+  namespace: likecoin
+  labels:
+    app: puttyimage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: puttyimage-ipfs
+  namespace: likecoin
+spec:
+  selector:
+    matchLabels:
+      app: puttyimage-ipfs
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: puttyimage-ipfs
+    spec:
+      containers:
+      - name: ipfs
+        image: ipfs/go-ipfs:v0.4.15
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: ipfs-persistent-storage
+          mountPath: /data/ipfs
+      volumes:
+      - name: ipfs-persistent-storage
+        persistentVolumeClaim:
+          claimName: ipfs-pv-claim
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: puttyimage-db
+  namespace: likecoin
+spec:
+  selector:
+    matchLabels:
+      app: puttyimage-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: puttyimage-db
+    spec:
+      containers:
+      - name: pgsql
+        image: postgres:10.4
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: pgsql-persistent-storage
+          mountPath: /data
+      volumes:
+      - name: pgsql-persistent-storage
+        persistentVolumeClaim:
+          claimName: pgsql-pv-claim
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: puttyimage-web
+  namespace: likecoin
+spec:
+  selector:
+    matchLabels:
+      app: puttyimage-web
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: puttyimage-web
+    spec:
+      containers:
+      - name: web
+        image: indream/puttyimages-web:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: HOST
+          value: 0.0.0.0
+        - name: IPFS_HOST
+          value: ipfs
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: web
+  name: web
+  namespace: likecoin
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: puttyimage-web
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ipfs
+  namespace: likecoin
+  labels:
+    app: puttyimage-ipfs
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: puttyimage-ipfs
+  clusterIP: None
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  namespace: likecoin
+  labels:
+    app: puttyimage-db
+spec:
+  ports:
+    - port: 5432
+  selector:
+    app: puttyimage-db
+  clusterIP: None
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: puttyimage
+  name: puttyimage
+  namespace: likecoin
+  annotations:
+    ingress.kubernetes.io/proxy-body-size: 10m
+spec:
+  rules:
+  - host: puttyimage.pandawork.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web
+          servicePort: 80
+  tls:
+  - hosts:
+    - puttyimage.pandawork.com
