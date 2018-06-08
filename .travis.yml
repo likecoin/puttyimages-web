@@ -15,6 +15,9 @@ deploy:
   - provider: script
     script: ./scripts/deploy-docker-hub.sh
     skip_cleanup: true
+    on:
+      repo: oursky/puttyimages-web
+      branch: master
 after_deploy:
   - ./scripts/trigger-github-deploy.sh
 env:
