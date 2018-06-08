@@ -1,0 +1,19 @@
+$colors: (
+  like-green: #2d6472,
+  like-brown: #6a282e,
+);
+
+@function color($name) {
+  @return map-get($colors, $name);
+}
+
+$gradient-colors: (
+  primary: (#3d286e, color(like-green)),
+  secondary: (#3d286e, color(like-brown)),
+);
+
+@function gradient-colors($name) {
+  @return map-get($gradient-colors, $name);
+}
+
+$gradient-likecoin: linear-gradient(292deg, #d0f0f0, #f0e6b4);

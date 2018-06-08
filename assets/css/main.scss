@@ -1,30 +1,27 @@
 @import 'node_modules/vuetify/dist/vuetify.min.css';
 
-html, body
-{
-  background-color: #fff;
-  color: #000;
-  letter-spacing: 0.5px;
-  font-family: "Source Sans Pro", Arial, sans-serif;
+@import '_variables';
+@import '_components';
+
+html, body {
   height: 100vh;
   margin: 0;
-}
 
-footer
-{
-  padding: 20px;
-  text-align: center;
-  border-top: 1px solid #ddd;
-}
+  letter-spacing: 0.5px;
 
-a, a:hover, a:focus, a:visited
-{
   color: #000;
+  background-color: #fff;
+
+  font-family: "Source Sans Pro", Arial, sans-serif;
 }
 
-.logo {
-  width: 100%;
-  height: auto;
-  max-width: 400px;
-  max-height: 289px;
+a {
+  transition: color .25s ease-out;
+  text-decoration: none;
+
+  color: color(like-green);
+
+  &:hover  {
+    color: darken(color(like-green), 10);
+  }
 }

@@ -51,6 +51,25 @@ module.exports = {
           }),
         ];
       }
+
+      // Remove SVG from url-loader rules
+      const urlLoader = config.module.rules.find(rule => rule.loader === 'url-loader');
+      urlLoader.test = /\.(png|jpe?g|gif)$/;
+
+      // Add custom SVG rule
+      config.module.rules.push({
+        test: /\.svg$/,
+        loader: 'vue-svg-loader',
+        options: {
+          // optional options, ref: https://github.com/svg/svgo
+          svgo: {
+            plugins: [
+              { removeDoctype: true },
+              { removeComments: true },
+            ],
+          },
+        },
+      });
     },
   },
   plugins: ['~/plugins/vuetify'],

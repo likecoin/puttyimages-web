@@ -1,0 +1,48 @@
+/* Buttons */
+
+.btn--likecoin {
+  min-height: 42px;
+
+  text-transform: none;
+
+  font-size: 18px;
+  font-weight: 400;
+
+  &.primary {
+    background-image: linear-gradient(to right, gradient-colors(primary));
+
+    &--text {
+      color: color(like-green) !important;
+    }
+  }
+
+  &.secondary {
+    background-image: linear-gradient(to right, gradient-colors(secondary));
+
+    &--text {
+      color: color(like-brown) !important;
+    }
+  }
+
+  .icon {
+    & + * {
+      margin-left: 8px;
+    }
+  }
+
+  &.btn--icon {
+    svg {
+      fill: currentColor;
+
+      width: 24px;
+      height: 24px;
+    }
+
+    &.btn--large {
+      svg {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+}
