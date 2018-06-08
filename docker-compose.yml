@@ -14,7 +14,8 @@ services:
       - /usr/src/app/node_modules
     environment:
       HOST: 0.0.0.0
-      IPFS_HOST: ipfs
+      IPFS_HOST: http://ipfs:5001
+      IPFS_MASTER: http://ipfs:5001
 
   db:
     image: postgres:10.4
