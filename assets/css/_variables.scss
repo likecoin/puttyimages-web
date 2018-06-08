@@ -1,3 +1,5 @@
+/* Colors */
+
 $colors: (
   like-green: #2d6472,
   like-brown: #6a282e,
@@ -17,3 +19,15 @@ $gradient-colors: (
 }
 
 $gradient-likecoin: linear-gradient(292deg, #d0f0f0, #f0e6b4);
+
+/* Grid System */
+
+$breakpoints: (
+  xs: 600px,
+  sm: 960px,
+  md: 1264px,
+);
+
+@function breakpoint($type) {
+  @return map-get($breakpoints, $type);
+}

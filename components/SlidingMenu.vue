@@ -139,6 +139,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~assets/css/variables';
+@import '~assets/css/mixins';
 
 $sliding-menu__inset-x: 64px;
 
@@ -174,7 +175,7 @@ $sliding-menu__inset-x: 64px;
   top: 0;
   right: 0;
 
-  width: 600px;
+  width: breakpoint(xs);
   height: 100vh;
 
   transition: transform .25s ease-out;
@@ -182,7 +183,7 @@ $sliding-menu__inset-x: 64px;
 
   background-image: $gradient-likecoin;
 
-  @media screen and (max-width: 600px) {
+  @include mobile-only {
     width: 100vw;
   }
 
