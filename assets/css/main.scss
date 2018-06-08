@@ -3,16 +3,17 @@
 @import '_variables';
 @import '_components';
 
-html, body {
+html,
+body {
+  font-family: 'Source Sans Pro', Arial, sans-serif;
+
   height: 100vh;
   margin: 0;
 
-  letter-spacing: 0.5px;
+  letter-spacing: .5px;
 
   color: #000;
-  background-color: #fff;
-
-  font-family: "Source Sans Pro", Arial, sans-serif;
+  background-color: #FFF;
 }
 
 a {
@@ -21,7 +22,7 @@ a {
 
   color: color(like-green);
 
-  &:hover  {
+  &:hover {
     color: darken(color(like-green), 10);
   }
 }
