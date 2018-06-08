@@ -37,8 +37,7 @@ export default {
 </script>
 
 <style scoped>
-.title
-{
+.title {
   margin-top: 30px;
 }
 </style>

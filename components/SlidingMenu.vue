@@ -187,7 +187,7 @@ $sliding-menu__inset-x: 64px;
     width: 100vw;
   }
 
-  > div {
+   > div {
     position: relative;
 
     display: flex;
@@ -208,7 +208,7 @@ $sliding-menu__inset-x: 64px;
     transform: none;
     pointer-events: all;
 
-    > div {
+     > div {
       opacity: 1;
     }
   }
@@ -240,7 +240,7 @@ $sliding-menu__inset-x: 64px;
   margin-right: 12px;
 
   border-radius: 50%;
-  background-color: #ddd;
+  background-color: #DDD;
 }
 
 .user-account__greeting {
