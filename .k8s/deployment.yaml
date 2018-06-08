@@ -4,7 +4,7 @@ metadata:
   name: ipfs-pv-claim
   namespace: likecoin
   labels:
-    app: puttyimage
+    app: puttyimages
 spec:
   accessModes:
     - ReadWriteOnce
@@ -18,7 +18,7 @@ metadata:
   name: pgsql-pv-claim
   namespace: likecoin
   labels:
-    app: puttyimage
+    app: puttyimages
 spec:
   accessModes:
     - ReadWriteOnce
@@ -29,17 +29,17 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: puttyimage-ipfs
+  name: puttyimages-ipfs
   namespace: likecoin
 spec:
   selector:
     matchLabels:
-      app: puttyimage-ipfs
+      app: puttyimages-ipfs
   replicas: 1
   template:
     metadata:
       labels:
-        app: puttyimage-ipfs
+        app: puttyimages-ipfs
     spec:
       containers:
       - name: ipfs
@@ -57,17 +57,17 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: puttyimage-db
+  name: puttyimages-db
   namespace: likecoin
 spec:
   selector:
     matchLabels:
-      app: puttyimage-db
+      app: puttyimages-db
   replicas: 1
   template:
     metadata:
       labels:
-        app: puttyimage-db
+        app: puttyimages-db
     spec:
       containers:
       - name: pgsql
@@ -85,21 +85,21 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: puttyimage-web
+  name: puttyimages-web
   namespace: likecoin
 spec:
   selector:
     matchLabels:
-      app: puttyimage-web
+      app: puttyimages-web
   replicas: 1
   template:
     metadata:
       labels:
-        app: puttyimage-web
+        app: puttyimages-web
     spec:
       containers:
       - name: web
-        image: indream/puttyimages-web:latest
+        image: oursky/puttyimages-web:latest
         ports:
         - containerPort: 3000
         env:
@@ -121,7 +121,7 @@ spec:
     protocol: TCP
     targetPort: 3000
   selector:
-    app: puttyimage-web
+    app: puttyimages-web
   sessionAffinity: None
   type: ClusterIP
 ---
@@ -131,12 +131,12 @@ metadata:
   name: ipfs
   namespace: likecoin
   labels:
-    app: puttyimage-ipfs
+    app: puttyimages-ipfs
 spec:
   ports:
     - port: 8080
   selector:
-    app: puttyimage-ipfs
+    app: puttyimages-ipfs
   clusterIP: None
 ---
 apiVersion: v1
@@ -145,26 +145,26 @@ metadata:
   name: db
   namespace: likecoin
   labels:
-    app: puttyimage-db
+    app: puttyimages-db
 spec:
   ports:
     - port: 5432
   selector:
-    app: puttyimage-db
+    app: puttyimages-db
   clusterIP: None
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   labels:
-    app: puttyimage
-  name: puttyimage
+    app: puttyimages
+  name: puttyimages
   namespace: likecoin
   annotations:
     ingress.kubernetes.io/proxy-body-size: 10m
 spec:
   rules:
-  - host: puttyimage.pandawork.com
+  - host: puttyimages.pandawork.com
     http:
       paths:
       - path: /
@@ -173,4 +173,4 @@ spec:
           servicePort: 80
   tls:
   - hosts:
-    - puttyimage.pandawork.com
+    - puttyimages.pandawork.com

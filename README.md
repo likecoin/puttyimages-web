@@ -40,7 +40,7 @@ make test
 
 Oursky hosts a staging continuous integration pipeline for fast review. The
 deployed endpoint is
-[https://puttyimage.pandawork.com](https://puttyimage.pandawork.com). The
+[https://puttyimages.pandawork.com](https://puttyimages.pandawork.com). The
 endpoint is in sync with the `master` branch of [Oursky
 fork](https://github.com/oursky/puttyimages-web) via Travis-CI. You can send PR to the
 branch if you want your changes reflect on the review endpoint.

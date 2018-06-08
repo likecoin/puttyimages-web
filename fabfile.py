@@ -8,7 +8,7 @@ env.shell = '/bin/sh -l -c'
 # roledes is the mapping on the enviromnet to the remote machine.
 env.user = 'unimportant'
 env.roledefs.update({
-    'pandawork': ['puttyimage.pandawork.com']
+    'pandawork': ['puttyimages.pandawork.com']
 })
 
 def short_sha():
@@ -17,4 +17,4 @@ def short_sha():
 @task
 def deploy(branch_name):
     image_tag = short_sha()
-    local("kubectl --namespace likecoin set image deployment/puttyimage-web web=oursky/puttyimage-web:%s" % (image_tag,))
+    local("kubectl --namespace likecoin set image deployment/puttyimages-web web=oursky/puttyimages-web:%s" % (image_tag,))

@@ -1,6 +1,6 @@
 .PHONY: test
 
-docker_compose_test := docker-compose --project-name puttyimage_test
+docker_compose_test := docker-compose --project-name puttyimages_test
 
 test:
 	$(docker_compose_test) down -v
