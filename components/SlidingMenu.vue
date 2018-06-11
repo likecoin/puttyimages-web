@@ -145,7 +145,7 @@ $sliding-menu__inset-x: 64px;
 
 .sliding-menu {
   position: fixed;
-  z-index: 1000;
+  z-index: 100;
   top: 0;
   left: 0;
 

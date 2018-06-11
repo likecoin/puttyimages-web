@@ -37,19 +37,11 @@
           <!-- Chrome Dialog end -->
 
           <!-- Metamask related dialog start -->
-          <v-dialog
-            v-model="isDialogOpen"
-            max-width="290"
+          <the-metamask-dialog
+            :getWeb3Message="getWeb3Message"
+            :isDialogOpen.sync="isDialogOpen"
             v-else-if="!!getWeb3Message"
-            @keydown.esc="isDialogOpen = false"
-          >
-            <v-card>
-              <v-card-title class="headline">
-                {{ metamaskDialogMessage }}
-              </v-card-title>
-            </v-card>
-            <v-btn dark flat @click.native="isDialogOpen = false">Close</v-btn>
-          </v-dialog>
+          />
           <!-- Metamask related dialog end -->
         </div>
       </div>
@@ -60,6 +52,8 @@
 <script>
 import { mapGetters } from 'vuex';
 
+import TheMetamaskDialog from '@/components/TheMetamaskDialog';
+
 import {
   checkIsMobileClient,
   checkIsDesktopChrome,
@@ -67,6 +61,9 @@ import {
 
 export default {
   name: 'the-overlay-component',
+  components: {
+    TheMetamaskDialog,
+  },
   data() {
     return {
       isDialogOpen: false,
@@ -82,16 +79,6 @@ export default {
     },
     shouldShowChromeDialog() {
       return this.getWeb3Message === 'web3' && !checkIsDesktopChrome();
-    },
-    metamaskDialogMessage() {
-      switch (this.getWeb3Message) {
-        case 'web3':
-          return 'install metamask!';
-        case 'testnet':
-          return 'switch to mainnet';
-        default:
-          return '';
-      }
     },
   },
   methods: {
