@@ -107,6 +107,8 @@ spec:
           value: 0.0.0.0
         - name: IPFS_HOST
           value: ipfs
+        - name: NODE_ENV
+          value: production
 ---
 apiVersion: v1
 kind: Service
