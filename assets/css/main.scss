@@ -26,3 +26,7 @@ a {
     color: darken(color(like-green), 10);
   }
 }
+
+svg {
+  fill: currentColor;
+}
