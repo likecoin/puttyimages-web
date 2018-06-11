@@ -1,6 +1,8 @@
+/* Colors */
+
 $colors: (
-  like-green: #2d6472,
-  like-brown: #6a282e,
+  like-green: #2D6472,
+  like-brown: #6A282E,
 );
 
 @function color($name) {
@@ -8,12 +10,24 @@ $colors: (
 }
 
 $gradient-colors: (
-  primary: (#3d286e, color(like-green)),
-  secondary: (#3d286e, color(like-brown)),
+  primary: (#3D286E, color(like-green)),
+  secondary: (#3D286E, color(like-brown)),
 );
 
 @function gradient-colors($name) {
   @return map-get($gradient-colors, $name);
 }
 
-$gradient-likecoin: linear-gradient(292deg, #d0f0f0, #f0e6b4);
+$gradient-likecoin: linear-gradient(292deg, #D0F0F0, #F0E6B4);
+
+/* Grid System */
+
+$breakpoints: (
+  xs: 600px,
+  sm: 960px,
+  md: 1264px,
+);
+
+@function breakpoint($type) {
+  @return map-get($breakpoints, $type);
+}
