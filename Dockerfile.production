@@ -10,6 +10,8 @@ COPY . /usr/src/app
 
 RUN npm run build
 
+RUN npm prune --production
+
 FROM node:10-slim AS release
 
 WORKDIR /usr/src/app
