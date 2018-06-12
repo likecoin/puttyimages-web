@@ -29,7 +29,11 @@ module.exports = {
   ** Add axios globally
   */
   build: {
-    vendor: ['axios', 'vuetify'],
+    vendor: [
+      'axios',
+      'vuetify',
+      '@likecoin/likecoin-eth-util',
+    ],
     extractCSS: true,
     /*
     ** Run ESLINT on save
@@ -72,5 +76,8 @@ module.exports = {
       });
     },
   },
-  plugins: ['~/plugins/vuetify'],
+  plugins: [
+    '~/plugins/vuetify',
+    { src: '~/plugins/ethHelper', ssr: false },
+  ],
 };
