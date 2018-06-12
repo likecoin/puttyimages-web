@@ -2,6 +2,7 @@
   <div
     class="the-landing-carousel-swiper"
     v-swiper:carousel="swiperOption"
+    @slideChange="onSlideChange"
   >
     <div class="the-landing-carousel-swiper__slides-wrapper">
       <div
@@ -41,6 +42,7 @@ export default {
       type: Array,
       default: () => [],
     },
+    activeIndex: Number,
   },
   data() {
     // IMPORTANT:
@@ -87,6 +89,12 @@ export default {
         },
       },
     };
+  },
+  methods: {
+    onSlideChange() {
+      const { activeIndex } = this.carousel;
+      this.$emit('update:activeIndex', activeIndex % this.images.length);
+    },
   },
 };
 </script>

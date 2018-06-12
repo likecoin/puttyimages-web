@@ -1,7 +1,22 @@
 <template>
   <div class="the-landing-carousel">
 
-    <swiper :images="images" />
+    <swiper
+      :images="images"
+      :active-index.sync="activeImageIndex"
+    />
+
+    <transition name="the-landing-carousel__credits--slide-fade">
+      <div :key="activeImage.id" class="the-landing-carousel__credits">
+        <div class="like-button">
+          <span class="like-button">{{ activeImageLikeCount }} Like</span>
+        </div>
+        <div>
+          <span class="text--size-12">by</span> {{ activeImage.author }}<br/>
+          <a class="link--dark text--underline" href="#">use this image</a>
+        </div>
+      </div>
+    </transition>
 
   </div>
 </template>
@@ -16,6 +31,7 @@ export default {
   },
   data() {
     return {
+      activeImageIndex: 0,
       images: [
         {
           id: 1,
@@ -38,6 +54,14 @@ export default {
       ],
     };
   },
+  computed: {
+    activeImage() {
+      return this.images[this.activeImageIndex];
+    },
+    activeImageLikeCount() {
+      return this.activeImage.likeCount.toLocaleString('en');
+    },
+  },
 };
 </script>
 
@@ -50,5 +74,45 @@ export default {
 
   width: 100vw;
   height: 100vh;
+
+  &__credits {
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+
+    margin-bottom: 60px;
+    margin-left: 80px;
+
+    color: white;
+
+    &--slide-fade- {
+      &enter-active,
+      &leave-active {
+        transition: (
+          transform 1s cubic-bezier(.2, .2, 0, 1),
+          opacity 1s cubic-bezier(.2, .2, 0, 1)
+        );
+      }
+      &enter,
+      &leave-to {
+        transform: translateX(10px);
+
+        opacity: 0;
+      }
+    }
+
+    > *:first-child {
+      display: flex;
+      align-items: center;
+
+      margin-right: 16px;
+      padding-right: 16px;
+
+      border-right: solid 1px white;
+    }
+  }
 }
 </style>
