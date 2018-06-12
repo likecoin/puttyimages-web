@@ -10,9 +10,10 @@ const master = (
 ).split(',');
 
 class IpfsClient {
-  constructor(addrs, clients) {
+  constructor(addrs, clients, masters) {
     this.addrs = addrs;
     this.clients = clients;
+    this.masters = masters;
   }
 
   addAndPin = async (stream) => {
@@ -22,10 +23,7 @@ class IpfsClient {
 
   files = {
     add: (stream) => {
-      const masterNodes = this.clients.filter(
-        ({ host }) => master.indexOf(host) > -1
-      );
-      return Promise.race(masterNodes.map(({ api }) => api.files.add(stream)));
+      Promise.race(this.masters.map(({ api }) => api.files.add(stream)));
     },
     cat: (path) => {
       const client = this.clients[
@@ -36,8 +34,9 @@ class IpfsClient {
   };
 
   pin = {
-    add: (hash) =>
-      Promise.race(this.clients.map(({ api }) => api.pin.add(hash))),
+    add: (hash) => {
+      Promise.race(this.clients.map(({ api }) => api.pin.add(hash)));
+    },
   };
 }
 
@@ -74,6 +73,7 @@ export default async () => {
   if (clients.length > 1) {
     await Promise.all(clients.map((client) => addBootstrap(client, addrs)));
   }
-  ipfsClient = new IpfsClient(addrs, clients);
+  const masters = clients.filter(({ host }) => master.indexOf(host) > -1);
+  ipfsClient = new IpfsClient(addrs, clients, masters);
   return ipfsClient;
 };
