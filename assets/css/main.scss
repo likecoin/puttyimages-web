@@ -22,11 +22,62 @@ a {
 
   color: color(like-green);
 
-  &:hover {
-    color: darken(color(like-green), 10);
+  /*
+  Link styling
+  - [default]        Green text
+  - .link-secondary  Brown text
+  - .link-dark       White text
+  */
+  $link-style: (
+    default: (
+      class: '',
+      color: color(like-green),
+    ),
+    secondary: (
+      class: 'secondary',
+      color: color(like-brown),
+    ),
+    dark: (
+      class: 'dark',
+      color: white,
+    ),
+  );
+
+  @each $key, $value in $link-style {
+    $class: map-get($value, class);
+    @if $key != default {
+      $class: '.link--' + $class;
+    }
+    $color: map-get($value, color);
+
+    &#{$class} {
+      color: $color;
+
+      &:hover {
+        color: darken($color, 15);
+      }
+    }
   }
 }
 
 svg {
   fill: currentColor;
+}
+
+/*
+Text styling
+- .text--size-{12, 14, 16, 18, 24, 28, 32}
+- .text--underline  Underline
+*/
+.text {
+  $font-size-list: 12, 14, 16, 18, 24, 28, 32;
+  @each $value in $font-size-list {
+    &--size-#{$value} {
+      font-size: #{$value}px;
+    }
+  }
+
+  &--underline {
+    text-decoration: underline;
+  }
 }
