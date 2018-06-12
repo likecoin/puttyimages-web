@@ -5,7 +5,8 @@
   "env": {
     "test": {
       "presets": [
-        ["env"]
+        "env",
+        "babel-preset-backpack"
       ]
     }
   }
