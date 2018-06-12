@@ -1,8 +1,11 @@
 .git
-node_modules
-dist
-packages/*/node_modules
-packages/*/dist
-packages/*/*.tgz
-Dockerfile*
+.nuxt
 **/*.sw?
+build
+coverage
+dist
+Dockerfile*
+node_modules
+packages/*/*.tgz
+packages/*/dist
+packages/*/node_modules
