@@ -1,4 +1,5 @@
 import ipfsAPI from 'ipfs-api';
+import url from 'url';
 
 const defaultHost = 'http://localhost:5001';
 const hosts = (process.env.IPFS_HOST || defaultHost).split(',');
@@ -41,8 +42,11 @@ class IpfsClient {
 }
 
 const initClient = async (config, addrs, clients) => {
-  const [, protocol, host, port] = config.match(/(\w+):\/\/(\w+):(\w+)/);
-  const api = ipfsAPI(host, port, { protocol });
+  const ipfsURL = url.parse(config);
+  const host = ipfsURL.hostname;
+  const api = ipfsAPI(host, ipfsURL.port, {
+    protocol: ipfsURL.protocol,
+  });
   const [, addr] = await api.swarm.localAddrs();
 
   addrs.push({ addr, host });
