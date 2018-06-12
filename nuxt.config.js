@@ -24,7 +24,10 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['~/assets/css/main.scss'],
+  css: [
+    // 'swiper/dist/css/swiper.css', // Uncomment this for UI development
+    '~/assets/css/main.scss',
+  ],
   /*
   ** Add axios globally
   */
@@ -79,5 +82,6 @@ module.exports = {
   plugins: [
     '~/plugins/vuetify',
     { src: '~/plugins/ethUtil', ssr: false },
+    { src: '~/plugins/swiper.js', ssr: false },
   ],
 };
