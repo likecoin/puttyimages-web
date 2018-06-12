@@ -100,6 +100,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~assets/css/mixins';
+
 .the-landing-carousel-swiper {
   position: absolute;
   top: 0;
@@ -122,7 +124,7 @@ export default {
   &__navigation {
     position: absolute;
     top: 50%;
-    right: 60px;
+    right: 0;
 
     padding: 16px 0;
 
@@ -132,6 +134,10 @@ export default {
     color: white;
     border-radius: 8px;
     background-color: #0000004F;
+
+    @include responsive-inset(0,
+      margin-right
+    );
 
     &:not(:hover) {
       opacity: .6;

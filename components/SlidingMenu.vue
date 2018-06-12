@@ -164,10 +164,12 @@ $sliding-menu__inset-x: 64px;
   top: 0;
   right: 0;
 
-  margin-top: 104px;
-  margin-right: $sliding-menu__inset-x;
-
   pointer-events: all;
+
+  @include responsive-inset(0,
+    margin-top,
+    margin-right
+  );
 }
 
 .sliding-menu__menu {
@@ -197,11 +199,15 @@ $sliding-menu__inset-x: 64px;
 
     width: inherit;
     height: inherit;
-    padding: 104px 0 64px;
 
     transition: opacity .4s ease-out;
 
     opacity: 0;
+
+    @include responsive-inset(0,
+      padding-top,
+      padding-bottom
+    );
   }
 
   .sliding-menu--open & {
@@ -220,7 +226,10 @@ $sliding-menu__inset-x: 64px;
   justify-content: flex-end;
 
   margin-top: 64px;
-  padding-right: $sliding-menu__inset-x;
+
+  @include responsive-inset(0,
+    padding-right
+  );
 }
 
 .user-account {
@@ -250,7 +259,9 @@ $sliding-menu__inset-x: 64px;
 .site-menu {
   flex-grow: 1;
 
-  margin-top: 104px;
+  @include responsive-inset(0,
+    margin-top
+  );
 
   ul {
     margin: 0;

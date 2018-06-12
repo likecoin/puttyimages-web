@@ -1,7 +1,8 @@
 @import 'node_modules/vuetify/dist/vuetify.min.css';
 
-@import '_variables';
-@import '_components';
+@import 'functions';
+@import 'variables';
+@import 'components';
 
 html,
 body {

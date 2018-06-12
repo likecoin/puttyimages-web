@@ -30,21 +30,24 @@ export default {
 
 <style lang="scss" scoped>
 @import '~assets/css/variables';
+@import '~assets/css/mixins';
 
 .the-header {
   margin-bottom: 152px;
 }
 
 .the-logo {
+  @include responsive-inset(0,
+    margin-top,
+    margin-left
+  );
+
   position: fixed;
   z-index: 100;
   top: 0;
   left: 0;
 
   display: flex;
-
-  margin-top: 96px;
-  margin-left: 80px;
 
   color: color(like-green);
 }

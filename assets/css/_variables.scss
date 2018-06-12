@@ -31,3 +31,21 @@ $breakpoints: (
 @function breakpoint($type) {
   @return map-get($breakpoints, $type);
 }
+
+/* Layout system */
+$responsive-inset: (
+  0: (
+    x: (
+      xs: 24px,
+      md: 64px
+    ),
+    y: (
+      xs: 32px,
+      md: 64px
+    )
+  )
+);
+
+@function get-responsive-inset($keys...) {
+  @return map-deep-get($responsive-inset, $keys...);
+}
