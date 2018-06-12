@@ -1,0 +1,2 @@
+export const UI_SET_WEB3_MESSAGE = 'UI_SET_WEB3_MESSAGE';
+export const UI_SET_WEB3_TYPE = 'UI_SET_WEB3_TYPE';
