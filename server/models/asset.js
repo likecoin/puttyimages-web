@@ -42,8 +42,5 @@ module.exports = (sequelize, DataTypes) => {
       freezeTableName: true,
     },
   );
-  asset.associate = (models) => {
-    asset.belongsTo(models.license, { foreignKey: 'name' });
-  };
   return asset;
 };

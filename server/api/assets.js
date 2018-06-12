@@ -140,7 +140,7 @@ router.post('/assets/upload', multer.single('asset'), async (req, res, next) => 
     };
     await sequelize.asset.upsert(assetRecord);
     const assetTagRecord = tags.map(t => ({ asset_fingerprint: hash256Bytes, tag_name: t }));
-    await sequelize.asset_tag.bulkCreate(assetTagRecord);
+    await sequelize.assetTag.bulkCreate(assetTagRecord);
     
     // TODO: media chain
 

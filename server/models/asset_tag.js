@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const asset_user = sequelize.define( // eslint-disable-line camelcase
-    'asset_tag',
+  const assetTag = sequelize.define(
+    'assetTag',
     {
       asset_fingerprint: {
         type: DataTypes.BLOB,
@@ -24,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       freezeTableName: true,
       timestamps: false,
+      tableName: 'asset_tag',
     },
   );
-  return asset_user; // eslint-disable-line camelcase
+  return assetTag;
 };
