@@ -78,6 +78,6 @@ module.exports = {
   },
   plugins: [
     '~/plugins/vuetify',
-    { src: '~/plugins/ethHelper', ssr: false },
+    { src: '~/plugins/ethUtil', ssr: false },
   ],
 };

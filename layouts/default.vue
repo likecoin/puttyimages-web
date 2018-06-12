@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <overlay-component />
+    <the-overlay-component />
 
     <the-header />
     <nuxt/>
@@ -8,12 +8,12 @@
 </template>
 
 <script>
-import OverlayComponent from '@/components/OverlayComponent';
+import TheOverlayComponent from '@/components/TheOverlayComponent';
 import TheHeader from '@/components/TheHeader';
 
 export default {
   components: {
-    OverlayComponent,
+    TheOverlayComponent,
     TheHeader,
   },
 };

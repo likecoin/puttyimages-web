@@ -1,6 +1,6 @@
 <template>
   <no-ssr>
-    <div class="overlay-component">
+    <div class="the-overlay-component">
 
       <div v-if="shouldShowWeb3Dialog">
         <div v-if="checkIsMobileClient()">
@@ -66,7 +66,7 @@ import {
 } from '@/util/client';
 
 export default {
-  name: 'overlay-component',
+  name: 'the-overlay-component',
   data() {
     return {
       isDialogOpen: false,

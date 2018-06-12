@@ -1,4 +1,3 @@
-/* eslint no-param-reassign: "off" */
 import Vuex from 'vuex';
 import ui from './modules/ui';
 

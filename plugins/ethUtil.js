@@ -1,8 +1,8 @@
-import EthHelper from '@likecoin/likecoin-eth-util';
+import EthUtil from '@likecoin/likecoin-eth-util';
 
 
 export default async ({ store }) => {
-  EthHelper.initApp({
+  EthUtil.initApp({
     targetNetwork: 'main', // main / rinkeby
     errCb: (message) => {
       /*
