@@ -16,7 +16,7 @@ const sequelize = new Sequelize({
 const db = {};
 const isTest = global.test !== undefined;
 const modelPath = `${isTest ? '' : '../'}${__dirname}`; // Fix backpack fs path
-const nonModelFile = ['index.js', 'base.js', 'validator.js', 'query.js'];
+const nonModelFile = ['index.js', 'base.js', 'validator.js'];
 
 fs.readdirSync(__dirname).forEach((file) => {
   if (nonModelFile.includes(file)) {
@@ -39,7 +39,7 @@ db.Sequelize = Sequelize;
 db.asset.belongsTo(db.license, { foreignKey: 'fk_asset_license' });
 db.license.hasMany(db.asset, { foreignKey: 'fk_asset_license' });
 
-db.asset.belongsToMany(db.tag, { through: 'asset_tag', foreignKey: 'asset_fingerprint' });
-db.tag.belongsToMany(db.asset, { through: 'asset_tag', foreignKey: 'tag_name' });
+db.asset.belongsToMany(db.tag, { through: 'asset_tag', timestamps: false, foreignKey: 'asset_fingerprint' });
+db.tag.belongsToMany(db.asset, { through: 'asset_tag', timestamps: false, foreignKey: 'tag_name' });
 
 module.exports = db;

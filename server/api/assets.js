@@ -12,7 +12,6 @@ import {
   MAX_IMAGE_SIZE,
 } from '../../constant';
 import formatMediaObject from '../util/metadata';
-import { query } from '../models/query';
 
 const Multer = require('multer');
 const sha256 = require('js-sha256');
@@ -115,17 +114,22 @@ router.post('/assets/upload', multer.single('asset'), async (req, res, next) => 
     await ipfs.pin.add(ipld.toBaseEncodedString());
 
     // db update
-    await query.bulkCreateTags(tags);
-    const assetRecord = {
-      fingerprint: hash256Bytes,
-      ipfs: bs58.decode(ipfsAdd[0].hash),
-      ipld: bs58.decode(ipld.toBaseEncodedString()),
-      wallet,
-      fk_asset_license: license,
-    };
-    await sequelize.asset.create(assetRecord);
-    const assetTagRecord = tags.map(t => ({ asset_fingerprint: hash256Bytes, tag_name: t }));
-    await sequelize.assetTag.bulkCreate(assetTagRecord);
+    await sequelize.sequelize.transaction(t => sequelize.sequelize.Promise.all([
+      sequelize.asset.create({
+        fingerprint: hash256Bytes,
+        ipfs: bs58.decode(ipfsAdd[0].hash),
+        ipld: bs58.decode(ipld.toBaseEncodedString()),
+        wallet,
+        fk_asset_license: license,
+        tags: [
+          { name: 'hehe' },
+          { name: 'haha' },
+        ],
+      }, {
+        include: [ sequelize.tag ],
+        transaction: t,
+      })
+    ]));
     
     // TODO: media chain
 
