@@ -37,7 +37,7 @@ export default {
 
 .the-logo {
   position: fixed;
-  z-index: 1000;
+  z-index: 100;
   top: 0;
   left: 0;
 

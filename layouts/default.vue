@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import TheOverlayComponent from '@/components/TheOverlayComponent';
 import TheHeader from '@/components/TheHeader';
+import TheOverlayComponent from '@/components/TheOverlayComponent';
 
 export default {
   components: {
