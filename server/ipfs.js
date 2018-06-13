@@ -43,8 +43,9 @@ class IpfsClient {
 const initClient = async (config, addrs, clients) => {
   const ipfsURL = url.parse(config);
   const host = ipfsURL.hostname;
+  const protocol = ipfsURL.protocol.replace(':', '');
   const api = ipfsAPI(host, ipfsURL.port, {
-    protocol: ipfsURL.protocol,
+    protocol,
   });
   const [, addr] = await api.swarm.localAddrs();
 
