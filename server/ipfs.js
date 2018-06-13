@@ -3,15 +3,14 @@ import url from 'url';
 
 const defaultHost = 'http://localhost:5001';
 const hosts = (process.env.IPFS_HOST || defaultHost).split(',');
-const master = (
+const masterHosts = (
   process.env.IPFS_MASTER ||
   process.env.IPFS_HOST ||
   defaultHost
 ).split(',');
 
 class IpfsClient {
-  constructor(addrs, clients, masters) {
-    this.addrs = addrs;
+  constructor(clients, masters) {
     this.clients = clients;
     this.masters = masters;
   }
@@ -21,43 +20,57 @@ class IpfsClient {
     return this.pin.add(file.hash);
   };
 
+  anyClient = () => {
+    const i = Math.floor(Math.random() * this.clients.length);
+    return this.clients[i];
+  };
+
   files = {
     add: (stream) => {
-      Promise.race(this.masters.map(({ api }) => api.files.add(stream)));
+      Promise.race(this.masters.map((c) => c.files.add(stream)));
     },
     cat: (path) => {
-      const client = this.clients[
-        Math.floor(Math.random() * this.clients.length)
-      ];
-      return client.api.files.cat(path);
+      this.anyClient().files.cat(path);
     },
   };
 
   pin = {
     add: (hash) => {
-      Promise.race(this.clients.map(({ api }) => api.pin.add(hash)));
+      Promise.race(this.clients.map((c) => c.pin.add(hash)));
+    },
+  };
+
+  dag = {
+    get: (cid, path, options) => {
+      this.anyClient().dag.get(cid, path, options);
+    },
+    put: (dagNode, options) => {
+      Promise.race(this.masters.map((c) => c.dag.put(dagNode, options)));
     },
   };
 }
 
-const initClient = async (config, addrs, clients) => {
+const initClient = (config) => {
   const ipfsURL = url.parse(config);
   const host = ipfsURL.hostname;
-  const api = ipfsAPI(host, ipfsURL.port, {
-    protocol: ipfsURL.protocol,
+  const protocol = ipfsURL.protocol.replace(':', '');
+  return ipfsAPI(host, ipfsURL.port, {
+    protocol,
   });
-  const [, addr] = await api.swarm.localAddrs();
-
-  addrs.push({ addr, host });
-  clients.push({ api, host });
 };
 
-const addBootstrap = async (client, addrs) => {
-  const { api, host } = client;
-  addrs.forEach(({ addr, addrHost }) => {
-    if (addrHost !== host) {
-      api.bootstrap.add(addr);
-    }
+/**
+ * boostrapClients will accept array of client as trusted peer and boostrap
+ * them.
+ */
+const bootstrapClients = async (clients) => {
+  const ids = await Promise.all(clients.map((c) => c.id()));
+  const addrs = ids.map((id_) => id_.id);
+  // Fire and forgot, the IPFS should already boot correctly at production
+  clients.forEach((c) => {
+    addrs.forEach((addr) => {
+      c.bootstrap.add(`/p2p-circuit/ipfs/${addr}`);
+    });
   });
 };
 
@@ -67,13 +80,11 @@ export default async () => {
   if (ipfsClient) {
     return ipfsClient;
   }
-  const addrs = [];
-  const clients = [];
-  await Promise.all(hosts.map((host) => initClient(host, addrs, clients)));
-  if (clients.length > 1) {
-    await Promise.all(clients.map((client) => addBootstrap(client, addrs)));
-  }
-  const masters = clients.filter(({ host }) => master.indexOf(host) > -1);
-  ipfsClient = new IpfsClient(addrs, clients, masters);
+  const slaveHosts = hosts.filter((c) => masterHosts.indexOf(c) === -1);
+  const slaveClients = slaveHosts.map((host) => initClient(host));
+  const masterClients = masterHosts.map((host) => initClient(host));
+  const allClients = slaveClients.concat(masterClients);
+  await bootstrapClients(allClients);
+  ipfsClient = new IpfsClient(allClients, masterClients);
   return ipfsClient;
 };

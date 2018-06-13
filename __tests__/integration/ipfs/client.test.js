@@ -1,10 +1,10 @@
 import IpfsClient from '../../../server/ipfs';
 
+jest.unmock('ipfs-api');
+
 test('should init client', async () => {
   const ipfs = await IpfsClient();
-  expect(ipfs.addrs).toBeInstanceOf(Array);
   expect(ipfs.clients).toBeInstanceOf(Array);
-  expect(ipfs.addrs.length).toBeGreaterThan(0);
   expect(ipfs.clients.length).toBeGreaterThan(0);
   expect(ipfs.addAndPin).toBeInstanceOf(Function);
   expect(ipfs.files.add).toBeInstanceOf(Function);

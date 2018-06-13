@@ -1,41 +1,41 @@
-import IpfsClient from 'ipfs-api';
-
-const MOCK_FILE_INFO = {
-  '/file': {
-    content: 'file content',
-    hash: 'file hash',
-    path: '/file',
-    size: 12,
-  },
-};
+import IpfsClient from '../../server/ipfs';
 
 test('should add file', async () => {
   const ipfs = await IpfsClient();
-  ipfs.setMockFiles(MOCK_FILE_INFO);
-  expect(ipfs.files.add).not.toHaveBeenCalled();
+  expect(ipfs.clients[0].files.add).not.toHaveBeenCalled();
 
-  return ipfs.files.add({ path: '/file' }).then((file) => {
-    expect(file).toEqual(MOCK_FILE_INFO['/file']);
-    expect(ipfs.files.add).toHaveBeenCalledTimes(1);
-  });
+  ipfs.files.add({ path: '/file' });
+  expect(ipfs.clients[0].files.add).toHaveBeenCalledTimes(1);
 });
 
 test('should cat file', async () => {
   const ipfs = await IpfsClient();
-  ipfs.setMockFiles(MOCK_FILE_INFO);
-  expect(ipfs.files.cat).not.toHaveBeenCalled();
+  expect(ipfs.clients[0].files.cat).not.toHaveBeenCalled();
 
-  return ipfs.files.cat('/file').then((file) => {
-    expect(file).toEqual('file content');
-    expect(ipfs.files.cat).toHaveBeenCalledTimes(1);
-  });
+  ipfs.files.cat('/file');
+  expect(ipfs.clients[0].files.cat).toHaveBeenCalledTimes(1);
 });
 
 test('should pin file', async () => {
   const ipfs = await IpfsClient();
-  expect(ipfs.pin.add).not.toHaveBeenCalled();
+  expect(ipfs.clients[0].pin.add).not.toHaveBeenCalled();
 
-  return ipfs.pin.add('file hash').then(() => {
-    expect(ipfs.pin.add).toHaveBeenCalledTimes(1);
-  });
+  ipfs.pin.add('file hash');
+  expect(ipfs.clients[0].pin.add).toHaveBeenCalledTimes(1);
+});
+
+test('should proxy dag get', async () => {
+  const ipfs = await IpfsClient();
+  expect(ipfs.clients[0].dag.get).not.toHaveBeenCalled();
+
+  ipfs.dag.get('file hash');
+  expect(ipfs.clients[0].dag.get).toHaveBeenCalledTimes(1);
+});
+
+test('should proxy dag put', async () => {
+  const ipfs = await IpfsClient();
+  expect(ipfs.clients[0].dag.put).not.toHaveBeenCalled();
+
+  ipfs.dag.put('file hash');
+  expect(ipfs.clients[0].dag.put).toHaveBeenCalledTimes(1);
 });
