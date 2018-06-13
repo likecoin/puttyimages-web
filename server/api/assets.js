@@ -2,24 +2,20 @@ import { Router } from 'express';
 import IpfsClient from '../ipfs';
 import sequelize from '../models';
 import { validator, ValidationError } from '../../util/validator';
+import { validator as modelValidator } from '../models/validator';
 import {
   personalEcRecover,
   web3HexToUtf8,
 } from '../util/web3';
 import {
   ONE_DATE_IN_MS,
-  SUPPORTED_IMAGE_TYPE,
   MAX_IMAGE_SIZE,
-  MAX_TAG_COUNT,
-  MAX_TAG_LENGTH,
-  MIN_TAG_LENGTH,
-  SUPPORTED_LICENSE,
 } from '../../constant';
 import formatMediaObject from '../util/metadata';
+import { query } from '../models/query';
 
 const Multer = require('multer');
 const sha256 = require('js-sha256');
-const imageType = require('image-type');
 const bs58 = require('bs58');
 
 const router = Router();
@@ -78,28 +74,20 @@ router.post('/assets/upload', multer.single('asset'), async (req, res, next) => 
     }
 
     // check tag
-    if (tags.length < 1) throw new ValidationError('asset need at least 1 tag');
-    if (tags.length > MAX_TAG_COUNT) {
-      throw new ValidationError(`asset need at most ${MAX_TAG_COUNT} tag`);
+    if (!tags || !modelValidator.isTagsCountValid(tags)) {
+      throw new ValidationError('number of tags invalid');
     }
-    const isTagsValid = tags.every(e => e.length >= MIN_TAG_LENGTH && e.length <= MAX_TAG_LENGTH);
-    if (!isTagsValid) throw new ValidationError('tags length invalid');
+    if (!modelValidator.isTagsValid(tags)) throw new ValidationError('tags length invalid');
 
     // check license
     if (!license) throw new ValidationError('asset need a license');
-    if (!SUPPORTED_LICENSE.has(license)) throw new ValidationError('license invalid');
+    if (!modelValidator.isLicenseValid(license)) throw new ValidationError('license invalid');
     
     // check asset
     const { file: asset } = req;
-    if (!asset) throw new ValidationError('no asset uploaded');
-    if (asset.size > MAX_IMAGE_SIZE) throw new ValidationError('asset size too large');
-    const type = imageType(asset.buffer);
-    if (!SUPPORTED_IMAGE_TYPE.has(type && type.ext)) throw new ValidationError('unsupported file format!');
     const hash256 = sha256(asset.buffer);
-    if (hash256 !== assetSHA256) throw new ValidationError('asset sha not match');
+    modelValidator.validateImage(asset, assetSHA256);
     const hash256Bytes = Buffer.from(hash256, 'hex');
-    const oldAsset = await sequelize.asset.findById(hash256Bytes, { raw: true });
-    if (oldAsset) throw new ValidationError('asset already exist');
 
     // FIXME: use ipfs wrapper function
     const ipfs = await IpfsClient();
@@ -127,10 +115,7 @@ router.post('/assets/upload', multer.single('asset'), async (req, res, next) => 
     await ipfs.pin.add(ipld.toBaseEncodedString());
 
     // db update
-    // NOTE: sequelize.model.bulkCreate fail on duplicate in postgres
-    await sequelize.sequelize.query(`INSERT INTO tag (name) VALUES
-            ${tags.map(tag => `('${tag}')`).join(', ')}
-            ON CONFLICT DO NOTHING;`);
+    await query.bulkCreateTags(tags);
     const assetRecord = {
       fingerprint: hash256Bytes,
       ipfs: bs58.decode(ipfsAdd[0].hash),
@@ -138,7 +123,7 @@ router.post('/assets/upload', multer.single('asset'), async (req, res, next) => 
       wallet,
       fk_asset_license: license,
     };
-    await sequelize.asset.upsert(assetRecord);
+    await sequelize.asset.create(assetRecord);
     const assetTagRecord = tags.map(t => ({ asset_fingerprint: hash256Bytes, tag_name: t }));
     await sequelize.assetTag.bulkCreate(assetTagRecord);
     

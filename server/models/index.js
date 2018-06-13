@@ -16,9 +16,10 @@ const sequelize = new Sequelize({
 const db = {};
 const isTest = global.test !== undefined;
 const modelPath = `${isTest ? '' : '../'}${__dirname}`; // Fix backpack fs path
+const nonModelFile = ['index.js', 'base.js', 'validator.js', 'query.js'];
 
 fs.readdirSync(__dirname).forEach((file) => {
-  if (file === 'index.js' || file === 'base.js') {
+  if (nonModelFile.includes(file)) {
     return;
   }
 

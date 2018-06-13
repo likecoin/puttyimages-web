@@ -11,8 +11,8 @@ export default function formatMediaObject(mediaObj) {
       previousVersion,
       uploadDate,
     } = mediaObj;
-    if (creator.length < 1) throw new Error('creator must exist');
     if (!Array.isArray(creator)) throw new Error('creator should be array');
+    if (creator.length < 1) throw new Error('creator must exist');
     if (!license) throw new Error('license must exist');
     if (!fingerprint) throw new Error('fingerprint must exist');
     if (!footprint) throw new Error('footprint must exist');
