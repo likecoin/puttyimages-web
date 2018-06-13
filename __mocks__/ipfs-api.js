@@ -13,9 +13,11 @@ class IPFSApi {
       },
     };
   }
+
   setMockFiles = (files) => {
     this.mockFiles = files;
   };
+
   id = jest.fn().mockImplementation(() =>
     Promise.resolve({
       id: 'QmSvsumZkbvYqKj8fxfBhVLiPbMHmxwyhHpWRBqwFgA7r7',
@@ -28,9 +30,11 @@ class IPFSApi {
       protocolVersion: 'ipfs/0.1.0',
     })
   );
+
   bootstrap = {
     add: jest.fn().mockImplementation(() => Promise.resolve()),
   };
+
   files = {
     add: jest
       .fn()
@@ -41,8 +45,22 @@ class IPFSApi {
         Promise.resolve(this.mockFiles[path].content)
       ),
   };
+
   pin = {
     add: jest.fn().mockImplementation(() => Promise.resolve()),
+  };
+
+  dag = {
+    get: jest
+      .fn()
+      .mockImplementation((cid, path, options) =>
+        Promise.resolve(cid, path, options)
+      ),
+    put: jest
+      .fn()
+      .mockImplementation((dagNode, options) =>
+        Promise.resolve(dagNode, options)
+      ),
   };
   swarm = {
     localAddrs: jest

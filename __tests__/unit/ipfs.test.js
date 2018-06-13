@@ -23,3 +23,19 @@ test('should pin file', async () => {
   ipfs.pin.add('file hash');
   expect(ipfs.clients[0].pin.add).toHaveBeenCalledTimes(1);
 });
+
+test('should proxy dag get', async () => {
+  const ipfs = await IpfsClient();
+  expect(ipfs.clients[0].dag.get).not.toHaveBeenCalled();
+
+  ipfs.dag.get('file hash');
+  expect(ipfs.clients[0].dag.get).toHaveBeenCalledTimes(1);
+});
+
+test('should proxy dag put', async () => {
+  const ipfs = await IpfsClient();
+  expect(ipfs.clients[0].dag.put).not.toHaveBeenCalled();
+
+  ipfs.dag.put('file hash');
+  expect(ipfs.clients[0].dag.put).toHaveBeenCalledTimes(1);
+});

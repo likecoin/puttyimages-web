@@ -20,21 +20,32 @@ class IpfsClient {
     return this.pin.add(file.hash);
   };
 
+  anyClient = () => {
+    const i = Math.floor(Math.random() * this.clients.length);
+    return this.clients[i];
+  };
+
   files = {
     add: (stream) => {
       Promise.race(this.masters.map((c) => c.files.add(stream)));
     },
     cat: (path) => {
-      const client = this.clients[
-        Math.floor(Math.random() * this.clients.length)
-      ];
-      return client.files.cat(path);
+      this.anyClient().files.cat(path);
     },
   };
 
   pin = {
     add: (hash) => {
       Promise.race(this.clients.map((c) => c.pin.add(hash)));
+    },
+  };
+
+  dag = {
+    get: (cid, path, options) => {
+      this.anyClient().dag.get(cid, path, options);
+    },
+    put: (dagNode, options) => {
+      Promise.race(this.masters.map((c) => c.dag.put(dagNode, options)));
     },
   };
 }
