@@ -1,8 +1,14 @@
 import { Router } from 'express';
 import IpfsClient from '../ipfs';
 import sequelize from '../models';
-import { validator, ValidationError } from '../../util/validator';
-import { validator as modelValidator } from '../models/validator';
+import {
+  ValidationError,
+  checkAddressValid,
+  isTagsCountValid,
+  isTagsValid,
+  isLicenseValid,
+  validateImage,
+} from '../models/validator';
 import {
   personalEcRecover,
   web3HexToUtf8,
@@ -63,7 +69,7 @@ router.post('/assets/upload', multer.single('asset'), async (req, res, next) => 
     } = actualPayload;
 
     // check address match
-    if (from !== wallet || !validator.checkAddressValid(wallet)) {
+    if (from !== wallet || !checkAddressValid(wallet)) {
       throw new ValidationError('wallet address not match');
     }
 
@@ -73,19 +79,19 @@ router.post('/assets/upload', multer.single('asset'), async (req, res, next) => 
     }
 
     // check tag
-    if (!tags || !modelValidator.isTagsCountValid(tags)) {
+    if (!tags || !isTagsCountValid(tags)) {
       throw new ValidationError('number of tags invalid');
     }
-    if (!modelValidator.isTagsValid(tags)) throw new ValidationError('tags length invalid');
+    if (!isTagsValid(tags)) throw new ValidationError('tags length invalid');
 
     // check license
     if (!license) throw new ValidationError('asset need a license');
-    if (!modelValidator.isLicenseValid(license)) throw new ValidationError('license invalid');
+    if (!isLicenseValid(license)) throw new ValidationError('license invalid');
     
     // check asset
     const { file: asset } = req;
     const hash256 = sha256(asset.buffer);
-    modelValidator.validateImage(asset, assetSHA256);
+    validateImage(asset, assetSHA256);
     const hash256Bytes = Buffer.from(hash256, 'hex');
 
     // FIXME: use ipfs wrapper function
