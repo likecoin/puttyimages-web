@@ -64,7 +64,7 @@
     </div>
 
     <div class="sliding-menu__buttons">
-      <v-btn class="btn--likecoin btn--search" flat icon large color="primary">
+      <v-btn class="btn--likecoin" flat icon large color="primary">
         <search-icon />
       </v-btn>
       <v-btn

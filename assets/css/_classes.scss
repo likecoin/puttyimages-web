@@ -1,0 +1,63 @@
+@import 'variables';
+@import 'mixins';
+
+@mixin text-style {
+  $font-size-list: 12, 14, 16, 18, 20, 24, 28, 32;
+  @each $value in $font-size-list {
+    &--size-#{$value} {
+      font-size: #{$value}px;
+    }
+  }
+
+  $color-list: (
+    primary: color(like-green),
+    secondary: color(like-brown),
+    white: white,
+  );
+  @each $key, $value in $color-list {
+    &--color-#{$key} {
+      color: $value;
+    }
+  }
+
+  $font-weight-list: 300 400 600;
+  @each $value in $font-weight-list {
+    &--weight-#{$value} {
+      font-weight: $value;
+    }
+  }
+
+  $line-height-map: (
+    1: 1,
+    '1-2': 1.2,
+    '1-5': 1.5,
+    '1-6': 1.6,
+    '1-8': 1.8,
+    2: 2
+  );
+  @each $key, $value in $line-height-map {
+    &--height-#{$key} {
+      line-height: $value;
+    }
+  }
+
+  &--underline {
+    text-decoration: underline;
+  }
+}
+
+%text {
+  @include text-style;
+
+  &--xs {
+    @include mobile-only {
+      @include text-style;
+    }
+  }
+
+  &--sm {
+    @include tablet-only {
+      @include text-style;
+    }
+  }
+}

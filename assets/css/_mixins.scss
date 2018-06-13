@@ -19,6 +19,12 @@
   }
 }
 
+@mixin tablet-and-up {
+  @media only screen and (min-width: breakpoint(xs) + 1px) {
+    @content;
+  }
+}
+
 @mixin desktop-only {
   @media only screen and (min-width: breakpoint(sm) + 1px) and (max-width: breakpoint(md)) {
     @content;
