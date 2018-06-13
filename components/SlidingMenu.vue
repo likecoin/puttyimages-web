@@ -64,18 +64,22 @@
     </div>
 
     <div class="sliding-menu__buttons">
-      <v-btn class="btn--likecoin" flat icon large color="primary">
+      <v-btn class="btn--likecoin btn--search" flat icon large color="primary">
         <search-icon />
       </v-btn>
       <v-btn
-        class="btn--likecoin"
+        class="sliding-menu__buttons__toggle btn--likecoin"
         color="primary"
         flat
         icon
         large
         @click="onToggle"
       >
-        <v-icon large>{{ isOpen ? 'close' : 'menu' }}</v-icon>
+        <div class="hamburger-icon">
+          <span />
+          <span />
+          <span />
+        </div>
       </v-btn>
     </div>
 
@@ -170,6 +174,40 @@ $sliding-menu__inset-x: 64px;
     margin-top,
     margin-right
   );
+
+  &__toggle {
+    margin-right: -8px;
+
+    .hamburger-icon > span {
+      width: 26px;
+      height: 2px;
+      display: block;
+      background-color: currentColor;
+
+      &:not(:first-child) {
+        margin-top: 7px;
+      }
+
+      &:nth-child(1),
+      &:nth-child(3) {
+        transform-origin: left;
+      }
+
+      transition: transform .25s ease-out;
+
+      .sliding-menu--open & {
+        &:nth-child(1) {
+          transform: translateX(4px) rotateZ(45deg);
+        }
+        &:nth-child(2)  {
+          transform: scaleY(0);
+        }
+        &:nth-child(3)  {
+          transform: translateX(4px) rotateZ(-45deg);
+        }
+      }
+    }
+  }
 }
 
 .sliding-menu__menu {
