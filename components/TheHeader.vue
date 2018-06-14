@@ -32,20 +32,20 @@
       <the-logo class="the-header__logo" />
     </div>
 
-    <sliding-menu />
+    <the-sliding-menu />
 
   </div>
 </template>
 
 <script>
-import SlidingMenu from '@/components/SlidingMenu';
 import TheLogo from '@/components/TheLogo';
+import TheSlidingMenu from '@/components/TheSlidingMenu';
 
 export default {
   name: 'the-header',
   components: {
     TheLogo,
-    SlidingMenu,
+    TheSlidingMenu,
   },
   computed: {
     isHomePage() {

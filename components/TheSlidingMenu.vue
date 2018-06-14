@@ -1,15 +1,15 @@
 <template>
   <div
     :class="[
-      'sliding-menu',
+      'the-sliding-menu',
       {
-        'sliding-menu--open': isOpen,
+        'the-sliding-menu--open': isOpen,
       },
     ]"
     @click.self="onClickOutside"
   >
 
-    <div class="sliding-menu__menu">
+    <div class="the-sliding-menu__menu">
       <div>
 
         <div class="user-account">
@@ -44,7 +44,7 @@
           </ul>
         </nav>
 
-        <div class="sliding-menu__menu-footer">
+        <div class="the-sliding-menu__menu-footer">
           <v-menu
             open-on-hover
             top
@@ -73,7 +73,7 @@
       </div>
     </div>
 
-    <div class="sliding-menu__buttons">
+    <div class="the-sliding-menu__buttons">
       <v-btn
         class="btn--likecoin"
         flat
@@ -84,7 +84,7 @@
         <search-icon />
       </v-btn>
       <v-btn
-        class="sliding-menu__buttons__toggle btn--likecoin"
+        class="the-sliding-menu__buttons__toggle btn--likecoin"
         color="primary"
         flat
         icon
@@ -106,7 +106,7 @@
 import SearchIcon from '~/assets/icons/search.svg';
 
 export default {
-  name: 'sliding-menu',
+  name: 'the-sliding-menu',
   components: {
     SearchIcon,
   },
@@ -160,9 +160,9 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/css/helpers';
 
-$sliding-menu__inset-x: 64px;
+$the-sliding-menu__inset-x: 64px;
 
-.sliding-menu {
+.the-sliding-menu {
   position: fixed;
   z-index: 100;
   top: 0;
@@ -173,12 +173,12 @@ $sliding-menu__inset-x: 64px;
 
   pointer-events: none;
 
-  &.sliding-menu--open {
+  &.the-sliding-menu--open {
     pointer-events: all;
   }
 }
 
-.sliding-menu__buttons {
+.the-sliding-menu__buttons {
   position: absolute;
   top: 0;
   right: 0;
@@ -209,7 +209,7 @@ $sliding-menu__inset-x: 64px;
         transform-origin: left;
       }
 
-      .sliding-menu--open & {
+      .the-sliding-menu--open & {
         &:nth-child(1) {
           transform: translateX(4px) rotateZ(45deg);
         }
@@ -224,7 +224,7 @@ $sliding-menu__inset-x: 64px;
   }
 }
 
-.sliding-menu__menu {
+.the-sliding-menu__menu {
   position: absolute;
   top: 0;
   right: 0;
@@ -259,7 +259,7 @@ $sliding-menu__inset-x: 64px;
     @include responsive-inset(0, padding-top, padding-bottom);
   }
 
-  .sliding-menu--open & {
+  .the-sliding-menu--open & {
     transform: none;
     pointer-events: all;
 
@@ -269,7 +269,7 @@ $sliding-menu__inset-x: 64px;
   }
 }
 
-.sliding-menu__menu-footer {
+.the-sliding-menu__menu-footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
@@ -283,7 +283,7 @@ $sliding-menu__inset-x: 64px;
   display: flex;
   align-items: center;
 
-  margin-left: $sliding-menu__inset-x;
+  margin-left: $the-sliding-menu__inset-x;
 
   color: color(like-green);
 
@@ -324,7 +324,7 @@ $sliding-menu__inset-x: 64px;
       a {
         display: block;
 
-        padding: 24px $sliding-menu__inset-x;
+        padding: 24px $the-sliding-menu__inset-x;
 
         font-size: 28px;
         line-height: 1.5;
