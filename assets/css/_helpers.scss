@@ -1,5 +1,25 @@
-@import 'functions';
 @import 'variables';
+@import 'functions';
+
+/// Variables Getters
+
+@function color($name) {
+  @return map-get($colors, $name);
+}
+
+@function gradient-colors($name) {
+  @return map-get($gradient-colors, $name);
+}
+
+@function breakpoint($type) {
+  @return map-get($breakpoints, $type);
+}
+
+@function get-responsive-inset($keys...) {
+  @return map-deep-get($responsive-inset, $keys...);
+}
+
+/// Responsive
 
 @mixin mobile-only {
   @media only screen and (max-width: breakpoint(xs)) {

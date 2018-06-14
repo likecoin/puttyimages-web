@@ -1,7 +1,6 @@
 @import 'node_modules/vuetify/dist/vuetify.min.css';
 
-@import 'functions';
-@import 'variables';
+@import 'helpers';
 @import 'classes';
 @import 'components';
 
@@ -24,12 +23,10 @@ a {
 
   color: color(like-green);
 
-  /*
-  Link styling
-  - [default]        Green text
-  - .link-secondary  Brown text
-  - .link-dark       White text
-  */
+  /// Link styling
+  /// - [default]        Green text
+  /// - .link-secondary  Brown text
+  /// - .link-dark       White text
   $link-style: (
     default: (
       class: '',
@@ -64,22 +61,4 @@ a {
 
 svg {
   fill: currentColor;
-}
-
-/*
-Text styling
-- .text--size-{12, 14, 16, 18, 24, 28, 32}
-- .text--underline  Underline
-*/
-.text {
-  $font-size-list: 12, 14, 16, 18, 24, 28, 32;
-  @each $value in $font-size-list {
-    &--size-#{$value} {
-      font-size: #{$value}px;
-    }
-  }
-
-  &--underline {
-    text-decoration: underline;
-  }
 }

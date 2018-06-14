@@ -50,15 +50,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/css/variables';
-@import '~assets/css/mixins';
 @import '~assets/css/classes';
 
 .the-header {
   margin-bottom: 152px;
 
   &__logo {
-    padding-bottom: 24px;
+    @extend .pb-24;
   }
 
   &__banner {
@@ -79,7 +77,9 @@ export default {
     }
 
     &--home {
-      padding: 0 24px 48px;
+      @extend
+        .px-24,
+        .pb-48;
 
       @include responsive-inset(0,
         padding-top,
@@ -118,7 +118,9 @@ export default {
       }
 
       .the-header__banner__upload-button {
-        margin: 24px 0 0;
+        @extend
+          .ma-0,
+          .my-24;
       }
     }
 
@@ -128,12 +130,12 @@ export default {
       }
       @extend
         .mt-32--xs,
-        %text--color-primary,
-        %text--xs--color-white,
-        %text--size-32,
-        %text--xs--size-24,
-        %text--height-1-2,
-        %text--weight-600;
+        .text--color-primary,
+        .text--color-white--xs,
+        .text--size-32,
+        .text--size-24--xs,
+        .text--height-1-2,
+        .text--weight-600;
     }
 
     &__slogan--line-2 {
@@ -141,10 +143,10 @@ export default {
 
       @extend
         .mt-8,
-        %text--color-secondary,
-        %text--xs--color-white,
-        %text--size-20,
-        %text--weight-400;
+        .text--color-secondary,
+        .text--color-white--xs,
+        .text--size-20,
+        .text--weight-400;
     }
   }
 }

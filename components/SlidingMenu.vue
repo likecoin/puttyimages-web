@@ -142,8 +142,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/css/variables';
-@import '~assets/css/mixins';
+@import '~assets/css/helpers';
 
 $sliding-menu__inset-x: 64px;
 

@@ -66,7 +66,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/css/mixins';
+@import '~assets/css/helpers';
 
 .the-landing-carousel {
   position: fixed;

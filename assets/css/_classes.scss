@@ -1,74 +1,51 @@
-@import 'variables';
-@import 'mixins';
+@import 'helpers';
 
-@mixin text-style {
-  $font-size-list: 12, 14, 16, 18, 20, 24, 28, 32;
+/// Text Styling
+@mixin text-style($suffix: '') {
   @each $value in $font-size-list {
-    &--size-#{$value} {
+    &--size-#{$value}#{$suffix} {
       font-size: #{$value}px;
     }
   }
 
-  $color-list: (
-    primary: color(like-green),
-    secondary: color(like-brown),
-    white: white,
-  );
-  @each $key, $value in $color-list {
-    &--color-#{$key} {
+  @each $key, $value in $color-map {
+    &--color-#{$key}#{$suffix} {
       color: $value;
     }
   }
 
-  $font-weight-list: 300 400 600;
   @each $value in $font-weight-list {
-    &--weight-#{$value} {
+    &--weight-#{$value}#{$suffix} {
       font-weight: $value;
     }
   }
 
-  $line-height-map: (
-    1: 1,
-    '1-2': 1.2,
-    '1-5': 1.5,
-    '1-6': 1.6,
-    '1-8': 1.8,
-    2: 2
-  );
   @each $key, $value in $line-height-map {
-    &--height-#{$key} {
+    &--height-#{$key}#{$suffix} {
       line-height: $value;
     }
   }
 
-  &--underline {
+  &--underline#{$suffix} {
     text-decoration: underline;
   }
 }
 
-%text {
+.text {
   @include text-style;
 
-  &--xs {
-    @include mobile-only {
-      @include text-style;
-    }
+  @include mobile-only {
+    @include text-style(--xs);
   }
-
-  &--sm {
-    @include tablet-only {
-      @include text-style;
-    }
+  @include tablet-and-below {
+    @include text-style(--sm);
   }
 }
 
-/*
- * Spacing
- *
- * The class naming is following https://vuetifyjs.com/en/layout/spacing, in
- * addition, we added responsive modifier and use exact value instead of multiply
- * of spacer value which is more intuitive
- */
+/// Spacing
+/// The class naming is following https://vuetifyjs.com/en/layout/spacing, in
+/// addition, we added responsive modifier and use exact value instead of multiply
+/// of spacer value which is more intuitive
 $spacing-value-list: 0, 2, 4, 8, 12, 16, 20, 24, 28, 32, 48, 64;
 $spacing-property-map: (
   p: padding,
