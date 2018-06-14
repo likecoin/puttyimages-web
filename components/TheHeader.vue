@@ -1,7 +1,10 @@
 <template>
   <div class="the-header">
 
-    <div v-if="isHomePage" class="the-header__banner the-header__banner--home">
+    <div
+      v-if="isHomePage"
+      class="the-header__banner the-header__banner--home"
+    >
       <div>
         <the-logo class="the-header__logo" />
 
@@ -22,7 +25,10 @@
 
       </div>
     </div>
-    <div v-else class="the-header__banner the-header__banner--generic">
+    <div
+      v-else
+      class="the-header__banner the-header__banner--generic"
+    >
       <the-logo class="the-header__logo" />
     </div>
 
@@ -65,26 +71,18 @@ export default {
     top: 0;
     left: 0;
 
-     > div {
+    > div {
       position: relative;
     }
 
     &--generic {
-      @include responsive-inset(0,
-        margin-top,
-        margin-left
-      );
+      @include responsive-inset(0, margin-top, margin-left);
     }
 
     &--home {
-      @extend
-        .px-24,
-        .pb-48;
+      @extend .px-24, .pb-48;
 
-      @include responsive-inset(0,
-        padding-top,
-        margin-left
-      );
+      @include responsive-inset(0, padding-top, margin-left);
       @include tablet-and-up {
         width: 360px;
       }
@@ -118,9 +116,7 @@ export default {
       }
 
       .the-header__banner__upload-button {
-        @extend
-          .ma-0,
-          .my-24;
+        @extend .ma-0, .my-24;
       }
     }
 
@@ -128,8 +124,7 @@ export default {
       @include mobile-only {
         max-width: 230px;
       }
-      @extend
-        .mt-32--xs,
+      @extend .mt-32--xs,
         .text--color-primary,
         .text--color-white--xs,
         .text--size-32,
@@ -141,8 +136,7 @@ export default {
     &__slogan--line-2 {
       max-width: 230px;
 
-      @extend
-        .mt-8,
+      @extend .mt-8,
         .text--color-secondary,
         .text--color-white--xs,
         .text--size-20,
@@ -151,4 +145,3 @@ export default {
   }
 }
 </style>
-

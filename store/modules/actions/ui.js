@@ -1,6 +1,5 @@
 import * as types from '../../mutation-types';
 
-
 export const setWeb3Message = ({ commit, state }, message) => {
   if (state.web3Message !== message) {
     commit(types.UI_SET_WEB3_MESSAGE, message);

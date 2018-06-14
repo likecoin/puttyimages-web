@@ -3,29 +3,29 @@ module.exports = (sequelize, DataTypes) => {
     'assetTag',
     {
       asset_fingerprint: {
-        type: DataTypes.BLOB,
         allowNull: false,
         primaryKey: true,
         references: {
-          model: 'asset',
           key: 'fingerprint',
+          model: 'asset',
         },
+        type: DataTypes.BLOB,
       },
       tag_name: {
-        type: DataTypes.TEXT,
         allowNull: false,
         primaryKey: true,
         references: {
-          model: 'tag',
           key: 'name',
+          model: 'tag',
         },
+        type: DataTypes.TEXT,
       },
     },
     {
       freezeTableName: true,
-      timestamps: false,
       tableName: 'asset_tag',
-    },
+      timestamps: false,
+    }
   );
   return assetTag;
 };

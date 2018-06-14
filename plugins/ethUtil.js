@@ -1,9 +1,10 @@
 import EthUtil from '@likecoin/likecoin-eth-util';
 
-
 export default async ({ store }) => {
   EthUtil.initApp({
-    targetNetwork: 'main', // main / rinkeby
+    clearErrCb: () => {
+      store.dispatch('setWeb3Message', '');
+    },
     errCb: (message) => {
       /*
         Circumstance                        message
@@ -13,14 +14,8 @@ export default async ({ store }) => {
        */
       store.dispatch('setWeb3Message', message);
     },
-    retryCb: () => {
-      // store.dispatch('setWeb3IsFetching', true);
-    },
-    onWalletCb: (/* wallet */) => {
-      // user's wallet is retrieved
-    },
-    clearErrCb: () => {
-      store.dispatch('setWeb3Message', '');
+    onLogin: () => {
+      store.dispatch('setWeb3Message', 'login');
     },
     onSetWeb3: (type) => {
       store.dispatch('setWeb3Type', type);
@@ -28,11 +23,15 @@ export default async ({ store }) => {
     onSign: () => {
       store.dispatch('setWeb3Message', 'sign');
     },
-    onLogin: () => {
-      store.dispatch('setWeb3Message', 'login');
-    },
     onSigned: () => {
       store.dispatch('setWeb3Message', '');
     },
+    onWalletCb: (/* wallet */) => {
+      // user's wallet is retrieved
+    },
+    retryCb: () => {
+      // store.dispatch('setWeb3IsFetching', true);
+    },
+    targetNetwork: 'main', // main / rinkeby
   });
 };

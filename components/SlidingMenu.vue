@@ -13,10 +13,16 @@
       <div>
 
         <div class="user-account">
-          <img class="user-account__avatar" src="" />
+          <img
+            class="user-account__avatar"
+            src=""
+          >
           <div>
             <div class="user-account__greeting">Welcome!</div>
-            <div class="user-account__likecoin-id" @click="onClickOutside">
+            <div
+              class="user-account__likecoin-id"
+              @click="onClickOutside"
+            >
               <nuxt-link :to="{ name: 'dashboard' }">
                 franklamhang
               </nuxt-link>
@@ -39,7 +45,11 @@
         </nav>
 
         <div class="sliding-menu__menu-footer">
-          <v-menu open-on-hover top offset-y>
+          <v-menu
+            open-on-hover
+            top
+            offset-y
+          >
             <v-btn
               slot="activator"
               class="btn--likecoin"
@@ -64,7 +74,13 @@
     </div>
 
     <div class="sliding-menu__buttons">
-      <v-btn class="btn--likecoin" flat icon large color="primary">
+      <v-btn
+        class="btn--likecoin"
+        flat
+        icon
+        large
+        color="primary"
+      >
         <search-icon />
       </v-btn>
       <v-btn
@@ -169,18 +185,19 @@ $sliding-menu__inset-x: 64px;
 
   pointer-events: all;
 
-  @include responsive-inset(0,
-    margin-top,
-    margin-right
-  );
+  @include responsive-inset(0, margin-top, margin-right);
 
   &__toggle {
     margin-right: -8px;
 
     .hamburger-icon > span {
+      display: block;
+
       width: 26px;
       height: 2px;
-      display: block;
+
+      transition: transform 0.25s ease-out;
+
       background-color: currentColor;
 
       &:not(:first-child) {
@@ -192,16 +209,14 @@ $sliding-menu__inset-x: 64px;
         transform-origin: left;
       }
 
-      transition: transform .25s ease-out;
-
       .sliding-menu--open & {
         &:nth-child(1) {
           transform: translateX(4px) rotateZ(45deg);
         }
-        &:nth-child(2)  {
+        &:nth-child(2) {
           transform: scaleY(0);
         }
-        &:nth-child(3)  {
+        &:nth-child(3) {
           transform: translateX(4px) rotateZ(-45deg);
         }
       }
@@ -217,7 +232,7 @@ $sliding-menu__inset-x: 64px;
   width: breakpoint(xs);
   height: 100vh;
 
-  transition: transform .25s ease-out;
+  transition: transform 0.25s ease-out;
   transform: translateX(100%);
 
   background-image: $gradient-likecoin;
@@ -226,7 +241,7 @@ $sliding-menu__inset-x: 64px;
     width: 100vw;
   }
 
-   > div {
+  > div {
     position: relative;
 
     display: flex;
@@ -237,21 +252,18 @@ $sliding-menu__inset-x: 64px;
     width: inherit;
     height: inherit;
 
-    transition: opacity .4s ease-out;
+    transition: opacity 0.4s ease-out;
 
     opacity: 0;
 
-    @include responsive-inset(0,
-      padding-top,
-      padding-bottom
-    );
+    @include responsive-inset(0, padding-top, padding-bottom);
   }
 
   .sliding-menu--open & {
     transform: none;
     pointer-events: all;
 
-     > div {
+    > div {
       opacity: 1;
     }
   }
@@ -264,9 +276,7 @@ $sliding-menu__inset-x: 64px;
 
   margin-top: 64px;
 
-  @include responsive-inset(0,
-    padding-right
-  );
+  @include responsive-inset(0, padding-right);
 }
 
 .user-account {
@@ -286,19 +296,17 @@ $sliding-menu__inset-x: 64px;
   margin-right: 12px;
 
   border-radius: 50%;
-  background-color: #DDD;
+  background-color: #ddd;
 }
 
 .user-account__greeting {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .site-menu {
   flex-grow: 1;
 
-  @include responsive-inset(0,
-    margin-top
-  );
+  @include responsive-inset(0, margin-top);
 
   ul {
     margin: 0;
@@ -307,10 +315,10 @@ $sliding-menu__inset-x: 64px;
     list-style: none;
 
     li {
-      transition: background-color .4s ease-out;
+      transition: background-color 0.4s ease-out;
 
       &:hover {
-        background-color: #FFFFFF44;
+        background-color: #ffffff44;
       }
 
       a {
@@ -325,4 +333,3 @@ $sliding-menu__inset-x: 64px;
   }
 }
 </style>
-

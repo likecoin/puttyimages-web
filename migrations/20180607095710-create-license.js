@@ -2,13 +2,13 @@ module.exports = {
   up: (queryInterface, Sequelize) =>
     queryInterface.createTable('license', {
       name: {
-        type: Sequelize.TEXT,
         allowNull: false,
         primaryKey: true,
+        type: Sequelize.TEXT,
       },
       url: {
-        type: Sequelize.TEXT,
         allowNull: false,
+        type: Sequelize.TEXT,
       },
     }),
   down: (queryInterface) => queryInterface.dropTable('license'),

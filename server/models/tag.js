@@ -3,15 +3,15 @@ module.exports = (sequelize, DataTypes) => {
     'tag',
     {
       name: {
-        type: DataTypes.TEXT,
         allowNull: false,
         primaryKey: true,
+        type: DataTypes.TEXT,
       },
     },
     {
       freezeTableName: true,
       timestamps: false,
-    },
+    }
   );
 
   return tag;

@@ -1,7 +1,7 @@
 <template>
   <v-dialog
-    content-class="metamask-dialog"
     v-model="isDialogOpen"
+    content-class="metamask-dialog"
     width="450"
   >
     <v-card>
@@ -12,10 +12,16 @@
         small
         @click.native.stop="$emit('update:isDialogOpen', false)"
       >
-        <v-icon color="white" size="21">close</v-icon>
+        <v-icon
+          color="white"
+          size="21"
+        >close</v-icon>
       </v-btn>
       <v-card-title class="metamask-dialog__title">
-        <img class="metamask-dialog__logo" src="@/assets/img/metamask.png" />
+        <img
+          class="metamask-dialog__logo"
+          src="@/assets/img/metamask.png"
+        >
         <earth-icon class="metamask-dialog__earth-icon" />
       </v-card-title>
       <v-card-text class="metamask-dialog__text">
@@ -66,8 +72,19 @@
 import EarthIcon from '@/assets/icons/earth.svg';
 
 export default {
+  name: 'the-metamask-dialog',
   components: {
     EarthIcon,
+  },
+  props: {
+    getWeb3Message: {
+      required: true,
+      type: String,
+    },
+    isDialogOpen: {
+      required: true,
+      type: Boolean,
+    },
   },
   computed: {
     metamaskDialogMessage() {
@@ -81,8 +98,6 @@ export default {
       }
     },
   },
-  name: 'the-metamask-dialog',
-  props: ['getWeb3Message', 'isDialogOpen'],
 };
 </script>
 
@@ -98,14 +113,14 @@ export default {
   margin-top: -20px;
   margin-left: -20px;
 
-  background: linear-gradient(2700deg, #6A282E, #3D286E);
+  background: linear-gradient(2700deg, #6a282e, #3d286e);
 }
 .metamask-dialog__title {
   justify-content: center;
 
   height: 55px;
 
-  background: linear-gradient(270deg, #ED8526, #EEBE78);
+  background: linear-gradient(270deg, #ed8526, #eebe78);
 }
 .metamask-dialog__logo {
   margin-top: -30px;

@@ -4,14 +4,19 @@
       User
     </h1>
     <v-card>
-    <v-card-title primary-title>
-      {{ user.name }}
-    </v-card-title>
-    <v-card-actions>
-      <v-btn flat color="orange" nuxt to="/" >
-        All Users
-      </v-btn>
-    </v-card-actions>
+      <v-card-title primary-title>
+        {{ user.name }}
+      </v-card-title>
+      <v-card-actions>
+        <v-btn
+          flat
+          color="orange"
+          nuxt
+          to="/"
+        >
+          All Users
+        </v-btn>
+      </v-card-actions>
     </v-card>
   </section>
 </template>
@@ -22,9 +27,10 @@ import axios from '~/plugins/axios';
 export default {
   name: 'id',
   asyncData({ params, error }) {
-    return axios.get(`/api/users/${params.id}`)
-      .then(res => ({ user: res.data }))
-      .catch((e) => { // eslint-disable-line no-unused-vars
+    return axios
+      .get(`/api/users/${params.id}`)
+      .then((res) => ({ user: res.data }))
+      .catch(() => {
         error({ statusCode: 404, message: 'User not found' });
       });
   },

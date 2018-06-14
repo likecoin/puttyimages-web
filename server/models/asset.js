@@ -2,45 +2,47 @@ module.exports = (sequelize, DataTypes) => {
   const asset = sequelize.define(
     'asset',
     {
-      fingerprint: {
-        type: DataTypes.BLOB,
-        allowNull: false,
-        primaryKey: true,
-      },
-      ipfs: {
-        type: DataTypes.BLOB,
-        allowNull: false,
-        unique: true,
-      },
-      ipld: {
-        type: DataTypes.BLOB,
-        allowNull: false,
-        unique: true,
-      },
-      wallet: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
       created_at: {
         allowNull: false,
         type: DataTypes.DATE,
+      },
+      fingerprint: {
+        allowNull: false,
+        primaryKey: true,
+        type: DataTypes.BLOB,
+      },
+      fkAssetLicense: {
+        allowNull: false,
+        field: 'fk_asset_license',
+        references: {
+          key: 'name',
+          model: 'license',
+        },
+        type: DataTypes.TEXT,
+      },
+      ipfs: {
+        allowNull: false,
+        type: DataTypes.BLOB,
+        unique: true,
+      },
+      ipld: {
+        allowNull: false,
+        type: DataTypes.BLOB,
+        unique: true,
       },
       updated_at: {
         allowNull: false,
         type: DataTypes.DATE,
       },
-      fk_asset_license: {
-        type: DataTypes.TEXT,
+      wallet: {
         allowNull: false,
-        references: {
-          model: 'license',
-          key: 'name',
-        },
+        type: DataTypes.TEXT,
       },
     },
     {
       freezeTableName: true,
-    },
+      timestamps: true,
+    }
   );
   return asset;
 };

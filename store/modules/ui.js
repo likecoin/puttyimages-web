@@ -22,4 +22,4 @@ export default {
   getters,
   mutations,
   state: uiState,
-}
+};

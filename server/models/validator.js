@@ -27,8 +27,10 @@ export function isTagsCountValid(tags) {
 }
 
 export function isTagsValid(tags) {
-  const checkTags = typeof tags === 'string' ? [ tags ] : tags;
-  return checkTags.every(e => e.length >= MIN_TAG_LENGTH && e.length <= MAX_TAG_LENGTH);
+  const checkTags = typeof tags === 'string' ? [tags] : tags;
+  return checkTags.every(
+    (e) => e.length >= MIN_TAG_LENGTH && e.length <= MAX_TAG_LENGTH
+  );
 }
 
 export function isLicenseValid(license) {
@@ -37,11 +39,12 @@ export function isLicenseValid(license) {
 
 export function validateImage(img, inputSHA256) {
   if (!img) throw new ValidationError('no image uploaded');
-  if (img.size > MAX_IMAGE_SIZE) throw new ValidationError('image size too large');
+  if (img.size > MAX_IMAGE_SIZE)
+    throw new ValidationError('image size too large');
   const type = imageType(img.buffer);
-  if (!SUPPORTED_IMAGE_TYPE.has(type && type.ext)) throw new ValidationError('unsupported file format!');
+  if (!SUPPORTED_IMAGE_TYPE.has(type && type.ext))
+    throw new ValidationError('unsupported file format!');
   const hash256 = sha256(img.buffer);
   if (hash256 !== inputSHA256) throw new ValidationError('image SHA not match');
   return true;
 }
-
