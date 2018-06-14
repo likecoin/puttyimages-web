@@ -1,43 +1,47 @@
 <template>
   <div :class="classObject">
 
-    <div
-      v-if="isHomePage"
-      class="the-header__banner the-header__banner--home"
-    >
-      <div>
+    <transition name="page">
+      <div
+        v-if="isHomePage"
+        key="home-banner"
+        class="the-header__banner the-header__banner--home"
+      >
+        <div>
+          <the-logo
+            color="primary"
+            class="the-header__logo"
+          />
+
+          <h1 class="the-header__banner__slogan--line-1">
+            Making profit with free to use photos
+          </h1>
+          <h2 class="the-header__banner__slogan--line-2">
+            Rewarding Contents by Proof of Creativity
+          </h2>
+
+          <v-btn
+            :to="{ name: 'upload' }"
+            class="the-header__banner__upload-button btn--likecoin"
+            color="secondary"
+          >
+            <v-icon>add_circle_outline</v-icon>
+            <span>Upload Your Image</span>
+          </v-btn>
+
+        </div>
+      </div>
+      <div
+        v-else
+        key="generic-banner"
+        class="the-header__banner the-header__banner--generic"
+      >
         <the-logo
-          color="primary"
+          :color="color"
           class="the-header__logo"
         />
-
-        <h1 class="the-header__banner__slogan--line-1">
-          Making profit with free to use photos
-        </h1>
-        <h2 class="the-header__banner__slogan--line-2">
-          Rewarding Contents by Proof of Creativity
-        </h2>
-
-        <v-btn
-          :to="{ name: 'upload' }"
-          class="the-header__banner__upload-button btn--likecoin"
-          color="secondary"
-        >
-          <v-icon>add_circle_outline</v-icon>
-          <span>Upload Your Image</span>
-        </v-btn>
-
       </div>
-    </div>
-    <div
-      v-else
-      class="the-header__banner the-header__banner--generic"
-    >
-      <the-logo
-        :color="color"
-        class="the-header__logo"
-      />
-    </div>
+    </transition>
 
     <the-sliding-menu :color="color" />
 

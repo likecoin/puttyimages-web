@@ -4,6 +4,16 @@
     @click.self="onClickOutside"
   >
 
+    <transition
+      name="the-search-transition-overlay--fade"
+      @afterEnter="goToSearchPage"
+    >
+      <div
+        v-if="isSearchButtonClicked"
+        class="the-search-transition-overlay"
+      />
+    </transition>
+
     <transition name="the-sliding-menu__menu-">
       <div
         v-if="isOpen"
@@ -78,15 +88,20 @@
     </transition>
 
     <div class="the-sliding-menu__buttons">
-      <v-btn
-        :color="buttonsColor"
-        class="btn--likecoin"
-        flat
-        icon
-        large
-      >
-        <search-icon />
-      </v-btn>
+      <transition name="the-sliding-menu__buttons__search-button--slide-fade">
+        <v-btn
+          v-if="isShowSearchButton"
+          key="search-button"
+          :color="buttonsColor"
+          class="btn--likecoin"
+          flat
+          icon
+          large
+          @click="onToggleSearchDialog"
+        >
+          <search-icon />
+        </v-btn>
+      </transition>
       <v-btn
         :color="buttonsColor"
         class="the-sliding-menu__buttons__toggle btn--likecoin"
@@ -123,6 +138,7 @@ export default {
   data() {
     return {
       isOpen: false,
+      isSearchButtonClicked: false,
     };
   },
   computed: {
@@ -141,6 +157,9 @@ export default {
     },
     currentUserId() {
       return '1';
+    },
+    isShowSearchButton() {
+      return !(this.isSearchButtonClicked || this.$route.name === 'search');
     },
     menuItems() {
       return [
@@ -172,12 +191,24 @@ export default {
       ];
     },
   },
+  watch: {
+    $route() {
+      this.isSearchButtonClicked = false;
+    },
+  },
   methods: {
+    onClickOutside() {
+      this.isOpen = false;
+    },
     onToggle() {
       this.isOpen = !this.isOpen;
     },
-    onClickOutside() {
+    onToggleSearchDialog() {
       this.isOpen = false;
+      this.isSearchButtonClicked = true;
+    },
+    goToSearchPage() {
+      this.$router.push({ name: 'search' });
     },
   },
 };
@@ -251,6 +282,25 @@ $the-sliding-menu__inset-x: 64px;
         &:nth-child(3) {
           transform: translateX(4px) rotateZ(-45deg);
         }
+      }
+    }
+  }
+
+  &__search-button {
+    &--slide-fade- {
+      &enter-active,
+      &leave-active {
+        transition: (
+          transform 0.6s cubic-bezier(0.3, 0, 0.5, 0.5),
+          opacity 0.4s cubic-bezier(0.3, 0, 0.5, 0.5)
+        );
+      }
+      &enter,
+      &leave-to {
+        opacity: 0 !important;
+      }
+      &leave-to {
+        transform: translateX(-30vw) !important;
       }
     }
   }
@@ -389,6 +439,28 @@ $the-sliding-menu__inset-x: 64px;
         font-size: 28px;
         line-height: 1.5;
       }
+    }
+  }
+}
+
+.the-search-transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: white;
+
+  &--fade- {
+    &enter-active,
+    &leave-active {
+      transition: opacity 0.5s cubic-bezier(0.2, 0.2, 0, 1);
+    }
+    &enter,
+    &leave-to {
+      opacity: 0;
     }
   }
 }

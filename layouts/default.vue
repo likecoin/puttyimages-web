@@ -1,10 +1,16 @@
 <template>
-  <v-app>
-    <the-overlay-component />
+  <transition
+    name="page"
+    appear
+  >
+    <v-app>
+      <the-overlay-component />
 
-    <the-header />
-    <nuxt />
-  </v-app>
+      <the-header />
+
+      <nuxt />
+    </v-app>
+  </transition>
 </template>
 
 <script>
