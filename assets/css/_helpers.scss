@@ -12,6 +12,13 @@ $color-map: (
   secondary: color(like-brown),
   white: white,
 );
+@mixin color-modifiers {
+  @each $key, $value in $color-map {
+    &--#{$key} {
+      color: $value;
+    }
+  }
+}
 
 $gradient-colors: (
   primary: (#3D286E, color(like-green)),

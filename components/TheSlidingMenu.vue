@@ -1,11 +1,6 @@
 <template>
   <div
-    :class="[
-      'the-sliding-menu',
-      {
-        'the-sliding-menu--open': isOpen,
-      },
-    ]"
+    :class="classObject"
     @click.self="onClickOutside"
   >
 
@@ -75,17 +70,17 @@
 
     <div class="the-sliding-menu__buttons">
       <v-btn
+        :color="buttonsColor"
         class="btn--likecoin"
         flat
         icon
         large
-        color="primary"
       >
         <search-icon />
       </v-btn>
       <v-btn
+        :color="buttonsColor"
         class="the-sliding-menu__buttons__toggle btn--likecoin"
-        color="primary"
         flat
         icon
         large
@@ -103,6 +98,8 @@
 </template>
 
 <script>
+import { ColorPropType } from '@/constant/prop-types';
+
 import SearchIcon from '~/assets/icons/search.svg';
 
 export default {
@@ -110,23 +107,43 @@ export default {
   components: {
     SearchIcon,
   },
+  props: {
+    // eslint-disable-next-line vue/require-default-prop
+    color: ColorPropType,
+  },
   data() {
     return {
       isOpen: false,
     };
   },
   computed: {
+    buttonsColor() {
+      return this.isOpen ? 'primary' : this.color;
+    },
+    classObject() {
+      return [
+        'the-sliding-menu',
+        `the-sliding-menu--${this.color}`,
+        {
+          'the-sliding-menu--open': this.isOpen,
+          'the-sliding-menu--home': this.$route.name === 'index',
+        },
+      ];
+    },
+    currentUserId() {
+      return '1';
+    },
     menuItems() {
       return [
         {
           key: 'upload',
           title: 'Upload Image Now',
-          to: { name: 'index' },
+          to: { name: 'upload' },
         },
         {
           key: 'my-image',
           title: 'My Images',
-          to: { name: 'dashboard' },
+          to: { name: 'id', params: { id: this.currentUserId } },
         },
         {
           key: 'about',
@@ -158,7 +175,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/css/helpers';
+@import '~assets/css/classes';
 
 $the-sliding-menu__inset-x: 64px;
 
@@ -176,6 +193,8 @@ $the-sliding-menu__inset-x: 64px;
   &.the-sliding-menu--open {
     pointer-events: all;
   }
+
+  @include color-modifiers;
 }
 
 .the-sliding-menu__buttons {
@@ -220,6 +239,12 @@ $the-sliding-menu__inset-x: 64px;
           transform: translateX(4px) rotateZ(-45deg);
         }
       }
+    }
+  }
+
+  .btn {
+    .the-sliding-menu--home & {
+      @extend .text--color-primary--xs;
     }
   }
 }

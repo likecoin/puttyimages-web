@@ -1,12 +1,15 @@
 <template>
-  <div class="the-header">
+  <div :class="classObject">
 
     <div
       v-if="isHomePage"
       class="the-header__banner the-header__banner--home"
     >
       <div>
-        <the-logo class="the-header__logo" />
+        <the-logo
+          color="primary"
+          class="the-header__logo"
+        />
 
         <h1 class="the-header__banner__slogan--line-1">
           Making profit with free to use photos
@@ -16,6 +19,7 @@
         </h2>
 
         <v-btn
+          :to="{ name: 'upload' }"
           class="the-header__banner__upload-button btn--likecoin"
           color="secondary"
         >
@@ -29,15 +33,20 @@
       v-else
       class="the-header__banner the-header__banner--generic"
     >
-      <the-logo class="the-header__logo" />
+      <the-logo
+        :color="color"
+        class="the-header__logo"
+      />
     </div>
 
-    <the-sliding-menu />
+    <the-sliding-menu :color="color" />
 
   </div>
 </template>
 
 <script>
+import { ColorPropType } from '@/constant/prop-types';
+
 import TheLogo from '@/components/TheLogo';
 import TheSlidingMenu from '@/components/TheSlidingMenu';
 
@@ -47,7 +56,14 @@ export default {
     TheLogo,
     TheSlidingMenu,
   },
+  props: {
+    // eslint-disable-next-line vue/require-default-prop
+    color: ColorPropType,
+  },
   computed: {
+    classObject() {
+      return ['the-header', `the-header--${this.color}`];
+    },
     isHomePage() {
       return this.$route.name === 'index';
     },
@@ -141,5 +157,7 @@ export default {
         .text--weight-400;
     }
   }
+
+  @include color-modifiers;
 }
 </style>

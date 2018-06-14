@@ -10,6 +10,7 @@
 import TheLandingCarousel from '@/components/TheLandingCarousel';
 
 export default {
+  layout: 'index',
   components: {
     TheLandingCarousel,
   },
