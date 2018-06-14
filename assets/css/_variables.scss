@@ -5,17 +5,6 @@ $colors: (
   like-brown: #6A282E,
 );
 
-$color-map: (
-  primary: color(like-green),
-  secondary: color(like-brown),
-  white: white,
-);
-
-$gradient-colors: (
-  primary: (#3D286E, color(like-green)),
-  secondary: (#3D286E, color(like-brown)),
-);
-
 $gradient-likecoin: linear-gradient(292deg, #D0F0F0, #F0E6B4);
 
 /// Grid System

@@ -7,6 +7,16 @@
   @return map-get($colors, $name);
 }
 
+$color-map: (
+  primary: color(like-green),
+  secondary: color(like-brown),
+  white: white,
+);
+
+$gradient-colors: (
+  primary: (#3D286E, color(like-green)),
+  secondary: (#3D286E, color(like-brown)),
+);
 @function gradient-colors($name) {
   @return map-get($gradient-colors, $name);
 }
