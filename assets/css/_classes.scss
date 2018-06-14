@@ -1,5 +1,21 @@
 @import 'helpers';
 
+/// Visibility
+.hide {
+  display: none !important;
+
+  @include mobile-only {
+    &--xs {
+      display: none !important;
+    }
+  }
+  @include tablet-and-below {
+    &--sm {
+      display: none !important;
+    }
+  }
+}
+
 /// Text Styling
 @mixin text-style($suffix: '') {
   @each $value in $font-size-list {
