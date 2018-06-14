@@ -1,13 +1,30 @@
 <template>
   <div class="the-header">
 
-    <nuxt-link class="the-logo" :to="{ name: 'index' }">
-      <logo class="the-logo__icon" />
+    <div v-if="isHomePage" class="the-header__banner the-header__banner--home">
       <div>
-        <div class="the-logo__type">puttyimages</div>
-        <div class="the-logo__subtitle">Supported by LikeCoin</div>
+        <the-logo class="the-header__logo" />
+
+        <h1 class="the-header__banner__slogan--line-1">
+          Making profit with free to use photos
+        </h1>
+        <h2 class="the-header__banner__slogan--line-2">
+          Rewarding Contents by Proof of Creativity
+        </h2>
+
+        <v-btn
+          class="the-header__banner__upload-button btn--likecoin"
+          color="secondary"
+        >
+          <v-icon>add_circle_outline</v-icon>
+          <span>Upload Your Image</span>
+        </v-btn>
+
       </div>
-    </nuxt-link>
+    </div>
+    <div v-else class="the-header__banner the-header__banner--generic">
+      <the-logo class="the-header__logo" />
+    </div>
 
     <sliding-menu />
 
@@ -16,55 +33,122 @@
 
 <script>
 import SlidingMenu from '@/components/SlidingMenu';
-
-import Logo from '@/assets/icons/logo.svg';
+import TheLogo from '@/components/TheLogo';
 
 export default {
   name: 'the-header',
   components: {
-    Logo,
+    TheLogo,
     SlidingMenu,
+  },
+  computed: {
+    isHomePage() {
+      return this.$route.name === 'index';
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/css/variables';
+@import '~assets/css/classes';
 
 .the-header {
   margin-bottom: 152px;
-}
 
-.the-logo {
-  position: fixed;
-  z-index: 100;
-  top: 0;
-  left: 0;
+  &__logo {
+    @extend .pb-24;
+  }
 
-  display: flex;
+  &__banner {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
 
-  margin-top: 96px;
-  margin-left: 80px;
+     > div {
+      position: relative;
+    }
 
-  color: color(like-green);
-}
+    &--generic {
+      @include responsive-inset(0,
+        margin-top,
+        margin-left
+      );
+    }
 
-.the-logo__icon {
-  width: 56px;
-  height: 56px;
-  margin-right: 12px;
+    &--home {
+      @extend
+        .px-24,
+        .pb-48;
 
-  color: inherit;
+      @include responsive-inset(0,
+        padding-top,
+        margin-left
+      );
+      @include tablet-and-up {
+        width: 360px;
+      }
+      @include mobile-only {
+        width: 100vw;
+        margin-left: 0;
+      }
 
-  fill: currentColor;
-}
+      &::before {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        left: 0;
 
-.the-logo__type {
-  font-size: 24px;
-}
+        width: 100%;
+        height: 100%;
 
-.the-logo__subtitle {
-  font-size: 12px;
+        content: ' ';
+
+        background-image: $gradient-likecoin;
+
+        @include tablet-and-up {
+          border-bottom: {
+            left-radius: 8px;
+            right-radius: 8px;
+          }
+        }
+        @include mobile-only {
+          height: 104px;
+        }
+      }
+
+      .the-header__banner__upload-button {
+        @extend
+          .ma-0,
+          .my-24;
+      }
+    }
+
+    &__slogan--line-1 {
+      @include mobile-only {
+        max-width: 230px;
+      }
+      @extend
+        .mt-32--xs,
+        .text--color-primary,
+        .text--color-white--xs,
+        .text--size-32,
+        .text--size-24--xs,
+        .text--height-1-2,
+        .text--weight-600;
+    }
+
+    &__slogan--line-2 {
+      max-width: 230px;
+
+      @extend
+        .mt-8,
+        .text--color-secondary,
+        .text--color-white--xs,
+        .text--size-20,
+        .text--weight-400;
+    }
+  }
 }
 </style>
 

@@ -66,6 +66,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~assets/css/helpers';
+
 .the-landing-carousel {
   position: fixed;
   z-index: 0;
@@ -83,10 +85,12 @@ export default {
 
     display: flex;
 
-    margin-bottom: 60px;
-    margin-left: 80px;
-
     color: white;
+
+    @include responsive-inset(0,
+      margin-bottom,
+      margin-left
+    );
 
     &--slide-fade- {
       &enter-active,

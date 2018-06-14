@@ -3,13 +3,6 @@
 
     <the-landing-carousel />
 
-    <div class="image-upload-btn-wrapper">
-      <v-btn class="btn--likecoin" color="secondary" depressed>
-        <v-icon>add_circle_outline</v-icon>
-        <span>Upload Your Image</span>
-      </v-btn>
-    </div>
-
   </div>
 </template>
 

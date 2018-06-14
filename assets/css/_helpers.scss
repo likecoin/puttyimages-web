@@ -1,0 +1,99 @@
+@import 'variables';
+@import 'functions';
+
+/// Variables Getters
+
+@function color($name) {
+  @return map-get($colors, $name);
+}
+
+@function gradient-colors($name) {
+  @return map-get($gradient-colors, $name);
+}
+
+@function breakpoint($type) {
+  @return map-get($breakpoints, $type);
+}
+
+@function get-responsive-inset($keys...) {
+  @return map-deep-get($responsive-inset, $keys...);
+}
+
+/// Responsive
+
+@mixin mobile-only {
+  @media only screen and (max-width: breakpoint(xs)) {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @media only screen and (min-width: breakpoint(xs) + 1px) and (max-width: breakpoint(sm)) {
+    @content;
+  }
+}
+
+@mixin tablet-and-below {
+  @media only screen and (max-width: breakpoint(sm)) {
+    @content;
+  }
+}
+
+@mixin tablet-and-up {
+  @media only screen and (min-width: breakpoint(xs) + 1px) {
+    @content;
+  }
+}
+
+@mixin desktop-only {
+  @media only screen and (min-width: breakpoint(sm) + 1px) and (max-width: breakpoint(md)) {
+    @content;
+  }
+}
+
+@mixin desktop-and-up {
+  @media only screen and (min-width: breakpoint(sm) + 1px) {
+    @content;
+  }
+}
+
+@mixin responsive($property-config: ()) {
+  @each $property, $config in $property-config {
+    @each $breakpoint, $value in $config {
+      @if $breakpoint == 'xs' {
+        @include mobile-only {
+          #{$property}: $value;
+        }
+      } @else if $breakpoint == 'sm' {
+        @include tablet-and-below {
+          #{$property}: $value;
+        }
+      } @else {
+        #{$property}: $value;
+      }
+    }
+  }
+}
+
+@mixin responsive-inset($level: 0, $properties...) {
+  $property-config: ();
+  $x-property: top, bottom, margin-top, margin-bottom, padding-top, padding-bottom;
+  $y-property: left, right, margin-left, margin-right, padding-left, padding-right;
+
+  @each $property in $properties {
+    $direction: false;
+    @if index($x-property, $property) {
+      $direction: x;
+    } @else if index($y-property, $property) {
+      $direction: y;
+    }
+
+    @if $direction {
+      $property-config: map-merge($property-config, (
+        $property: get-responsive-inset($level, $direction)
+      ));
+    }
+  }
+
+  @include responsive($property-config);
+}

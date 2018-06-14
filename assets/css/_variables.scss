@@ -1,26 +1,24 @@
-/* Colors */
+/// Colors
 
 $colors: (
   like-green: #2D6472,
   like-brown: #6A282E,
 );
 
-@function color($name) {
-  @return map-get($colors, $name);
-}
+$color-map: (
+  primary: color(like-green),
+  secondary: color(like-brown),
+  white: white,
+);
 
 $gradient-colors: (
   primary: (#3D286E, color(like-green)),
   secondary: (#3D286E, color(like-brown)),
 );
 
-@function gradient-colors($name) {
-  @return map-get($gradient-colors, $name);
-}
-
 $gradient-likecoin: linear-gradient(292deg, #D0F0F0, #F0E6B4);
 
-/* Grid System */
+/// Grid System
 
 $breakpoints: (
   xs: 600px,
@@ -28,6 +26,29 @@ $breakpoints: (
   md: 1264px,
 );
 
-@function breakpoint($type) {
-  @return map-get($breakpoints, $type);
-}
+/// Layout system
+
+$responsive-inset: (
+  0: (
+    x: (
+      xs: 24px,
+      md: 64px
+    ),
+    y: (
+      xs: 32px,
+      md: 64px
+    )
+  )
+);
+
+/// Text styling
+$font-size-list: 12, 14, 16, 18, 20, 24, 28, 32;
+$font-weight-list: 300 400 600;
+$line-height-map: (
+  1: 1,
+  '1-2': 1.2,
+  '1-5': 1.5,
+  '1-6': 1.6,
+  '1-8': 1.8,
+  2: 2
+);

@@ -68,14 +68,18 @@
         <search-icon />
       </v-btn>
       <v-btn
-        class="btn--likecoin"
+        class="sliding-menu__buttons__toggle btn--likecoin"
         color="primary"
         flat
         icon
         large
         @click="onToggle"
       >
-        <v-icon large>{{ isOpen ? 'close' : 'menu' }}</v-icon>
+        <div class="hamburger-icon">
+          <span />
+          <span />
+          <span />
+        </div>
       </v-btn>
     </div>
 
@@ -138,8 +142,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/css/variables';
-@import '~assets/css/mixins';
+@import '~assets/css/helpers';
 
 $sliding-menu__inset-x: 64px;
 
@@ -164,10 +167,46 @@ $sliding-menu__inset-x: 64px;
   top: 0;
   right: 0;
 
-  margin-top: 104px;
-  margin-right: $sliding-menu__inset-x;
-
   pointer-events: all;
+
+  @include responsive-inset(0,
+    margin-top,
+    margin-right
+  );
+
+  &__toggle {
+    margin-right: -8px;
+
+    .hamburger-icon > span {
+      width: 26px;
+      height: 2px;
+      display: block;
+      background-color: currentColor;
+
+      &:not(:first-child) {
+        margin-top: 7px;
+      }
+
+      &:nth-child(1),
+      &:nth-child(3) {
+        transform-origin: left;
+      }
+
+      transition: transform .25s ease-out;
+
+      .sliding-menu--open & {
+        &:nth-child(1) {
+          transform: translateX(4px) rotateZ(45deg);
+        }
+        &:nth-child(2)  {
+          transform: scaleY(0);
+        }
+        &:nth-child(3)  {
+          transform: translateX(4px) rotateZ(-45deg);
+        }
+      }
+    }
+  }
 }
 
 .sliding-menu__menu {
@@ -197,11 +236,15 @@ $sliding-menu__inset-x: 64px;
 
     width: inherit;
     height: inherit;
-    padding: 104px 0 64px;
 
     transition: opacity .4s ease-out;
 
     opacity: 0;
+
+    @include responsive-inset(0,
+      padding-top,
+      padding-bottom
+    );
   }
 
   .sliding-menu--open & {
@@ -220,7 +263,10 @@ $sliding-menu__inset-x: 64px;
   justify-content: flex-end;
 
   margin-top: 64px;
-  padding-right: $sliding-menu__inset-x;
+
+  @include responsive-inset(0,
+    padding-right
+  );
 }
 
 .user-account {
@@ -250,7 +296,9 @@ $sliding-menu__inset-x: 64px;
 .site-menu {
   flex-grow: 1;
 
-  margin-top: 104px;
+  @include responsive-inset(0,
+    margin-top
+  );
 
   ul {
     margin: 0;
