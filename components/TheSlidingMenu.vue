@@ -4,69 +4,78 @@
     @click.self="onClickOutside"
   >
 
-    <div class="the-sliding-menu__menu">
-      <div>
+    <transition name="the-sliding-menu__menu-">
+      <div
+        v-if="isOpen"
+        class="the-sliding-menu__menu"
+      >
+        <div>
 
-        <div class="user-account">
-          <img
-            class="user-account__avatar"
-            src=""
-          >
-          <div>
-            <div class="user-account__greeting">Welcome!</div>
-            <div
-              class="user-account__likecoin-id"
-              @click="onClickOutside"
+          <div class="user-account">
+            <img
+              class="user-account__avatar"
+              src=""
             >
-              <nuxt-link :to="{ name: 'dashboard' }">
-                franklamhang
-              </nuxt-link>
+            <div>
+              <div class="user-account__greeting">Welcome!</div>
+              <div
+                class="user-account__likecoin-id"
+                @click="onClickOutside"
+              >
+                <nuxt-link :to="{ name: 'dashboard' }">
+                  franklamhang
+                </nuxt-link>
+              </div>
             </div>
           </div>
-        </div>
 
-        <nav class="site-menu">
-          <ul>
-            <li
-              v-for="item in menuItems"
-              :key="item.key"
-              @click="onClickOutside"
+          <nav class="site-menu">
+            <transition-group
+              name="site-menu__item--fade"
+              tag="ul"
+              appear
             >
-              <nuxt-link :to="item.to">
-                {{ item.title }}
-              </nuxt-link>
-            </li>
-          </ul>
-        </nav>
+              <li
+                v-for="item in menuItems"
+                :key="item.key"
+                @click="onClickOutside"
+              >
+                <nuxt-link :to="item.to">
+                  {{ item.title }}
+                </nuxt-link>
+              </li>
+            </transition-group>
+          </nav>
 
-        <div class="the-sliding-menu__menu-footer">
-          <v-menu
-            open-on-hover
-            top
-            offset-y
-          >
-            <v-btn
-              slot="activator"
-              class="btn--likecoin"
-              color="primary"
-              flat
-              small
+          <div class="the-sliding-menu__menu-footer">
+            <v-menu
+              open-on-hover
+              top
+              offset-y
             >
-              <v-icon>language</v-icon><span>Language</span>
-            </v-btn>
-            <v-list>
-              <v-list-tile>
-                <v-list-tile-title>English</v-list-tile-title>
-              </v-list-tile>
-              <v-list-tile>
-                <v-list-tile-title>中文</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
-        </div>
+              <v-btn
+                slot="activator"
+                class="btn--likecoin"
+                color="primary"
+                flat
+                small
+              >
+                <v-icon>language</v-icon><span>Language</span>
+              </v-btn>
+              <v-list>
+                <v-list-tile>
+                  <v-list-tile-title>English</v-list-tile-title>
+                </v-list-tile>
+                <v-list-tile>
+                  <v-list-tile-title>中文</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
+          </div>
 
+        </div>
       </div>
-    </div>
+    </transition>
 
     <div class="the-sliding-menu__buttons">
       <v-btn
@@ -124,8 +133,8 @@ export default {
       return [
         'the-sliding-menu',
         `the-sliding-menu--${this.color}`,
+        `the-sliding-menu--${this.isOpen ? 'open' : 'closed'}`,
         {
-          'the-sliding-menu--open': this.isOpen,
           'the-sliding-menu--home': this.$route.name === 'index',
         },
       ];
@@ -188,10 +197,14 @@ $the-sliding-menu__inset-x: 64px;
   width: 100vw;
   height: 100vh;
 
+  transition: background-color 1s ease-out;
+
   pointer-events: none;
 
   &.the-sliding-menu--open {
     pointer-events: all;
+
+    background-color: #00000022;
   }
 
   @include color-modifiers;
@@ -257,13 +270,21 @@ $the-sliding-menu__inset-x: 64px;
   width: breakpoint(xs);
   height: 100vh;
 
-  transition: transform 0.25s ease-out;
-  transform: translateX(100%);
-
   background-image: $gradient-likecoin;
 
   @include mobile-only {
     width: 100vw;
+  }
+
+  &-- {
+    &enter-active,
+    &leave-active {
+      transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.15, 1);
+    }
+    &enter,
+    &leave-to {
+      transform: translateX(100%);
+    }
   }
 
   > div {
@@ -277,20 +298,11 @@ $the-sliding-menu__inset-x: 64px;
     width: inherit;
     height: inherit;
 
-    transition: opacity 0.4s ease-out;
-
-    opacity: 0;
-
     @include responsive-inset(0, padding-top, padding-bottom);
   }
 
   .the-sliding-menu--open & {
-    transform: none;
     pointer-events: all;
-
-    > div {
-      opacity: 1;
-    }
   }
 }
 
@@ -344,6 +356,29 @@ $the-sliding-menu__inset-x: 64px;
 
       &:hover {
         background-color: #ffffff44;
+      }
+
+      &.site-menu__item--fade- {
+        &enter-active {
+          transition: (
+            transform 0.4s cubic-bezier(0.2, 0.7, 0.15, 1),
+            opacity 0.6s ease-out
+          );
+
+          @for $i from 0 through 10 {
+            &:nth-child(#{$i}) {
+              transition-delay: #{$i / 24}s;
+            }
+          }
+        }
+        &enter {
+          transform: translateX(100px);
+
+          opacity: 0;
+        }
+        &leave-to {
+          transition-duration: 0.4s;
+        }
       }
 
       a {
