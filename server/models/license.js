@@ -3,15 +3,16 @@ module.exports = (sequelize, DataTypes) => {
     'license',
     {
       name: {
-        type: DataTypes.TEXT,
         allowNull: false,
         primaryKey: true,
+        type: DataTypes.TEXT,
       },
       url: {
-        type:  DataTypes.TEXT,
         allowNull: false,
+        type: DataTypes.TEXT,
       },
-    }, {
+    },
+    {
       freezeTableName: true,
       timestamps: false,
     }

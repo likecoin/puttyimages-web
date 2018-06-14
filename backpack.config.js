@@ -1,5 +1,6 @@
 module.exports = {
-  webpack: (config, options, webpack) => { // eslint-disable-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars
+  webpack: (config, options, webpack) => {
     config.entry.main = './server/index.js'; // eslint-disable-line no-param-reassign
     return config;
   },

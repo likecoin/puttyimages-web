@@ -3,7 +3,7 @@
     <the-overlay-component />
 
     <the-header />
-    <nuxt/>
+    <nuxt />
   </v-app>
 </template>
 

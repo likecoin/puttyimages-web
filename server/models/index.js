@@ -6,11 +6,11 @@ const config = require('../../config/database');
 
 const sequelize = new Sequelize({
   ...config.development,
-  operatorsAliases: false,
-  timezone: '+00:00',
   define: {
     underscored: true,
   },
+  operatorsAliases: false,
+  timezone: '+00:00',
 });
 
 const db = {};
@@ -39,7 +39,15 @@ db.Sequelize = Sequelize;
 db.asset.belongsTo(db.license, { foreignKey: 'fk_asset_license' });
 db.license.hasMany(db.asset, { foreignKey: 'fk_asset_license' });
 
-db.asset.belongsToMany(db.tag, { through: 'asset_tag', timestamps: false, foreignKey: 'asset_fingerprint' });
-db.tag.belongsToMany(db.asset, { through: 'asset_tag', timestamps: false, foreignKey: 'tag_name' });
+db.asset.belongsToMany(db.tag, {
+  foreignKey: 'asset_fingerprint',
+  through: 'asset_tag',
+  timestamps: false,
+});
+db.tag.belongsToMany(db.asset, {
+  foreignKey: 'tag_name',
+  through: 'asset_tag',
+  timestamps: false,
+});
 
 module.exports = db;

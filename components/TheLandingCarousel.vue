@@ -7,13 +7,19 @@
     />
 
     <transition name="the-landing-carousel__credits--slide-fade">
-      <div :key="activeImage.id" class="the-landing-carousel__credits">
+      <div
+        :key="activeImage.id"
+        class="the-landing-carousel__credits"
+      >
         <div class="like-button">
           <span class="like-button">{{ activeImageLikeCount }} Like</span>
         </div>
         <div>
-          <span class="text--size-12">by</span> {{ activeImage.author }}<br/>
-          <a class="link--dark text--underline" href="#">use this image</a>
+          <span class="text--size-12">by</span> {{ activeImage.author }}<br>
+          <a
+            class="link--dark text--underline"
+            href="#"
+          >use this image</a>
         </div>
       </div>
     </transition>
@@ -87,17 +93,14 @@ export default {
 
     color: white;
 
-    @include responsive-inset(0,
-      margin-bottom,
-      margin-left
-    );
+    @include responsive-inset(0, margin-bottom, margin-left);
 
     &--slide-fade- {
       &enter-active,
       &leave-active {
         transition: (
-          transform 1s cubic-bezier(.2, .2, 0, 1),
-          opacity 1s cubic-bezier(.2, .2, 0, 1)
+          transform 1s cubic-bezier(0.2, 0.2, 0, 1),
+          opacity 1s cubic-bezier(0.2, 0.2, 0, 1)
         );
       }
       &enter,

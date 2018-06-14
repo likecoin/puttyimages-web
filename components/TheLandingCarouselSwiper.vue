@@ -1,15 +1,15 @@
 <template>
   <div
-    class="the-landing-carousel-swiper"
     v-swiper:carousel="swiperOption"
+    class="the-landing-carousel-swiper"
     @slideChange="onSlideChange"
   >
     <div class="the-landing-carousel-swiper__slides-wrapper">
       <div
         v-for="image in images"
         :key="image.id"
-        class="the-landing-carousel-swiper__slide"
         :style="{ backgroundImage: `url(${image.src})` }"
+        class="the-landing-carousel-swiper__slide"
       />
 
     </div>
@@ -39,10 +39,13 @@ export default {
   },
   props: {
     images: {
-      type: Array,
       default: () => [],
+      type: Array,
     },
-    activeIndex: Number,
+    activeIndex: {
+      required: true,
+      type: Number,
+    },
   },
   data() {
     // IMPORTANT:
@@ -74,9 +77,12 @@ export default {
           el: '.the-landing-carousel-swiper__navigation__pagination',
           dynamicBullets: true,
           clickable: true,
-          modifierClass: 'the-landing-carousel-swiper__navigation__pagination--',
-          bulletClass: 'the-landing-carousel-swiper__navigation__pagination__bullet',
-          bulletActiveClass: 'the-landing-carousel-swiper__navigation__pagination__bullet--active',
+          modifierClass:
+            'the-landing-carousel-swiper__navigation__pagination--',
+          bulletClass:
+            'the-landing-carousel-swiper__navigation__pagination__bullet',
+          bulletActiveClass:
+            'the-landing-carousel-swiper__navigation__pagination__bullet--active',
         },
         autoplay: {
           // Delay between transitions (in ms)
@@ -128,37 +134,32 @@ export default {
 
     padding: 16px 0;
 
-    transition: opacity .5s ease-out;
+    transition: opacity 0.5s ease-out;
     transform: translate3d(0px, -50%, 0);
 
     color: white;
     border-radius: 8px;
-    background-color: #0000004F;
+    background-color: #0000004f;
 
-    @include responsive-inset(0,
-      margin-right
-    );
+    @include responsive-inset(0, margin-right);
 
     &:not(:hover) {
-      opacity: .6;
+      opacity: 0.6;
     }
 
     &__button {
       width: 28px;
       height: 20px;
 
-      transition: (
-      opacity .2s ease-out,
-      transform .2s ease-out
-      );
+      transition: (opacity 0.2s ease-out, transform 0.2s ease-out);
 
       &:hover {
-        opacity: .7;
+        opacity: 0.7;
       }
       &:active {
         transform: translateY(1px);
 
-        opacity: .7;
+        opacity: 0.7;
       }
 
       &--prev {
@@ -186,12 +187,12 @@ export default {
     margin: 16px 12px;
 
     transition: (
-      opacity .5s cubic-bezier(.2, .2, 0, 1),
-      height 1s cubic-bezier(.2, .2, 0, 1)
+      opacity 0.5s cubic-bezier(0.2, 0.2, 0, 1),
+      height 1s cubic-bezier(0.2, 0.2, 0, 1)
     );
 
-    opacity: .3;
-    background-color: #FFF;
+    opacity: 0.3;
+    background-color: #fff;
 
     &--active {
       height: 60px;

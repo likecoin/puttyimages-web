@@ -6,8 +6,6 @@
 
 html,
 body {
-  font-family: 'Source Sans Pro', Arial, sans-serif;
-
   height: 100vh;
   margin: 0;
 
@@ -15,6 +13,8 @@ body {
 
   color: #000;
   background-color: #FFF;
+
+  font-family: 'Source Sans Pro', Arial, sans-serif;
 }
 
 a {

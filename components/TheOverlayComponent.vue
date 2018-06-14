@@ -15,16 +15,20 @@
                 Wallet App required
               </v-card-title>
             </v-card>
-            <v-btn dark flat @click.native="isDialogOpen = false">Close</v-btn>
+            <v-btn
+              dark
+              flat
+              @click.native="isDialogOpen = false"
+            >Close</v-btn>
           </v-dialog>
           <!-- Trust Dialog end -->
         </div>
         <div v-else>
           <!-- Chrome Dialog start (ask when user use browser like Safari) -->
           <v-dialog
+            v-if="shouldShowChromeDialog"
             v-model="isDialogOpen"
             max-width="290"
-            v-if="shouldShowChromeDialog"
             @keydown.esc="isDialogOpen = false"
           >
             <v-card>
@@ -32,15 +36,19 @@
                 Chrome required
               </v-card-title>
             </v-card>
-            <v-btn dark flat @click.native="isDialogOpen = false">Close</v-btn>
+            <v-btn
+              dark
+              flat
+              @click.native="isDialogOpen = false"
+            >Close</v-btn>
           </v-dialog>
           <!-- Chrome Dialog end -->
 
           <!-- Metamask related dialog start -->
           <the-metamask-dialog
+            v-else-if="!!getWeb3Message"
             :getWeb3Message="getWeb3Message"
             :isDialogOpen.sync="isDialogOpen"
-            v-else-if="!!getWeb3Message"
           />
           <!-- Metamask related dialog end -->
         </div>
@@ -54,10 +62,7 @@ import { mapGetters } from 'vuex';
 
 import TheMetamaskDialog from '@/components/TheMetamaskDialog';
 
-import {
-  checkIsMobileClient,
-  checkIsDesktopChrome,
-} from '@/util/client';
+import { checkIsMobileClient, checkIsDesktopChrome } from '@/util/client';
 
 export default {
   name: 'the-overlay-component',
@@ -70,10 +75,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      'getWeb3Message',
-      'getWeb3Type',
-    ]),
+    ...mapGetters(['getWeb3Message', 'getWeb3Type']),
     shouldShowWeb3Dialog() {
       return !!this.getWeb3Message;
     },
@@ -81,21 +83,21 @@ export default {
       return this.getWeb3Message === 'web3' && !checkIsDesktopChrome();
     },
   },
-  methods: {
-    checkIsMobileClient,
-  },
-  mounted() {
-    this.isDialogOpen = !!this.getWeb3Message;
-  },
   watch: {
     getWeb3Message(message) {
       this.isDialogOpen = !!message;
     },
   },
+  mounted() {
+    this.isDialogOpen = !!this.getWeb3Message;
+  },
+  methods: {
+    checkIsMobileClient,
+  },
 };
 </script>
 <style lang="scss" scoped>
-@import "~assets/css/variables";
+@import '~assets/css/variables';
 
 .overlay {
   position: relative;

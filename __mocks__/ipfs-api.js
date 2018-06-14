@@ -20,14 +20,14 @@ class IPFSApi {
 
   id = jest.fn().mockImplementation(() =>
     Promise.resolve({
-      id: 'QmSvsumZkbvYqKj8fxfBhVLiPbMHmxwyhHpWRBqwFgA7r7',
-      publicKey: 'secrest',
       addresses: [
         '/ip4/127.0.0.1/tcp/4001/ipfs/QmSvsumZkbvYqKj8fxfBhVLiPbMHmxwyhHpWRBqwFgA7r7',
         '/ip4/172.23.0.3/tcp/4001/ipfs/QmSvsumZkbvYqKj8fxfBhVLiPbMHmxwyhHpWRBqwFgA7r7',
       ],
       agentVersion: 'go-ipfs/0.4.15/',
+      id: 'QmSvsumZkbvYqKj8fxfBhVLiPbMHmxwyhHpWRBqwFgA7r7',
       protocolVersion: 'ipfs/0.1.0',
+      publicKey: 'secrest',
     })
   );
 

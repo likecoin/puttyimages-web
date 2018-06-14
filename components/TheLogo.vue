@@ -1,5 +1,8 @@
 <template>
-  <nuxt-link class="the-logo" :to="{ name: 'index' }">
+  <nuxt-link
+    :to="{ name: 'index' }"
+    class="the-logo"
+  >
     <logo class="the-logo__icon" />
     <div>
       <div class="the-logo__type">puttyimages</div>
@@ -16,7 +19,7 @@ export default {
   components: {
     Logo,
   },
-}
+};
 </script>
 
 <style lang="scss">
@@ -49,4 +52,3 @@ export default {
   font-size: 12px;
 }
 </style>
-
