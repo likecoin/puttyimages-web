@@ -15,3 +15,6 @@ build
 
 # tests
 coverage
+
+# Docker
+docker-compose.override.yml
