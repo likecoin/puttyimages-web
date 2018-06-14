@@ -125,9 +125,9 @@ export default {
     &__slogan--line-1 {
       @include mobile-only {
         max-width: 230px;
-        margin-top: 32px;
       }
       @extend
+        .mt-32--xs,
         %text--color-primary,
         %text--xs--color-white,
         %text--size-32,
@@ -138,9 +138,9 @@ export default {
 
     &__slogan--line-2 {
       max-width: 230px;
-      margin-top: 8px;
 
       @extend
+        .mt-8,
         %text--color-secondary,
         %text--xs--color-white,
         %text--size-20,

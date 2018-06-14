@@ -61,3 +61,57 @@
     }
   }
 }
+
+/*
+ * Spacing
+ *
+ * The class naming is following https://vuetifyjs.com/en/layout/spacing, in
+ * addition, we added responsive modifier and use exact value instead of multiply
+ * of spacer value which is more intuitive
+ */
+$spacing-value-list: 0, 2, 4, 8, 12, 16, 20, 24, 28, 32, 48, 64;
+$spacing-property-map: (
+  p: padding,
+  m: margin
+);
+$spacing-direction-map: (
+  l: left,
+  r: right,
+  t: top,
+  b: bottom
+);
+$spacing-multi-direction-map-list: (
+  (
+    x: (l, r),
+    y: (t, b)
+  ),
+  (a: (x, y))
+);
+@mixin spacing-style($suffix: '') {
+  @each $value in $spacing-value-list {
+    @each $property-key, $property in $spacing-property-map {
+      @each $direction-key, $direction in $spacing-direction-map {
+        .#{$property-key}#{$direction-key}-#{$value}#{$suffix} {
+          #{$property}-#{$direction}: #{$value}px !important;
+        }
+      }
+
+      @each $direction-key-map in $spacing-multi-direction-map-list {
+        @each $multi-direction-key, $direction-key-list in $direction-key-map {
+          @each $direction-key in $direction-key-list {
+            .#{$property-key}#{$multi-direction-key}-#{$value}#{$suffix} {
+              @extend .#{$property-key}#{$direction-key}-#{$value}#{$suffix};
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@include spacing-style;
+@include mobile-only {
+  @include spacing-style(--xs);
+}
+@include tablet-and-below {
+  @include spacing-style(--sm);
+}
