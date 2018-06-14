@@ -6,12 +6,18 @@
   "private": true,
   "scripts": {
     "build": "nuxt build && backpack build",
+    "eslint": "eslint --ignore-path .gitignore '{**/*,*}.{js,vue}'",
     "dev": "backpack dev",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint": "npm run stylelint && npm run eslint",
+    "lint:fix": "npm run stylelint -- --fix && npm run eslint -- --fix",
     "precommit": "npm run lint",
     "sequelize": "sequelize",
     "start": "cross-env NODE_ENV=production node build/main.js",
+    "stylelint": "stylelint -i .gitignore '**/*.{scss,vue}'",
     "test": "jest"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   },
   "dependencies": {
     "@likecoin/likecoin-eth-util": "^1.0.1",
@@ -57,7 +63,13 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jest": "^21.17.0",
     "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-vue": "^4.5.0",
+    "stylelint": "^9.2.1",
+    "stylelint-config-recommended-scss": "^3.2.0",
+    "stylelint-order": "^0.8.1",
+    "stylelint-scss": "^3.1.0",
     "vue-svg-loader": "^0.5.0"
   },
   "jest": {
