@@ -1,28 +1,44 @@
 @import 'helpers';
 
+/// Visibility
+.hide {
+  display: none !important;
+
+  @include mobile-only {
+    &--xs {
+      display: none !important;
+    }
+  }
+  @include tablet-and-below {
+    &--sm {
+      display: none !important;
+    }
+  }
+}
+
 /// Text Styling
 @mixin text-style($suffix: '') {
   @each $value in $font-size-list {
     &--size-#{$value}#{$suffix} {
-      font-size: #{$value}px;
+      font-size: #{$value}px !important;
     }
   }
 
   @each $key, $value in $color-map {
     &--color-#{$key}#{$suffix} {
-      color: $value;
+      color: $value !important;
     }
   }
 
   @each $value in $font-weight-list {
     &--weight-#{$value}#{$suffix} {
-      font-weight: $value;
+      font-weight: $value !important;
     }
   }
 
   @each $key, $value in $line-height-map {
     &--height-#{$key}#{$suffix} {
-      line-height: $value;
+      line-height: $value !important;
     }
   }
 
