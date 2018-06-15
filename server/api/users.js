@@ -16,14 +16,10 @@ router.get('/users', async (req, res, next) => {
 /* GET user by ID. */
 router.get('/users/:id', async (req, res, next) => {
   try {
-    const id = parseInt(req.params.id, 10);
-    if (id >= 0) {
-      const user = await sequelize.user.findById(id, { raw: true });
-      if (user) {
-        res.json(user);
-      } else {
-        res.sendStatus(404);
-      }
+    const { id } = req.params;
+    const user = await sequelize.user.findById(id, { raw: true });
+    if (user) {
+      res.json(user);
     } else {
       res.sendStatus(404);
     }
