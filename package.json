@@ -12,6 +12,8 @@
     "lint:fix": "npm run stylelint -- --fix && npm run eslint -- --fix",
     "precommit": "npm run lint",
     "sequelize": "sequelize",
+    "sequelize:reset": "npm run sequelize db:migrate:undo:all && npm run sequelize db:migrate",
+    "sequelize:reseed": "npm run sequelize db:seed:undo:all && npm run sequelize db:seed:all",
     "start": "cross-env NODE_ENV=production node build/main.js",
     "stylelint": "stylelint -i .gitignore '**/*.{scss,vue}'",
     "test": "jest"

@@ -1,0 +1,23 @@
+{
+  "licenses": ["cc0", "cc-by", "cc-by-sa", "cc-by-nd"],
+  "tags": [
+    { "name": "avocado" },
+    { "name": "banana" },
+    { "name": "cherry" },
+    { "name": "dragonfruit" },
+    { "name": "elderberry" },
+    { "name": "feijoa" },
+    { "name": "grape" },
+    { "name": "honeyberry" },
+    { "name": "jackfruit" },
+    { "name": "kiwifruit" },
+    { "name": "lychee" },
+    { "name": "mango" },
+    { "name": "nectarine" },
+    { "name": "orange" },
+    { "name": "peach" },
+    { "name": "quince" },
+    { "name": "raspberry" },
+    { "name": "strawberry" }
+  ]
+}

@@ -10,8 +10,9 @@ module.exports = {
         },
         type: Sequelize.BLOB,
       },
-      tag_name: {
+      tagName: {
         allowNull: false,
+        field: 'tag_name',
         primaryKey: true,
         references: {
           key: 'name',
