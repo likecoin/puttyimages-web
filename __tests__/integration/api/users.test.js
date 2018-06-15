@@ -6,6 +6,6 @@ test('get users list', async () => {
 });
 
 test('get user info by id', async () => {
-  const response = await api.get('users/1');
+  const response = await api.get('users/likecoin_id_1');
   expect(response.data).toMatchSnapshot();
 });
