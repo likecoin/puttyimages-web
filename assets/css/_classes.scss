@@ -131,3 +131,12 @@ $spacing-preset: (
     }
   }
 }
+
+/// Layout
+.page-container {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+
+  @extend .px-64--dy;
+}
