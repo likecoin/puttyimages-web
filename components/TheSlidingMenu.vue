@@ -248,7 +248,7 @@ $the-sliding-menu__inset-x: 64px;
 
   pointer-events: all;
 
-  @include responsive-inset(0, margin-top, margin-right);
+  @extend .mt-64--dy, .mr-64--dy;
 
   &__toggle {
     margin-right: -8px;
@@ -348,7 +348,7 @@ $the-sliding-menu__inset-x: 64px;
     width: inherit;
     height: inherit;
 
-    @include responsive-inset(0, padding-top, padding-bottom);
+    @extend .py-64--dy;
   }
 
   .the-sliding-menu--open & {
@@ -363,7 +363,7 @@ $the-sliding-menu__inset-x: 64px;
 
   margin-top: 64px;
 
-  @include responsive-inset(0, padding-right);
+  @extend .pr-64--dy;
 }
 
 .user-account {
@@ -393,7 +393,7 @@ $the-sliding-menu__inset-x: 64px;
 .site-menu {
   flex-grow: 1;
 
-  @include responsive-inset(0, margin-top);
+  @extend .mt-64--dy;
 
   ul {
     margin: 0;

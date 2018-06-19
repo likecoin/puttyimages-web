@@ -15,22 +15,8 @@ $breakpoints: (
   md: 1264px,
 );
 
-/// Layout system
-
-$responsive-inset: (
-  0: (
-    x: (
-      xs: 24px,
-      md: 64px
-    ),
-    y: (
-      xs: 32px,
-      md: 64px
-    )
-  )
-);
-
 /// Text styling
+
 $font-size-list: 12, 14, 16, 18, 20, 24, 28, 32;
 $font-weight-list: 300 400 600;
 $line-height-map: (
