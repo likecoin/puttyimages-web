@@ -106,7 +106,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/css/helpers';
+@import '~assets/css/classes';
 
 .the-landing-carousel-swiper {
   position: absolute;
@@ -141,7 +141,7 @@ export default {
     border-radius: 8px;
     background-color: #0000004f;
 
-    @include responsive-inset(0, margin-right);
+    @extend .mr-64--dy;
 
     &:not(:hover) {
       opacity: 0.6;
