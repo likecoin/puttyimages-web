@@ -73,11 +73,12 @@ $spacing-direction-map: (
   t: top,
   b: bottom
 );
+$spacing-multi-direction-map: (
+  x: (l, r),
+  y: (t, b)
+);
 $spacing-multi-direction-map-list: (
-  (
-    x: (l, r),
-    y: (t, b)
-  ),
+  $spacing-multi-direction-map,
   (a: (x, y))
 );
 @mixin spacing-style($suffix: '') {
@@ -107,4 +108,26 @@ $spacing-multi-direction-map-list: (
 }
 @include tablet-and-below {
   @include spacing-style(--sm);
+}
+
+$spacing-preset: (
+  64: (
+    x: 24,
+    y: 32
+  ),
+);
+@each $preset-value, $preset in $spacing-preset {
+  @each $spacing-property-key, $spacing-property in $spacing-property-map {
+    @each $multi-direction-key, $direction-keys in $spacing-multi-direction-map {
+      $dynamic-spacing-value: map-get($preset, $multi-direction-key);
+      $direction-keys: append($direction-keys, $multi-direction-key);
+      @each $direction-key in $direction-keys {
+        $class-prefix: #{'.'}#{$spacing-property-key}#{$direction-key};
+        #{$class-prefix}-#{$preset-value}--dy {
+          @extend #{$class-prefix}-#{$preset-value};
+          @extend #{$class-prefix}-#{$dynamic-spacing-value}--xs;
+        }
+      }
+    }
+  }
 }

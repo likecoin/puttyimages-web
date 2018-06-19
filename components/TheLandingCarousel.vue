@@ -72,7 +72,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/css/helpers';
+@import '~assets/css/classes';
 
 .the-landing-carousel {
   position: fixed;
@@ -93,7 +93,7 @@ export default {
 
     color: white;
 
-    @include responsive-inset(0, margin-bottom, margin-left);
+    @extend .mb-64--dy, .ml-64--dy;
 
     &--slide-fade- {
       &enter-active,

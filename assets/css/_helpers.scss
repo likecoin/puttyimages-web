@@ -67,6 +67,7 @@ $gradient-colors: (
   }
 }
 
+/// Deprecated
 @mixin responsive($property-config: ()) {
   @each $property, $config in $property-config {
     @each $breakpoint, $value in $config {
@@ -85,6 +86,7 @@ $gradient-colors: (
   }
 }
 
+/// Deprecated
 @mixin responsive-inset($level: 0, $properties...) {
   $property-config: ();
   $x-property: top, bottom, margin-top, margin-bottom, padding-top, padding-bottom;

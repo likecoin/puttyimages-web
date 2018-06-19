@@ -76,19 +76,17 @@ export default {
     }
 
     &--generic {
-      @include responsive-inset(0, margin-top, margin-left);
+      @extend .mt-64--dy, .ml-64--dy;
     }
 
     &--home {
-      @extend .px-24, .pb-48;
+      @extend .px-24, .pt-64--dy, .pb-48, .ml-64, .ml-0--xs;
 
-      @include responsive-inset(0, padding-top, margin-left);
       @include tablet-and-up {
         width: 360px;
       }
       @include mobile-only {
         width: 100vw;
-        margin-left: 0;
       }
 
       &::before {
