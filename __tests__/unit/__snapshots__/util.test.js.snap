@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getPageInfo 1`] = `
+Object {
+  "endCursor": "eyJvZmZzZXQiOjEwLCJxIjoia2V5d29yZCJ9",
+  "hasNextPage": true,
+  "hasPrevPage": true,
+  "next": "http://localhost:3000/api/search?q=keyword&after=eyJvZmZzZXQiOjEwLCJxIjoia2V5d29yZCJ9",
+  "prev": "http://localhost:3000/api/search?q=keyword&before=eyJvZmZzZXQiOjAsInEiOiJrZXl3b3JkIn0",
+  "startCursor": "eyJvZmZzZXQiOjAsInEiOiJrZXl3b3JkIn0",
+  "totalCount": 10,
+}
+`;
+
+exports[`getPageInfo 2`] = `
+Object {
+  "endCursor": "eyJvZmZzZXQiOjEwLCJxIjoia2V5d29yZCJ9",
+  "hasNextPage": true,
+  "hasPrevPage": false,
+  "next": "http://localhost:3000/api/search?q=keyword&after=eyJvZmZzZXQiOjEwLCJxIjoia2V5d29yZCJ9",
+  "prev": null,
+  "startCursor": null,
+  "totalCount": 10,
+}
+`;
+
+exports[`getPageInfo 3`] = `
+Object {
+  "endCursor": null,
+  "hasNextPage": false,
+  "hasPrevPage": true,
+  "next": null,
+  "prev": "http://localhost:3000/api/search?q=keyword&before=eyJvZmZzZXQiOjAsInEiOiJrZXl3b3JkIn0",
+  "startCursor": "eyJvZmZzZXQiOjAsInEiOiJrZXl3b3JkIn0",
+  "totalCount": 10,
+}
+`;
+
+exports[`getPageInfo 4`] = `
+Object {
+  "endCursor": null,
+  "hasNextPage": false,
+  "hasPrevPage": false,
+  "next": null,
+  "prev": null,
+  "startCursor": null,
+  "totalCount": 10,
+}
+`;
