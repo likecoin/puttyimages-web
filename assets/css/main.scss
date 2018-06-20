@@ -11,8 +11,8 @@ body {
 
   letter-spacing: .5px;
 
-  color: #000;
-  background-color: #FFF;
+  color: color(gray-4a);
+  background-color: white;
 
   font-family: 'Source Sans Pro', Arial, sans-serif;
 }
@@ -73,5 +73,15 @@ svg {
   &enter,
   &leave-to {
     opacity: 0;
+  }
+}
+
+/// Override Vuetify
+.application {
+  font-family: inherit !important;
+
+  &.theme--light {
+    color: inherit !important;
+    background: inherit !important;
   }
 }
