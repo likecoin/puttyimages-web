@@ -24,6 +24,15 @@
     }
   }
 
+  &.likecoin {
+    color: color(like-green) !important;
+    background-image: $gradient-likecoin;
+
+    &--text {
+      color: color(like-green) !important;
+    }
+  }
+
   .icon {
     & + * {
       margin-left: 8px;

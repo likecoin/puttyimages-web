@@ -62,7 +62,7 @@
 /// The class naming is following https://vuetifyjs.com/en/layout/spacing, in
 /// addition, we added responsive modifier and use exact value instead of multiply
 /// of spacer value which is more intuitive
-$spacing-value-list: 0, 2, 4, 8, 12, 16, 20, 24, 28, 32, 48, 64;
+$spacing-value-list: 0, 2, 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 64;
 $spacing-property-map: (
   p: padding,
   m: margin
