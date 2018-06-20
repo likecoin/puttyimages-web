@@ -7,7 +7,7 @@
   >
     <v-text-field
       v-model="description"
-      :rules="[v => (!!v && !!v.trim()) || 'Please add a short description']"
+      :rules="descriptionRules"
       class="input-text--likecoin"
       placeholder="Describe briefly about your image"
       light
@@ -16,7 +16,7 @@
 
     <v-select
       v-model="tags"
-      :rules="[v => v.length > 0 || 'Please add a tag']"
+      :rules="tagsRules"
       append-icon=""
       class="input-text--likecoin"
       label="Add some tags"
@@ -51,8 +51,8 @@
     <div class="the-upload-image-form__license-input">
       <v-select
         v-model="license"
-        :items="['A license', 'B license']"
-        :rules="[v => !!v || 'Please choose a license']"
+        :items="supportedLicense"
+        :rules="licenseRules"
         append-icon="expand_more"
         class="input-text--likecoin"
         label="Image License"
@@ -99,6 +99,8 @@
 </template>
 
 <script>
+import { MAX_TAG_COUNT, MIN_TAG_LENGTH, SUPPORTED_LICENSE } from '@/constant';
+
 export default {
   name: 'the-image-upload-form',
   data() {
@@ -109,7 +111,27 @@ export default {
       isUploading: false,
       license: null,
       tags: [],
+      MAX_TAG_COUNT,
+      MIN_TAG_LENGTH,
     };
+  },
+  computed: {
+    supportedLicense() {
+      return [...SUPPORTED_LICENSE];
+    },
+    descriptionRules() {
+      return [(v) => (!!v && !!v.trim()) || 'Please add a short description'];
+    },
+    tagsRules() {
+      return [
+        (v) =>
+          (v.length >= MIN_TAG_LENGTH && v.length <= MAX_TAG_COUNT) ||
+          `Please provide at least ${MIN_TAG_LENGTH} and up to ${MAX_TAG_COUNT} tags`,
+      ];
+    },
+    licenseRules() {
+      return [(v) => !!v || 'Please choose a license'];
+    },
   },
   methods: {
     removeTag(item) {

@@ -3,25 +3,25 @@
     <div :class="['upload-image-page', { 'upload-image-page--full-size': isShowUploadImageForm }]">
       <input
         ref="imageInput"
-        accept="image/*"
+        :accept="acceptInput"
         style="display: none"
         type="file"
         @change="onImageInputChange"
       >
 
       <v-snackbar
-        v-model="isUnsupportedFormat"
+        v-model="isInvalidImage"
         :auto-height="true"
         :bottom="true"
         :timeout="0"
         class="snackbar--likecoin"
         color="green"
       >
-        File format not supported
+        {{ invalidImageDescription }}
         <v-btn
           fab
           flat
-          @click.native="isUnsupportedFormat = false"
+          @click.native="closeInvalidImageError"
         >
           <v-icon>close</v-icon>
         </v-btn>
@@ -130,11 +130,20 @@
 <script>
 import TheImageUploadForm from '@/components/TheImageUploadForm';
 
-const validExtensions = ['jpg', 'gif', 'png', 'jpeg', 'bmp'];
+import {
+  MAX_IMAGE_SIZE,
+  MAX_IMAGE_SIZE_MB,
+  SUPPORTED_IMAGE_TYPE,
+} from '@/constant';
+
+const SUPPORTED_FILE_TYPES = [...SUPPORTED_IMAGE_TYPE];
+
 const isValidFileExtension = (filename) =>
   filename
     .toLowerCase()
-    .match(new RegExp(`(${validExtensions.join('|').replace(/\./g, '\\.')})$`));
+    .match(
+      new RegExp(`(${SUPPORTED_FILE_TYPES.join('|').replace(/\./g, '\\.')})$`)
+    );
 
 export default {
   components: {
@@ -144,13 +153,30 @@ export default {
     return {
       image: null,
       imageData: null,
+      isExceedMaxSize: false,
       isImageLoading: false,
       isShowUploadImageForm: false,
       isUnsupportedFormat: false,
-      supportedFileTypes: validExtensions.reduce(
+      acceptInput: SUPPORTED_FILE_TYPES.reduce(
+        (acc, current) => `image/${acc}, ${current}`
+      ),
+      supportedFileTypes: SUPPORTED_FILE_TYPES.reduce(
         (acc, current) => `${acc}, ${current}`
       ),
     };
+  },
+  computed: {
+    isInvalidImage() {
+      return this.isExceedMaxSize || this.isUnsupportedFormat;
+    },
+    invalidImageDescription() {
+      if (this.isUnsupportedFormat) {
+        return 'File format not supported';
+      } else if (this.isExceedMaxSize) {
+        return `File size exceed limit (${MAX_IMAGE_SIZE_MB})`;
+      }
+      return null;
+    },
   },
   head() {
     return {
@@ -169,17 +195,24 @@ export default {
         this.isUnsupportedFormat = true;
         return;
       }
-      this.isUnsupportedFormat = false;
 
       const { files } = target;
-      this.isImageLoading = true;
 
       if (files && files[0]) {
         const [file] = Object.values(files);
+
+        if (file.size > MAX_IMAGE_SIZE) {
+          this.isExceedMaxSize = true;
+          return;
+        }
+
         this.image = null;
+        this.isImageLoading = true;
         const reader = new FileReader();
 
         reader.onload = (e) => {
+          this.closeInvalidImageError();
+
           const img = new Image();
           img.onload = () => {
             this.image = URL.createObjectURL(file);
@@ -192,7 +225,12 @@ export default {
       }
     },
     onClickNext() {
+      this.closeInvalidImageError();
       this.isShowUploadImageForm = true;
+    },
+    closeInvalidImageError() {
+      this.isUnsupportedFormat = false;
+      this.isExceedMaxSize = false;
     },
   },
 };
