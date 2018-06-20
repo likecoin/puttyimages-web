@@ -47,3 +47,82 @@ Object {
   "totalCount": 10,
 }
 `;
+
+exports[`parse search keyword 1`] = `
+Array [
+  Array [
+    "%fruit%",
+  ],
+  Array [],
+  Array [],
+]
+`;
+
+exports[`parse search keyword 2`] = `
+Array [
+  Array [],
+  Array [
+    "%fruit%",
+  ],
+  Array [],
+]
+`;
+
+exports[`parse search keyword 3`] = `
+Array [
+  Array [],
+  Array [],
+  Array [
+    "%likecoin_id_1%",
+  ],
+]
+`;
+
+exports[`parse search keyword 4`] = `
+Array [
+  Array [
+    "%fruit%",
+  ],
+  Array [
+    "%fruit%",
+  ],
+  Array [
+    "%likecoin_id_1%",
+  ],
+]
+`;
+
+exports[`parse search query 1`] = `
+Array [
+  "fruit",
+  0,
+]
+`;
+
+exports[`parse search query 2`] = `
+Array [
+  "#fruit",
+  0,
+]
+`;
+
+exports[`parse search query 3`] = `
+Array [
+  "@likecoin_id_1",
+  0,
+]
+`;
+
+exports[`parse search query 4`] = `
+Array [
+  "#fruit",
+  15,
+]
+`;
+
+exports[`parse search query 5`] = `
+Array [
+  "#fruit",
+  0,
+]
+`;

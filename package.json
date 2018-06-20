@@ -24,6 +24,7 @@
   "dependencies": {
     "@likecoin/likecoin-eth-util": "^1.0.1",
     "axios": "^0.18.0",
+    "babel-register": "^6.26.0",
     "bs58": "^4.0.1",
     "cross-env": "^5.1.6",
     "eth-sig-util": "^1.4.2",

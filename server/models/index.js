@@ -1,3 +1,7 @@
+require('babel-register')({
+  ignore: /node_modules\/(?!image-type|js-sha256)/, // only import modules needed by models
+});
+
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
