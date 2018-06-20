@@ -40,6 +40,12 @@
 
         <div class="image-details-dialog__panel--right">
           <div class="image-details">
+            <section class="image-details__credits">
+              <user-badge
+                :user="image.user"
+                type="upload"
+              />
+            </section>
             <section class="image-details__meta">
               <h1>Image Description</h1>
               <p>{{ image.description }}</p>
@@ -88,11 +94,13 @@
 
 <script>
 import LikeButton from '~/components/LikeButton';
+import UserBadge from '~/components/UserBadge';
 
 export default {
   name: 'image-details-dialog',
   components: {
     LikeButton,
+    UserBadge,
   },
   props: {
     image: {
@@ -230,6 +238,10 @@ export default {
     font-weight: 600;
   }
 
+  &__credits {
+    @extend .mt-32--sm;
+  }
+
   &__meta {
     ul {
       list-style: none;
@@ -272,14 +284,17 @@ export default {
   }
 
   @include tablet-and-below {
-    &__meta {
+    &__credits {
       order: 2;
+    }
+    &__meta {
+      order: 3;
     }
     &__actions {
       order: 1;
     }
     &__license {
-      order: 3;
+      order: 4;
     }
   }
 }
