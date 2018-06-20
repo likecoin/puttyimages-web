@@ -10,6 +10,8 @@ export const MAX_TAG_LENGTH = 20;
 
 export const MIN_TAG_LENGTH = 2;
 
+export const RESULT_PER_PAGE = 15;
+
 export const SUPPORTED_LICENSE = new Set([
   'cc0',
   'cc-by',
