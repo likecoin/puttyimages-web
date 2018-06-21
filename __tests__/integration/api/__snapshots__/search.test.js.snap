@@ -130,10 +130,10 @@ Object {
       },
       "tags": Array [
         Object {
-          "name": "raspberry",
+          "name": "fruit",
         },
         Object {
-          "name": "fruit",
+          "name": "raspberry",
         },
       ],
       "updatedAt": "2018-06-20T00:30:00.000Z",
@@ -272,13 +272,13 @@ Object {
       },
       "tags": Array [
         Object {
-          "name": "fruit",
+          "name": "berry",
         },
         Object {
           "name": "dragonfruit",
         },
         Object {
-          "name": "berry",
+          "name": "fruit",
         },
       ],
       "updatedAt": "2018-06-20T01:20:00.000Z",
@@ -417,10 +417,10 @@ Object {
       },
       "tags": Array [
         Object {
-          "name": "orange",
+          "name": "fruit",
         },
         Object {
-          "name": "fruit",
+          "name": "orange",
         },
       ],
       "updatedAt": "2018-06-20T01:30:00.000Z",
@@ -1844,10 +1844,10 @@ Object {
       },
       "tags": Array [
         Object {
-          "name": "kiwifruit",
+          "name": "fruit",
         },
         Object {
-          "name": "fruit",
+          "name": "kiwifruit",
         },
       ],
       "updatedAt": "2018-06-20T01:50:00.000Z",
@@ -3121,10 +3121,10 @@ Object {
       },
       "tags": Array [
         Object {
-          "name": "lychee",
+          "name": "fruit",
         },
         Object {
-          "name": "fruit",
+          "name": "lychee",
         },
       ],
       "updatedAt": "2018-06-20T01:00:00.000Z",
@@ -3405,10 +3405,10 @@ Object {
       },
       "tags": Array [
         Object {
-          "name": "orange",
+          "name": "fruit",
         },
         Object {
-          "name": "fruit",
+          "name": "orange",
         },
       ],
       "updatedAt": "2018-06-20T01:30:00.000Z",
@@ -3831,13 +3831,13 @@ Object {
       },
       "tags": Array [
         Object {
+          "name": "avocado",
+        },
+        Object {
           "name": "berry",
         },
         Object {
           "name": "fruit",
-        },
-        Object {
-          "name": "avocado",
         },
       ],
       "updatedAt": "2018-06-20T00:00:00.000Z",

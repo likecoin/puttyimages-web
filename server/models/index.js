@@ -45,12 +45,12 @@ db.license.hasMany(db.asset, { foreignKey: 'license' });
 
 db.asset.belongsToMany(db.tag, {
   foreignKey: 'asset_fingerprint',
-  through: 'asset_tag',
+  through: { model: db.assetTag },
   timestamps: false,
 });
 db.tag.belongsToMany(db.asset, {
   foreignKey: 'tag_name',
-  through: 'asset_tag',
+  through: { model: db.assetTag },
   timestamps: false,
 });
 

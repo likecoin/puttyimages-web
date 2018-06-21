@@ -125,6 +125,7 @@ module.exports = (sequelize, DataTypes) => {
       order: [
         [{ as: 'like', model: models.assetLike }, 'totalLike', 'DESC'],
         ['updatedAt', 'DESC'],
+        [models.tag, models.assetTag, 'tag_name', 'ASC'],
       ],
       where,
     });
