@@ -34,6 +34,7 @@ const USER_BADGE_TYPE = {
   MIN: 'min',
   MENU: 'menu',
   UPLOAD: 'upload',
+  LARGE: 'large',
 };
 
 export default {
@@ -95,11 +96,15 @@ export default {
 
   font-size: 14px;
 
+  @include color-modifiers;
+
   &--menu {
     font-size: 16px;
   }
 
-  @include color-modifiers;
+  &--large {
+    flex-direction: column;
+  }
 }
 
 .user-badge__avatar {
@@ -109,6 +114,13 @@ export default {
 
   border-radius: 50%;
   background-color: #ddd;
+
+  .user-badge--large & {
+    width: 84px;
+    height: 84px;
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
 }
 
 .user-badge__greeting {
