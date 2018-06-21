@@ -126,9 +126,9 @@ router.post(
           sequelize.asset.create(
             {
               fingerprint: hash256Bytes,
-              fkAssetLicense: license,
               ipfs: bs58.decode(ipfsAdd[0].hash),
               ipld: bs58.decode(ipld.toBaseEncodedString()),
+              license,
               tags: [{ name: 'hehe' }, { name: 'haha' }],
               wallet,
             },

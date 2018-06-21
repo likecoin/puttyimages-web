@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const assetTag = sequelize.define(
-    'assetTag',
+  const assetLike = sequelize.define(
+    'assetLike',
     {
       assetFingerprint: {
         allowNull: false,
@@ -12,22 +12,19 @@ module.exports = (sequelize, DataTypes) => {
         },
         type: DataTypes.BLOB,
       },
-      tagName: {
+      totalLike: {
         allowNull: false,
-        field: 'tag_name',
-        primaryKey: true,
-        references: {
-          key: 'name',
-          model: 'tag',
-        },
-        type: DataTypes.TEXT,
+        defaultValue: 0,
+        field: 'total_like',
+        type: DataTypes.INTEGER,
       },
     },
     {
+      createdAt: false,
       freezeTableName: true,
-      tableName: 'asset_tag',
-      timestamps: false,
+      tableName: 'asset_like',
+      timestamps: true,
     }
   );
-  return assetTag;
+  return assetLike;
 };

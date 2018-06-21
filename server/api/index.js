@@ -1,7 +1,8 @@
 import { Router } from 'express';
 
-import users from './users';
 import assets from './assets';
+import search from './search';
+import users from './users';
 
 const router = Router();
 
@@ -17,8 +18,9 @@ const errorHandler = (err, req, res, next) => {
   });
 };
 
-router.use(users);
 router.use(assets);
+router.use(search);
+router.use(users);
 
 router.use(errorHandler);
 

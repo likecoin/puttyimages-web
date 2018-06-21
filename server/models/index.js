@@ -1,3 +1,7 @@
+require('babel-register')({
+  ignore: /node_modules\/(?!image-type|js-sha256)/, // only import modules needed by models
+});
+
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -6,9 +10,6 @@ const config = require('../../config/database');
 
 const sequelize = new Sequelize({
   ...config.development,
-  define: {
-    underscored: true,
-  },
   operatorsAliases: false,
   timezone: '+00:00',
 });
@@ -36,8 +37,11 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.asset.belongsTo(db.license, { foreignKey: 'fk_asset_license' });
-db.license.hasMany(db.asset, { foreignKey: 'fk_asset_license' });
+db.asset.belongsTo(db.license, { as: 'assetLicense', foreignKey: 'license' });
+db.asset.belongsTo(db.user, { foreignKey: 'wallet', targetKey: 'wallet' });
+db.asset.hasOne(db.assetLike, { as: 'like', foreignKey: 'asset_fingerprint' });
+db.assetLike.belongsTo(db.asset, { foreignKey: 'asset_fingerprint' });
+db.license.hasMany(db.asset, { foreignKey: 'license' });
 
 db.asset.belongsToMany(db.tag, {
   foreignKey: 'asset_fingerprint',

@@ -1,0 +1,1578 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`search with keyword 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "createdAt": "2018-06-20T01:30:00.000Z",
+      "description": "kiwifruit",
+      "fingerprint": Object {
+        "data": Array [
+          107,
+          105,
+          119,
+          105,
+          102,
+          114,
+          117,
+          105,
+          116,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          57,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          57,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by",
+      "like": Object {
+        "count": 30,
+      },
+      "tags": Array [
+        Object {
+          "name": "kiwifruit",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T01:30:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+    Object {
+      "createdAt": "2018-06-20T00:30:00.000Z",
+      "description": "dragonfruit",
+      "fingerprint": Object {
+        "data": Array [
+          100,
+          114,
+          97,
+          103,
+          111,
+          110,
+          102,
+          114,
+          117,
+          105,
+          116,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          51,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          51,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 30,
+      },
+      "tags": Array [
+        Object {
+          "name": "dragonfruit",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T00:30:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+    Object {
+      "createdAt": "2018-06-20T01:20:00.000Z",
+      "description": "jackfruit",
+      "fingerprint": Object {
+        "data": Array [
+          106,
+          97,
+          99,
+          107,
+          102,
+          114,
+          117,
+          105,
+          116,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          56,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          56,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc0",
+      "like": Object {
+        "count": 20,
+      },
+      "tags": Array [
+        Object {
+          "name": "jackfruit",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T01:20:00.000Z",
+      "user": Object {
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+      },
+      "wallet": "address 3",
+    },
+  ],
+  "error": false,
+  "pageInfo": Object {
+    "endCursor": null,
+    "hasNextPage": false,
+    "hasPrevPage": false,
+    "next": null,
+    "prev": null,
+    "startCursor": null,
+    "totalCount": 3,
+  },
+}
+`;
+
+exports[`search with pagination 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "createdAt": "2018-06-20T00:20:00.000Z",
+      "description": "cherry",
+      "fingerprint": Object {
+        "data": Array [
+          99,
+          104,
+          101,
+          114,
+          114,
+          121,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          50,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          50,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by-sa",
+      "like": Object {
+        "count": 20,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T00:20:00.000Z",
+      "user": Object {
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+      },
+      "wallet": "address 3",
+    },
+    Object {
+      "createdAt": "2018-06-20T00:10:00.000Z",
+      "description": "banana",
+      "fingerprint": Object {
+        "data": Array [
+          98,
+          97,
+          110,
+          97,
+          110,
+          97,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          49,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          49,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by",
+      "like": Object {
+        "count": 10,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T00:10:00.000Z",
+      "user": Object {
+        "displayName": "Pooya",
+        "likecoinId": "likecoin_id_2",
+      },
+      "wallet": "address 2",
+    },
+    Object {
+      "createdAt": "2018-06-20T00:00:00.000Z",
+      "description": "avocado",
+      "fingerprint": Object {
+        "data": Array [
+          97,
+          118,
+          111,
+          99,
+          97,
+          100,
+          111,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          48,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          48,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc0",
+      "like": Object {
+        "count": 0,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T00:00:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+  ],
+  "error": false,
+  "pageInfo": Object {
+    "endCursor": null,
+    "hasNextPage": false,
+    "hasPrevPage": true,
+    "next": null,
+    "prev": "http://0.0.0.0:3000/api/search?q=%23fruit&before=eyJvZmZzZXQiOjE1LCJxIjoiI2ZydWl0In0",
+    "startCursor": "eyJvZmZzZXQiOjE1LCJxIjoiI2ZydWl0In0",
+    "totalCount": 18,
+  },
+}
+`;
+
+exports[`search with tag 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "createdAt": "2018-06-20T02:50:00.000Z",
+      "description": "strawberry",
+      "fingerprint": Object {
+        "data": Array [
+          115,
+          116,
+          114,
+          97,
+          119,
+          98,
+          101,
+          114,
+          114,
+          121,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          49,
+          55,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          49,
+          55,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by",
+      "like": Object {
+        "count": 50,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T02:50:00.000Z",
+      "user": Object {
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+      },
+      "wallet": "address 3",
+    },
+    Object {
+      "createdAt": "2018-06-20T01:50:00.000Z",
+      "description": "mango",
+      "fingerprint": Object {
+        "data": Array [
+          109,
+          97,
+          110,
+          103,
+          111,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          49,
+          49,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          49,
+          49,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 50,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T01:50:00.000Z",
+      "user": Object {
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+      },
+      "wallet": "address 3",
+    },
+    Object {
+      "createdAt": "2018-06-20T00:50:00.000Z",
+      "description": "feijoa",
+      "fingerprint": Object {
+        "data": Array [
+          102,
+          101,
+          105,
+          106,
+          111,
+          97,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          53,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          53,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by",
+      "like": Object {
+        "count": 50,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T00:50:00.000Z",
+      "user": Object {
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+      },
+      "wallet": "address 3",
+    },
+    Object {
+      "createdAt": "2018-06-20T02:40:00.000Z",
+      "description": "raspberry",
+      "fingerprint": Object {
+        "data": Array [
+          114,
+          97,
+          115,
+          112,
+          98,
+          101,
+          114,
+          114,
+          121,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          49,
+          54,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          49,
+          54,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc0",
+      "like": Object {
+        "count": 40,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T02:40:00.000Z",
+      "user": Object {
+        "displayName": "Pooya",
+        "likecoinId": "likecoin_id_2",
+      },
+      "wallet": "address 2",
+    },
+    Object {
+      "createdAt": "2018-06-20T01:40:00.000Z",
+      "description": "lychee",
+      "fingerprint": Object {
+        "data": Array [
+          108,
+          121,
+          99,
+          104,
+          101,
+          101,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          49,
+          48,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          49,
+          48,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by-sa",
+      "like": Object {
+        "count": 40,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T01:40:00.000Z",
+      "user": Object {
+        "displayName": "Pooya",
+        "likecoinId": "likecoin_id_2",
+      },
+      "wallet": "address 2",
+    },
+    Object {
+      "createdAt": "2018-06-20T00:40:00.000Z",
+      "description": "elderberry",
+      "fingerprint": Object {
+        "data": Array [
+          101,
+          108,
+          100,
+          101,
+          114,
+          98,
+          101,
+          114,
+          114,
+          121,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          52,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          52,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc0",
+      "like": Object {
+        "count": 40,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T00:40:00.000Z",
+      "user": Object {
+        "displayName": "Pooya",
+        "likecoinId": "likecoin_id_2",
+      },
+      "wallet": "address 2",
+    },
+    Object {
+      "createdAt": "2018-06-20T02:30:00.000Z",
+      "description": "quince",
+      "fingerprint": Object {
+        "data": Array [
+          113,
+          117,
+          105,
+          110,
+          99,
+          101,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          49,
+          53,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          49,
+          53,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 30,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T02:30:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+    Object {
+      "createdAt": "2018-06-20T01:30:00.000Z",
+      "description": "kiwifruit",
+      "fingerprint": Object {
+        "data": Array [
+          107,
+          105,
+          119,
+          105,
+          102,
+          114,
+          117,
+          105,
+          116,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          57,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          57,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by",
+      "like": Object {
+        "count": 30,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "kiwifruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T01:30:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+    Object {
+      "createdAt": "2018-06-20T00:30:00.000Z",
+      "description": "dragonfruit",
+      "fingerprint": Object {
+        "data": Array [
+          100,
+          114,
+          97,
+          103,
+          111,
+          110,
+          102,
+          114,
+          117,
+          105,
+          116,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          51,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          51,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 30,
+      },
+      "tags": Array [
+        Object {
+          "name": "dragonfruit",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T00:30:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+    Object {
+      "createdAt": "2018-06-20T02:20:00.000Z",
+      "description": "peach",
+      "fingerprint": Object {
+        "data": Array [
+          112,
+          101,
+          97,
+          99,
+          104,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          49,
+          52,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          49,
+          52,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by-sa",
+      "like": Object {
+        "count": 20,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T02:20:00.000Z",
+      "user": Object {
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+      },
+      "wallet": "address 3",
+    },
+    Object {
+      "createdAt": "2018-06-20T01:20:00.000Z",
+      "description": "jackfruit",
+      "fingerprint": Object {
+        "data": Array [
+          106,
+          97,
+          99,
+          107,
+          102,
+          114,
+          117,
+          105,
+          116,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          56,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          56,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc0",
+      "like": Object {
+        "count": 20,
+      },
+      "tags": Array [
+        Object {
+          "name": "jackfruit",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T01:20:00.000Z",
+      "user": Object {
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+      },
+      "wallet": "address 3",
+    },
+    Object {
+      "createdAt": "2018-06-20T02:10:00.000Z",
+      "description": "orange",
+      "fingerprint": Object {
+        "data": Array [
+          111,
+          114,
+          97,
+          110,
+          103,
+          101,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          49,
+          51,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          49,
+          51,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by",
+      "like": Object {
+        "count": 10,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T02:10:00.000Z",
+      "user": Object {
+        "displayName": "Pooya",
+        "likecoinId": "likecoin_id_2",
+      },
+      "wallet": "address 2",
+    },
+    Object {
+      "createdAt": "2018-06-20T01:10:00.000Z",
+      "description": "honeyberry",
+      "fingerprint": Object {
+        "data": Array [
+          104,
+          111,
+          110,
+          101,
+          121,
+          98,
+          101,
+          114,
+          114,
+          121,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          55,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          55,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 10,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T01:10:00.000Z",
+      "user": Object {
+        "displayName": "Pooya",
+        "likecoinId": "likecoin_id_2",
+      },
+      "wallet": "address 2",
+    },
+    Object {
+      "createdAt": "2018-06-20T02:00:00.000Z",
+      "description": "nectarine",
+      "fingerprint": Object {
+        "data": Array [
+          110,
+          101,
+          99,
+          116,
+          97,
+          114,
+          105,
+          110,
+          101,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          49,
+          50,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          49,
+          50,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc0",
+      "like": Object {
+        "count": 0,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T02:00:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+    Object {
+      "createdAt": "2018-06-20T01:00:00.000Z",
+      "description": "grape",
+      "fingerprint": Object {
+        "data": Array [
+          103,
+          114,
+          97,
+          112,
+          101,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          54,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          54,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by-sa",
+      "like": Object {
+        "count": 0,
+      },
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T01:00:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+  ],
+  "error": false,
+  "pageInfo": Object {
+    "endCursor": "eyJvZmZzZXQiOjE1LCJxIjoiI2ZydWl0In0",
+    "hasNextPage": true,
+    "hasPrevPage": false,
+    "next": "http://0.0.0.0:3000/api/search?q=%23fruit&after=eyJvZmZzZXQiOjE1LCJxIjoiI2ZydWl0In0",
+    "prev": null,
+    "startCursor": null,
+    "totalCount": 18,
+  },
+}
+`;
+
+exports[`search with user 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "createdAt": "2018-06-20T02:30:00.000Z",
+      "description": "quince",
+      "fingerprint": Object {
+        "data": Array [
+          113,
+          117,
+          105,
+          110,
+          99,
+          101,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          49,
+          53,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          49,
+          53,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 30,
+      },
+      "tags": Array [
+        Object {
+          "name": "quince",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T02:30:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+    Object {
+      "createdAt": "2018-06-20T01:30:00.000Z",
+      "description": "kiwifruit",
+      "fingerprint": Object {
+        "data": Array [
+          107,
+          105,
+          119,
+          105,
+          102,
+          114,
+          117,
+          105,
+          116,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          57,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          57,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by",
+      "like": Object {
+        "count": 30,
+      },
+      "tags": Array [
+        Object {
+          "name": "kiwifruit",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T01:30:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+    Object {
+      "createdAt": "2018-06-20T00:30:00.000Z",
+      "description": "dragonfruit",
+      "fingerprint": Object {
+        "data": Array [
+          100,
+          114,
+          97,
+          103,
+          111,
+          110,
+          102,
+          114,
+          117,
+          105,
+          116,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          51,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          51,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 30,
+      },
+      "tags": Array [
+        Object {
+          "name": "dragonfruit",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T00:30:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+    Object {
+      "createdAt": "2018-06-20T02:00:00.000Z",
+      "description": "nectarine",
+      "fingerprint": Object {
+        "data": Array [
+          110,
+          101,
+          99,
+          116,
+          97,
+          114,
+          105,
+          110,
+          101,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          49,
+          50,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          49,
+          50,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc0",
+      "like": Object {
+        "count": 0,
+      },
+      "tags": Array [
+        Object {
+          "name": "nectarine",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T02:00:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+    Object {
+      "createdAt": "2018-06-20T01:00:00.000Z",
+      "description": "grape",
+      "fingerprint": Object {
+        "data": Array [
+          103,
+          114,
+          97,
+          112,
+          101,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          54,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          54,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc-by-sa",
+      "like": Object {
+        "count": 0,
+      },
+      "tags": Array [
+        Object {
+          "name": "grape",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T01:00:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+    Object {
+      "createdAt": "2018-06-20T00:00:00.000Z",
+      "description": "avocado",
+      "fingerprint": Object {
+        "data": Array [
+          97,
+          118,
+          111,
+          99,
+          97,
+          100,
+          111,
+        ],
+        "type": "Buffer",
+      },
+      "ipfs": Object {
+        "data": Array [
+          105,
+          112,
+          102,
+          115,
+          32,
+          48,
+        ],
+        "type": "Buffer",
+      },
+      "ipld": Object {
+        "data": Array [
+          105,
+          112,
+          108,
+          100,
+          32,
+          48,
+        ],
+        "type": "Buffer",
+      },
+      "license": "cc0",
+      "like": Object {
+        "count": 0,
+      },
+      "tags": Array [
+        Object {
+          "name": "avocado",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "updatedAt": "2018-06-20T00:00:00.000Z",
+      "user": Object {
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+      },
+      "wallet": "address 1",
+    },
+  ],
+  "error": false,
+  "pageInfo": Object {
+    "endCursor": null,
+    "hasNextPage": false,
+    "hasPrevPage": false,
+    "next": null,
+    "prev": null,
+    "startCursor": null,
+    "totalCount": 6,
+  },
+}
+`;

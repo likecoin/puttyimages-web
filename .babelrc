@@ -1,13 +1,9 @@
 {
-  "presets": [
-    "babel-preset-backpack"
-  ],
   "env": {
     "test": {
-      "presets": [
-        "env",
-        "babel-preset-backpack"
-      ]
+      "presets": ["env", "babel-preset-backpack"]
     }
-  }
+  },
+  "plugins": ["transform-es2015-modules-commonjs"],
+  "presets": ["babel-preset-backpack"]
 }
