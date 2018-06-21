@@ -103,10 +103,14 @@ spec:
         ports:
         - containerPort: 3000
         env:
+        - name: CDN_HOST
+          value: https://cdn-puttyimages.pandawork.com
         - name: HOST
           value: 0.0.0.0
         - name: IPFS_HOST
-          value: ipfs
+          value: http://ipfs:5001
+        - name: IPFS_MASTER
+          value: http://ipfs:5001
         - name: NODE_ENV
           value: production
 ---
@@ -139,7 +143,8 @@ spec:
     - port: 8080
   selector:
     app: puttyimages-ipfs
-  clusterIP: None
+  sessionAffinity: None
+  type: ClusterIP
 ---
 apiVersion: v1
 kind: Service
@@ -166,6 +171,13 @@ metadata:
     ingress.kubernetes.io/proxy-body-size: 10m
 spec:
   rules:
+  - host: cdn-puttyimages.pandawork.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ipfs
+          servicePort: 8080
   - host: puttyimages.pandawork.com
     http:
       paths:
@@ -175,4 +187,5 @@ spec:
           servicePort: 80
   tls:
   - hosts:
+    - cdn-puttyimages.pandawork.com
     - puttyimages.pandawork.com

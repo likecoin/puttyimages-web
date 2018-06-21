@@ -13,6 +13,7 @@ services:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
     environment:
+      CDN_HOST: http://localhost:8080
       HOST: 0.0.0.0
       IPFS_HOST: http://ipfs:5001
       IPFS_MASTER: http://ipfs:5001

@@ -1,3 +1,5 @@
+import bs58 from 'bs58';
+
 import { RESULT_PER_PAGE } from '../../constant';
 import { ValidationError } from './validator';
 import { parseKeyword } from '../util/paginator';
@@ -42,6 +44,15 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         field: 'updated_at',
         type: DataTypes.DATE,
+      },
+      url: {
+        get() {
+          const hash = bs58.encode(
+            Buffer.from(this.getDataValue('ipfs'), 'hex')
+          );
+          return `${process.env.CDN_HOST}/ipfs/${hash}`;
+        },
+        type: DataTypes.VIRTUAL,
       },
       wallet: {
         allowNull: false,
