@@ -13,9 +13,10 @@ import { personalEcRecover, web3HexToUtf8 } from '../util/web3';
 import { ONE_DATE_IN_MS, MAX_IMAGE_SIZE } from '../../constant';
 import formatMediaObject from '../util/metadata';
 
+const bs58 = require('bs58');
+const imageSize = require('image-size');
 const Multer = require('multer');
 const sha256 = require('js-sha256');
-const bs58 = require('bs58');
 
 const router = Router();
 
@@ -87,6 +88,7 @@ router.post(
       // check asset
       const { file: asset } = req;
       const hash256 = sha256(asset.buffer);
+      const { height, width } = imageSize(asset.buffer);
       validateImage(asset, assetSHA256);
       const hash256Bytes = Buffer.from(hash256, 'hex');
 
@@ -126,11 +128,13 @@ router.post(
           sequelize.asset.create(
             {
               fingerprint: hash256Bytes,
+              height,
               ipfs: bs58.decode(ipfsAdd[0].hash),
               ipld: bs58.decode(ipld.toBaseEncodedString()),
               license,
               tags: [{ name: 'hehe' }, { name: 'haha' }],
               wallet,
+              width,
             },
             {
               include: [sequelize.tag],

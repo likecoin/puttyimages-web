@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.BLOB,
       },
+      height: DataTypes.INTEGER,
       ipfs: {
         allowNull: false,
         type: DataTypes.BLOB,
@@ -51,6 +52,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         unique: true,
       },
+      width: DataTypes.INTEGER,
     },
     {
       freezeTableName: true,

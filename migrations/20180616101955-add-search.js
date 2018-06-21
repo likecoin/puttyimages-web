@@ -3,6 +3,12 @@ module.exports = {
     queryInterface.addColumn('asset', 'description', {
       type: Sequelize.TEXT,
     }),
+    queryInterface.addColumn('asset', 'height', {
+      type: Sequelize.INTEGER,
+    }),
+    queryInterface.addColumn('asset', 'width', {
+      type: Sequelize.INTEGER,
+    }),
     queryInterface.renameColumn('asset', 'fk_asset_license', 'license'),
     queryInterface.addConstraint('asset', ['wallet'], {
       type: 'foreign key',
@@ -37,6 +43,8 @@ module.exports = {
   ],
   down: (queryInterface) => [
     queryInterface.removeColumn('asset', 'description'),
+    queryInterface.removeColumn('asset', 'height'),
+    queryInterface.removeColumn('asset', 'width'),
     queryInterface.renameColumn('asset', 'license', 'fk_asset_license'),
     queryInterface.removeConstraint('asset', 'asset_wallet_fkey'),
     queryInterface.dropTable('asset_like'),
