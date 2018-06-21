@@ -1,5 +1,25 @@
 /// Buttons
 
+$class-style-map: (
+  primary: (
+    bg-color: color(like-green),
+    bg-image: linear-gradient(to right, gradient-colors(primary)),
+  ),
+  secondary: (
+    bg-color: color(like-brown),
+    bg-image: linear-gradient(to right, gradient-colors(secondary))
+  ),
+  likecoin: (
+    color: color(like-green),
+    bg-color: color(like-cyan),
+    bg-image: $gradient-likecoin
+  ),
+  gray-a: (
+    color: color(gray-a),
+    bg-color: color(gray-a),
+  )
+);
+
 .btn--likecoin {
   min-height: 42px;
 
@@ -8,34 +28,27 @@
   font-size: 18px;
   font-weight: 400;
 
-  &.primary {
-    background-image: linear-gradient(to right, gradient-colors(primary));
-
-    &--text {
-      color: color(like-green) !important;
+  @each $class, $config in $class-style-map {
+    $bg-color: map-get($config, bg-color);
+    $bg-image: map-get($config, bg-image);
+    $color: map-get($config, color);
+    @if not $color {
+      $color: white;
     }
-  }
 
-  &.secondary {
-    background-image: linear-gradient(to right, gradient-colors(secondary));
+    &.#{$class} {
+      color: $color !important;
+      background-color: $bg-color !important;
 
-    &--text {
-      color: color(like-brown) !important;
+      &:not(.btn--solid) {
+        background-image: $bg-image !important;
+      }
     }
-  }
 
-  &.likecoin {
-    color: color(like-green) !important;
-    background-image: $gradient-likecoin;
-
-    &--text {
-      color: color(like-green) !important;
-    }
-  }
-
-  &.gray-a {
-    &--text {
-      color: color(gray-a) !important;
+    @at-root .#{$class}--text {
+      @at-root &#{&} {
+        color: $bg-color !important;
+      }
     }
   }
 
@@ -45,10 +58,8 @@
     font-size: 12px;
   }
 
-  .icon {
-    & + * {
-      margin-left: 8px;
-    }
+  &.btn--disabled.btn--outline:not(.btn--icon):not(.btn--flat) {
+    background-color: transparent !important;
   }
 
   &.btn--icon {
@@ -64,6 +75,16 @@
         width: 32px;
         height: 32px;
       }
+    }
+  }
+
+  .btn__content {
+    min-height: inherit;
+  }
+
+  .icon {
+    & + * {
+      margin-left: 8px;
     }
   }
 }

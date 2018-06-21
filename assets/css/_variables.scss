@@ -3,11 +3,12 @@
 $colors: (
   like-green: #2D6472,
   like-brown: #6A282E,
+  like-cyan: #D0F0F0,
   gray-4a: #4A4A4A,
   gray-a: #AAA
 );
 
-$gradient-likecoin: linear-gradient(292deg, #D0F0F0, #F0E6B4);
+$gradient-likecoin: linear-gradient(292deg, map-get($colors, like-cyan), #F0E6B4);
 
 /// Grid System
 
