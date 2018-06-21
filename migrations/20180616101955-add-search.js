@@ -9,7 +9,6 @@ module.exports = {
     queryInterface.addColumn('asset', 'width', {
       type: Sequelize.INTEGER,
     }),
-    queryInterface.renameColumn('asset', 'fk_asset_license', 'license'),
     queryInterface.addConstraint('asset', ['wallet'], {
       type: 'foreign key',
       name: 'asset_wallet_fkey',
@@ -45,7 +44,6 @@ module.exports = {
     queryInterface.removeColumn('asset', 'description'),
     queryInterface.removeColumn('asset', 'height'),
     queryInterface.removeColumn('asset', 'width'),
-    queryInterface.renameColumn('asset', 'license', 'fk_asset_license'),
     queryInterface.removeConstraint('asset', 'asset_wallet_fkey'),
     queryInterface.dropTable('asset_like'),
   ],
