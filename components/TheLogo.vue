@@ -1,7 +1,7 @@
 <template>
   <nuxt-link
+    :class="classObject"
     :to="{ name: 'index' }"
-    class="the-logo"
   >
     <logo class="the-logo__icon" />
     <div>
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { ColorPropType } from '@/constant/prop-types';
+
 import Logo from '@/assets/icons/logo.svg';
 
 export default {
@@ -19,11 +21,20 @@ export default {
   components: {
     Logo,
   },
+  props: {
+    // eslint-disable-next-line vue/require-default-prop
+    color: ColorPropType,
+  },
+  computed: {
+    classObject() {
+      return ['the-logo', `the-logo--${this.color}`];
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-@import '~assets/css/variables';
+@import '~assets/css/helpers';
 
 .the-logo {
   top: 0;
@@ -31,7 +42,7 @@ export default {
 
   display: flex;
 
-  color: color(like-green);
+  @include color-modifiers;
 }
 
 .the-logo__icon {

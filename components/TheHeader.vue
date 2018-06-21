@@ -1,53 +1,73 @@
 <template>
-  <div class="the-header">
+  <div :class="classObject">
 
-    <div
-      v-if="isHomePage"
-      class="the-header__banner the-header__banner--home"
-    >
-      <div>
-        <the-logo class="the-header__logo" />
+    <transition name="page">
+      <div
+        v-if="isHomePage"
+        key="home-banner"
+        class="the-header__banner the-header__banner--home"
+      >
+        <div>
+          <the-logo
+            color="primary"
+            class="the-header__logo"
+          />
 
-        <h1 class="the-header__banner__slogan--line-1">
-          Making profit with free to use photos
-        </h1>
-        <h2 class="the-header__banner__slogan--line-2">
-          Rewarding Contents by Proof of Creativity
-        </h2>
+          <h1 class="the-header__banner__slogan--line-1">
+            Making profit with free to use photos
+          </h1>
+          <h2 class="the-header__banner__slogan--line-2">
+            Rewarding Contents by Proof of Creativity
+          </h2>
 
-        <v-btn
-          class="the-header__banner__upload-button btn--likecoin"
-          color="secondary"
-        >
-          <v-icon>add_circle_outline</v-icon>
-          <span>Upload Your Image</span>
-        </v-btn>
+          <v-btn
+            :to="{ name: 'upload' }"
+            class="the-header__banner__upload-button btn--likecoin"
+            color="secondary"
+          >
+            <v-icon>add_circle_outline</v-icon>
+            <span>Upload Your Image</span>
+          </v-btn>
 
+        </div>
       </div>
-    </div>
-    <div
-      v-else
-      class="the-header__banner the-header__banner--generic"
-    >
-      <the-logo class="the-header__logo" />
-    </div>
+      <div
+        v-else
+        key="generic-banner"
+        class="the-header__banner the-header__banner--generic"
+      >
+        <the-logo
+          :color="color"
+          class="the-header__logo"
+        />
+      </div>
+    </transition>
 
-    <sliding-menu />
+    <the-sliding-menu :color="color" />
 
   </div>
 </template>
 
 <script>
-import SlidingMenu from '@/components/SlidingMenu';
+import { ColorPropType } from '@/constant/prop-types';
+
 import TheLogo from '@/components/TheLogo';
+import TheSlidingMenu from '@/components/TheSlidingMenu';
 
 export default {
   name: 'the-header',
   components: {
     TheLogo,
-    SlidingMenu,
+    TheSlidingMenu,
+  },
+  props: {
+    // eslint-disable-next-line vue/require-default-prop
+    color: ColorPropType,
   },
   computed: {
+    classObject() {
+      return ['the-header', `the-header--${this.color}`];
+    },
     isHomePage() {
       return this.$route.name === 'index';
     },
@@ -141,5 +161,7 @@ export default {
         .text--weight-400;
     }
   }
+
+  @include color-modifiers;
 }
 </style>

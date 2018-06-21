@@ -1,5 +1,4 @@
 @import 'variables';
-@import 'functions';
 
 /// Variables Getters
 
@@ -12,6 +11,13 @@ $color-map: (
   secondary: color(like-brown),
   white: white,
 );
+@mixin color-modifiers {
+  @each $key, $value in $color-map {
+    &--#{$key} {
+      color: $value;
+    }
+  }
+}
 
 $gradient-colors: (
   primary: (#3D286E, color(like-green)),
@@ -23,10 +29,6 @@ $gradient-colors: (
 
 @function breakpoint($type) {
   @return map-get($breakpoints, $type);
-}
-
-@function get-responsive-inset($keys...) {
-  @return map-deep-get($responsive-inset, $keys...);
 }
 
 /// Responsive
@@ -65,47 +67,4 @@ $gradient-colors: (
   @media only screen and (min-width: breakpoint(sm) + 1px) {
     @content;
   }
-}
-
-/// Deprecated
-@mixin responsive($property-config: ()) {
-  @each $property, $config in $property-config {
-    @each $breakpoint, $value in $config {
-      @if $breakpoint == 'xs' {
-        @include mobile-only {
-          #{$property}: $value;
-        }
-      } @else if $breakpoint == 'sm' {
-        @include tablet-and-below {
-          #{$property}: $value;
-        }
-      } @else {
-        #{$property}: $value;
-      }
-    }
-  }
-}
-
-/// Deprecated
-@mixin responsive-inset($level: 0, $properties...) {
-  $property-config: ();
-  $x-property: top, bottom, margin-top, margin-bottom, padding-top, padding-bottom;
-  $y-property: left, right, margin-left, margin-right, padding-left, padding-right;
-
-  @each $property in $properties {
-    $direction: false;
-    @if index($x-property, $property) {
-      $direction: x;
-    } @else if index($y-property, $property) {
-      $direction: y;
-    }
-
-    @if $direction {
-      $property-config: map-merge($property-config, (
-        $property: get-responsive-inset($level, $direction)
-      ));
-    }
-  }
-
-  @include responsive($property-config);
 }

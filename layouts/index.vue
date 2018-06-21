@@ -6,7 +6,7 @@
     <v-app>
       <the-overlay-component />
 
-      <the-header />
+      <the-header color="white" />
 
       <nuxt />
     </v-app>
