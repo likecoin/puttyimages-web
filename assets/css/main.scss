@@ -108,3 +108,13 @@ svg {
     }
   }
 }
+
+/// Fix weird overlay transition in nested <v-dialog/>
+.overlay--active {
+  @keyframes dialog-overlay-fade-in {
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  animation: dialog-overlay-fade-in 0.75s ease 0s 1 both;
+}
