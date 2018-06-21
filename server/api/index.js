@@ -10,7 +10,6 @@ const router = Router();
 
 router.use(cookieParser());
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true }));
 
 const errorHandler = (err, req, res, next) => {
   if (res.headersSent) {

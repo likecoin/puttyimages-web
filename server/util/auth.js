@@ -10,7 +10,7 @@ const axios = Axios.create({
 
 export async function getUserChallenge(queryWallet) {
   let data;
-  if (LIKECOIN_AUTH_URL) {
+  if (process.env.production) {
     ({ data } = await axios.get(LIKECOIN_AUTH_URL, {
       params: { wallet: queryWallet },
     }));
@@ -25,30 +25,35 @@ export async function getUserChallenge(queryWallet) {
 }
 
 export async function postUserChallenge(payload) {
-  const { challenge, signature, wallet } = payload;
-  let data;
-  if (LIKECOIN_AUTH_URL) {
-    ({ data } = await axios.post(LIKECOIN_AUTH_URL, {
-      challenge,
-      signature,
-      wallet,
-    }));
-  } else {
-    data = Object.assign({ wallet }, LIKECOIN_USER_STUB);
-  }
-  const {
-    user: likecoinId,
-    displayName,
-    wallet: responseWallet,
-    avatar,
-  } = data;
-  if (!likecoinId || !displayName || wallet !== responseWallet) {
+  try {
+    const { challenge, signature, wallet } = payload;
+    let data;
+    if (process.env.production) {
+      ({ data } = await axios.post(LIKECOIN_AUTH_URL, {
+        challenge,
+        signature,
+        wallet,
+      }));
+    } else {
+      data = Object.assign({ wallet }, LIKECOIN_USER_STUB);
+    }
+    const {
+      user: likecoinId,
+      displayName,
+      wallet: responseWallet,
+      avatar,
+    } = data;
+    if (!likecoinId || !displayName || wallet !== responseWallet) {
+      throw new Error('invalid post challenge response');
+    }
+    return {
+      avatar,
+      displayName,
+      likecoinId,
+      wallet: responseWallet,
+    };
+  } catch (err) {
+    console.error(err.message || err); // eslint-disable-line no-console
     throw new Error('POST_CHALLENGE_FAILED');
   }
-  return {
-    avatar,
-    displayName,
-    likecoinId,
-    wallet: responseWallet,
-  };
 }
