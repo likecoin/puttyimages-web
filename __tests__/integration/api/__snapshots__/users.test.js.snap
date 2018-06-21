@@ -31,3 +31,20 @@ Array [
   },
 ]
 `;
+
+exports[`get user info by wallet 1`] = `
+Object {
+  "challenge": "local",
+  "wallet": "0x0000000000000000000000000000000000000000",
+}
+`;
+
+exports[`post user login 1`] = `
+Object {
+  "avatar": null,
+  "likecoinId": "local",
+  "displayName": "local",
+  "wallet": "0x0000000000000000000000000000000000000000",
+}
+`;
+
