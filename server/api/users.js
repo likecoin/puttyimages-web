@@ -37,30 +37,34 @@ router.get('/users/:id', async (req, res, next) => {
 // req with jwt: return db record
 // req without jwt / no db record: return challenge
 // no likecoin id: return 404
-router.get('/users/wallet/:wallet', jwtAuth({ credentialsRequired: false }), async (req, res, next) => {
-  try {
-    const { wallet } = req.params;
-    if (req.user && req.user.wallet === wallet) {
-      const user = await sequelize.user.findOne(
-        { where: { wallet } },
-        { raw: true }
-      );
-      if (user) {
-        if (!user.avatar) user.avatar = toDataUrl(user.wallet);
-        res.json(user);
+router.get(
+  '/users/wallet/:wallet',
+  jwtAuth({ credentialsRequired: false }),
+  async (req, res, next) => {
+    try {
+      const { wallet } = req.params;
+      if (req.user && req.user.wallet === wallet) {
+        const user = await sequelize.user.findOne(
+          { where: { wallet } },
+          { raw: true }
+        );
+        if (user) {
+          if (!user.avatar) user.avatar = toDataUrl(user.wallet);
+          res.json(user);
+          return;
+        }
+      }
+      const payload = await getUserChallenge(wallet);
+      if (!payload || !payload.wallet) {
+        res.sendStatus(404);
         return;
       }
+      res.json(payload);
+    } catch (err) {
+      next(err);
     }
-    const payload = await getUserChallenge(wallet);
-    if (!payload || !payload.wallet) {
-      res.sendStatus(404);
-      return;
-    }
-    res.json(payload);
-  } catch (err) {
-    next(err);
   }
-});
+);
 
 router.post('/users/login', async (req, res, next) => {
   try {
@@ -70,7 +74,8 @@ router.post('/users/login', async (req, res, next) => {
     const token = jwtSign({ createdTs: Date.now(), likecoinId, wallet });
     await sequelize.user.upsert(likecoinUser);
     res.cookie(JWT_COOKIE_KEY, token, AUTH_COOKIE_OPTION);
-    if (!likecoinUser.avatar) likecoinUser.avatar = toDataUrl(likecoinUser.wallet);
+    if (!likecoinUser.avatar)
+      likecoinUser.avatar = toDataUrl(likecoinUser.wallet);
     res.json(likecoinUser);
   } catch (err) {
     next(err);

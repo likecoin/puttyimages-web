@@ -11,7 +11,9 @@ test('get user info by id', async () => {
 });
 
 test('get user info by wallet', async () => {
-  const response = await api.get('users/wallet/0x0000000000000000000000000000000000000000');
+  const response = await api.get(
+    'users/wallet/0x0000000000000000000000000000000000000000'
+  );
   expect(response.data).toMatchSnapshot();
 });
 
