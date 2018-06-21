@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`search with empty result 1`] = `
+Object {
+  "data": Array [],
+  "error": false,
+  "pageInfo": Object {
+    "endCursor": null,
+    "hasNextPage": false,
+    "hasPrevPage": false,
+    "next": null,
+    "prev": null,
+    "startCursor": null,
+    "totalCount": 0,
+  },
+}
+`;
+
 exports[`search with keyword 1`] = `
 Object {
   "data": Array [
