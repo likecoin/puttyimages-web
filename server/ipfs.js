@@ -26,27 +26,18 @@ class IpfsClient {
   };
 
   files = {
-    add: (stream) => {
-      Promise.race(this.masters.map((c) => c.files.add(stream)));
-    },
-    cat: (path) => {
-      this.anyClient().files.cat(path);
-    },
+    add: (stream) => Promise.race(this.masters.map((c) => c.files.add(stream))),
+    cat: (path) => this.anyClient().files.cat(path),
   };
 
   pin = {
-    add: (hash) => {
-      Promise.race(this.clients.map((c) => c.pin.add(hash)));
-    },
+    add: (hash) => Promise.race(this.clients.map((c) => c.pin.add(hash))),
   };
 
   dag = {
-    get: (cid, path, options) => {
-      this.anyClient().dag.get(cid, path, options);
-    },
-    put: (dagNode, options) => {
-      Promise.race(this.masters.map((c) => c.dag.put(dagNode, options)));
-    },
+    get: (cid, path, options) => this.anyClient().dag.get(cid, path, options),
+    put: (dagNode, options) =>
+      Promise.race(this.masters.map((c) => c.dag.put(dagNode, options))),
   };
 }
 
