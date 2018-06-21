@@ -69,6 +69,7 @@
                     color="primary"
                     depressed
                     block
+                    @click="useImage"
                   >Use or Download This Image</v-btn>
                 </li>
                 <li>
@@ -89,17 +90,24 @@
         </div>
       </div>
     </div>
+
+    <use-image-dialog
+      :image="image"
+      :is-open.sync="isUseImageDialogOpen"
+    />
   </v-dialog>
 </template>
 
 <script>
 import LikeButton from '~/components/LikeButton';
+import UseImageDialog from '~/components/UseImageDialog';
 import UserBadge from '~/components/UserBadge';
 
 export default {
   name: 'image-details-dialog',
   components: {
     LikeButton,
+    UseImageDialog,
     UserBadge,
   },
   props: {
@@ -111,16 +119,29 @@ export default {
       default: false,
       type: [Boolean, String],
     },
+    isUseImage: {
+      required: true,
+      type: [Boolean, String],
+    },
   },
   data() {
     return {
       isImageLoaded: false,
+      isUseImageDialogOpen: false,
     };
   },
   watch: {
     image() {
       this.isImageLoaded = false;
     },
+    isOpen(isOpen) {
+      if (isOpen) {
+        this.openSubDialogIfNeeded();
+      }
+    },
+  },
+  mounted() {
+    this.openSubDialogIfNeeded();
   },
   methods: {
     onImageLoaded() {
@@ -128,6 +149,14 @@ export default {
     },
     close() {
       this.$emit('update:isOpen', false);
+    },
+    openSubDialogIfNeeded() {
+      this.openSubDialogTimer = setTimeout(() => {
+        this.isUseImageDialogOpen = this.isUseImage;
+      }, 500);
+    },
+    useImage() {
+      this.isUseImageDialogOpen = true;
     },
   },
 };

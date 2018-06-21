@@ -29,6 +29,7 @@
       v-if="detailsImage"
       :image="detailsImage"
       :is-open.sync="isOpenDialog"
+      is-use-image
     />
 
   </div>

@@ -19,3 +19,5 @@ export const SUPPORTED_LICENSE = new Set([
   'cc-by-sa',
   'cc-by-nd',
 ]);
+
+export const EMBEDDED_SCRIPT_IN_HEAD = `<script src="https://code.puttyimage.io/latest/polyfill.min.js"></script>`;
