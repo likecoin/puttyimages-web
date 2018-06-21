@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 const expressjwt = require('express-jwt');
 const {
   JWT_COOKIE_KEY,
-  JWT_EXPIRE_DAYS,
+  JWT_EXPIRE_TIME,
+  JWT_COOKIE_MAX_AGE,
   JWT_SECRET,
 } = require('../../config/server');
 
@@ -21,7 +22,7 @@ function getToken(req) {
   ) {
     return req.headers.authorization.split(' ')[1];
   } else if (req.cookies && req.cookies[JWT_COOKIE_KEY]) {
-    return req.cookies.auth;
+    return req.cookies[JWT_COOKIE_KEY];
   }
   return null;
 }
@@ -37,23 +38,20 @@ function setNoCacheHeader(res) {
 }
 
 export const jwtSign = (payload) =>
-  jwt.sign(payload, secret, { expiresIn: `${JWT_EXPIRE_DAYS}d` });
+  jwt.sign(payload, secret, { expiresIn: JWT_EXPIRE_TIME });
 
 export const jwtVerify = (token) => jwt.verify(token, secret);
 
-export const jwtAuth = (options) => {
-  const auth = (req, res, next) => {
-    setNoCacheHeader(res);
-    expressjwt(Object.assign({ getToken, secret }, options))(req, res, (e) => {
-      next(e);
-    });
-  };
-  return auth;
+export const jwtAuth = (options) => (req, res, next) => {
+  setNoCacheHeader(res);
+  expressjwt(Object.assign({ getToken, secret }, options))(req, res, (e) => {
+    next(e);
+  });
 };
 
 export const AUTH_COOKIE_OPTION = {
   httpOnly: true,
-  maxAge: JWT_EXPIRE_DAYS * 24 * 60 * 60 * 1000,
+  maxAge: JWT_COOKIE_MAX_AGE,
   secure: !!process.env.production,
 };
 
