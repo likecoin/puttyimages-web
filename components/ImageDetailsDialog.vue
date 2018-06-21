@@ -84,6 +84,7 @@
               <p>{{ image.license.name }}</p>
               <a
                 class="text--underline text--size-12"
+                @click="reportImage"
               >Report Image Right Violations / Abuse</a>
             </section>
           </div>
@@ -91,6 +92,10 @@
       </div>
     </div>
 
+    <report-image-dialog
+      :image="image"
+      :is-open.sync="isReportImageDialogOpen"
+    />
     <use-image-dialog
       :image="image"
       :is-open.sync="isUseImageDialogOpen"
@@ -100,6 +105,7 @@
 
 <script>
 import LikeButton from '~/components/LikeButton';
+import ReportImageDialog from '~/components/ReportImageDialog';
 import UseImageDialog from '~/components/UseImageDialog';
 import UserBadge from '~/components/UserBadge';
 
@@ -107,6 +113,7 @@ export default {
   name: 'image-details-dialog',
   components: {
     LikeButton,
+    ReportImageDialog,
     UseImageDialog,
     UserBadge,
   },
@@ -119,6 +126,10 @@ export default {
       default: false,
       type: [Boolean, String],
     },
+    isReportImage: {
+      type: [Boolean, String],
+      default: false,
+    },
     isUseImage: {
       required: true,
       type: [Boolean, String],
@@ -127,6 +138,7 @@ export default {
   data() {
     return {
       isImageLoaded: false,
+      isReportImageDialogOpen: false,
       isUseImageDialogOpen: false,
     };
   },
@@ -152,8 +164,12 @@ export default {
     },
     openSubDialogIfNeeded() {
       this.openSubDialogTimer = setTimeout(() => {
+        this.isReportImageDialogOpen = this.isReportImage;
         this.isUseImageDialogOpen = this.isUseImage;
       }, 500);
+    },
+    reportImage() {
+      this.isReportImageDialogOpen = true;
     },
     useImage() {
       this.isUseImageDialogOpen = true;
