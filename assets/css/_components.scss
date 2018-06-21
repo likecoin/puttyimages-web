@@ -33,6 +33,18 @@
     }
   }
 
+  &.gray-a {
+    &--text {
+      color: color(gray-a) !important;
+    }
+  }
+
+  &.btn--small {
+    min-height: 0;
+
+    font-size: 12px;
+  }
+
   .icon {
     & + * {
       margin-left: 8px;
@@ -219,5 +231,30 @@
 
   .green {
     background-color: #28646E !important;
+  }
+}
+
+
+/// Dialogs
+.dialog--likecoin {
+  h1,
+  h2 {
+    @extend .text--color-primary, .text--weight-400;
+  }
+
+  h1 {
+    @extend .text--size-32, .text--size-24--sm, .text--align-center;
+  }
+
+  h2 {
+    @extend .text--size-16;
+
+    &:not(:first-child) {
+      @extend .mt-24;
+    }
+  }
+
+  p {
+    @extend .text--size-12, .mt-16, .mb-8;
   }
 }

@@ -3,7 +3,8 @@
 $colors: (
   like-green: #2D6472,
   like-brown: #6A282E,
-  gray-4a: #4A4A4A
+  gray-4a: #4A4A4A,
+  gray-a: #AAA
 );
 
 $gradient-likecoin: linear-gradient(292deg, #D0F0F0, #F0E6B4);
@@ -28,3 +29,5 @@ $line-height-map: (
   '1-8': 1.8,
   2: 2
 );
+
+$text-align-list: left center right;

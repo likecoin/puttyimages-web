@@ -42,6 +42,12 @@
     }
   }
 
+  @each $value in $text-align-list {
+    &--align-#{$value}#{$suffix} {
+      text-align: $value !important;
+    }
+  }
+
   &--underline#{$suffix} {
     text-decoration: underline;
   }

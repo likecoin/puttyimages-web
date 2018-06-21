@@ -72,7 +72,26 @@ svg {
   }
   &enter,
   &leave-to {
-    opacity: 0;
+    opacity: 0 !important;
+  }
+}
+
+.collapsed- {
+  &enter-active,
+  &leave-active {
+    overflow-y: hidden !important;
+
+    max-height: 100vh !important;
+
+    transition-timing-function: ease;
+    transition-duration: 0.5s;
+    transition-property: opacity max-width;
+  }
+  &enter,
+  &leave-to {
+    max-height: 0 !important;
+
+    opacity: 0 !important;
   }
 }
 
@@ -83,5 +102,9 @@ svg {
   &.theme--light {
     color: inherit !important;
     background: inherit !important;
+
+    .card {
+      color: inherit !important;
+    }
   }
 }
