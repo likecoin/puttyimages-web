@@ -1,13 +1,10 @@
 import { Router } from 'express';
+import { toDataUrl } from '@likecoin/ethereum-blockies';
 import sequelize from '../models';
 import { getUserChallenge, postUserChallenge } from '../util/auth';
-import { jwtAuthNoBlock, jwtSign } from '../util/jwt';
+import { jwtAuth, jwtSign, AUTH_COOKIE_OPTION } from '../util/jwt';
 
-const AUTH_COOKIE_OPTION = {
-  httpOnly: true,
-  maxAge: 31556926000, // 365d
-  secure: process.env.production,
-};
+const { JWT_COOKIE_KEY } = require('../../config/server');
 
 const router = Router();
 
@@ -40,7 +37,7 @@ router.get('/users/:id', async (req, res, next) => {
 // req with jwt: return db record
 // req without jwt / no db record: return challenge
 // no likecoin id: return 404
-router.get('/users/wallet/:wallet', jwtAuthNoBlock, async (req, res, next) => {
+router.get('/users/wallet/:wallet', jwtAuth({ credentialsRequired: false }), async (req, res, next) => {
   try {
     const { wallet } = req.params;
     if (req.user && req.user.wallet === wallet) {
@@ -49,12 +46,16 @@ router.get('/users/wallet/:wallet', jwtAuthNoBlock, async (req, res, next) => {
         { raw: true }
       );
       if (user) {
+        if (!user.avatar) user.avatar = toDataUrl(user.wallet);
         res.json(user);
         return;
       }
     }
     const payload = await getUserChallenge(wallet);
-    if (!payload || !payload.wallet) res.sendStatus(404);
+    if (!payload || !payload.wallet) {
+      res.sendStatus(404);
+      return;
+    }
     res.json(payload);
   } catch (err) {
     next(err);
@@ -67,9 +68,10 @@ router.post('/users/login', async (req, res, next) => {
     const likecoinUser = await postUserChallenge(req.body);
     const { likecoinId } = likecoinUser;
     const token = jwtSign({ createdTs: Date.now(), likecoinId, wallet });
-    res.cookie('auth', token, AUTH_COOKIE_OPTION);
-    res.status(200).json(likecoinUser);
     await sequelize.user.upsert(likecoinUser);
+    res.cookie(JWT_COOKIE_KEY, token, AUTH_COOKIE_OPTION);
+    if (!likecoinUser.avatar) likecoinUser.avatar = toDataUrl(likecoinUser.wallet);
+    res.json(likecoinUser);
   } catch (err) {
     next(err);
   }

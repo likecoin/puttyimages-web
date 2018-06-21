@@ -1,16 +1,18 @@
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const expressjwt = require('express-jwt');
-const { UnauthorizedError } = require('express-jwt');
-const config = require('../../config/server');
+const {
+  JWT_COOKIE_KEY,
+  JWT_EXPIRE_DAYS,
+  JWT_SECRET,
+} = require('../../config/server');
 
-let secret = config.JWT_SECRET;
-if (!secret) {
-  secret = crypto
+const secret =
+  JWT_SECRET ||
+  crypto
     .randomBytes(64)
     .toString('hex')
     .slice(0, 64);
-}
 
 function getToken(req) {
   if (
@@ -18,18 +20,13 @@ function getToken(req) {
     req.headers.authorization.split(' ')[0] === 'Bearer'
   ) {
     return req.headers.authorization.split(' ')[1];
-  } else if (req.cookies && req.cookies.auth) {
+  } else if (req.cookies && req.cookies[JWT_COOKIE_KEY]) {
     return req.cookies.auth;
   }
-  if (req.route.path === '/users/:wallet') {
-    return null;
-  }
-  throw new UnauthorizedError('credentials_required', {
-    message: 'No authorization token was found',
-  });
+  return null;
 }
 
-function setAuthHeader(res) {
+function setNoCacheHeader(res) {
   res.setHeader('Surrogate-Control', 'no-store');
   res.setHeader(
     'Cache-Control',
@@ -40,30 +37,24 @@ function setAuthHeader(res) {
 }
 
 export const jwtSign = (payload) =>
-  jwt.sign(payload, secret, { expiresIn: '7d' });
+  jwt.sign(payload, secret, { expiresIn: `${JWT_EXPIRE_DAYS}d` });
 
 export const jwtVerify = (token) => jwt.verify(token, secret);
 
-export const jwtAuth = (req, res, next) => {
-  setAuthHeader(res);
-  expressjwt({ getToken, secret })(req, res, (e) => {
-    if (e && e.name === 'UnauthorizedError') {
-      res.status(401).send('LOGIN_NEEDED');
-      return;
-    }
-    next(e);
-  });
+export const jwtAuth = (options) => {
+  const auth = (req, res, next) => {
+    setNoCacheHeader(res);
+    expressjwt(Object.assign({ getToken, secret }, options))(req, res, (e) => {
+      next(e);
+    });
+  };
+  return auth;
 };
 
-export const jwtAuthNoBlock = (req, res, next) => {
-  setAuthHeader(res);
-  expressjwt({ credentialsRequired: false, getToken, secret })(
-    req,
-    res,
-    (e) => {
-      next(e);
-    }
-  );
+export const AUTH_COOKIE_OPTION = {
+  httpOnly: true,
+  maxAge: JWT_EXPIRE_DAYS * 24 * 60 * 60 * 1000,
+  secure: !!process.env.production,
 };
 
 export default jwtAuth;
