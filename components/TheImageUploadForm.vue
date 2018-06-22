@@ -103,6 +103,11 @@
 </template>
 
 <script>
+import axios from '@/plugins/axios';
+
+import assetUtil from '@/util/assetUtil';
+import ethUtil from '@/util/ethUtil';
+
 import {
   MIN_TAG_COUNT,
   MAX_TAG_COUNT,
@@ -114,6 +119,12 @@ import {
 
 export default {
   name: 'the-image-upload-form',
+  props: {
+    file: {
+      required: true,
+      type: Object,
+    },
+  },
   data() {
     return {
       checkbox: false,
@@ -158,9 +169,32 @@ export default {
     removeTag(item) {
       this.tags.splice(this.tags.indexOf(item), 1);
     },
-    submit() {
+    async submit() {
       if (this.$refs.form.validate()) {
         this.isUploading = true;
+        const assetInfo = {
+          assetFile: this.file,
+          description: this.description.trim(),
+          license: this.license,
+          tags: this.tags,
+          wallet: ethUtil.getWallet(),
+        };
+        const payload = await assetUtil.formatAndSignAsset(
+          assetInfo,
+          'Upload asset with following information'
+        );
+
+        const params = new FormData();
+        Object.keys(payload).forEach((key) => {
+          params.append(key, payload[key]);
+        });
+        axios
+          .post('/api/assets/upload', params)
+          .then((mediaObj) => mediaObj) // TODO: go to my image page maybe?
+          .catch((err) => {
+            console.error(err);
+          });
+      }
     },
     onTagChange(tags) {
       const numTags = tags.length;

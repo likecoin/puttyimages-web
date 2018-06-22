@@ -117,7 +117,7 @@
               Back
             </v-btn>
 
-            <the-image-upload-form />
+            <the-image-upload-form :file="imageFile" />
           </div>
 
         </section>
@@ -152,7 +152,7 @@ export default {
   data() {
     return {
       image: null,
-      imageData: null,
+      imageFile: null,
       isExceedMaxSize: false,
       isImageLoading: false,
       isShowUploadImageForm: false,
@@ -216,7 +216,7 @@ export default {
           const img = new Image();
           img.onload = () => {
             this.image = URL.createObjectURL(file);
-            this.imageData = file;
+            this.imageFile = file;
             this.isImageLoading = false;
           };
           img.src = e.target.result;

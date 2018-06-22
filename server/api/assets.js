@@ -54,7 +54,9 @@ router.post(
       }
 
       const message = web3HexToUtf8(payload);
-      const actualPayload = JSON.parse(message);
+      // filter signing description append before the object
+      const actualPayload = JSON.parse(message.substr(message.indexOf('{')));
+
       const {
         wallet,
         assetSHA256,
