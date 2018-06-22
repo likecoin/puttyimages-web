@@ -129,12 +129,13 @@ router.post(
         sequelize.sequelize.Promise.all([
           sequelize.asset.create(
             {
+              description,
               fingerprint: hash256Bytes,
               height,
               ipfs: bs58.decode(ipfsAdd[0].hash),
               ipld: bs58.decode(ipld.toBaseEncodedString()),
               license,
-              tags: [{ name: 'hehe' }, { name: 'haha' }],
+              tags: tags.map((name) => ({ name })),
               wallet,
               width,
             },
