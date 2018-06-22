@@ -139,4 +139,8 @@ $spacing-preset: (
   margin: 0 auto;
 
   @extend .px-64--dy;
+
+  &--fluid {
+    max-width: initial;
+  }
 }
