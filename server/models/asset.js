@@ -1,3 +1,5 @@
+import bs58 from 'bs58';
+
 import { RESULT_PER_PAGE } from '../../constant';
 import { ValidationError } from './validator';
 import { parseKeyword } from '../util/paginator';
@@ -19,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         type: DataTypes.BLOB,
       },
+      height: DataTypes.INTEGER,
       ipfs: {
         allowNull: false,
         type: DataTypes.BLOB,
@@ -42,6 +45,15 @@ module.exports = (sequelize, DataTypes) => {
         field: 'updated_at',
         type: DataTypes.DATE,
       },
+      url: {
+        get() {
+          const hash = bs58.encode(
+            Buffer.from(this.getDataValue('ipfs'), 'hex')
+          );
+          return `${process.env.CDN_HOST}/ipfs/${hash}`;
+        },
+        type: DataTypes.VIRTUAL,
+      },
       wallet: {
         allowNull: false,
         references: {
@@ -51,6 +63,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         unique: true,
       },
+      width: DataTypes.INTEGER,
     },
     {
       freezeTableName: true,
@@ -112,6 +125,7 @@ module.exports = (sequelize, DataTypes) => {
       order: [
         [{ as: 'like', model: models.assetLike }, 'totalLike', 'DESC'],
         ['updatedAt', 'DESC'],
+        [models.tag, models.assetTag, 'tag_name', 'ASC'],
       ],
       where,
     });

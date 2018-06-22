@@ -5,7 +5,7 @@ import { RESULT_PER_PAGE } from '../../constant';
 import { ValidationError } from '../models/validator';
 
 export const getPageInfo = ({ after, baseUrl, before, totalCount } = {}) => {
-  if (!baseUrl || !totalCount) {
+  if (!baseUrl || totalCount === undefined) {
     throw new Error('missing baseUrl and totalCount');
   }
   const endCursor = after ? Base64.encodeURI(JSON.stringify(after)) : null;
@@ -64,14 +64,15 @@ export const parseQuery = (query) => {
     }
 
     const { offset: cursorOffset, q: cursorQuery } = cursor;
-    if ((after || before) && !isNumber(offset)) {
+    if ((after || before) && !isNumber(cursorOffset)) {
       throw new ValidationError('cannot decode cursor');
     } else if (!cursorQuery) {
       throw new ValidationError('no search keyword');
     }
     if (after) {
       offset = cursorOffset;
-    } else if (before) {
+    }
+    if (before) {
       offset = cursorOffset - RESULT_PER_PAGE;
     }
     q = cursorQuery;

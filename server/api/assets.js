@@ -13,9 +13,10 @@ import { personalEcRecover, web3HexToUtf8 } from '../util/web3';
 import { ONE_DATE_IN_MS, MAX_IMAGE_SIZE } from '../../constant';
 import formatMediaObject from '../util/metadata';
 
+const bs58 = require('bs58');
+const imageSize = require('image-size');
 const Multer = require('multer');
 const sha256 = require('js-sha256');
-const bs58 = require('bs58');
 
 const router = Router();
 
@@ -32,6 +33,8 @@ router.get('/assets/:id', async (req, res, next) => {
     const asset = await sequelize.asset.findById(Buffer.from(id, 'hex'), {
       raw: true,
     });
+    const hash = bs58.encode(Buffer.from(asset.ipfs, 'hex'));
+    asset.url = `${process.env.CDN_HOST}/ipfs/${hash}`;
     if (!asset) throw new Error('asset not found');
     res.json(asset);
   } catch (e) {
@@ -87,6 +90,7 @@ router.post(
       // check asset
       const { file: asset } = req;
       const hash256 = sha256(asset.buffer);
+      const { height, width } = imageSize(asset.buffer);
       validateImage(asset, assetSHA256);
       const hash256Bytes = Buffer.from(hash256, 'hex');
 
@@ -125,12 +129,15 @@ router.post(
         sequelize.sequelize.Promise.all([
           sequelize.asset.create(
             {
+              description,
               fingerprint: hash256Bytes,
+              height,
               ipfs: bs58.decode(ipfsAdd[0].hash),
               ipld: bs58.decode(ipld.toBaseEncodedString()),
               license,
-              tags: [{ name: 'hehe' }, { name: 'haha' }],
+              tags: tags.map((name) => ({ name })),
               wallet,
+              width,
             },
             {
               include: [sequelize.tag],

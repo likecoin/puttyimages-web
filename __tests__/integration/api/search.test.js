@@ -2,6 +2,11 @@ const axios = require('axios');
 
 const api = require('./api');
 
+test('search with empty result', async () => {
+  const response = await api.get('search?q=no_result');
+  expect(response.data).toMatchSnapshot();
+});
+
 test('search with keyword', async () => {
   const response = await api.get('search?q=fruit');
   expect(response.data).toMatchSnapshot();

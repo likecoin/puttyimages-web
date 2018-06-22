@@ -22,6 +22,7 @@ test('getPageInfo', () => {
   const totalCount = 10;
   expect(() => getPageInfo()).toThrow();
   expect(() => getPageInfo({ baseUrl })).toThrow();
+  expect(() => getPageInfo({ baseUrl, totalCount: 0 })).not.toThrow();
   expect(() => getPageInfo({ baseUrl, totalCount })).not.toThrow();
 
   expect(getPageInfo({ after, baseUrl, before, totalCount })).toMatchSnapshot();
@@ -33,6 +34,9 @@ test('getPageInfo', () => {
 test('parse search query', () => {
   const after = 'eyJvZmZzZXQiOjE1LCJxIjoiI2ZydWl0In0';
   const before = 'eyJvZmZzZXQiOjE1LCJxIjoiI2ZydWl0In0';
+  const invalidOffset = 'eyJvZmZzZXQiOiIiLCJxIjoiI2ZydWl0In0';
+  const missingKeyword = 'eyJvZmZzZXQiOjE1fQ';
+  const missingOffset = 'eyJxIjoiI2ZydWl0In0';
 
   expect(parseQuery({ q: 'fruit' })).toMatchSnapshot();
   expect(parseQuery({ q: '%23fruit' })).toMatchSnapshot();
@@ -43,6 +47,10 @@ test('parse search query', () => {
   expect(() => parseQuery({ q: '' })).toThrow();
   expect(() => parseQuery({ after, before })).toThrow();
   expect(() => parseQuery({ after, before, q: '%23fruit' })).toThrow();
+  expect(() => parseQuery({ after: '__invalid__' })).toThrow();
+  expect(() => parseQuery({ after: invalidOffset })).toThrow();
+  expect(() => parseQuery({ after: missingKeyword })).toThrow();
+  expect(() => parseQuery({ after: missingOffset })).toThrow();
 });
 
 test('parse search keyword', () => {

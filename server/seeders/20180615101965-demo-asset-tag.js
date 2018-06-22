@@ -1,25 +1,25 @@
-const { tags } = require('./fixture');
+const { ipfs, tags } = require('./fixture');
 
 module.exports = {
   up: (queryInterface) =>
     queryInterface.bulkInsert(
       'asset_tag',
       tags
-        .map(({ name }) => ({
-          asset_fingerprint: Buffer.from(name),
+        .map(({ name }, index) => ({
+          asset_fingerprint: Buffer.from(ipfs[index], 'hex'),
           tag_name: name,
         }))
         .concat(
-          tags.map(({ name }) => ({
-            asset_fingerprint: Buffer.from(name),
+          tags.map((tag, index) => ({
+            asset_fingerprint: Buffer.from(ipfs[index], 'hex'),
             tag_name: 'fruit',
           }))
         )
         .concat(
           tags
             .filter(({ name }) => name.indexOf('berry') > -1)
-            .map(({ name }) => ({
-              asset_fingerprint: Buffer.from(name),
+            .map((tag, index) => ({
+              asset_fingerprint: Buffer.from(ipfs[index], 'hex'),
               tag_name: 'berry',
             }))
         )

@@ -10,9 +10,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.BLOB,
       },
-      fkAssetLicense: {
+      license: {
         allowNull: false,
-        field: 'fk_asset_license',
+        field: 'license',
         references: {
           key: 'name',
           model: 'license',
