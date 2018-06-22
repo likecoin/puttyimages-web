@@ -1,6 +1,7 @@
 <template>
   <v-dialog
     v-model="isDialogOpen"
+    :persistent="getWeb3Message === 'sign'"
     content-class="metamask-dialog"
     width="450"
   >
@@ -10,7 +11,7 @@
         absolute
         fab
         small
-        @click.native.stop="$emit('update:isDialogOpen', false)"
+        @click.native.stop="onCloseDialog"
       >
         <v-icon
           color="white"
@@ -93,8 +94,17 @@ export default {
           return 'Please unlock your wallet';
         case 'testnet':
           return 'Please switch to Main Ethereum Network';
+        case 'sign':
+          return 'Sign on MetaMask to continue';
         default:
           return '';
+      }
+    },
+  },
+  methods: {
+    onCloseDialog() {
+      if (this.getWeb3Message !== 'sign') {
+        this.$emit('update:isDialogOpen', false);
       }
     },
   },
