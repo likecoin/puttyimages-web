@@ -25,30 +25,23 @@
       </div>
     </transition>
 
-    <image-details-dialog
-      v-if="detailsImage"
-      :image="detailsImage"
-      :is-open.sync="isOpenDialog"
-      is-use-image
-    />
-
   </div>
 </template>
 
 <script>
-import ImageDetailsDialog from '@/components/ImageDetailsDialog';
+import { createMixin as createTheImageDetailsDialogMixin } from '~/components/TheImageDetailsDialog';
+
 import Swiper from './TheLandingCarouselSwiper';
 
 export default {
   name: 'the-landing-carousel',
   components: {
-    ImageDetailsDialog,
     Swiper,
   },
+  mixins: [createTheImageDetailsDialogMixin()],
   data() {
     return {
       activeImageIndex: 0,
-      detailsImage: null,
       images: [
         {
           user: {
@@ -105,7 +98,6 @@ export default {
           width: 2560,
         },
       ],
-      isOpenDialog: false,
     };
   },
   computed: {
@@ -118,8 +110,11 @@ export default {
   },
   methods: {
     useImage() {
-      this.detailsImage = this.activeImage;
-      this.isOpenDialog = true;
+      this.setImageDetailsDialog({
+        image: this.activeImage,
+        isOpen: true,
+        isUseImage: true,
+      });
     },
   },
 };
