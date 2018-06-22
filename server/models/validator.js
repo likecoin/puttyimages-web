@@ -2,6 +2,7 @@ import {
   MAX_TAG_LENGTH,
   MIN_TAG_LENGTH,
   MAX_TAG_COUNT,
+  MIN_TAG_COUNT,
   SUPPORTED_LICENSE,
   MAX_IMAGE_SIZE,
   SUPPORTED_IMAGE_TYPE,
@@ -23,7 +24,7 @@ export function checkAddressValid(addr) {
 
 export function isTagsCountValid(tags) {
   if (!Array.isArray(tags)) return false;
-  return tags.length >= 1 && tags.length <= MAX_TAG_COUNT;
+  return tags.length >= MIN_TAG_COUNT && tags.length <= MAX_TAG_COUNT;
 }
 
 export function isTagsValid(tags) {
