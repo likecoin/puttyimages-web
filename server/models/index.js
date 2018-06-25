@@ -2,31 +2,32 @@ require('babel-register')({
   ignore: /node_modules\/(?!image-type|js-sha256)/, // only import modules needed by models
 });
 
-const fs = require('fs');
-const path = require('path');
 const Sequelize = require('sequelize');
 
+const { NODE_ENV } = process.env;
 const config = require('../../config/database');
+
+const asset = require('./asset');
+const assetLike = require('./asset_like');
+const assetTag = require('./asset_tag');
+const license = require('./license');
+const tag = require('./tag');
+const user = require('./user');
 
 const sequelize = new Sequelize({
   ...config.development,
+  logging: NODE_ENV === 'development',
   operatorsAliases: false,
   timezone: '+00:00',
 });
 
 const db = {};
-const isTest = global.test !== undefined;
-const modelPath = `${isTest ? '' : '../'}${__dirname}`; // Fix backpack fs path
-const nonModelFile = ['index.js', 'base.js', 'validator.js'];
-
-fs.readdirSync(__dirname).forEach((file) => {
-  if (nonModelFile.includes(file)) {
-    return;
-  }
-
-  const model = sequelize.import(path.join(modelPath, file));
-  db[model.name] = model;
-});
+db.asset = sequelize.import('asset', asset);
+db.assetLike = sequelize.import('assetLike', assetLike);
+db.assetTag = sequelize.import('assetTag', assetTag);
+db.license = sequelize.import('license', license);
+db.tag = sequelize.import('tag', tag);
+db.user = sequelize.import('user', user);
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {

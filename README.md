@@ -16,15 +16,15 @@ and basic DB schema. Also kick start the docker container for development.
 ``` bash
 # Build the docker images, run it for the first time or you have dependency
 # updates
-$ docker-compose build
+docker-compose build
 
 # Run the DB migration and reseed the DB for the first time run or after you
 # pull an update.
-$ docker-compose run --rm nuxt npm run sequelize db:migrate
-$ docker-compose run --rm nuxt npm run sequelize db:seed:all
+docker-compose run --rm nuxt npm run sequelize db:migrate
+docker-compose run --rm nuxt npm run sequelize db:seed:all
 
 # Kick of the development setup
-$ docker-compose up
+docker-compose up
 ```
 
 Local files are mount into docker you can modify file in your fs and will
@@ -52,8 +52,8 @@ own instances, you can checkout the `./k8s` folder for details.
 ## Production
 
 ``` bash
-$ docker-compose -f docker-compose.production.yml build
-$ docker-compose -f docker-compose.production.yml up
+docker-compose -f docker-compose.yml -f docker-compose.production.yml --project-name puttyimages_prod build
+docker-compose -f docker-compose.yml -f docker-compose.production.yml --project-name puttyimages_prod up
 ```
 
 For detailed explanation on how things work, checkout the [Nuxt.js
