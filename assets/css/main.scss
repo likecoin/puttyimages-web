@@ -63,6 +63,10 @@ svg {
   fill: currentColor;
 }
 
+.application--wrap {
+  background-color: #fff;
+}
+
 /// Global page transition
 /// Ref: https://nuxtjs.org/api/pages-transition
 .page- {
