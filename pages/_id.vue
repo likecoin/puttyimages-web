@@ -1,49 +1,112 @@
 <template>
-  <section class="container">
-    <h1 class="title">
-      User
-    </h1>
-    <v-card>
-      <v-card-title primary-title>
-        {{ user.name }}
-      </v-card-title>
-      <v-card-actions>
-        <v-btn
-          flat
-          color="orange"
-          nuxt
-          to="/"
+  <section class="page-container">
+    <div class="user-page">
+      <div class="px-12 mb-32 hidden-sm-and-up">
+        <!-- TODO: search button here -->
+        Search
+      </div>
+
+      <!-- TODO: show only when _id route is current user -->
+      <div v-if="isCurrentUser">
+        <div class="text--align-center text--weight-600 text--size-24">
+          My Images
+        </div>
+
+        <the-likecoin-amount
+          :amount="58.2500"
+          :avatar="user.avatar"
+          :likecoinId="user.likecoinId"
+          class="my-48"
+        />
+      </div>
+      <div v-else>
+        <UserBadge
+          :user="user"
+          class="my-32"
+        />
+      </div>
+
+      <!-- TODO: integrate masonry grid -->
+      <div class="user-page__masonry">
+        <div
+          v-for="asset in assets"
+          :key="asset.fingerprint"
         >
-          All Users
-        </v-btn>
-      </v-card-actions>
-    </v-card>
+          <img
+            :alt="asset.description"
+            :src="asset.url"
+          >
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
 import axios from '~/plugins/axios';
 
+import TheLikeCoinAmount from '~/components/TheLikeCoinAmount';
+import UserBadge from '~/components/UserBadge';
+
 export default {
   name: 'id',
-  asyncData({ params, error }) {
-    return axios
-      .get(`/api/users/${params.id}`)
-      .then((res) => ({ user: res.data }))
-      .catch(() => {
-        error({ statusCode: 404, message: 'User not found' });
-      });
+  components: {
+    'the-likecoin-amount': TheLikeCoinAmount,
+    UserBadge,
+  },
+  data() {
+    return {
+      isCurrentUser: true,
+    };
+  },
+  async asyncData({ params, error }) {
+    let user;
+    try {
+      const res = await axios.get(`/api/users/${params.id}`);
+      user = res.data;
+    } catch (err) {
+      error({ statusCode: 404, message: 'User not found' });
+      return {};
+    }
+
+    let assets;
+    try {
+      const res = await axios.get(`/api/assets/list/${user.wallet}`);
+      assets = res.data;
+    } catch (err) {
+      console.error(err);
+    }
+
+    return { user, assets };
   },
   head() {
     return {
-      title: `User: ${this.user.name}`,
+      title: `User: ${this.user.displayName}`,
     };
   },
 };
 </script>
 
-<style scoped>
-.title {
-  margin-top: 30px;
+<style lang="scss" scoped>
+@import '~assets/css/classes';
+
+.page-container {
+  @include mobile-only {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+  @extend .pb-32;
+}
+
+.user-page {
+  &__masonry {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    > * {
+      @extend .pa-4;
+    }
+  }
 }
 </style>
