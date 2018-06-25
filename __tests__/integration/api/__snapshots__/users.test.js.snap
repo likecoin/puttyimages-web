@@ -2,6 +2,7 @@
 
 exports[`get user info by id 1`] = `
 Object {
+  "avatar": null,
   "displayName": "Alexandre",
   "likecoinId": "likecoin_id_1",
   "wallet": "address 1",
@@ -11,19 +12,39 @@ Object {
 exports[`get users list 1`] = `
 Array [
   Object {
+    "avatar": null,
     "displayName": "Alexandre",
     "likecoinId": "likecoin_id_1",
     "wallet": "address 1",
   },
   Object {
+    "avatar": null,
     "displayName": "Pooya",
     "likecoinId": "likecoin_id_2",
     "wallet": "address 2",
   },
   Object {
+    "avatar": null,
     "displayName": "Sébastien",
     "likecoinId": "likecoin_id_3",
     "wallet": "address 3",
   },
 ]
 `;
+
+exports[`get user info by wallet 1`] = `
+Object {
+  "challenge": "local",
+  "wallet": "0x0000000000000000000000000000000000000000",
+}
+`;
+
+exports[`post user login 1`] = `
+Object {
+  "avatar": null,
+  "displayName": "local",
+  "likecoinId": "local",
+  "wallet": "0x0000000000000000000000000000000000000000",
+}
+`;
+
