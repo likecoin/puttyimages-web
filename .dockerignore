@@ -1,5 +1,6 @@
 .git
 .nuxt
+*.yml
 **/*.sw?
 build
 coverage
