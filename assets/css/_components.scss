@@ -1,5 +1,25 @@
 /// Buttons
 
+$class-style-map: (
+  primary: (
+    bg-color: color(like-green),
+    bg-image: linear-gradient(to right, gradient-colors(primary)),
+  ),
+  secondary: (
+    bg-color: color(like-brown),
+    bg-image: linear-gradient(to right, gradient-colors(secondary))
+  ),
+  likecoin: (
+    color: color(like-green),
+    bg-color: color(like-cyan),
+    bg-image: $gradient-likecoin
+  ),
+  gray-a: (
+    color: color(gray-a),
+    bg-color: color(gray-a),
+  )
+);
+
 .btn--likecoin {
   min-height: 42px;
 
@@ -8,26 +28,38 @@
   font-size: 18px;
   font-weight: 400;
 
-  &.primary {
-    background-image: linear-gradient(to right, gradient-colors(primary));
+  @each $class, $config in $class-style-map {
+    $bg-color: map-get($config, bg-color);
+    $bg-image: map-get($config, bg-image);
+    $color: map-get($config, color);
+    @if not $color {
+      $color: white;
+    }
 
-    &--text {
-      color: color(like-green) !important;
+    &.#{$class} {
+      color: $color !important;
+      background-color: $bg-color !important;
+
+      &:not(.btn--solid) {
+        background-image: $bg-image !important;
+      }
+    }
+
+    @at-root .#{$class}--text {
+      @at-root &#{&} {
+        color: $bg-color !important;
+      }
     }
   }
 
-  &.secondary {
-    background-image: linear-gradient(to right, gradient-colors(secondary));
+  &.btn--small {
+    min-height: 0;
 
-    &--text {
-      color: color(like-brown) !important;
-    }
+    font-size: 12px;
   }
 
-  .icon {
-    & + * {
-      margin-left: 8px;
-    }
+  &.btn--disabled.btn--outline:not(.btn--icon):not(.btn--flat) {
+    background-color: transparent !important;
   }
 
   &.btn--icon {
@@ -43,6 +75,16 @@
         width: 32px;
         height: 32px;
       }
+    }
+  }
+
+  .btn__content {
+    min-height: inherit;
+  }
+
+  .icon {
+    & + * {
+      margin-left: 8px;
     }
   }
 }
@@ -210,5 +252,30 @@
 
   .green {
     background-color: #28646E !important;
+  }
+}
+
+
+/// Dialogs
+.dialog--likecoin {
+  h1,
+  h2 {
+    @extend .text--color-primary, .text--weight-400;
+  }
+
+  h1 {
+    @extend .text--size-32, .text--size-24--sm, .text--align-center;
+  }
+
+  h2 {
+    @extend .text--size-16;
+
+    &:not(:first-child) {
+      @extend .mt-24;
+    }
+  }
+
+  p {
+    @extend .text--size-12, .mt-16, .mb-8;
   }
 }

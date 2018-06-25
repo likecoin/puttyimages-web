@@ -7,8 +7,8 @@
     <div class="the-landing-carousel-swiper__slides-wrapper">
       <div
         v-for="image in images"
-        :key="image.id"
-        :style="{ backgroundImage: `url(${image.src})` }"
+        :key="image.url"
+        :style="{ backgroundImage: `url(${image.url})` }"
         class="the-landing-carousel-swiper__slide"
       />
 

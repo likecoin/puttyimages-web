@@ -11,8 +11,8 @@ body {
 
   letter-spacing: .5px;
 
-  color: #000;
-  background-color: #FFF;
+  color: color(gray-4a);
+  background-color: white;
 
   font-family: 'Source Sans Pro', Arial, sans-serif;
 }
@@ -72,6 +72,49 @@ svg {
   }
   &enter,
   &leave-to {
-    opacity: 0;
+    opacity: 0 !important;
   }
+}
+
+.collapsed- {
+  &enter-active,
+  &leave-active {
+    overflow-y: hidden !important;
+
+    max-height: 100vh !important;
+
+    transition-timing-function: ease;
+    transition-duration: 0.5s;
+    transition-property: opacity max-width;
+  }
+  &enter,
+  &leave-to {
+    max-height: 0 !important;
+
+    opacity: 0 !important;
+  }
+}
+
+/// Override Vuetify
+.application {
+  font-family: inherit !important;
+
+  &.theme--light {
+    color: inherit !important;
+    background: inherit !important;
+
+    .card {
+      color: inherit !important;
+    }
+  }
+}
+
+/// Fix weird overlay transition in nested <v-dialog/>
+.overlay--active {
+  @keyframes dialog-overlay-fade-in {
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  animation: dialog-overlay-fade-in 0.75s ease 0s 1 both;
 }

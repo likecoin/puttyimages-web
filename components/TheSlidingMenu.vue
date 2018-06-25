@@ -21,23 +21,13 @@
       >
         <div>
 
-          <div class="user-account">
-            <img
-              class="user-account__avatar"
-              src=""
-            >
-            <div>
-              <div class="user-account__greeting">Welcome!</div>
-              <div
-                class="user-account__likecoin-id"
-                @click="onClickOutside"
-              >
-                <nuxt-link :to="{ name: 'dashboard' }">
-                  franklamhang
-                </nuxt-link>
-              </div>
-            </div>
-          </div>
+          <user-badge
+            :user="{
+              likecoinId: 'franklamhang',
+              displayName: 'Frank',
+            }"
+            type="menu"
+          />
 
           <nav class="site-menu">
             <transition-group
@@ -125,11 +115,13 @@
 import { ColorPropType } from '@/constant/prop-types';
 
 import SearchIcon from '~/assets/icons/search.svg';
+import UserBadge from '~/components/UserBadge';
 
 export default {
   name: 'the-sliding-menu',
   components: {
     SearchIcon,
+    UserBadge,
   },
   props: {
     // eslint-disable-next-line vue/require-default-prop
@@ -354,6 +346,10 @@ $the-sliding-menu__inset-x: 64px;
   .the-sliding-menu--open & {
     pointer-events: all;
   }
+
+  :global(.user-badge) {
+    margin-left: $the-sliding-menu__inset-x;
+  }
 }
 
 .the-sliding-menu__menu-footer {
@@ -364,30 +360,6 @@ $the-sliding-menu__inset-x: 64px;
   margin-top: 64px;
 
   @extend .pr-64--dy;
-}
-
-.user-account {
-  display: flex;
-  align-items: center;
-
-  margin-left: $the-sliding-menu__inset-x;
-
-  color: color(like-green);
-
-  font-size: 16px;
-}
-
-.user-account__avatar {
-  width: 50px;
-  height: 50px;
-  margin-right: 12px;
-
-  border-radius: 50%;
-  background-color: #ddd;
-}
-
-.user-account__greeting {
-  opacity: 0.5;
 }
 
 .site-menu {
