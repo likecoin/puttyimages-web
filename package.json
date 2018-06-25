@@ -88,6 +88,7 @@
       "server/**/*.js",
       "!server/seeders/*.js"
     ],
+    "globalSetup": "<rootDir>/__tests__/setup.js",
     "testMatch": [
       "<rootDir>/__tests__/**/*.test.js"
     ],

@@ -4,17 +4,12 @@ import models from '../models';
 import { getPageInfo, parseQuery } from '../util/paginator';
 import { RESULT_PER_PAGE } from '../../constant';
 
+const { API_HOST } = process.env;
 const router = Router();
 
 router.get('/search', async (req, res, next) => {
-  const {
-    headers: { host },
-    protocol,
-    query,
-  } = req;
-
   try {
-    const [q, offset] = parseQuery(query);
+    const [q, offset] = parseQuery(req.query);
     const { count, rows } = await models.asset.searchByKeyword(
       models,
       q,
@@ -28,7 +23,7 @@ router.get('/search', async (req, res, next) => {
       error: false,
       pageInfo: getPageInfo({
         after: hasNextPage ? { offset: offset + RESULT_PER_PAGE, q } : null,
-        baseUrl: `${protocol}://${host}/api/search?q=${encodeURIComponent(q)}`,
+        baseUrl: `${API_HOST}/api/search?q=${encodeURIComponent(q)}`,
         before: hasPrevPage ? { offset, q } : null,
         totalCount: count,
       }),

@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  test:
+    build:
+      context: .
+    depends_on:
+    - db
+    - ipfs
+    - nuxt
+    image: puttyimages_test_nuxt:latest
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      API_HOST: http://nuxt:3000
+      CDN_HOST: http://ipfs:8080
+      HOST: nuxt
+      IPFS_HOST: http://ipfs:5001
+      IPFS_MASTER: http://ipfs:5001

@@ -5,12 +5,7 @@ sudo: required
 install:
   - docker-compose build
 script:
-  - docker-compose up -d
-  - docker-compose exec nuxt npm run lint
-  - docker-compose exec nuxt npm run sequelize db:migrate
-  - docker-compose exec nuxt npm run sequelize db:seed:all
-  - docker-compose exec nuxt npm test
-  - docker-compose down
+  - make test
 deploy:
   - provider: script
     script: ./scripts/deploy-docker-hub.sh

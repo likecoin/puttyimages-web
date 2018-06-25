@@ -4,6 +4,7 @@ require('babel-register')({
 
 const Sequelize = require('sequelize');
 
+const { NODE_ENV } = process.env;
 const config = require('../../config/database');
 
 const asset = require('./asset');
@@ -15,6 +16,7 @@ const user = require('./user');
 
 const sequelize = new Sequelize({
   ...config.development,
+  logging: NODE_ENV === 'development',
   operatorsAliases: false,
   timezone: '+00:00',
 });
