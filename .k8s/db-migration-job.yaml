@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pgsql-migration
+  namespace: likecoin
+  labels:
+    app: puttyimages-web
+spec:
+  activeDeadlineSeconds: 240
+  template:
+    metadata:
+      name: pgsql-migration
+      labels:
+        app: puttyimages-web
+        tier: migration
+    spec:
+      containers:
+      - name: pgsql-migration
+        image: oursky/puttyimages-web:latest
+        command: ["npm", "run", "sequelize", "db:migrate"]
+      restartPolicy: Never
