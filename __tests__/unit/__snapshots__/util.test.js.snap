@@ -92,6 +92,17 @@ Array [
 ]
 `;
 
+exports[`parse search keyword 5`] = `
+Array [
+  Array [
+    "%test%",
+    "%empty%",
+  ],
+  Array [],
+  Array [],
+]
+`;
+
 exports[`parse search query 1`] = `
 Array [
   "fruit",
