@@ -22,7 +22,26 @@
           >
             <v-icon>close</v-icon>
           </v-btn>
-          <div class="image-preview">
+          <div
+            v-if="isError"
+            class="text--align-center pa-64 px-24--sm pt-24--sm"
+          >
+            There is an error when showing the image.
+          </div>
+          <div
+            v-else
+            class="image-preview"
+          >
+            <transition name="page">
+              <v-progress-circular
+                v-if="!isImageLoaded"
+                :size="64"
+                :width="2"
+                class="image-preview__progress"
+                color="primary"
+                indeterminate
+              />
+            </transition>
             <img
               ref="image"
               :class="[
@@ -38,22 +57,30 @@
           </div>
         </div>
 
-        <div class="image-details-dialog__panel--right">
+        <div
+          v-if="!isError"
+          class="image-details-dialog__panel--right"
+        >
           <div class="image-details">
-            <section class="image-details__credits">
+            <section
+              v-if="image.user"
+              class="image-details__credits"
+            >
               <user-badge
                 :user="image.user"
                 type="upload"
+                @click="close"
               />
             </section>
             <section class="image-details__meta">
-              <h1>Image Description</h1>
-              <p>{{ image.description }}</p>
-              <h1>Tags</h1>
-              <ul>
+              <h1 v-if="image.description">Image Description</h1>
+              <p v-if="image.description">{{ image.description }}</p>
+              <h1 v-if="tags.length > 0">Tags</h1>
+              <ul v-if="tags.length > 0">
                 <li
-                  v-for="(tag) in image.tags"
+                  v-for="(tag) in tags"
                   :key="tag.name"
+                  @click="close"
                 >
                   <nuxt-link
                     :to="{ name: 'search', query: {tags: tag.name } }"
@@ -65,6 +92,7 @@
               <ul>
                 <li>
                   <v-btn
+                    :loading="isFetching"
                     class="btn--likecoin text--size-14"
                     color="primary"
                     depressed
@@ -75,13 +103,17 @@
                 <li>
                   <like-button
                     :count="image.like.count"
+                    :loading="isFetching"
                     block
                   />
                 </li>
               </ul>
             </section>
-            <section class="image-details__license">
-              <p>{{ image.license.name }}</p>
+            <section
+              v-if="image.license"
+              class="image-details__license"
+            >
+              <p>{{ image.license }}</p>
               <a
                 class="text--underline text--size-12"
                 @click="reportImage"
@@ -90,13 +122,16 @@
           </div>
         </div>
       </div>
+
     </div>
 
     <report-image-dialog
+      v-if="!isError && isFetched"
       :image="image"
       :is-open.sync="isReportImageDialogOpen"
     />
     <use-image-dialog
+      v-if="!isError && isFetched"
       :image="image"
       :is-open.sync="isUseImageDialogOpen"
     />
@@ -122,6 +157,18 @@ export default {
       required: true,
       type: Object,
     },
+    isError: {
+      type: [Boolean, String],
+      default: false,
+    },
+    isFetched: {
+      type: [Boolean, String],
+      default: false,
+    },
+    isFetching: {
+      type: [Boolean, String],
+      default: false,
+    },
     isOpen: {
       default: false,
       type: [Boolean, String],
@@ -141,6 +188,12 @@ export default {
       isReportImageDialogOpen: false,
       isUseImageDialogOpen: false,
     };
+  },
+  computed: {
+    tags() {
+      const { tags } = this.image;
+      return tags || [];
+    },
   },
   watch: {
     image() {
@@ -239,6 +292,8 @@ export default {
 
   flex-grow: 1;
 
+  min-height: 240px;
+
   &__image {
     display: block;
 
@@ -265,6 +320,12 @@ export default {
     &--loaded {
       opacity: 1;
     }
+  }
+
+  &__progress {
+    position: absolute;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
   }
 }
 

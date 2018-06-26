@@ -1,6 +1,5 @@
 <template>
   <image-details-dialog
-    v-if="state.image"
     v-bind="state"
     @update:isOpen="onToggle"
   />

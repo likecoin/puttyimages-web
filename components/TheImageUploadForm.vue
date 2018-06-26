@@ -192,7 +192,7 @@ export default {
           .post('/api/assets/upload', params)
           .then((mediaObj) => mediaObj) // TODO: go to my image page maybe?
           .catch((err) => {
-            console.error(err);
+            console.error(err); // eslint-disable-line no-console
           });
       }
     },

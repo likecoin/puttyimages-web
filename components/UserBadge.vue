@@ -1,5 +1,8 @@
 <template>
-  <div :class="classObject">
+  <div
+    v-if="user"
+    :class="classObject"
+  >
     <div @click="onClick">
       <nuxt-link :to="userRoute">
         <img
@@ -53,7 +56,7 @@ export default {
     },
     user: {
       type: Object,
-      required: true,
+      default: null,
     },
   },
   computed: {

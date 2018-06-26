@@ -15,7 +15,10 @@
           <span class="like-button">{{ activeImageLikeCount }} Like</span>
         </div>
         <div>
-          <span class="text--size-12">by</span> {{ activeImage.user.displayName }}<br>
+          <span
+            v-if="activeImageUserDisplayName"
+            class="text--size-12"
+          >by</span> {{ activeImageUserDisplayName }}<br v-if="activeImageUserDisplayName">
           <a
             class="link--dark text--underline"
             href="#"
@@ -39,65 +42,15 @@ export default {
     Swiper,
   },
   mixins: [createTheImageDetailsDialogMixin()],
+  props: {
+    images: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data() {
     return {
       activeImageIndex: 0,
-      images: [
-        {
-          user: {
-            likecoinId: 'bejaminvon',
-            displayName: 'Bejamin Von',
-          },
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pretium pretium tempor. Ut eget imperdiet neque. In volutpat ante semper diam molestie, et aliquam er…',
-          height: 1440,
-          license: {
-            name: 'cc0',
-          },
-          like: {
-            count: 3242,
-          },
-          tags: [{ name: 'Mountain' }, { name: 'Landscape' }, { name: 'Cold' }],
-          url: 'https://picsum.photos/2560/1440?image=961',
-          width: 2560,
-        },
-        {
-          user: {
-            likecoinId: 'tobias1',
-            displayName: 'Tobias',
-          },
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pretium pretium tempor. Ut eget imperdiet neque. In volutpat ante semper diam molestie, et aliquam er…',
-          height: 1440,
-          license: {
-            name: 'cc0',
-          },
-          like: {
-            count: 1767,
-          },
-          tags: [{ name: 'Mountain' }, { name: 'Landscape' }, { name: 'Cold' }],
-          url: 'https://picsum.photos/2560/1440?image=985',
-          width: 2560,
-        },
-        {
-          user: {
-            likecoinId: 'davidng',
-            displayName: 'David Ng',
-          },
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pretium pretium tempor. Ut eget imperdiet neque. In volutpat ante semper diam molestie, et aliquam er…',
-          height: 1440,
-          license: {
-            name: 'cc0',
-          },
-          like: {
-            count: 485,
-          },
-          tags: [{ name: 'Girl' }, { name: 'Women' }],
-          url: 'https://picsum.photos/2560/1440?image=1027',
-          width: 2560,
-        },
-      ],
     };
   },
   computed: {
@@ -105,13 +58,19 @@ export default {
       return this.images[this.activeImageIndex];
     },
     activeImageLikeCount() {
-      return this.activeImage.like.count.toLocaleString('en');
+      const { like } = this.activeImage;
+      return (like ? like.count : 0).toLocaleString('en');
+    },
+    activeImageUserDisplayName() {
+      const { user } = this.activeImage;
+      return user ? user.displayName : '';
     },
   },
   methods: {
     useImage() {
       this.setImageDetailsDialog({
         image: this.activeImage,
+        isFetched: true,
         isOpen: true,
         isUseImage: true,
       });
