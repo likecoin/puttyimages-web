@@ -165,4 +165,13 @@ router.get('/assets/list/:wallet', async (req, res, next) => {
   }
 });
 
+router.get('/assets/featured/list', async (req, res, next) => {
+  try {
+    const assets = await sequelize.asset.getFeatured(sequelize);
+    res.json(assets || []);
+  } catch (e) {
+    next(e);
+  }
+});
+
 export default router;

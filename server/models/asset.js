@@ -135,6 +135,15 @@ module.exports = (sequelize, DataTypes) => {
     return res.toJSON();
   };
 
+  asset.getFeatured = async (models) => {
+    const res = await models.asset.findAll({
+      include: models.asset.getQueryInclude(models),
+      limit: 10,
+      order: [['like', 'totalLike', 'DESC'], ['createdAt']],
+    });
+    return res;
+  };
+
   asset.searchByKeyword = async (models, q, offset) => {
     const [keywords, tags, users] = parseKeyword(q);
     const where = {};
