@@ -15,11 +15,6 @@
     </div>
 
     <div class="mt-20">
-      <v-card
-        v-if="searchQuery.length && !isLoading && !images.length"
-        class="text-xs-center py-20"
-      >No Result Found</v-card>
-
       <div class="search-page__masonry">
         <div
           v-for="image in images"
@@ -46,6 +41,22 @@
           </v-btn>
         </div>
       </div>
+
+      <no-ssr>
+        <infinite-loading
+          v-if="searchQuery.length"
+          ref="infiniteLoading"
+          @infinite="infiniteHandler"
+        >
+          <span slot="no-more" />
+          <v-card
+            slot="no-results"
+            class="text-xs-center py-20"
+          >
+            No Result Found
+          </v-card>
+        </infinite-loading>
+      </no-ssr>
     </div>
 
   </div>
@@ -53,6 +64,7 @@
 
 <script>
 import axios from '@/plugins/axios';
+import InfiniteLoading from 'vue-infinite-loading';
 
 import LikeButton from '~/components/LikeButton';
 import SearchIcon from '~/assets/icons/search.svg';
@@ -62,6 +74,7 @@ import { sortImagesByHeight } from '~/util/masonry';
 
 export default {
   components: {
+    InfiniteLoading,
     LikeButton,
     SearchIcon,
     UserBadge,
@@ -70,7 +83,6 @@ export default {
     colCount: 3,
     images: [],
     isLoading: false,
-    lastQuery: '',
     pageInfo: null,
     rawImages: [],
     searchQuery: '',
@@ -105,22 +117,39 @@ export default {
         this.images = sortImagesByHeight(this.rawImages, colCount);
       }
     },
+    async infiniteHandler($state) {
+      const { colCount, pageInfo, rawImages } = this;
+      if (pageInfo && pageInfo.hasNextPage) {
+        try {
+          this.isLoading = true;
+          const { data, pageInfo: nextPageInfo } = (await axios.get(
+            pageInfo.next
+          )).data;
+          this.isLoading = false;
+          this.rawImages = rawImages.concat(data);
+          this.images = sortImagesByHeight(this.rawImages, colCount);
+          this.pageInfo = nextPageInfo;
+          $state.loaded();
+        } catch (err) {
+          this.isLoading = false;
+        }
+      } else {
+        $state.complete();
+      }
+    },
     async onKeywordChange(e) {
-      const { colCount, lastQuery, searchQuery } = this;
+      const { colCount, searchQuery } = this;
       if (searchQuery.length === 0) {
         this.isLoading = false;
         this.images = [];
         this.pageInfo = null;
         return;
       } else if (e) {
-        if (searchQuery !== lastQuery) {
-          this.isLoading = true;
-        }
-        this.lastQuery = searchQuery;
         clearTimeout(this.timer);
         this.timer = setTimeout(() => this.onKeywordChange(), 300);
         return;
       }
+      this.isLoading = true;
       try {
         const { data, pageInfo } = (await axios.get(
           `/api/search?q=${encodeURIComponent(searchQuery)}`
@@ -129,6 +158,15 @@ export default {
         this.rawImages = data;
         this.images = sortImagesByHeight(data, colCount);
         this.pageInfo = pageInfo;
+        const { stateChanger } = this.$refs.infiniteLoading;
+        if (pageInfo.hasNextPage) {
+          stateChanger.reset();
+        } else {
+          if (data.length) {
+            stateChanger.loaded();
+          }
+          stateChanger.complete();
+        }
       } catch (err) {
         this.isLoading = false;
       }
