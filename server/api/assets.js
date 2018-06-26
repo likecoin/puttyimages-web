@@ -30,11 +30,7 @@ const multer = Multer({
 router.get('/assets/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-    const asset = await sequelize.asset.findById(Buffer.from(id, 'hex'), {
-      raw: true,
-    });
-    const hash = bs58.encode(Buffer.from(asset.ipfs, 'hex'));
-    asset.url = `${process.env.CDN_HOST}/ipfs/${hash}`;
+    const asset = await sequelize.asset.getMetaById(sequelize, id);
     if (!asset) throw new Error('asset not found');
     res.json(asset);
   } catch (e) {

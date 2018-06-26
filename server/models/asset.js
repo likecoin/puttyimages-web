@@ -82,19 +82,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  asset.searchByKeyword = async (models, q, offset) => {
-    const [keywords, tags, users] = parseKeyword(q);
+  asset.getQueryInclude = (db, tags = [], users = []) => {
     const tagWhere = {};
     const userWhere = {};
-    const where = {};
     let tagRequired = false;
     let userRequired = false;
-    if (!keywords.length && !tags.length && !users.length) {
-      throw new ValidationError('no search keyword');
-    }
-    if (keywords.length) {
-      where.description = { [Op.iLike]: { [Op.any]: keywords } };
-    }
     if (tags.length) {
       tagRequired = true;
       tagWhere.name = { [Op.iLike]: { [Op.any]: tags } };
@@ -106,37 +98,56 @@ module.exports = (sequelize, DataTypes) => {
         likecoinId: { [Op.iLike]: { [Op.any]: users } },
       };
     }
+    return [
+      {
+        as: 'like',
+        attributes: [['total_like', 'count']],
+        model: db.assetLike,
+        order: [['totalLike', 'DESC']],
+        // required: true, // This should be enabled but caused bug when sorting
+      },
+      {
+        attributes: ['name'],
+        model: db.tag,
+        through: { attributes: [] },
+      },
+      {
+        as: 'queryTags',
+        attributes: [],
+        model: db.tag,
+        required: tagRequired,
+        through: { attributes: [] },
+        where: tagWhere,
+      },
+      {
+        attributes: ['displayName', 'likecoinId'],
+        model: db.user,
+        required: userRequired,
+        where: userWhere,
+      },
+    ];
+  };
+
+  asset.getMetaById = async (models, id) => {
+    const res = await models.asset.findById(Buffer.from(id, 'hex'), {
+      include: models.asset.getQueryInclude(models),
+    });
+    return res.toJSON();
+  };
+
+  asset.searchByKeyword = async (models, q, offset) => {
+    const [keywords, tags, users] = parseKeyword(q);
+    const where = {};
+    if (!keywords.length && !tags.length && !users.length) {
+      throw new ValidationError('no search keyword');
+    }
+    if (keywords.length) {
+      where.description = { [Op.iLike]: { [Op.any]: keywords } };
+    }
 
     return models.asset.findAndCountAll({
       distinct: true,
-      include: [
-        {
-          as: 'like',
-          attributes: [['total_like', 'count']],
-          model: models.assetLike,
-          order: [['totalLike', 'DESC']],
-          // required: true, // This should be enabled but caused bug when sorting
-        },
-        {
-          attributes: ['name'],
-          model: models.tag,
-          through: { attributes: [] },
-        },
-        {
-          as: 'queryTags',
-          attributes: [],
-          model: models.tag,
-          required: tagRequired,
-          through: { attributes: [] },
-          where: tagWhere,
-        },
-        {
-          attributes: ['displayName', 'likecoinId'],
-          model: models.user,
-          required: userRequired,
-          where: userWhere,
-        },
-      ],
+      include: models.asset.getQueryInclude(models, tags, users),
       limit: RESULT_PER_PAGE,
       offset,
       order: [
