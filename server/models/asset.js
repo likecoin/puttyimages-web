@@ -109,6 +109,12 @@ module.exports = (sequelize, DataTypes) => {
         {
           attributes: ['name'],
           model: models.tag,
+          through: { attributes: [] },
+        },
+        {
+          as: 'queryTags',
+          attributes: [],
+          model: models.tag,
           required: tagRequired,
           through: { attributes: [] },
           where: tagWhere,
