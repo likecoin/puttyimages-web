@@ -17,4 +17,6 @@ def short_sha():
 @task
 def deploy(branch_name):
     image_tag = short_sha()
+    local("kubectl --namespace likecoin delete --ignore-not-found=true -f .k8s/db-migration-job.yaml")
+    local("kubectl --namespace likecoin create -f .k8s/db-migration-job.yaml")
     local("kubectl --namespace likecoin set image deployment/puttyimages-web web=oursky/puttyimages-web:%s" % (image_tag,))
