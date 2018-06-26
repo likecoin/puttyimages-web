@@ -109,6 +109,8 @@ export default {
       const { colCount, lastQuery, searchQuery } = this;
       if (searchQuery.length === 0) {
         this.isLoading = false;
+        this.images = [];
+        this.pageInfo = null;
         return;
       } else if (e) {
         if (searchQuery !== lastQuery) {
@@ -119,13 +121,17 @@ export default {
         this.timer = setTimeout(() => this.onKeywordChange(), 300);
         return;
       }
-      const { data, pageInfo } = (await axios.get(
-        `/api/search?q=${encodeURIComponent(searchQuery)}`
-      )).data;
-      this.isLoading = false;
-      this.rawImages = data;
-      this.images = sortImagesByHeight(data, colCount);
-      this.pageInfo = pageInfo;
+      try {
+        const { data, pageInfo } = (await axios.get(
+          `/api/search?q=${encodeURIComponent(searchQuery)}`
+        )).data;
+        this.isLoading = false;
+        this.rawImages = data;
+        this.images = sortImagesByHeight(data, colCount);
+        this.pageInfo = pageInfo;
+      } catch (err) {
+        this.isLoading = false;
+      }
     },
   },
 };
