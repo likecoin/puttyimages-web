@@ -18,17 +18,28 @@ module.exports = (sequelize, DataTypes) => {
       description: DataTypes.TEXT,
       fingerprint: {
         allowNull: false,
+        get() {
+          return Buffer.from(this.getDataValue('fingerprint'), 'hex').toString(
+            'hex'
+          );
+        },
         primaryKey: true,
         type: DataTypes.BLOB,
       },
       height: DataTypes.INTEGER,
       ipfs: {
         allowNull: false,
+        get() {
+          return bs58.encode(Buffer.from(this.getDataValue('ipfs'), 'hex'));
+        },
         type: DataTypes.BLOB,
         unique: true,
       },
       ipld: {
         allowNull: false,
+        get() {
+          return bs58.encode(Buffer.from(this.getDataValue('ipld'), 'hex'));
+        },
         type: DataTypes.BLOB,
         unique: true,
       },
