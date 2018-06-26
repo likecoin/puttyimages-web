@@ -1,17 +1,18 @@
 <template>
   <v-dialog
     v-model="isDialogOpen"
-    :persistent="getWeb3Message === 'sign'"
+    :persistent="!isNotSign"
     content-class="metamask-dialog"
     width="450"
   >
     <v-card>
       <v-btn
+        v-if="isNotSign"
         class="metamask-dialog__close-btn"
         absolute
         fab
         small
-        @click.native.stop="onCloseDialog"
+        @click.native.stop="$emit('update:isDialogOpen', false)"
       >
         <v-icon
           color="white"
@@ -61,7 +62,11 @@
             Connect to Ledger wallet
           </v-btn>
         </div>
-        <div v-else>
+
+        <div v-if="metamaskDialogHeadline">
+          <p class="metamask-dialog__headline">{{ metamaskDialogHeadline }}</p>
+        </div>
+        <div v-if="metamaskDialogMessage">
           <p>{{ metamaskDialogMessage }}</p>
         </div>
       </v-card-text>
@@ -88,6 +93,16 @@ export default {
     },
   },
   computed: {
+    metamaskDialogHeadline() {
+      switch (this.getWeb3Message) {
+        case 'login':
+          return 'Sign on MetaMask to Login';
+        case 'sign':
+          return 'Sign on MetaMask';
+        default:
+          return '';
+      }
+    },
     metamaskDialogMessage() {
       switch (this.getWeb3Message) {
         case 'locked':
@@ -96,16 +111,14 @@ export default {
           return 'Please switch to Main Ethereum Network';
         case 'sign':
           return 'Sign on MetaMask to continue';
+        case 'login':
+          return 'Please click Sign on Metamask to login.';
         default:
           return '';
       }
     },
-  },
-  methods: {
-    onCloseDialog() {
-      if (this.getWeb3Message !== 'sign') {
-        this.$emit('update:isDialogOpen', false);
-      }
+    isNotSign() {
+      return this.getWeb3Message !== 'sign' && this.getWeb3Message !== 'login';
     },
   },
 };
@@ -119,6 +132,8 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import '~assets/css/classes';
+
 .metamask-dialog__close-btn {
   margin-top: -20px;
   margin-left: -20px;
@@ -143,11 +158,7 @@ export default {
   height: 21px;
 }
 .metamask-dialog__text {
-  margin-top: 20px;
-
-  text-align: center;
-
-  font-size: 16px;
+  @extend .text--align-left, .text--size-16, .text--height-1-2, .px-40, .mt-20;
 }
 .metamask-dialog__headline {
   font-size: 38px;

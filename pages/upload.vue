@@ -1,6 +1,14 @@
 <template>
   <div class="page-container page-container--fluid">
     <div :class="['upload-image-page', { 'upload-image-page--full-size': isShowUploadImageForm }]">
+      <v-dialog
+        v-model="isNotLoggedIn"
+        max-width="500px"
+      >
+        <v-card class="pa-32">
+          Requires LikeCoin ID to enjoy member features
+        </v-card>
+      </v-dialog>
       <input
         ref="imageInput"
         :accept="acceptInput"
@@ -128,6 +136,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import TheImageUploadForm from '@/components/TheImageUploadForm';
 
 import {
@@ -155,6 +165,7 @@ export default {
       imageFile: null,
       isExceedMaxSize: false,
       isImageLoading: false,
+      isNotLoggedIn: false,
       isShowUploadImageForm: false,
       isUnsupportedFormat: false,
       acceptInput: SUPPORTED_FILE_TYPES.reduce(
@@ -166,6 +177,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['getUserInfo']),
     isInvalidImage() {
       return this.isExceedMaxSize || this.isUnsupportedFormat;
     },
@@ -182,6 +194,11 @@ export default {
     return {
       title: 'Upload image - Puttyimages',
     };
+  },
+  watch: {
+    getUserInfo(info) {
+      this.isNotLoggedIn = !info.wallet;
+    },
   },
   methods: {
     onClickChooseFile() {
