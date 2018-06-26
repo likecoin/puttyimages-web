@@ -78,5 +78,6 @@ module.exports = {
     '~/plugins/vuetify',
     { src: '~/plugins/ethUtil', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
+    { src: '~/plugins/vue-clipboard2.js', ssr: false },
   ],
 };

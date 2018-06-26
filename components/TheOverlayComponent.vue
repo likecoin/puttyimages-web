@@ -54,12 +54,14 @@
         </div>
       </div>
 
+      <the-image-details-dialog />
     </div>
   </no-ssr>
 </template>
 <script>
 import { mapGetters } from 'vuex';
 
+import TheImageDetailsDialog from '@/components/TheImageDetailsDialog';
 import TheMetamaskDialog from '@/components/TheMetamaskDialog';
 
 import { checkIsMobileClient, checkIsDesktopChrome } from '@/util/client';
@@ -67,6 +69,7 @@ import { checkIsMobileClient, checkIsDesktopChrome } from '@/util/client';
 export default {
   name: 'the-overlay-component',
   components: {
+    TheImageDetailsDialog,
     TheMetamaskDialog,
   },
   data() {

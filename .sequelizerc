@@ -1,4 +1,6 @@
-require('babel-register');
+require('babel-register')({
+  ignore: /node_modules\/(?!image-type|js-sha256)/, // only import modules needed by models
+});
 
 const path = require('path');
 

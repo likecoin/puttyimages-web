@@ -1,10 +1,15 @@
 import { Router } from 'express';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
 
 import assets from './assets';
 import search from './search';
 import users from './users';
 
 const router = Router();
+
+router.use(cookieParser());
+router.use(bodyParser.json());
 
 const errorHandler = (err, req, res, next) => {
   if (res.headersSent) {

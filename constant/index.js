@@ -28,3 +28,5 @@ export const LICENSE_URL = {
   'cc-by-sa': 'https://creativecommons.org/licenses/by-sa/4.0/',
   cc0: 'https://creativecommons.org/share-your-work/public-domain/cc0/',
 };
+
+export const EMBEDDED_SCRIPT_IN_HEAD = `<script src="https://code.puttyimage.io/latest/polyfill.min.js"></script>`;

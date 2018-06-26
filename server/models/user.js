@@ -2,6 +2,9 @@ module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define(
     'user',
     {
+      avatar: {
+        type: DataTypes.TEXT,
+      },
       displayName: {
         allowNull: false,
         field: 'display_name',

@@ -1,9 +1,8 @@
 const axios = require('axios');
 
-const host = process.env.HOST || '127.0.0.1';
-const port = process.env.PORT || 3000;
+const { API_HOST } = process.env;
 
 module.exports = {
-  get: (url) => axios.get(`http://${host}:${port}/api/${url}`),
-  post: (url, data) => axios.post(`http://${host}:${port}/api/${url}`, data),
+  get: (url) => axios.get(`${API_HOST}/api/${url}`),
+  post: (url, data) => axios.post(`${API_HOST}/api/${url}`, data),
 };
