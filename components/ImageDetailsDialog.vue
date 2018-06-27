@@ -206,7 +206,9 @@ export default {
     },
   },
   mounted() {
-    this.openSubDialogIfNeeded();
+    if (this.isOpen) {
+      this.openSubDialogIfNeeded();
+    }
   },
   methods: {
     onImageLoaded() {
