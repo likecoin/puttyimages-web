@@ -1,5 +1,5 @@
 import ethUtil from './ethUtil';
-import fileUtil from './fileUtil';
+import { blobToArrayBuffer, arrayBufferToSha256 } from './fileUtil';
 
 const assetUtil = {
   async formatAndSignAsset(assetInfo, signMessage) {
@@ -7,8 +7,8 @@ const assetUtil = {
     const ts = Date.now();
     let assetSHA256;
     if (assetFile) {
-      const avatarBuf = await fileUtil.blobToArrayBuffer(assetFile);
-      assetSHA256 = await fileUtil.arrayBufferToSha256(avatarBuf);
+      const avatarBuf = await blobToArrayBuffer(assetFile);
+      assetSHA256 = await arrayBufferToSha256(avatarBuf);
     }
     let payload = JSON.stringify(
       {

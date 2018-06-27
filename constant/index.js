@@ -15,18 +15,13 @@ export const MIN_TAG_LENGTH = 2;
 
 export const RESULT_PER_PAGE = 15;
 
-export const SUPPORTED_LICENSE = new Set([
-  'cc0',
-  'cc-by',
-  'cc-by-sa',
-  'cc-by-nd',
-]);
-
-export const LICENSE_URL = {
+export const LICENSE = {
   'cc-by': 'https://creativecommons.org/licenses/by/4.0/',
   'cc-by-nd': 'https://creativecommons.org/licenses/by-nd/4.0/',
   'cc-by-sa': 'https://creativecommons.org/licenses/by-sa/4.0/',
   cc0: 'https://creativecommons.org/share-your-work/public-domain/cc0/',
 };
+
+export const SUPPORTED_LICENSE = new Set(Object.keys(LICENSE));
 
 export const EMBEDDED_SCRIPT_IN_HEAD = `<script src="https://code.puttyimage.io/latest/polyfill.min.js"></script>`;

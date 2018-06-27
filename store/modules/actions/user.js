@@ -5,7 +5,7 @@ import ethUtil from '@/util/ethUtil';
 
 async function checkIsUser(wallet) {
   try {
-    return await axios.get(`api/users/wallet/${wallet}`);
+    return await axios.get(`/api/users/wallet/${wallet}`);
   } catch (err) {
     // simply ignore, wallet owner is not likecoin user
     return null;
@@ -43,7 +43,7 @@ export async function loginUser({ state, commit }) {
   commit(types.USER_SET_USER_INFO, userInfo);
 }
 
-export async function onWalletChanged(ctx, wallet) {
+export async function updateWallet(ctx, wallet) {
   const { state, commit } = ctx;
   try {
     if (state.wallet !== wallet) {

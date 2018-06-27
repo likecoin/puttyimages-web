@@ -114,7 +114,7 @@ import {
   MIN_TAG_LENGTH,
   MAX_TAG_LENGTH,
   SUPPORTED_LICENSE,
-  LICENSE_URL,
+  LICENSE,
 } from '@/constant';
 
 export default {
@@ -122,7 +122,7 @@ export default {
   props: {
     file: {
       required: true,
-      type: Object,
+      type: process.browser ? File : Object,
     },
   },
   data() {
@@ -161,7 +161,7 @@ export default {
     licenseHint() {
       if (!this.license) return undefined;
       return `Learn more about <a href="${
-        LICENSE_URL[this.license]
+        LICENSE[this.license]
       }" rel="noopener noreferrer" target="_blank">${this.license}</a>`;
     },
   },

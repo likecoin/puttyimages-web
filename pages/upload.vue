@@ -200,6 +200,9 @@ export default {
       this.isNotLoggedIn = !info.wallet;
     },
   },
+  mounted() {
+    this.isNotLoggedIn = !this.getUserInfo.wallet;
+  },
   methods: {
     onClickChooseFile() {
       this.$refs.imageInput.click();

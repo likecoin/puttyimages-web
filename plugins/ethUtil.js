@@ -27,7 +27,7 @@ export default async ({ store }) => {
       store.dispatch('setWeb3Message', '');
     },
     onWalletCb: (wallet) => {
-      store.dispatch('onWalletChanged', wallet);
+      store.dispatch('updateWallet', wallet);
     },
     retryCb: () => {
       // store.dispatch('setWeb3IsFetching', true);
