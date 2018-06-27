@@ -26,8 +26,8 @@ export default async ({ store }) => {
     onSigned: () => {
       store.dispatch('setWeb3Message', '');
     },
-    onWalletCb: (/* wallet */) => {
-      // user's wallet is retrieved
+    onWalletCb: (wallet) => {
+      store.dispatch('updateWallet', wallet);
     },
     retryCb: () => {
       // store.dispatch('setWeb3IsFetching', true);

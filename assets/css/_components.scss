@@ -89,6 +89,14 @@ $class-style-map: (
   }
 }
 
+.input-text--likecoin,
+.checkbox--likecoin {
+  a {
+    text-decoration: underline;
+
+    color: currentColor;
+  }
+}
 
 .input-text--likecoin {
   > .input-group__input,
@@ -168,6 +176,9 @@ $class-style-map: (
         &:after {
           color: #FFF;
         }
+        .input-group__hint {
+          color: rgba(255, 255, 255, 0.8);
+        }
       }
     }
   }
@@ -198,20 +209,15 @@ $class-style-map: (
 
 
 .checkbox--likecoin {
-  a {
-    text-decoration: underline;
-
-    color: currentColor;
-  }
-
   &.light--text {
-    label,
-    a {
+    > * {
       color: #FFF !important;
     }
 
     .input-group__input {
-      color: #28646e;
+      i {
+        color: #28646e !important;
+      }
 
       &::before {
         position: absolute;

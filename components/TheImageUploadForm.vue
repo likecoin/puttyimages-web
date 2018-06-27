@@ -24,6 +24,7 @@
       chips
       light
       tags
+      @input="onTagChange"
     >
       <template
         slot="selection"
@@ -51,6 +52,7 @@
     <div class="the-upload-image-form__license-input">
       <v-select
         v-model="license"
+        :hint="licenseHint"
         :items="supportedLicense"
         :rules="licenseRules"
         append-icon="expand_more"
@@ -58,10 +60,12 @@
         label="Image License"
         placeholder="Choose an appropriate license"
         light
+        persistent-hint
       />
       <v-btn
         class="btn--likecoin the-upload-image-form__license-input__help-button"
         href="https://google.com"
+        rel="noopener noreferrer"
         target="_blank"
         icon
         small
@@ -99,10 +103,28 @@
 </template>
 
 <script>
-import { MAX_TAG_COUNT, MIN_TAG_LENGTH, SUPPORTED_LICENSE } from '@/constant';
+import axios from '@/plugins/axios';
+
+import assetUtil from '@/util/assetUtil';
+import ethUtil from '@/util/ethUtil';
+
+import {
+  MIN_TAG_COUNT,
+  MAX_TAG_COUNT,
+  MIN_TAG_LENGTH,
+  MAX_TAG_LENGTH,
+  SUPPORTED_LICENSE,
+  LICENSE,
+} from '@/constant';
 
 export default {
   name: 'the-image-upload-form',
+  props: {
+    file: {
+      required: true,
+      type: process.browser ? File : Object,
+    },
+  },
   data() {
     return {
       checkbox: false,
@@ -111,8 +133,6 @@ export default {
       isUploading: false,
       license: null,
       tags: [],
-      MAX_TAG_COUNT,
-      MIN_TAG_LENGTH,
     };
   },
   computed: {
@@ -125,22 +145,61 @@ export default {
     tagsRules() {
       return [
         (v) =>
-          (v.length >= MIN_TAG_LENGTH && v.length <= MAX_TAG_COUNT) ||
-          `Please provide at least ${MIN_TAG_LENGTH} and up to ${MAX_TAG_COUNT} tags`,
+          (v.length >= MIN_TAG_COUNT && v.length <= MAX_TAG_COUNT) ||
+          `Please provide at least ${MIN_TAG_COUNT} and up to ${MAX_TAG_COUNT} tags`,
+        (v) =>
+          v.every((item) => {
+            const itemLength = item.trim().length;
+            return itemLength >= MIN_TAG_LENGTH && itemLength <= MAX_TAG_LENGTH;
+          }) ||
+          `Each tag should be ${MIN_TAG_LENGTH} - ${MAX_TAG_LENGTH} characters`,
       ];
     },
     licenseRules() {
       return [(v) => !!v || 'Please choose a license'];
     },
+    licenseHint() {
+      if (!this.license) return undefined;
+      return `Learn more about <a href="${
+        LICENSE[this.license]
+      }" rel="noopener noreferrer" target="_blank">${this.license}</a>`;
+    },
   },
   methods: {
     removeTag(item) {
       this.tags.splice(this.tags.indexOf(item), 1);
-      this.tags = [...this.tags];
     },
-    submit() {
+    async submit() {
       if (this.$refs.form.validate()) {
         this.isUploading = true;
+        const assetInfo = {
+          assetFile: this.file,
+          description: this.description.trim(),
+          license: this.license,
+          tags: this.tags,
+          wallet: ethUtil.getWallet(),
+        };
+        const payload = await assetUtil.formatAndSignAsset(
+          assetInfo,
+          'Upload asset with following information'
+        );
+
+        const params = new FormData();
+        Object.keys(payload).forEach((key) => {
+          params.append(key, payload[key]);
+        });
+        axios
+          .post('/api/assets/upload', params)
+          .then((mediaObj) => mediaObj) // TODO: go to my image page maybe?
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    },
+    onTagChange(tags) {
+      const numTags = tags.length;
+      if (numTags > 0) {
+        this.tags[numTags - 1] = this.tags[numTags - 1].trim();
       }
     },
   },
@@ -167,6 +226,8 @@ export default {
 
   &__license-input {
     position: relative;
+
+    @extend .mb-24;
 
     &__help-button {
       position: absolute;

@@ -1,2 +1,7 @@
+/* UI */
 export const UI_SET_WEB3_MESSAGE = 'UI_SET_WEB3_MESSAGE';
 export const UI_SET_WEB3_TYPE = 'UI_SET_WEB3_TYPE';
+
+/* USER */
+export const USER_SET_USER_INFO = 'USER_SET_USER_INFO';
+export const USER_SET_LOCAL_WALLET = 'USER_SET_LCOAL_WALLET';
