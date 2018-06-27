@@ -13,7 +13,7 @@ services:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
     environment:
-      API_HOST: http://nuxt:3000
+      API_HOST: http://localhost:3000
       CDN_HOST: http://localhost:8080
       HOST: 0.0.0.0
       IPFS_HOST: http://ipfs:5001

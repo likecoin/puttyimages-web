@@ -32,9 +32,13 @@ export const parseKeyword = (q) => {
   q.split(' ').forEach((word) => {
     if (word.length) {
       if (word[0] === '#') {
-        tags.push(`%${word.slice(1)}%`);
+        if (word.length > 1) {
+          tags.push(`%${word.slice(1)}%`);
+        }
       } else if (word[0] === '@') {
-        users.push(`%${word.slice(1)}%`);
+        if (word.length > 1) {
+          users.push(`%${word.slice(1)}%`);
+        }
       } else {
         keywords.push(`%${word}%`);
       }

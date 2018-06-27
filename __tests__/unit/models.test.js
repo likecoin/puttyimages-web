@@ -11,3 +11,9 @@ test('get sequelize instance', async () => {
     expect(User.associate).toBeInstanceOf(Function);
   }
 });
+
+test('asset model', async () => {
+  expect(models.asset.getQueryInclude).toBeInstanceOf(Function);
+  expect(models.asset.getMetaById).toBeInstanceOf(Function);
+  expect(models.asset.searchByKeyword).toBeInstanceOf(Function);
+});

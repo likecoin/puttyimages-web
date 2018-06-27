@@ -64,4 +64,6 @@ test('parse search keyword', () => {
   const mixed = parseKeyword('fruit #fruit @likecoin_id_1');
   expect(mixed).toMatchSnapshot();
   expect(parseKeyword('fruit   #fruit   @likecoin_id_1')).toMatchObject(mixed);
+
+  expect(parseKeyword('@ # test empty')).toMatchSnapshot();
 });
