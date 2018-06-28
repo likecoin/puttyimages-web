@@ -22,10 +22,7 @@
         <div>
 
           <user-badge
-            :user="{
-              likecoinId: 'franklamhang',
-              displayName: 'Frank',
-            }"
+            :user="getUserInfo"
             type="menu"
           />
 
@@ -112,6 +109,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import { ColorPropType } from '@/constant/prop-types';
 
 import SearchIcon from '~/assets/icons/search.svg';
@@ -134,6 +133,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['getUserInfo']),
     buttonsColor() {
       return this.isOpen ? 'primary' : this.color;
     },
@@ -148,7 +148,7 @@ export default {
       ];
     },
     currentUserId() {
-      return '1';
+      return this.getUserInfo.likecoinId;
     },
     isShowSearchButton() {
       return !(this.isSearchButtonClicked || this.$route.name === 'search');
