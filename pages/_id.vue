@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import axios from '~/plugins/axios';
 
 import TheLikeCoinAmount from '~/components/TheLikeCoinAmount';
@@ -54,10 +56,11 @@ export default {
     'the-likecoin-amount': TheLikeCoinAmount,
     UserBadge,
   },
-  data() {
-    return {
-      isCurrentUser: true,
-    };
+  computed: {
+    ...mapGetters(['getUserInfo']),
+    isCurrentUser() {
+      return this.getUserInfo.wallet === this.user.wallet;
+    },
   },
   async asyncData({ params, error }) {
     let user;
