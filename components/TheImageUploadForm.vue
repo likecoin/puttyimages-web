@@ -95,10 +95,23 @@
       :loading="isUploading"
       class="btn--likecoin the-upload-image-form__submit-button"
       color="primary"
+      block
       @click="submit"
     >
       Upload the image now
     </v-btn>
+
+    <v-alert
+      v-model="isError"
+      color="error"
+      icon="warning"
+      transition="collapsed"
+      dismissible
+      outline
+    >
+      {{ errorMessage }}
+    </v-alert>
+
   </v-form>
 </template>
 
@@ -129,7 +142,9 @@ export default {
     return {
       checkbox: false,
       description: null,
+      errorMessage: '',
       formValid: true,
+      isError: false,
       isUploading: false,
       license: null,
       tags: [],
@@ -171,7 +186,9 @@ export default {
     },
     async submit() {
       if (this.$refs.form.validate()) {
+        this.isError = false;
         this.isUploading = true;
+
         const assetInfo = {
           assetFile: this.file,
           description: this.description.trim(),
@@ -179,21 +196,38 @@ export default {
           tags: this.tags,
           wallet: ethUtil.getWallet(),
         };
-        const payload = await assetUtil.formatAndSignAsset(
-          assetInfo,
-          'Upload asset with following information'
-        );
 
-        const params = new FormData();
-        Object.keys(payload).forEach((key) => {
-          params.append(key, payload[key]);
-        });
-        axios
-          .post('/api/assets/upload', params)
-          .then((mediaObj) => mediaObj) // TODO: go to my image page maybe?
-          .catch((err) => {
-            console.error(err);
+        try {
+          let payload;
+          try {
+            payload = await assetUtil.formatAndSignAsset(
+              assetInfo,
+              'Upload asset with following information'
+            );
+          } catch (err) {
+            throw err;
+          }
+
+          const params = new FormData();
+          Object.keys(payload).forEach((key) => {
+            params.append(key, payload[key]);
           });
+
+          try {
+            const mediaObj = await axios.post('/api/assets/upload', params);
+            this.$emit('upload', mediaObj);
+          } catch (err) {
+            this.isError = true;
+            if (err.response) {
+              this.errorMessage = err.response.data.message;
+            } else {
+              throw err;
+            }
+          }
+        } catch (err) {
+          console.error(err); // eslint-disable-line no-console
+        }
+        this.isUploading = false;
       }
     },
     onTagChange(tags) {
