@@ -125,7 +125,10 @@
               Back
             </v-btn>
 
-            <the-image-upload-form :file="imageFile" />
+            <the-image-upload-form
+              :file="imageFile"
+              @upload="onUpload"
+            />
           </div>
 
         </section>
@@ -247,6 +250,9 @@ export default {
     onClickNext() {
       this.closeInvalidImageError();
       this.isShowUploadImageForm = true;
+    },
+    onUpload(asset) {
+      this.$router.push({ name: 'assets', params: { id: asset.fingerprint } });
     },
     closeInvalidImageError() {
       this.isUnsupportedFormat = false;
