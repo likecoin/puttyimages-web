@@ -157,7 +157,10 @@ router.post(
 router.get('/assets/list/:wallet', async (req, res, next) => {
   try {
     const { wallet } = req.params;
-    const assets = await sequelize.asset.findAll({ where: { wallet } });
+    const assets = await sequelize.asset.findAll({
+      include: sequelize.asset.getQueryInclude(sequelize),
+      where: { wallet },
+    });
     if (!assets) throw new Error('asset not found');
     res.json(assets);
   } catch (e) {

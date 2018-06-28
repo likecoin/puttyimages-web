@@ -26,18 +26,10 @@
         />
       </div>
 
-      <!-- TODO: integrate masonry grid -->
-      <div class="user-page__masonry">
-        <div
-          v-for="asset in assets"
-          :key="asset.fingerprint"
-        >
-          <img
-            :alt="asset.description"
-            :src="asset.url"
-          >
-        </div>
-      </div>
+      <masonry
+        :colCount.sync="colCount"
+        :images="images"
+      />
     </div>
   </section>
 </template>
@@ -47,15 +39,20 @@ import { mapGetters } from 'vuex';
 
 import axios from '~/plugins/axios';
 
+import Masonry from '~/components/Masonry';
 import TheLikeCoinAmount from '~/components/TheLikeCoinAmount';
 import UserBadge from '~/components/UserBadge';
+
+import masonryMixin from '~/util/mixin/masonry';
 
 export default {
   name: 'id',
   components: {
+    Masonry,
     'the-likecoin-amount': TheLikeCoinAmount,
     UserBadge,
   },
+  mixins: [masonryMixin],
   computed: {
     ...mapGetters(['getUserInfo']),
     isCurrentUser() {
@@ -72,15 +69,15 @@ export default {
       return {};
     }
 
-    let assets;
+    let images;
     try {
       const res = await axios.get(`/api/assets/list/${user.wallet}`);
-      assets = res.data;
+      images = res.data;
     } catch (err) {
       console.error(err);
     }
 
-    return { user, assets };
+    return { user, images };
   },
   head() {
     return {
@@ -99,17 +96,5 @@ export default {
     padding-left: 0 !important;
   }
   @extend .pb-32;
-}
-
-.user-page {
-  &__masonry {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    > * {
-      @extend .pa-4;
-    }
-  }
 }
 </style>
