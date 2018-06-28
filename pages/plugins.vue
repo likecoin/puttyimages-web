@@ -113,19 +113,18 @@ $header-height: 152px;
       width: 100%;
       height: calc(100% + #{$header-height});
 
-      background-image: linear-gradient(268deg, #d0f0f0, #f0e6b4);
+      background-image: $gradient-likecoin;
     }
 
     &__description {
-      color: #8b572a;
+      color: color(like-light-brown);
 
       @extend .pa-64, .px-24--xs, .pt-0--xs, .text--size-28, .text--height-1-3;
     }
   }
 
   &__content {
-    color: #28646e;
-
+    @extend .text--color-primary;
     @include mobile-only {
       flex-direction: column;
     }
@@ -149,7 +148,7 @@ $header-height: 152px;
     }
 
     &__code-label {
-      color: #4a4a4a;
+      color: color(gray-4a);
 
       @extend .text--size-12, .mt-24;
     }
@@ -159,7 +158,7 @@ $header-height: 152px;
     }
 
     .input-text--likecoin :global(label) {
-      color: #28646e;
+      color: color(like-green);
     }
   }
 
@@ -191,7 +190,7 @@ $header-height: 152px;
 
   border: solid 1px rgba(40, 100, 110, 0.49);
   border-radius: 5px;
-  background-image: linear-gradient(267deg, #d0f0f0, #f0e6b4);
+  background-image: $gradient-likecoin;
 
   @extend .my-32;
 }

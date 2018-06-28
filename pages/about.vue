@@ -91,7 +91,7 @@ $likecoin-size: 260px;
 $likecoin-mobile-size: 184px;
 
 .about-page {
-  color: #8b572a;
+  color: color(like-light-brown);
 
   @extend .pb-64, .text--size-28, .text--height-1-3;
 
@@ -106,7 +106,7 @@ $likecoin-mobile-size: 184px;
       width: 100%;
       height: calc(100% + #{$header-height});
 
-      background-image: linear-gradient(268deg, #d0f0f0, #f0e6b4);
+      background-image: $gradient-likecoin;
 
       @include mobile-only {
         height: 249px;
@@ -161,9 +161,7 @@ $likecoin-mobile-size: 184px;
     align-items: center;
     flex-direction: column;
 
-    color: #28646e;
-
-    @extend .px-48, .text--size-28, .mt-64--xs;
+    @extend .px-48, .text--size-28, .mt-64--xs, .text--color-primary;
     @include tablet-and-up {
       width: 33%;
     }
