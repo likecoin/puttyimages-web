@@ -6,7 +6,7 @@
     <div @click="onClick">
       <nuxt-link :to="userRoute">
         <img
-          :src="user.avatar"
+          :src="avatar"
           class="user-badge__avatar"
         >
       </nuxt-link>
@@ -32,6 +32,7 @@
 
 <script>
 import { ColorPropType } from '@/constant/prop-types';
+import { toDataUrl } from '@likecoin/ethereum-blockies';
 
 const USER_BADGE_TYPE = {
   MIN: 'min',
@@ -60,6 +61,9 @@ export default {
     },
   },
   computed: {
+    avatar() {
+      return this.user.avatar || toDataUrl(this.user.wallet);
+    },
     classObject() {
       return [
         'user-badge',

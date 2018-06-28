@@ -120,7 +120,7 @@ module.exports = (sequelize, DataTypes) => {
         where: tagWhere,
       },
       {
-        attributes: ['displayName', 'likecoinId'],
+        attributes: ['avatar', 'displayName', 'likecoinId', 'wallet'],
         model: db.user,
         required: userRequired,
         where: userWhere,

@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { toDataUrl } from '@likecoin/ethereum-blockies';
 
 import sequelize from '../models';
 import { getUserChallenge, postUserChallenge } from '../util/auth';
@@ -25,9 +24,6 @@ router.get('/users/:id', async (req, res, next) => {
     const { id } = req.params;
     const user = await sequelize.user.findById(id, { raw: true });
     if (user) {
-      if (!user.avatar) {
-        user.avatar = toDataUrl(user.wallet);
-      }
       res.json(user);
     } else {
       res.sendStatus(404);
@@ -53,9 +49,6 @@ router.get(
           { raw: true }
         );
         if (user) {
-          if (!user.avatar) {
-            user.avatar = toDataUrl(user.wallet);
-          }
           res.json(user);
           return;
         }
