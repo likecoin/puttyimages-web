@@ -1,11 +1,13 @@
 /// Colors
 
 $colors: (
-  like-green: #2D6472,
+  like-green: #28646E,
   like-brown: #6A282E,
+  like-light-brown: #8B572A,
   like-cyan: #D0F0F0,
   gray-4a: #4A4A4A,
-  gray-a: #AAA
+  gray-a: #AAA,
+  white: #FFF
 );
 
 $gradient-likecoin: linear-gradient(292deg, map-get($colors, like-cyan), #F0E6B4);

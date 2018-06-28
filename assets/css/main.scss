@@ -12,7 +12,7 @@ body {
   letter-spacing: .5px;
 
   color: color(gray-4a);
-  background-color: white;
+  background-color: color(white);
 
   font-family: 'Source Sans Pro', Arial, sans-serif;
 }
@@ -64,7 +64,7 @@ svg {
 }
 
 .application--wrap {
-  background-color: #fff;
+  background-color: color(white);
 }
 
 /// Global page transition
