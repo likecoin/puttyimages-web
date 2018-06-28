@@ -6,7 +6,6 @@
         Search
       </div>
 
-      <!-- TODO: show only when _id route is current user -->
       <div v-if="isCurrentUser">
         <div class="text--align-center text--weight-600 text--size-24">
           My Images
@@ -14,8 +13,8 @@
 
         <the-likecoin-amount
           :amount="58.2500"
-          :avatar="user.avatar"
-          :likecoinId="user.likecoinId"
+          :avatar="getUserInfo.avatar"
+          :likecoinId="getUserInfo.likecoinId"
           class="my-48"
         />
       </div>
@@ -26,7 +25,7 @@
         />
       </div>
 
-      <masonry
+      <masonry-images-grid
         :colCount.sync="colCount"
         :images="images"
       />
@@ -39,20 +38,20 @@ import { mapGetters } from 'vuex';
 
 import axios from '~/plugins/axios';
 
-import Masonry from '~/components/Masonry';
+import MasonryImagesGrid, {
+  mixin as masonryImagesGridMixin,
+} from '~/components/MasonryImagesGrid';
 import TheLikeCoinAmount from '~/components/TheLikeCoinAmount';
 import UserBadge from '~/components/UserBadge';
-
-import masonryMixin from '~/util/mixin/masonry';
 
 export default {
   name: 'id',
   components: {
-    Masonry,
+    MasonryImagesGrid,
     'the-likecoin-amount': TheLikeCoinAmount,
     UserBadge,
   },
-  mixins: [masonryMixin],
+  mixins: [masonryImagesGridMixin],
   computed: {
     ...mapGetters(['getUserInfo']),
     isCurrentUser() {
@@ -74,7 +73,7 @@ export default {
       const res = await axios.get(`/api/assets/list/${user.wallet}`);
       images = res.data;
     } catch (err) {
-      console.error(err);
+      console.error(err); // eslint-disable-line no-console
     }
 
     return { user, images };

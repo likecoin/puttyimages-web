@@ -15,7 +15,7 @@
     </div>
 
     <div class="mt-20">
-      <masonry
+      <masonry-images-grid
         :colCount.sync="colCount"
         :images="images"
       />
@@ -46,18 +46,18 @@ import InfiniteLoading from 'vue-infinite-loading';
 
 import { createMixin as createTheImageDetailsDialogMixin } from '~/components/TheImageDetailsDialog';
 
-import Masonry from '~/components/Masonry';
+import MasonryImagesGrid, {
+  mixin as masonryImagesGridMixin,
+} from '~/components/MasonryImagesGrid';
 import SearchIcon from '~/assets/icons/search.svg';
-
-import masonryMixin from '~/util/mixin/masonry';
 
 export default {
   components: {
     InfiniteLoading,
-    Masonry,
+    MasonryImagesGrid,
     SearchIcon,
   },
-  mixins: [createTheImageDetailsDialogMixin(), masonryMixin],
+  mixins: [createTheImageDetailsDialogMixin(), masonryImagesGridMixin],
   data: () => ({
     images: [],
     isLoading: false,

@@ -36,7 +36,7 @@ export async function loginUser({ state, commit }) {
         signature,
       });
     } catch (err) {
-      console.error(err);
+      console.error(err); // eslint-disable-line no-console
     }
   }
 
@@ -54,6 +54,6 @@ export async function updateWallet(ctx, wallet) {
     if (!state.wallet) return;
     loginUser(ctx, wallet);
   } catch (err) {
-    console.error(err);
+    console.error(err); // eslint-disable-line no-console
   }
 }
