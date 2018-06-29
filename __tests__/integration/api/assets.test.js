@@ -6,3 +6,8 @@ test('get asset info', async () => {
   );
   expect(response.data).toMatchSnapshot();
 });
+
+test('get featured assets', async () => {
+  const response = await api.get('assets/featured/list');
+  expect(response.data).toMatchSnapshot();
+});

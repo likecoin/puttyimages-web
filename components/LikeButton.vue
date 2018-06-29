@@ -1,6 +1,6 @@
 <template>
   <v-btn
-    v-bind="{ block, flat }"
+    v-bind="{ block, flat, loading }"
     class="btn--likecoin"
     color="likecoin"
     depressed
@@ -23,6 +23,10 @@ export default {
     count: {
       type: Number,
       default: 0,
+    },
+    loading: {
+      type: [String, Boolean],
+      default: false,
     },
   },
   data() {

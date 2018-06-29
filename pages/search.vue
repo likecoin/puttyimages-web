@@ -36,6 +36,7 @@
           <v-btn
             class="btn--likecoin search-page__button search-page__button--use"
             color="secondary"
+            @click="useImage(image)"
           >
             Use Image
           </v-btn>
@@ -66,6 +67,8 @@
 import axios from '@/plugins/axios';
 import InfiniteLoading from 'vue-infinite-loading';
 
+import { createMixin as createTheImageDetailsDialogMixin } from '~/components/TheImageDetailsDialog';
+
 import LikeButton from '~/components/LikeButton';
 import SearchIcon from '~/assets/icons/search.svg';
 import UserBadge from '~/components/UserBadge';
@@ -79,6 +82,7 @@ export default {
     SearchIcon,
     UserBadge,
   },
+  mixins: [createTheImageDetailsDialogMixin()],
   data: () => ({
     colCount: 3,
     images: [],
@@ -170,6 +174,14 @@ export default {
       } catch (err) {
         this.isLoading = false;
       }
+    },
+    useImage(image) {
+      this.setImageDetailsDialog({
+        image,
+        isFetched: true,
+        isOpen: true,
+        isUseImage: true,
+      });
     },
   },
 };
