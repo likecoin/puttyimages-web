@@ -34,7 +34,6 @@ const assetUtil = {
 
     // show MetaMask dialog ask user to sign on MetaMask to continue
     if (ethUtil.onSign) ethUtil.onSign();
-    console.log(tags);
 
     const sign = await ethUtil.personalSign(payload);
     const data = {

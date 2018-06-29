@@ -89,14 +89,15 @@ router.post(
       if (!license || !licenseId) {
         throw new ValidationError('asset need a license');
       }
-      if (!isLicenseValid(licenseId, license))
+      if (!isLicenseValid(licenseId, license)) {
         throw new ValidationError('license invalid');
+      }
 
       // check asset
       const { file: asset } = req;
       const hash256 = sha256(asset.buffer);
       const { height, width } = imageSize(asset.buffer);
-      validateImage(asset, likeFingerprint);
+      validateImage(asset, likeFingerprint, hash256);
       const hash256Bytes = Buffer.from(hash256, 'hex');
 
       const ipfs = await IpfsClient();

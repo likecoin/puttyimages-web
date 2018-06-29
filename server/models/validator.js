@@ -9,7 +9,6 @@ import {
 } from '../../constant';
 
 const imageType = require('image-type');
-const sha256 = require('js-sha256');
 
 export class ValidationError extends Error {
   constructor(message) {
@@ -38,14 +37,14 @@ export function isLicenseValid(licenseId, license) {
   return LICENSE[licenseId] === license;
 }
 
-export function validateImage(img, inputSHA256) {
+export function validateImage(img, inputSHA256, checkSHA256) {
   if (!img) throw new ValidationError('no image uploaded');
   if (img.size > MAX_IMAGE_SIZE)
     throw new ValidationError('image size too large');
   const type = imageType(img.buffer);
   if (!SUPPORTED_IMAGE_TYPE.has(type && type.ext))
     throw new ValidationError('unsupported file format!');
-  const hash256 = sha256(img.buffer);
-  if (hash256 !== inputSHA256) throw new ValidationError('image SHA not match');
+  if (checkSHA256 !== inputSHA256)
+    throw new ValidationError('image SHA not match');
   return true;
 }
