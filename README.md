@@ -30,6 +30,22 @@ docker-compose up
 Local files are mount into docker you can modify file in your fs and will
 hot reload.
 
+## Env Setup
+``` bash
+# For development
+export LIKECHAIN_HOST=http://x.x.x.x
+export PROVIDER_ADDRESS=0x
+export PROVIDER_PRIVATE_KEY=xxx
+docker-compose up
+
+# For deployment
+kubectl delete secret app-secret # remove old secret
+kubectl create secret generic app-secret \
+  --from-literal=LIKECHAIN_HOST=http://x.x.x.x \
+  --from-literal=PROVIDER_ADDRESS=0x \
+  --from-literal=PROVIDER_PRIVATE_KEY=xxx
+```
+
 ## Test
 
 ``` bash

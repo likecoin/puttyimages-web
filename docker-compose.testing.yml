@@ -4,6 +4,7 @@ services:
   nuxt:
     environment:
       API_HOST: http://nuxt:3000
+      LIKECOIN_AUTH_URL:
 
   test:
     build:
@@ -22,3 +23,5 @@ services:
       HOST: nuxt
       IPFS_HOST: http://ipfs:5001
       IPFS_MASTER: http://ipfs:5001
+      LIKECHAIN_HOST: ${LIKECHAIN_HOST}
+      LIKECOIN_AUTH_URL: https://api.rinkeby.like.co/api/users/challenge
