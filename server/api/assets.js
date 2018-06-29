@@ -123,27 +123,35 @@ router.post(
       await ipfs.pin.add(ipld.toBaseEncodedString());
 
       // db update
-      await sequelize.sequelize.transaction((t) =>
-        sequelize.sequelize.Promise.all([
-          sequelize.asset.create(
-            {
-              description,
-              fingerprint: hash256Bytes,
-              height,
-              ipfs: bs58.decode(ipfsAdd[0].hash),
-              ipld: bs58.decode(ipld.toBaseEncodedString()),
-              license,
-              tags: tags.map((name) => ({ name })),
-              wallet,
-              width,
-            },
-            {
-              include: [sequelize.tag],
-              transaction: t,
-            }
-          ),
-        ])
-      );
+      await sequelize.sequelize.transaction(async (transaction) => {
+        await Promise.all(
+          tags.map((name) =>
+            sequelize.tag.findOrCreate({ transaction, where: { name } })
+          )
+        );
+
+        await sequelize.asset.create(
+          {
+            description,
+            fingerprint: hash256Bytes,
+            height,
+            ipfs: bs58.decode(ipfsAdd[0].hash),
+            ipld: bs58.decode(ipld.toBaseEncodedString()),
+            license,
+            wallet,
+            width,
+          },
+          { transaction }
+        );
+
+        await sequelize.assetTag.bulkCreate(
+          tags.map((name) => ({
+            assetFingerprint: hash256Bytes,
+            tag_name: name,
+          })),
+          { transaction }
+        );
+      });
 
       // TODO: media chain
 
