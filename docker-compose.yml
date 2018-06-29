@@ -18,6 +18,11 @@ services:
       HOST: 0.0.0.0
       IPFS_HOST: http://ipfs:5001
       IPFS_MASTER: http://ipfs:5001
+      LIKECHAIN_HOST: ${LIKECHAIN_HOST}
+      LIKECHAIN_STORAGE_PROVIDER: puttyimages
+      LIKECOIN_AUTH_URL: https://api.rinkeby.like.co/api/users/challenge
+      PROVIDER_ADDRESS: ${PROVIDER_ADDRESS}
+      PROVIDER_PRIVATE_KEY: $(PROVIDER_PRIVATE_KEY)
 
   db:
     image: postgres:10.4
