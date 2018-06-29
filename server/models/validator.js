@@ -1,9 +1,9 @@
 import {
+  LICENSE,
   MAX_TAG_LENGTH,
   MIN_TAG_LENGTH,
   MAX_TAG_COUNT,
   MIN_TAG_COUNT,
-  SUPPORTED_LICENSE,
   MAX_IMAGE_SIZE,
   SUPPORTED_IMAGE_TYPE,
 } from '../../constant';
@@ -34,8 +34,8 @@ export function isTagsValid(tags) {
   );
 }
 
-export function isLicenseValid(license) {
-  return SUPPORTED_LICENSE.has(license);
+export function isLicenseValid(licenseId, license) {
+  return LICENSE[licenseId] === license;
 }
 
 export function validateImage(img, inputSHA256) {

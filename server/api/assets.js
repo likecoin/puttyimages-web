@@ -11,7 +11,6 @@ import {
 } from '../models/validator';
 import { personalEcRecover, web3HexToUtf8 } from '../util/web3';
 import { ONE_DATE_IN_MS, MAX_IMAGE_SIZE } from '../../constant';
-import formatMediaObject from '../util/metadata';
 
 const bs58 = require('bs58');
 const imageSize = require('image-size');
@@ -43,7 +42,7 @@ router.post(
   multer.single('asset'),
   async (req, res, next) => {
     try {
-      const { from, payload, sign } = req.body;
+      const { from, payload, sign, tags: tagsStr, licenseId } = req.body;
       const recovered = personalEcRecover(payload, sign);
       if (recovered.toLowerCase() !== from.toLowerCase()) {
         throw new ValidationError('recovered address not match');
@@ -51,18 +50,23 @@ router.post(
 
       const message = web3HexToUtf8(payload);
       // filter signing description append before the object
-      const actualPayload = JSON.parse(message.substr(message.indexOf('{')));
+      const metadata = JSON.parse(message);
 
       const {
-        wallet,
-        assetSHA256,
-        ts,
+        creator,
+        dateCreated,
         description,
         license,
-        tags,
-        dateCreated,
-        footprint,
-      } = actualPayload;
+        likeFingerprint,
+        likeFootprint,
+        likePreviousVersion,
+        uploadDate,
+      } = metadata;
+      const userObj = await sequelize.user.findById(creator[0], {
+        raw: true,
+      });
+      const { wallet } = userObj;
+      const tags = JSON.parse(tagsStr);
 
       // check address match
       if (from !== wallet || !checkAddressValid(wallet)) {
@@ -70,6 +74,7 @@ router.post(
       }
 
       // check ts expire
+      const ts = new Date(uploadDate).getTime();
       if (Math.abs(ts - Date.now()) > ONE_DATE_IN_MS) {
         throw new ValidationError('payload expired');
       }
@@ -81,42 +86,26 @@ router.post(
       if (!isTagsValid(tags)) throw new ValidationError('tags length invalid');
 
       // check license
-      if (!license) throw new ValidationError('asset need a license');
-      if (!isLicenseValid(license))
+      if (!license || !licenseId) {
+        throw new ValidationError('asset need a license');
+      }
+      if (!isLicenseValid(licenseId, license))
         throw new ValidationError('license invalid');
 
       // check asset
       const { file: asset } = req;
       const hash256 = sha256(asset.buffer);
       const { height, width } = imageSize(asset.buffer);
-      validateImage(asset, assetSHA256);
+      validateImage(asset, likeFingerprint);
       const hash256Bytes = Buffer.from(hash256, 'hex');
 
-      // FIXME: use ipfs wrapper function
       const ipfs = await IpfsClient();
       const ipfsAdd = await ipfs.files.add(asset.buffer);
       if (!ipfsAdd) throw new Error('fail to ipfs add');
       await ipfs.pin.add(ipfsAdd[0].hash);
 
       // metadata
-      // TODO: creator: get user id by wallet address
-      const licenseObj = await sequelize.license.findById(license, {
-        raw: true,
-      });
-      const uploadDate = new Date().toISOString();
-      const mediaObj = {
-        creator: [wallet],
-        dateCreated,
-        description,
-        fingerprint: assetSHA256,
-        footprint: footprint || [],
-        ipfs: ipfsAdd[0].hash,
-        license: licenseObj.url,
-        previousVersion: null,
-        uploadDate,
-      };
-      const formattedMediaObj = formatMediaObject(mediaObj);
-      const ipld = await ipfs.dag.put(formattedMediaObj, {
+      const ipld = await ipfs.dag.put(metadata, {
         format: 'dag-cbor',
         hashAlg: 'sha2-256',
       });
@@ -137,7 +126,7 @@ router.post(
             height,
             ipfs: bs58.decode(ipfsAdd[0].hash),
             ipld: bs58.decode(ipld.toBaseEncodedString()),
-            license,
+            license: licenseId,
             wallet,
             width,
           },
@@ -155,7 +144,17 @@ router.post(
 
       // TODO: media chain
 
-      res.json(mediaObj);
+      res.json({
+        creator,
+        dateCreated,
+        description,
+        fingerprint: likeFingerprint,
+        footprint: likeFootprint,
+        ipfs: ipfsAdd[0].hash,
+        license,
+        previousVersion: likePreviousVersion,
+        uploadDate,
+      });
     } catch (err) {
       next(err);
     }

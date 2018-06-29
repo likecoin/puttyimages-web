@@ -1,39 +1,49 @@
 import ethUtil from './ethUtil';
 import { blobToArrayBuffer, arrayBufferToSha256 } from './fileUtil';
+import { LICENSE } from '../constant';
+
+const jsonStringify = require('json-stable-stringify');
 
 const assetUtil = {
-  async formatAndSignAsset(assetInfo, signMessage) {
-    const { assetFile, description, license, tags, wallet } = assetInfo;
-    const ts = Date.now();
+  async formatAndSignAsset(assetInfo) {
+    const {
+      assetFile,
+      creator,
+      description,
+      license,
+      tags,
+      wallet,
+    } = assetInfo;
+    const nowDateTime = new Date().toISOString();
     let assetSHA256;
     if (assetFile) {
-      const avatarBuf = await blobToArrayBuffer(assetFile);
-      assetSHA256 = await arrayBufferToSha256(avatarBuf);
+      const assetBuf = await blobToArrayBuffer(assetFile);
+      assetSHA256 = await arrayBufferToSha256(assetBuf);
     }
-    let payload = JSON.stringify(
-      {
-        assetSHA256,
-        dateCreated: ts,
-        description,
-        license,
-        tags,
-        ts,
-        wallet,
-      },
-      null,
-      2
-    );
-    if (signMessage) payload = [`${signMessage}:`, payload].join('\n');
+    const payload = jsonStringify({
+      creator,
+      dateCreated: nowDateTime,
+      description,
+      license: LICENSE[license],
+      likeFingerprint: assetSHA256,
+      likeFootprint: [],
+      likePreviousVersion: null,
+      type: 'ImageObject',
+      uploadDate: nowDateTime,
+    });
 
     // show MetaMask dialog ask user to sign on MetaMask to continue
     if (ethUtil.onSign) ethUtil.onSign();
+    console.log(tags);
 
     const sign = await ethUtil.personalSign(payload);
     const data = {
       asset: assetFile,
       from: wallet,
+      licenseId: license,
       payload: ethUtil.utf8ToHex(payload),
       sign,
+      tags: JSON.stringify(tags),
     };
 
     return data;
