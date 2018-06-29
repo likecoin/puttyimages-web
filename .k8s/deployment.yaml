@@ -113,6 +113,8 @@ spec:
           value: http://ipfs:5001
         - name: NODE_ENV
           value: production
+        - name: LIKECOIN_AUTH_URL
+          value: https://api.rinkeby.like.co/api/users/challenge
 ---
 apiVersion: v1
 kind: Service
