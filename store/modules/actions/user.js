@@ -3,44 +3,40 @@ import axios from '@/plugins/axios';
 import * as types from '@/store/mutation-types';
 import ethUtil from '@/util/ethUtil';
 
-async function checkIsUser(wallet) {
+export async function loginUser({ commit }, wallet) {
+  let user;
+
   try {
-    return await axios.get(`/api/users/wallet/${wallet}`);
+    const res = await axios.get(`/api/users/wallet/${wallet}`);
+    user = res.data;
   } catch (err) {
-    // simply ignore, wallet owner is not likecoin user
-    return null;
+    // Simply ignore, wallet owner is not LikeCoin user
+    return;
   }
-}
 
-export async function loginUser({ state, commit }) {
-  const result = await checkIsUser(state.wallet);
-  if (!result) return;
-
-  let userInfo = result.data;
-  if (userInfo.challenge) {
+  if (user.challenge) {
     let signature;
-    let isLoggedIn = false;
-    // force user to sign
-    while (!isLoggedIn) {
+    // Force user to sign
+    while (!signature) {
       try {
-        signature = await ethUtil.signLogin(userInfo.challenge); // eslint-disable-line no-await-in-loop
-        isLoggedIn = true;
+        signature = await ethUtil.signLogin(user.challenge); // eslint-disable-line no-await-in-loop
       } catch (err) {
-        // reject signing
+        // Reject signing
       }
     }
 
     try {
-      userInfo = await axios.post('/api/users/login', {
-        ...userInfo,
+      const res = await axios.post('/api/users/login', {
+        ...user,
         signature,
       });
+      user = res.data;
     } catch (err) {
       console.error(err); // eslint-disable-line no-console
     }
   }
 
-  commit(types.USER_SET_USER_INFO, userInfo);
+  commit(types.USER_SET_USER_INFO, user);
 }
 
 export async function updateWallet(ctx, wallet) {
