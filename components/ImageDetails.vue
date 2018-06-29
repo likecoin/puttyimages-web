@@ -154,8 +154,6 @@ export default {
   flex-direction: column;
   flex-grow: 1;
 
-  @extend .py-24--sm;
-
   &__close-btn {
     margin: 40px 0 24px -16px;
 
