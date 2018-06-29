@@ -252,7 +252,10 @@ export default {
       this.isShowUploadImageForm = true;
     },
     onUpload(asset) {
-      this.$router.push({ name: 'assets', params: { id: asset.fingerprint } });
+      this.$router.push({
+        name: 'assets-id',
+        params: { id: asset.fingerprint },
+      });
     },
     closeInvalidImageError() {
       this.isUnsupportedFormat = false;
