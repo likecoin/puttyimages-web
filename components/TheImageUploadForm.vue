@@ -214,8 +214,8 @@ export default {
           });
 
           try {
-            const mediaObj = await axios.post('/api/assets/upload', params);
-            this.$emit('upload', mediaObj);
+            const res = await axios.post('/api/assets/upload', params);
+            this.$emit('upload', res.data);
           } catch (err) {
             this.isError = true;
             if (err.response) {
