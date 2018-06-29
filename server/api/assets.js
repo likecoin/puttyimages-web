@@ -133,6 +133,14 @@ router.post(
           { transaction }
         );
 
+        await sequelize.assetLike.create(
+          {
+            assetFingerprint: hash256Bytes,
+            updated_at: new Date(),
+          },
+          { transaction }
+        );
+
         await sequelize.assetTag.bulkCreate(
           tags.map((name) => ({
             assetFingerprint: hash256Bytes,
