@@ -11,6 +11,7 @@ import {
 } from '../models/validator';
 import { personalEcRecover, web3HexToUtf8 } from '../util/web3';
 import { ONE_DATE_IN_MS, MAX_IMAGE_SIZE } from '../../constant';
+import { postLikeChain } from '../util/likechain';
 
 const bs58 = require('bs58');
 const imageSize = require('image-size');
@@ -151,8 +152,6 @@ router.post(
         );
       });
 
-      // TODO: media chain
-
       res.json({
         creator,
         dateCreated,
@@ -163,6 +162,12 @@ router.post(
         license,
         previousVersion: likePreviousVersion,
         uploadDate,
+      });
+
+      postLikeChain({
+        likeIpfs: ipfsAdd[0].hash,
+        metadata,
+        ownerSig: sign,
       });
     } catch (err) {
       next(err);
