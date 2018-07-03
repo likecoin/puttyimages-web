@@ -3,16 +3,16 @@
     v-model="isDialogOpen"
     :max-width="width"
     v-bind="getDialogProps"
-    content-class="base-dialog--likecoin"
+    content-class="base-dialog"
   >
 
-    <header class="base-dialog--likecoin__header">
-      <div class="base-dialog--likecoin__header--left">
+    <header class="base-dialog__header">
+      <div class="base-dialog__header--left">
         <slot name="header-left" />
 
         <v-btn
           v-if="isShowCloseButton"
-          class="base-dialog--likecoin__close-btn"
+          class="base-dialog__close-btn"
           absolute
           depressed
           fab
@@ -30,14 +30,14 @@
 
       <div
         v-if="isShowLanguageButton"
-        class="base-dialog--likecoin__header--right"
+        class="base-dialog__header--right"
       >
         <v-btn
           fab
           icon
           small
         >
-          <earth-icon class="base-dialog--likecoin__earth-icon" />
+          <earth-icon class="base-dialog__earth-icon" />
         </v-btn>
       </div>
     </header>
@@ -75,7 +75,7 @@ export default {
     },
     width: {
       type: Number,
-      default: 452,
+      default: 512,
     },
   },
   computed: {
@@ -96,7 +96,7 @@ $header-height: 56px;
 $close-btn-size: 48px;
 $dialog-header-icon-size: 120px;
 
-.base-dialog--likecoin {
+.base-dialog {
   overflow-y: visible;
 
   &__header {

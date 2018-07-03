@@ -3,15 +3,15 @@
     :dialog-props="{
       persistent: true,
     }"
-    :isDialogOpen="getIsUserRegisterNeeded"
-    :isShowCloseButton="false"
-    :isShowLanguageButton="true"
+    :is-dialog-open="getIsUserRegisterNeeded"
+    :is-show-close-button="false"
+    :is-show-language-button="true"
   >
     <div slot="header-center">
-      <likecoin-icon class="base-dialog--likecoin__header-icon" />
+      <likecoin-icon class="base-dialog__header-icon" />
     </div>
 
-    <section class="base-dialog--likecoin__content">
+    <section class="base-dialog__content">
       <h1>LikeCoin account required</h1>
 
       <p class="pt-24 pb-40">

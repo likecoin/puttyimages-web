@@ -4,10 +4,10 @@
       'hide-overlay': true,
       persistent: true,
     }"
-    :isDialogOpen="!!getErrorMessage"
+    :is-dialog-open="!!getErrorMessage"
     @close="closeErrorDialog"
   >
-    <section class="base-dialog--likecoin__content">
+    <section class="base-dialog__content">
       <h2>Oops!</h2>
       <h2>Something went wrong</h2>
 
