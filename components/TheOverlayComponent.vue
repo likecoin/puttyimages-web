@@ -56,6 +56,8 @@
 
       <the-image-details-dialog />
 
+      <register-dialog />
+
       <error-dialog />
     </div>
   </no-ssr>
@@ -64,6 +66,7 @@
 import { mapGetters } from 'vuex';
 
 import ErrorDialog from '@/components/dialogs/ErrorDialog';
+import RegisterDialog from '@/components/dialogs/RegisterDialog';
 import TheImageDetailsDialog from '@/components/TheImageDetailsDialog';
 import TheMetamaskDialog from '@/components/TheMetamaskDialog';
 
@@ -73,6 +76,7 @@ export default {
   name: 'the-overlay-component',
   components: {
     ErrorDialog,
+    RegisterDialog,
     TheImageDetailsDialog,
     TheMetamaskDialog,
   },
