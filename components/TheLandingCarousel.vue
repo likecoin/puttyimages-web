@@ -2,6 +2,7 @@
   <div class="the-landing-carousel">
 
     <carousel-swiper
+      v-if="images.length"
       :images="images"
       :active-index.sync="activeImageIndex"
       @open-details="openDetails"
