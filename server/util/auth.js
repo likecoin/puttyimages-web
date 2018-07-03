@@ -6,7 +6,7 @@ const { LIKECOIN_AUTH_URL, LIKECOIN_USER_STUB } = config;
 
 export async function getUserChallenge(queryWallet) {
   let data;
-  if (process.env.NODE_ENV === 'production' || LIKECOIN_AUTH_URL) {
+  if (LIKECOIN_AUTH_URL) {
     ({ data } = await axios.get(LIKECOIN_AUTH_URL, {
       params: { wallet: queryWallet },
     }));
@@ -24,7 +24,7 @@ export async function postUserChallenge(payload) {
   try {
     const { challenge, signature, wallet } = payload;
     let data;
-    if (process.env.NODE_ENV === 'production' || LIKECOIN_AUTH_URL) {
+    if (LIKECOIN_AUTH_URL) {
       ({ data } = await axios.post(LIKECOIN_AUTH_URL, {
         challenge,
         signature,
