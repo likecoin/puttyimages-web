@@ -17,8 +17,10 @@ const initialState = {
     updatedAt: '',
     url: '',
     user: {
+      avatar: null,
       displayName: '',
       likecoinId: '',
+      wallet: '',
     },
     wallet: '',
     width: 0,
@@ -33,7 +35,7 @@ const initialState = {
 
 const actions = {
   async setState({ commit }, newState) {
-    const { isFetched, isOpen } = newState;
+    const { isFetched = true, isOpen = true } = newState;
     if (isOpen && !isFetched) {
       commit('setState', {
         ...initialState,
@@ -48,9 +50,16 @@ const actions = {
         newState.isError = true;
       }
     }
+    newState.isOpen = isOpen;
     newState.isFetched = true;
     newState.isFetching = false;
     commit('setState', newState);
+  },
+  toggleImageDetailsDialog: {
+    handler({ dispatch }, newState) {
+      return dispatch('setState', newState);
+    },
+    root: true,
   },
 };
 

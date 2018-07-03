@@ -4,6 +4,7 @@
     <carousel-swiper
       :images="images"
       :active-index.sync="activeImageIndex"
+      @open-details="openDetails"
     />
 
     <transition
@@ -13,6 +14,7 @@
       <carousel-credits
         :key="activeImageIndex"
         :image="activeImage"
+        @open-details="openDetails"
       />
     </transition>
 
@@ -20,7 +22,7 @@
 </template>
 
 <script>
-import { createMixin as createTheImageDetailsDialogMixin } from '~/components/TheImageDetailsDialog';
+import { mapActions } from 'vuex';
 
 import CarouselCredits from './TheLandingCarouselCredits';
 import CarouselSwiper from './TheLandingCarouselSwiper';
@@ -31,7 +33,6 @@ export default {
     CarouselCredits,
     CarouselSwiper,
   },
-  mixins: [createTheImageDetailsDialogMixin()],
   props: {
     images: {
       type: Array,
@@ -46,6 +47,15 @@ export default {
   computed: {
     activeImage() {
       return this.images[this.activeImageIndex];
+    },
+  },
+  methods: {
+    ...mapActions(['toggleImageDetailsDialog']),
+    openDetails(image, options = {}) {
+      this.toggleImageDetailsDialog({
+        image,
+        ...options,
+      });
     },
   },
 };

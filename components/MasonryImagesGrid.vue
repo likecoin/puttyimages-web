@@ -8,6 +8,7 @@
       <img
         :src="image.url"
         class="masonry-images-grid__image"
+        @click="openDetails(image)"
       >
       <user-badge
         :user="image.user"
@@ -20,6 +21,7 @@
       <v-btn
         class="btn--likecoin masonry-images-grid__button masonry-images-grid__button--use"
         color="secondary"
+        @click="openDetails(image, { useImage: true })"
       >
         Use Image
       </v-btn>
@@ -60,6 +62,11 @@ export default {
     images: {
       type: Array,
       default: () => [],
+    },
+  },
+  methods: {
+    openDetails(image, options = {}) {
+      this.$emit('open-details', image, options);
     },
   },
 };

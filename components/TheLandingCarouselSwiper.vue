@@ -10,6 +10,7 @@
         :key="image.url"
         :style="{ backgroundImage: `url(${image.url})` }"
         class="the-landing-carousel-swiper__slide"
+        @click.self="$emit('open-details', image)"
       />
 
     </div>

@@ -18,6 +18,7 @@
       <masonry-images-grid
         :colCount.sync="colCount"
         :images="images"
+        @open-details="openDetails"
       />
 
       <no-ssr>
@@ -41,10 +42,10 @@
 </template>
 
 <script>
-import axios from '@/plugins/axios';
+import { mapActions } from 'vuex';
 import InfiniteLoading from 'vue-infinite-loading';
 
-import { createMixin as createTheImageDetailsDialogMixin } from '~/components/TheImageDetailsDialog';
+import axios from '@/plugins/axios';
 
 import MasonryImagesGrid, {
   mixin as masonryImagesGridMixin,
@@ -57,7 +58,7 @@ export default {
     MasonryImagesGrid,
     SearchIcon,
   },
-  mixins: [createTheImageDetailsDialogMixin(), masonryImagesGridMixin],
+  mixins: [masonryImagesGridMixin],
   data: () => ({
     images: [],
     isLoading: false,
@@ -72,6 +73,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(['toggleImageDetailsDialog']),
     async infiniteHandler($state) {
       const { colCount, pageInfo, rawImages } = this;
       if (pageInfo && pageInfo.hasNextPage) {
@@ -126,12 +128,12 @@ export default {
         this.isLoading = false;
       }
     },
-    useImage(image) {
-      this.setImageDetailsDialog({
+    openDetails(image, options) {
+      this.toggleImageDetailsDialog({
+        ...options,
         image,
         isFetched: true,
         isOpen: true,
-        isUseImage: true,
       });
     },
   },

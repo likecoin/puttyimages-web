@@ -11,7 +11,7 @@
       <a
         class="link--dark text--underline"
         href="#"
-        @click="useImage"
+        @click="$emit('open-details', image, { isUseImage: true })"
       >use this image</a>
     </div>
   </div>
@@ -37,16 +37,6 @@ export default {
     },
     userDisplayName() {
       return this.image.user.displayName;
-    },
-  },
-  methods: {
-    useImage() {
-      this.setImageDetailsDialog({
-        image: this.image,
-        isFetched: true,
-        isOpen: true,
-        isUseImage: true,
-      });
     },
   },
 };
