@@ -45,6 +45,8 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/css/classes';
 
+$the-landing-carousel-credits__shadow-color: rgba(0, 0, 0, 0.7);
+
 .the-landing-carousel-credits {
   position: absolute;
   z-index: 1;
@@ -57,14 +59,34 @@ export default {
 
   @extend .mb-64--dy, .ml-64--dy;
 
+  &,
+  * {
+    text-shadow: 0 0 10px $the-landing-carousel-credits__shadow-color;
+  }
+
   > *:first-child {
+    position: relative;
+
     display: flex;
     align-items: center;
 
     margin-right: 16px;
     padding-right: 16px;
 
-    border-right: solid 1px white;
+    // Seperator
+    &::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+
+      width: 1px;
+
+      content: '';
+
+      background-color: white;
+      box-shadow: 0 0 10px 0 $the-landing-carousel-credits__shadow-color;
+    }
   }
 }
 </style>
