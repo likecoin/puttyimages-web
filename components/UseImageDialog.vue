@@ -65,13 +65,14 @@
                 <v-select
                   v-model="selectedDownloadSizeItem"
                   :items="downloadSizeItems"
-                  item-value="text"
+                  return-object
                 />
                 <v-btn
                   :block="$vuetify.breakpoint.xsOnly"
                   class="btn--likecoin"
                   color="secondary"
                   depressed
+                  @click="download"
                 >
                   Download
                 </v-btn>
@@ -86,6 +87,8 @@
 </template>
 
 <script>
+import FileSaver from 'file-saver';
+
 import { EMBEDDED_SCRIPT_IN_HEAD } from '~/constant/index';
 
 import CodeBlock from '~/components/CodeBlock';
@@ -126,15 +129,19 @@ export default {
     embeddedCodeInBody() {
       return `<div class="pt-img" data-src="${this.image.ipfs}"></div>`;
     },
-    transitionName() {
-      return this.hasGivenThanks ? 'collapsed' : null;
+    downloadFilename() {
+      const { description, user } = this.image;
+      return `${description.substr(0, 32)}-by-${user.displayName}_${
+        this.selectedDownloadSizeItem.value
+      }`;
     },
     downloadSizeItems() {
       return [
         ['Original Image'],
-        ['Medium', 0.75],
-        ['Half', 0.5],
-        ['Small', 0.25],
+        // TODO: Download different sizes
+        // ['Medium', 0.75],
+        // ['Half', 0.5],
+        // ['Small', 0.25],
       ].map(([label, ratio = 1]) => {
         const width = Math.floor(this.image.width * ratio);
         const height = Math.floor(this.image.height * ratio);
@@ -144,6 +151,9 @@ export default {
           value,
         };
       });
+    },
+    transitionName() {
+      return this.hasGivenThanks ? 'collapsed' : null;
     },
   },
   watch: {
@@ -167,6 +177,10 @@ export default {
   methods: {
     close() {
       this.isDialogOpen = false;
+    },
+    async download() {
+      const blob = await fetch(this.image.url).then((res) => res.blob());
+      FileSaver.saveAs(blob, this.downloadFilename);
     },
     giveThanks() {
       this.hasGivenThanks = true;
