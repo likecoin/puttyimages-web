@@ -101,22 +101,11 @@
       Upload the image now
     </v-btn>
 
-    <v-alert
-      v-model="isError"
-      color="error"
-      icon="warning"
-      transition="collapsed"
-      dismissible
-      outline
-    >
-      {{ errorMessage }}
-    </v-alert>
-
   </v-form>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import axios from '@/plugins/axios';
 
 import assetUtil from '@/util/assetUtil';
@@ -143,7 +132,6 @@ export default {
     return {
       checkbox: false,
       description: null,
-      errorMessage: '',
       formValid: true,
       isError: false,
       isUploading: false,
@@ -183,6 +171,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['setErrorMessage']),
     removeTag(item) {
       this.tags.splice(this.tags.indexOf(item), 1);
     },
@@ -219,7 +208,7 @@ export default {
           } catch (err) {
             this.isError = true;
             if (err.response) {
-              this.errorMessage = err.response.data.message;
+              this.setErrorMessage(err.response.data.message);
             } else {
               throw err;
             }
