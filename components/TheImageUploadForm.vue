@@ -116,6 +116,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import axios from '@/plugins/axios';
 
 import assetUtil from '@/util/assetUtil';
@@ -151,6 +152,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['getUserInfo']),
     supportedLicense() {
       return [...SUPPORTED_LICENSE];
     },
@@ -190,6 +192,7 @@ export default {
         this.isUploading = true;
 
         const assetInfo = {
+          creator: [this.getUserInfo.likecoinId],
           assetFile: this.file,
           description: this.description.trim(),
           license: this.license,
@@ -200,10 +203,7 @@ export default {
         try {
           let payload;
           try {
-            payload = await assetUtil.formatAndSignAsset(
-              assetInfo,
-              'Upload asset with following information'
-            );
+            payload = await assetUtil.formatAndSignAsset(assetInfo);
           } catch (err) {
             throw err;
           }

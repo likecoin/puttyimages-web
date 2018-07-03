@@ -18,6 +18,11 @@ module.exports = (sequelize, DataTypes) => {
         field: 'total_like',
         type: DataTypes.INTEGER,
       },
+      updatedAt: {
+        allowNull: false,
+        field: 'updated_at',
+        type: DataTypes.DATE,
+      },
     },
     {
       createdAt: false,
