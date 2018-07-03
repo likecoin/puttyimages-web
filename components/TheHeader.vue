@@ -141,6 +141,8 @@ export default {
     &__slogan--line-1 {
       @include mobile-only {
         max-width: 230px;
+
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
       }
       @extend .mt-32--xs,
         .text--color-primary,
@@ -153,6 +155,10 @@ export default {
 
     &__slogan--line-2 {
       max-width: 230px;
+
+      @include mobile-only {
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+      }
 
       @extend .mt-8,
         .text--color-secondary,
