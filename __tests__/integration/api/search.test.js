@@ -2,7 +2,9 @@ const axios = require('axios');
 
 const api = require('./api');
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
+beforeAll(() => {
+  jest.setTimeout(15000);
+});
 
 test('search with empty result', async () => {
   const response = await api.get('search?q=no_result');
@@ -37,4 +39,6 @@ test('search with pagination', async () => {
   expect(prevResponse.data).toMatchObject(response.data);
 });
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
+afterAll(() => {
+  jest.setTimeout(5000);
+});
