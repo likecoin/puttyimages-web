@@ -210,6 +210,7 @@ export default {
 @import '~assets/css/classes';
 
 $the-sliding-menu__inset-x: 64px;
+$ths-sliding-menu__button-shadow-color: rgba(0, 0, 0, 0.5);
 
 .the-sliding-menu {
   position: fixed;
@@ -300,6 +301,19 @@ $the-sliding-menu__inset-x: 64px;
   .btn {
     .the-sliding-menu--home & {
       @extend .text--color-primary--xs;
+    }
+  }
+
+  // Shadow for icon buttons in home page
+  .the-sliding-menu--home:not(.the-sliding-menu--open) & {
+    @include tablet-and-up {
+      svg {
+        filter: drop-shadow(0px 0px 2px $ths-sliding-menu__button-shadow-color);
+      }
+
+      .hamburger-icon > span {
+        box-shadow: 0px 0px 5px $ths-sliding-menu__button-shadow-color;
+      }
     }
   }
 }
