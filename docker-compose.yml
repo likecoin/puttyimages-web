@@ -22,7 +22,7 @@ services:
       LIKECHAIN_STORAGE_PROVIDER: puttyimages
       LIKECOIN_AUTH_URL: https://api.rinkeby.like.co/api/users/challenge
       PROVIDER_ADDRESS: ${PROVIDER_ADDRESS}
-      PROVIDER_PRIVATE_KEY: $(PROVIDER_PRIVATE_KEY)
+      PROVIDER_PRIVATE_KEY: ${PROVIDER_PRIVATE_KEY}
 
   db:
     image: postgres:10.4

@@ -2,14 +2,12 @@ const axios = require('axios');
 
 const api = require('./api');
 
-test(
-  'search with empty result',
-  async () => {
-    const response = await api.get('search?q=no_result');
-    expect(response.data).toMatchSnapshot();
-  },
-  10000
-);
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
+
+test('search with empty result', async () => {
+  const response = await api.get('search?q=no_result');
+  expect(response.data).toMatchSnapshot();
+});
 
 test('search with keyword', async () => {
   const response = await api.get('search?q=fruit');
@@ -38,3 +36,5 @@ test('search with pagination', async () => {
   const prevResponse = await axios.get(nextResponse.data.pageInfo.prev);
   expect(prevResponse.data).toMatchObject(response.data);
 });
+
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 5000;
