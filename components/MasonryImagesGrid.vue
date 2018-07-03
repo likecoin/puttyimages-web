@@ -21,7 +21,7 @@
       <v-btn
         class="btn--likecoin masonry-images-grid__button masonry-images-grid__button--use"
         color="secondary"
-        @click="openDetails(image, { useImage: true })"
+        @click="openDetails(image, { isUseImage: true })"
       >
         Use Image
       </v-btn>

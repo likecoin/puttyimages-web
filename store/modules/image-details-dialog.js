@@ -34,25 +34,43 @@ const initialState = {
 };
 
 const actions = {
-  async setState({ commit }, newState) {
-    const { isFetched = true, isOpen = true } = newState;
-    if (isOpen && !isFetched) {
-      commit('setState', {
-        ...initialState,
-        isFetching: true,
-      });
-      try {
-        const res = await axios.get(
-          `/api/assets/${newState.image.fingerprint}`
-        );
-        newState.image = res.data;
-      } catch (err) {
-        newState.isError = true;
+  async setState({ commit }, inputState) {
+    const {
+      isError = false,
+      isFetched = true,
+      isOpen = true,
+      isReportImage = false,
+      isUseImage = false,
+    } = inputState;
+
+    const newState = {
+      isError,
+      isOpen,
+      isReportImage,
+      isUseImage,
+    };
+
+    if (isOpen) {
+      newState.image = inputState.image;
+      if (!isFetched) {
+        commit('setState', {
+          ...initialState,
+          isFetching: true,
+        });
+        try {
+          const res = await axios.get(
+            `/api/assets/${newState.image.fingerprint}`
+          );
+          newState.image = res.data;
+        } catch (err) {
+          newState.isError = true;
+        }
       }
     }
-    newState.isOpen = isOpen;
+
     newState.isFetched = true;
     newState.isFetching = false;
+
     commit('setState', newState);
   },
   toggleImageDetailsDialog: {
