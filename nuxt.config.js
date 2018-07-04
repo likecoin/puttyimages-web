@@ -45,7 +45,7 @@ module.exports = {
       });
     },
     extractCSS: true,
-    vendor: ['axios', 'vuetify', '@likecoin/likecoin-eth-util'],
+    vendor: ['axios', 'vuetify', '@likecoin/likecoin-eth-util', 'vue-i18n'],
   },
   /*
   ** Global CSS
@@ -79,5 +79,7 @@ module.exports = {
     { src: '~/plugins/ethUtil', ssr: false },
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-clipboard2.js', ssr: false },
+    { src: '~/plugins/vue-cookie', ssr: false },
+    { src: '~/plugins/vue-i18n' },
   ],
 };
