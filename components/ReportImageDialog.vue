@@ -7,7 +7,7 @@
   >
     <v-card>
       <dialog-header
-        title="Report Image"
+        :title="$t('ReportImageDialog.title')"
         is-show-close-button
         @close="close"
       />
@@ -25,7 +25,7 @@
           >
             <p class="px-24 px-0--xs text--align-center">
               <span class="text--size-16">
-                Please choose issue below for report, we will resolve this as soon as possible
+                {{ $t('ReportImageDialog.label.description') }}
               </span>
             </p>
 
@@ -52,9 +52,9 @@
 
             <v-text-field
               :disabled="isSubmitting"
+              :label="$t('ReportImageDialog.label.comments')"
               v-model="comments"
               class="mt-16"
-              label="Other Comments"
             />
 
             <v-flex>
@@ -70,7 +70,7 @@
                     block
                     depressed
                     @click.native="submit"
-                  >Submit</v-btn>
+                  >{{ $t('General.button.submit') }}</v-btn>
                 </v-flex>
               </v-layout>
             </v-flex>
@@ -84,7 +84,7 @@
           >
             <p class="px-24 px-0--xs text--align-center">
               <span class="text--size-16">
-                Thanks for your report, our team will look into the reported issue.
+                {{ $t('ReportImageDialog.label.thanksForReport') }}
               </span>
             </p>
 
@@ -100,7 +100,7 @@
                     block
                     depressed
                     @click.native="close"
-                  >Done</v-btn>
+                  >{{ $t('General.button.done') }}</v-btn>
                 </v-flex>
               </v-layout>
             </v-flex>

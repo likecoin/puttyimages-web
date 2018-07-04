@@ -5,7 +5,7 @@
 
       <div class="page-container">
         <p class="about-page__header__description hidden-xs-only">
-          PuttyImage is a library of photos and images site supported by LikeCoin Service and reward content creators with it.
+          {{ $t('About.label.description') }}
         </p>
       </div>
     </div>
@@ -15,7 +15,7 @@
         <LikeCoinIcon class="about-page__detail__icon" />
         <div class="pl-32 pb-16 pa-0--xs mt-32--xs">
           <p class="hidden-sm-and-up pb-16">
-            PuttyImage is a library of photos and images site supported by LikeCoin Service and reward content creators with it.
+            {{ $t('About.label.description') }}
           </p>
           <div style="text-align: center;">
             <v-btn
@@ -26,7 +26,7 @@
               target="_blank"
               depressed
             >
-              Learn more about LikeCoin
+              {{ $t('About.button.learnMore') }}
             </v-btn>
           </div>
         </div>
@@ -35,12 +35,12 @@
       <div class="about-page__example-wrap">
         <div
           v-for="example in examples"
-          :key="example.content"
+          :key="example.key"
           class="about-page__example"
         >
           <img :src="example.src">
           <span class="about-page__example__content">
-            {{ example.content }}
+            {{ $t(`About.label.${example.key}`) }}
           </span>
         </div>
       </div>
@@ -58,15 +58,15 @@ import RewardIcon from '@/assets/icons/about/reward.png';
 
 const examples = [
   {
-    content: 'Proof of Creativity',
+    key: 'poc',
     src: ProofOfCreativityIcon,
   },
   {
-    content: 'Integrated with LikeButton',
+    key: 'likeButton',
     src: LikeButtonIcon,
   },
   {
-    content: 'Get Rewards and Contributions',
+    key: 'rewards',
     src: RewardIcon,
   },
 ];

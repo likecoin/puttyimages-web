@@ -1,1 +1,189 @@
-{}
+{
+  "General": {
+    "label": {
+      "puttyimages": "puttyimages",
+      "sponsor": "Supported by LikeCoin",
+      "welcome": "Welcome!"
+    },
+    "button": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "send": "Send",
+      "yes": "Yes",
+      "no": "No",
+      "ok": "OK",
+      "next": "Next",
+      "back": "Back",
+      "download": "Download",
+      "copy": "Copy",
+      "copied": "Copied",
+      "submit": "Submit",
+      "done": "Done"
+    }
+  },
+  "Language": {
+    "en": "English",
+    "zh": "正體中文"
+  },
+  "Menu": {
+    "item": {
+      "upload": "@:Upload.title",
+      "my-image": "@:MyImages.title",
+      "about": "@:About.title",
+      "plugins": "@:Plugins.title",
+      "support": "@:Support.title"
+    }
+  },
+  "Header": {
+    "Home": {
+      "label": {
+        "sloganLine1": "Making profit with free to use photos",
+        "sloganLine2": "Rewarding Contents by Proof of Creativity"
+      },
+      "button": {
+        "uploadImage": "Upload Your Image"
+      }
+    }
+  },
+  "Landing": {
+    "Credit": {
+      "label": {
+        "likeCount": "{amount} Like",
+        "byAuthor": "{by} {author}"
+      },
+      "button": {
+        "useThisImage": "use this image"
+      }
+    }
+  },
+  "Upload": {
+    "title": "Upload Image Now",
+    "label": {
+      "supportedTypes": "We support file types of {types} only",
+      "uploadWarning": "Please only upload photos that you own the rights to.",
+      "addTags": "Add some tags",
+      "license": "Image License",
+      "licenseHint": "Learn more about <a href=\"{link}\" rel=\"noopener noreferrer\" target=\"_blank\">{license}</a>",
+      "acceptTC": "I accept the {termsAndConditions}",
+      "termsAndConditions": "Terms and Conditions"
+    },
+    "button": {
+      "chooseFile": "Choose a file",
+      "chooseAnotherFile": "Choose another file",
+      "uploadNow": "Upload the image now"
+    },
+    "placeholder": {
+      "description": "Describe briefly about your image",
+      "tags": "ex. apple, cat, table",
+      "license": "Choose an appropriate license"
+    },
+    "error": {
+      "invalidFormat": "File format not supported",
+      "fileTooLarge": "File size exceed limit ({size})",
+      "invalidTagCount": "Please provide at least {minTagCount} and up to {maxTagCount} tags",
+      "invalidTagCharacterCount": "Each tag should be {minTagChar} - {maxTagChar} characters",
+      "licenseNotChosen": "Please choose a license",
+      "termsNotAgreed": "Please agree our Terms and Conditions"
+    }
+  },
+  "MyImages": {
+    "title": "My Images",
+    "label": {
+      "id": "LikeCoin ID:",
+      "amountEarned": "Amount of LikeCoin Received via Puttyimage"
+    }
+  },
+  "About": {
+    "title": "About puttyimages",
+    "label": {
+      "description": "PuttyImage is a library of photos and images site supported by LikeCoin Service and reward content creators with it.",
+      "poc": "Proof of Creativity",
+      "likeButton": "Integrated with LikeButton",
+      "rewards": "Get Rewards and Contributions"
+    },
+    "button": {
+      "learnMore": "Learn more about LikeCoin"
+    }
+  },
+  "Plugins": {
+    "title": "Plugins and Widgets",
+    "label": {
+      "description": "Get or Reward Content Creators LikeCoin with the SuperLike Widgets and Wordpress Plugins",
+      "widget": "Your SuperLike Widgets",
+      "chooseSize": "Choose a size",
+      "copyCodeToSite": "Copy the below code to your site",
+      "addCodeToHeader": "Add the following lines into the header of your web page",
+      "addCodeToImageContent": "Add the following lines to show the image in your webpage content",
+      "wordpress": "Wordpress Plugin",
+      "useWordpressPlugin": "Use PuttyImage and contribute creators automatically with the official wordpress plugin"
+    }
+  },
+  "Support": {
+    "title": "Support"
+  },
+  "ImageDetails": {
+    "label": {
+      "description": "Image Description",
+      "tags": "Tags"
+    },
+    "button": {
+      "useOrDownload": "Use or Download This Image",
+      "reportAbuse": "Report Image Right Violations / Abuse"
+    }
+  },
+  "ReportImageDialog": {
+    "title": "Report Image",
+    "label": {
+      "description": "Please choose issue below for report, we will resolve this as soon as possible",
+      "comments": "Other Comments",
+      "thanksForReport": "Thanks for your report, our team will look into the reported issue."
+    }
+  },
+  "UseImageDialog": {
+    "title": "Use or Download Image",
+    "label": {
+      "description": "Give thanks to the owner by giving LikeCoins!",
+      "useImage": "Use this image on your site / online publications",
+      "downloadImage": "Or download the image",
+      "originalImage": "Original Image"
+    },
+    "button": {
+      "maybeLater": "Maybe later"
+    }
+  },
+  "MetaMaskDialog": {
+    "title": {
+      "web3": "Plugin required",
+      "login": "Sign on MetaMask to Login",
+      "sign": "Sign on MetaMask"
+    },
+    "content": {
+      "web3": "Puttyimage upload requires Metamask to work. Please switch to chrome and install Metamask extension.",
+      "locked": "Please unlock your wallet",
+      "testnet": "Please switch to Main Ethereum Network",
+      "sign": "Sign on MetaMask to continue",
+      "login": "Please click Sign on Metamask to login."
+    },
+    "label": {
+      "keepSeedWordsSafe": "Remember to keep your seed words safe!"
+    },
+    "button": {
+      "install": "Install Metamask",
+      "installed": "Done! Installed",
+      "ledger": "Connect to Ledger wallet"
+    }
+  },
+  "ErrorDialog": {
+    "label": {
+      "oops": "Oops!",
+      "sthWentWrong": "Something went wrong"
+    }
+  },
+  "RegisterDialog": {
+    "title": "LikeCoin account required",
+    "content": "One last step for using puttyimage! Go to LikeCoin and register your own LikeCoin account to get started!",
+    "button": {
+      "register": "Register LikeCoin Account"
+    }
+  }
+}

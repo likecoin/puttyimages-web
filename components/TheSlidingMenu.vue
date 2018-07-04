@@ -39,7 +39,7 @@
                 @click="onClickOutside"
               >
                 <nuxt-link :to="item.to">
-                  {{ item.title }}
+                  {{ $t(`Menu.item.${item.key}`) }}
                 </nuxt-link>
               </li>
             </transition-group>
@@ -158,12 +158,10 @@ export default {
       return [
         {
           key: 'upload',
-          title: 'Upload Image Now',
           to: { name: 'upload' },
         },
         {
           key: 'my-image',
-          title: 'My Images',
           to: {
             name: this.currentUserId ? 'id' : 'register',
             params: { id: this.currentUserId },
@@ -171,17 +169,14 @@ export default {
         },
         {
           key: 'about',
-          title: 'About puttyimages',
           to: { name: 'about' },
         },
         {
           key: 'plugins',
-          title: 'Plugins and Widgets',
           to: { name: 'plugins' },
         },
         {
           key: 'support',
-          title: 'Support',
           to: { name: 'support' },
         },
       ];

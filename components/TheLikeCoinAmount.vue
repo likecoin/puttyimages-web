@@ -8,7 +8,7 @@
     </div>
 
     <div class="pb-16 text--size-18">
-      LikeCoin ID:
+      {{ $t('MyImages.label.id') }}
       <a
         :href="`https://like.co/${likecoinId}`"
         rel="noopener noreferrer"
@@ -18,7 +18,7 @@
 
     <div class="the-likecoin-amount__wrap">
       <span class="the-likecoin-amount__label">
-        Amount of LikeCoin Received via Puttyimage
+        {{ $t('MyImages.label.amountEarned') }}
       </span>
       <span class="the-likecoin-amount__amount">
         {{ amount }}

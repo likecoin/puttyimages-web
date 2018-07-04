@@ -7,20 +7,20 @@
   >
     <v-text-field
       v-model="description"
+      :placeholder="$t('Upload.placeholder.description')"
       :rules="descriptionRules"
       class="input-text--likecoin"
-      placeholder="Describe briefly about your image"
       light
       single-line
     />
 
     <v-select
       v-model="tags"
+      :label="$t('Upload.placeholder.addTags')"
+      :placeholder="$t('Upload.placeholder.tags')"
       :rules="tagsRules"
       append-icon=""
       class="input-text--likecoin"
-      label="Add some tags"
-      placeholder="ex. apple, cat, table"
       chips
       light
       tags
@@ -54,11 +54,11 @@
         v-model="license"
         :hint="licenseHint"
         :items="supportedLicense"
+        :label="$t('Upload.label.license')"
+        :placeholder="$t('Upload.placeholder.license')"
         :rules="licenseRules"
         append-icon="expand_more"
         class="input-text--likecoin"
-        label="Image License"
-        placeholder="Choose an appropriate license"
         light
         persistent-hint
       />
@@ -77,17 +77,22 @@
 
     <v-checkbox
       v-model="checkbox"
-      :rules="[v => v || 'Please agree our Terms and Conditions']"
+      :rules="termRules"
       class="checkbox--likecoin"
       color="light"
     >
-      <span slot="label">
-        I accept the
+      <i18n
+        slot="label"
+        path="Upload.label.acceptTC"
+        tag="span"
+      >
         <a
           href="https://www.google.com"
+          place="termsAndConditions"
+          rel="noopener noreferrer"
           target="_blank"
-        >Terms and Conditions</a> of Puttyimage
-      </span>
+        >{{ $t('Upload.label.termsAndConditions') }}</a>
+      </i18n>
     </v-checkbox>
 
     <v-btn
@@ -98,7 +103,7 @@
       block
       @click="submit"
     >
-      Upload the image now
+      {{ $t('Upload.button.uploadNow') }}
     </v-btn>
 
   </v-form>
@@ -151,23 +156,33 @@ export default {
       return [
         (v) =>
           (v.length >= MIN_TAG_COUNT && v.length <= MAX_TAG_COUNT) ||
-          `Please provide at least ${MIN_TAG_COUNT} and up to ${MAX_TAG_COUNT} tags`,
+          this.$t('Upload.error.invalidTagCount', {
+            minTagCount: MIN_TAG_COUNT,
+            maxTagCount: MAX_TAG_COUNT,
+          }),
         (v) =>
           v.every((item) => {
             const itemLength = item.trim().length;
             return itemLength >= MIN_TAG_LENGTH && itemLength <= MAX_TAG_LENGTH;
           }) ||
-          `Each tag should be ${MIN_TAG_LENGTH} - ${MAX_TAG_LENGTH} characters`,
+          this.$t('Upload.error.invalidTagCharacterCount', {
+            minTagChar: MIN_TAG_LENGTH,
+            maxTagChar: MAX_TAG_LENGTH,
+          }),
       ];
     },
     licenseRules() {
-      return [(v) => !!v || 'Please choose a license'];
+      return [(v) => !!v || this.$t('Upload.error.licenseNotChosen')];
     },
     licenseHint() {
       if (!this.license) return undefined;
-      return `Learn more about <a href="${
-        LICENSE[this.license]
-      }" rel="noopener noreferrer" target="_blank">${this.license}</a>`;
+      return this.$t('Upload.label.licenseHint', {
+        license: this.license,
+        link: LICENSE[this.license],
+      });
+    },
+    termRules() {
+      return [(v) => v || this.$t('Upload.error.termsNotAgreed')];
     },
   },
   methods: {

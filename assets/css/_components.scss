@@ -98,7 +98,7 @@ $class-style-map: (
   a {
     text-decoration: underline;
 
-    color: currentColor;
+    color: currentColor !important;
   }
 }
 
@@ -246,6 +246,8 @@ $class-style-map: (
 }
 
 .snackbar--likecoin {
+  z-index: 10;
+
   .snack__wrapper {
     width: 100%;
   }

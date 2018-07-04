@@ -19,6 +19,7 @@
           size="21"
         >close</v-icon>
       </v-btn>
+
       <v-card-title class="metamask-dialog__title">
         <img
           class="metamask-dialog__logo"
@@ -26,11 +27,14 @@
         >
         <earth-icon class="metamask-dialog__earth-icon" />
       </v-card-title>
+
       <v-card-text class="metamask-dialog__text">
         <div v-if="getWeb3Message === 'web3'">
-          <p class="metamask-dialog__headline">Plugin required</p>
-          <p>Puttyimage upload requires Metamask to work. Please switch to chrome and install Metamask extension.</p>
-          <p class="red--text">Remember to keep your seed words safe!</p>
+          <p class="metamask-dialog__headline">
+            {{ $t('MetaMaskDialog.title.web3') }}
+          </p>
+          <p>{{ $t('MetaMaskDialog.content.web3') }}</p>
+          <p class="red--text">{{ $t('MetaMaskDialog.label.keepSeedWordsSafe') }}</p>
           <v-btn
             class="text-capitalize metamask-dialog__btn"
             color="orange"
@@ -40,7 +44,7 @@
             dark
             large
           >
-            Install Metamask
+            {{ $t('MetaMaskDialog.button.install') }}
           </v-btn>
           <v-btn
             class="text-capitalize metamask-dialog__btn"
@@ -50,7 +54,7 @@
             large
             @click.native="$emit('update:isDialogOpen', false)"
           >
-            Done! Installed
+            {{ $t('MetaMaskDialog.button.installed') }}
           </v-btn>
           <v-btn
             class="text-capitalize"
@@ -59,7 +63,7 @@
             flat
             @click.native="$emit('update:isDialogOpen', false)"
           >
-            Connect to Ledger wallet
+            {{ $t('MetaMaskDialog.button.ledger') }}
           </v-btn>
         </div>
 
@@ -94,28 +98,12 @@ export default {
   },
   computed: {
     metamaskDialogHeadline() {
-      switch (this.getWeb3Message) {
-        case 'login':
-          return 'Sign on MetaMask to Login';
-        case 'sign':
-          return 'Sign on MetaMask';
-        default:
-          return '';
-      }
+      const localeKey = `MetaMaskDialog.title.${this.getWeb3Message}`;
+      return this.$te(localeKey) ? this.$t(localeKey) : '';
     },
     metamaskDialogMessage() {
-      switch (this.getWeb3Message) {
-        case 'locked':
-          return 'Please unlock your wallet';
-        case 'testnet':
-          return 'Please switch to Main Ethereum Network';
-        case 'sign':
-          return 'Sign on MetaMask to continue';
-        case 'login':
-          return 'Please click Sign on Metamask to login.';
-        default:
-          return '';
-      }
+      const localeKey = `MetaMaskDialog.content.${this.getWeb3Message}`;
+      return this.$te(localeKey) ? this.$t(localeKey) : '';
     },
     isNotSign() {
       return this.getWeb3Message !== 'sign' && this.getWeb3Message !== 'login';

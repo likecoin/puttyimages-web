@@ -8,11 +8,11 @@
     @close="closeErrorDialog"
   >
     <section class="base-dialog__content">
-      <h2>Oops!</h2>
-      <h2>Something went wrong</h2>
+      <h2>{{ $t('ErrorDialog.label.oops') }}</h2>
+      <h2>{{ $t('ErrorDialog.label.sthWentWrong') }}</h2>
 
       <p class="pt-24 pb-32">
-        {{ getErrorMessage }}
+        {{ errorMessage }}
       </p>
 
       <v-btn
@@ -22,7 +22,7 @@
         depressed
         @click="closeErrorDialog"
       >
-        Okay
+        {{ $t('General.button.ok') }}
       </v-btn>
     </section>
   </base-dialog>
@@ -40,6 +40,10 @@ export default {
   },
   computed: {
     ...mapGetters(['getErrorMessage']),
+    errorMessage() {
+      const localeKey = `Error.${this.getErrorMessage}`;
+      return this.$te(localeKey) ? this.$t(localeKey) : this.getErrorMessage;
+    },
   },
   methods: {
     ...mapActions(['closeErrorDialog']),

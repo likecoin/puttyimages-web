@@ -17,3 +17,7 @@ export const setErrorMessage = ({ commit }, message) => {
 export const closeErrorDialog = ({ commit }) => {
   commit(types.UI_CLOSE_ERROR_DIALOG);
 };
+
+export const setLocale = ({ commit }, locale) => {
+  commit(types.UI_SET_LOCALE, locale);
+};

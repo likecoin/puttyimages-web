@@ -12,10 +12,10 @@
     </div>
 
     <section class="base-dialog__content">
-      <h1>LikeCoin account required</h1>
+      <h1>{{ $t('RegisterDialog.title') }}</h1>
 
       <p class="pt-24 pb-40">
-        One last step for using puttyimage! Go to LikeCoin and register your own LikeCoin account to get started!
+        {{ $t('RegisterDialog.content') }}
       </p>
 
       <v-btn
@@ -27,7 +27,7 @@
         block
         depressed
       >
-        Register LikeCoin Account
+        {{ $t('RegisterDialog.button.register') }}
       </v-btn>
     </section>
   </base-dialog>

@@ -5,8 +5,12 @@
   >
     <logo class="the-logo__icon" />
     <div>
-      <div class="the-logo__type">puttyimages</div>
-      <div class="the-logo__subtitle">Supported by LikeCoin</div>
+      <div class="the-logo__type">
+        {{ $t('General.label.puttyimages') }}
+      </div>
+      <div class="the-logo__subtitle">
+        {{ $t('General.label.sponsor') }}
+      </div>
     </div>
   </nuxt-link>
 </template>

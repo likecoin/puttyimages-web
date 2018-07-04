@@ -5,7 +5,7 @@
 
       <div class="page-container">
         <div class="plugin-page__header__description">
-          Get or Reward Content Creators LikeCoin with the SuperLike Widgets and Wordpress Plugins
+          {{ $t('Plugins.label.description') }}
         </div>
       </div>
     </div>
@@ -15,30 +15,30 @@
         <v-layout column>
           <div class="plugin-page__content__wrap">
             <div>
-              <h2>Your SuperLike Widgets</h2>
+              <h2>{{ $t('Plugins.label.widget') }}</h2>
               <div>
                 <v-select
                   :items="['Large Button', 'Icon']"
+                  :label="$t('Plugins.label.chooseSize')"
                   v-model="widgetSize"
                   append-icon="expand_more"
                   class="input-text--likecoin mt-16"
-                  label="Choose a size"
                 />
               </div>
               <div class="likecoin-button">
                 2.4k
               </div>
               <div class="text--size-16">
-                Copy the below code to your site
+                {{ $t('Plugins.label.copyCodeToSite') }}
               </div>
 
               <div class="plugin-page__content__code-label">
-                Add the following lines into the header of your web page
+                {{ $t('Plugins.label.addCodeToHeader') }}
               </div>
               <code-block :code="EMBEDDED_SCRIPT_IN_HEAD" />
 
               <div class="plugin-page__content__code-label">
-                Add the following lines to show the image in your webpage content
+                {{ $t('Plugins.label.addCodeToImageContent') }}
               </div>
               <code-block :code="embeddedCodeInBody" />
             </div>
@@ -48,20 +48,20 @@
         <v-layout column>
           <div class="plugin-page__content__wrap">
             <div>
-              <h2>Wordpress Plugin</h2>
+              <h2>{{ $t('Plugins.label.wordpress') }}</h2>
               <img
                 class="plugin-page__wordpress-image"
                 src="http://via.placeholder.com/371x233"
               >
               <p class="my-24 text--size-16">
-                Use PuttyImage and contribute creators automatically with the official wordpress plugin
+                {{ $t('Plugins.label.useWordpressPlugin') }}
               </p>
               <v-btn
                 class="btn--likecoin"
                 color="secondary"
                 small
               >
-                Download
+                {{ $t('General.button.download') }}
               </v-btn>
             </div>
           </div>

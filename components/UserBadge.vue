@@ -16,7 +16,7 @@
         v-if="isShowGreeting"
         class="user-badge__greeting"
       >
-        Welcome!
+        {{ $t('General.label.welcome') }}
       </div>
       <div
         class="user-badge__likecoin-id"

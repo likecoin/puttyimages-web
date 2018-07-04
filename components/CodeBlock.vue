@@ -21,14 +21,14 @@
             depressed
             @click.native="isShowTooltip = true"
           >
-            Copy
+            {{ $t('General.button.copy') }}
           </v-btn>
           <v-tooltip
             v-model="isShowTooltip"
             bottom
           >
             <span slot="activator" />
-            <span>Copied</span>
+            <span>{{ $t('General.button.copied') }}</span>
           </v-tooltip>
         </v-layout>
       </v-flex>

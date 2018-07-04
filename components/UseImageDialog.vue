@@ -9,7 +9,7 @@
     <v-card>
       <dialog-header
         :is-show-close-button="hasGivenThanks"
-        title="Use or Download Image"
+        :title="$t('UseImageDialog.title')"
         @close="close"
       />
 
@@ -25,7 +25,7 @@
             column
             align-center
           >
-            <h2>Give thanks to the owner by giving LikeCoins!</h2>
+            <h2>{{ $t('UseImageDialog.label.description') }}</h2>
             <user-badge
               :user="image.user"
               class="mt-40"
@@ -43,7 +43,7 @@
               round
               small
               @click="giveThanks"
-            >Maybe later</v-btn>
+            >{{ $t('UseImageDialog.button.maybeLater') }}</v-btn>
           </v-layout>
 
           <!-- Use or Download Image Step 2  -->
@@ -53,14 +53,14 @@
             column
           >
             <section>
-              <h2>Use this image on your site / online publications</h2>
-              <p>Add the following lines into the header of your web page</p>
+              <h2>{{ $t('UseImageDialog.label.useImage') }}</h2>
+              <p>{{ $t('Plugins.label.addCodeToHeader') }}</p>
               <code-block :code="EMBEDDED_SCRIPT_IN_HEAD" />
-              <p>Add the following lines  to show the image in your webpage content</p>
+              <p>{{ $t('Plugins.label.addCodeToImageContent') }}</p>
               <code-block :code="embeddedCodeInBody" />
             </section>
             <section class="mt-32">
-              <h2>Or download the image</h2>
+              <h2>{{ $t('UseImageDialog.label.downloadImage') }}</h2>
               <v-layout :column="$vuetify.breakpoint.xsOnly">
                 <v-select
                   v-model="selectedDownloadSizeItem"
@@ -74,7 +74,7 @@
                   depressed
                   @click="download"
                 >
-                  Download
+                  {{ $t('General.button.download') }}
                 </v-btn>
               </v-layout>
             </section>
@@ -137,7 +137,7 @@ export default {
     },
     downloadSizeItems() {
       return [
-        ['Original Image'],
+        [this.$t('UseImageDialog.label.originalImage')],
         // TODO: Download different sizes
         // ['Medium', 0.75],
         // ['Half', 0.5],

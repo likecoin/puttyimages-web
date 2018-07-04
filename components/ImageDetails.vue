@@ -28,16 +28,16 @@
             />
           </section>
           <section class="image-details-content__meta">
-            <h1>Image Description</h1>
+            <h1>{{ $t('ImageDetails.label.description') }}</h1>
             <p>{{ image.description }}</p>
-            <h1>Tags</h1>
+            <h1>{{ $t('ImageDetails.label.tags') }}</h1>
             <ul>
               <li
                 v-for="(tag) in image.tags"
                 :key="tag.name"
               >
                 <nuxt-link
-                  :to="{ name: 'search', query: {tags: tag.name } }"
+                  :to="{ name: 'search', query: { tags: tag.name } }"
                 >{{ tag.name }}</nuxt-link>
               </li>
             </ul>
@@ -51,7 +51,7 @@
                   depressed
                   block
                   @click="useImage"
-                >Use or Download This Image</v-btn>
+                >{{ $t('ImageDetails.button.useOrDownload') }}</v-btn>
               </li>
               <li>
                 <like-button
@@ -66,7 +66,7 @@
             <a
               class="text--underline text--size-12"
               @click="reportImage"
-            >Report Image Right Violations / Abuse</a>
+            >{{ $t('ImageDetails.button.reportAbuse') }}</a>
           </section>
         </div>
       </div>
