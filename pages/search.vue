@@ -59,18 +59,39 @@ export default {
     SearchIcon,
   },
   mixins: [masonryImagesGridMixin],
-  data: () => ({
-    images: [],
-    isLoading: false,
-    pageInfo: null,
-    rawImages: [],
-    searchQuery: '',
-    timer: null,
-  }),
+  data() {
+    const { q, tags } = this.$route.query;
+
+    let searchQuery = '';
+    if (tags) {
+      searchQuery = tags
+        .split(',')
+        .reduce((tagQuery, tag) => `${tagQuery}#${tag} `, '')
+        .trim();
+    } else if (q) {
+      searchQuery = decodeURIComponent(q);
+    }
+
+    return {
+      images: [],
+      isLoading: false,
+      pageInfo: null,
+      rawImages: [],
+      searchQuery,
+      timer: null,
+    };
+  },
   head() {
     return {
-      title: 'Search images - puttyimages',
+      title: `${
+        this.searchQuery ? `${this.searchQuery} - ` : ''
+      }Search Images | puttyimages`,
     };
+  },
+  mounted() {
+    if (this.searchQuery) {
+      this.onKeywordChange();
+    }
   },
   methods: {
     ...mapActions(['toggleImageDetailsDialog']),
@@ -94,12 +115,32 @@ export default {
         $state.complete();
       }
     },
+    matchRouteToSearchQuery() {
+      const nextRoute = {
+        name: 'search',
+        query: {},
+      };
+
+      if (this.searchQuery) {
+        nextRoute.query.q = this.searchQuery;
+      }
+
+      // Replace route history if:
+      // - there is no 'q' field in query string or;
+      // - there are more than one fields
+      if (!this.$route.query.q || Object.keys(this.$route.query).length > 1) {
+        this.$router.replace(nextRoute);
+      } else {
+        this.$router.push(nextRoute);
+      }
+    },
     async onKeywordChange(e) {
       const { colCount, searchQuery } = this;
       if (searchQuery.length === 0) {
         this.isLoading = false;
         this.images = [];
         this.pageInfo = null;
+        this.matchRouteToSearchQuery();
         return;
       } else if (e) {
         clearTimeout(this.timer);
@@ -124,6 +165,7 @@ export default {
           }
           stateChanger.complete();
         }
+        this.matchRouteToSearchQuery();
       } catch (err) {
         this.isLoading = false;
       }
