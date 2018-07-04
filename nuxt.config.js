@@ -80,4 +80,7 @@ module.exports = {
     { src: '~/plugins/swiper.js', ssr: false },
     { src: '~/plugins/vue-clipboard2.js', ssr: false },
   ],
+  router: {
+    middleware: 'routing',
+  },
 };
