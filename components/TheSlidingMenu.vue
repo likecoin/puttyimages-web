@@ -22,6 +22,7 @@
         <div>
 
           <user-badge
+            v-if="currentUserId"
             :user="getUserInfo"
             type="menu"
           />
@@ -163,7 +164,10 @@ export default {
         {
           key: 'my-image',
           title: 'My Images',
-          to: { name: 'id', params: { id: this.currentUserId } },
+          to: {
+            name: this.currentUserId ? 'id' : 'register',
+            params: { id: this.currentUserId },
+          },
         },
         {
           key: 'about',
@@ -362,6 +366,8 @@ $ths-sliding-menu__button-shadow-color: rgba(0, 0, 0, 0.5);
   }
 
   :global(.user-badge) {
+    flex-shrink: 0;
+
     margin-left: $the-sliding-menu__inset-x;
   }
 }
