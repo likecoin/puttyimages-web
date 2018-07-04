@@ -9,6 +9,7 @@ export async function checkIsUser({ commit }, wallet) {
     const user = res.data;
     if (!user.challenge) {
       commit(types.USER_SET_USER_INFO, user);
+      commit(types.USER_SET_IS_REGISTERED_NEEDED, false);
     } else {
       commit(types.USER_SET_IS_AUTH_NEEDED, true);
     }
@@ -59,16 +60,15 @@ export async function loginUser({ commit, state }, wallet) {
   commit(types.USER_SET_USER_INFO, user);
 }
 
-export async function updateWallet(ctx, wallet) {
-  const { state, commit } = ctx;
+export async function updateWallet({ commit, dispatch, state }, wallet) {
   try {
     if (state.wallet !== wallet) {
       commit(types.USER_SET_USER_INFO, {});
     }
     commit(types.USER_SET_LOCAL_WALLET, wallet);
 
-    if (!state.wallet) return;
-    await checkIsUser(ctx, wallet);
+    if (!wallet) return;
+    dispatch('checkIsUser', wallet);
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }

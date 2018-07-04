@@ -79,7 +79,7 @@ const allErrors = [
   'locked', // metamask locked
   'register', // require register LikeCoin ID
 ];
-const disableRouteErrors = {
+const disabledRouteErrors = {
   about: allErrors,
   'assets-id': allErrors,
   id: allErrors,
@@ -88,7 +88,7 @@ const disableRouteErrors = {
   search: allErrors,
   support: allErrors,
 };
-export const getDisableErrors = (route) => disableRouteErrors[route] || [];
+export const getDisableErrors = (route) => disabledRouteErrors[route] || [];
 
 export default {
   name: 'the-overlay-component',
@@ -123,7 +123,7 @@ export default {
   watch: {
     getIsUserAuthNeeded(a) {
       if (a) {
-        this.triggerSignin();
+        this.triggerSignInIfNeeded();
       }
     },
     getWeb3Message(message) {
@@ -131,7 +131,7 @@ export default {
     },
     '$route.name': function onRouteChange(route) {
       this.disableErrors = getDisableErrors(route);
-      this.triggerSignin();
+      this.triggerSignInIfNeeded();
     },
   },
   mounted() {
@@ -144,7 +144,7 @@ export default {
     shouldShowDialog(key) {
       return !this.disableErrors.includes(key);
     },
-    triggerSignin() {
+    triggerSignInIfNeeded() {
       // only trigger sign in when page requires web3
       if (
         this.getIsUserAuthNeeded &&
