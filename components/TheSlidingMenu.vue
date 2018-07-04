@@ -4,16 +4,6 @@
     @click.self="onClickOutside"
   >
 
-    <transition
-      name="the-search-transition-overlay--fade"
-      @afterEnter="goToSearchPage"
-    >
-      <div
-        v-if="isSearchButtonClicked"
-        class="the-search-transition-overlay"
-      />
-    </transition>
-
     <transition name="the-sliding-menu__menu-">
       <div
         v-if="isOpen"
@@ -76,16 +66,26 @@
     </transition>
 
     <div class="the-sliding-menu__buttons">
-      <transition name="the-sliding-menu__buttons__search-button--slide-fade">
+      <transition name="page">
         <v-btn
-          v-if="isShowSearchButton"
+          v-if="isShowUploadButton"
+          key="upload-button"
+          :to="{ name: 'upload' }"
+          class="the-sliding-menu__buttons__upload-button btn--likecoin hide--sm"
+          color="secondary"
+        >
+          <v-icon class="mr-8">add_circle_outline</v-icon>
+          Upload Your Image
+        </v-btn>
+        <v-btn
+          v-else-if="isShowSearchButton"
           key="search-button"
           :color="buttonsColor"
+          :to="{ name: 'search' }"
           class="btn--likecoin"
           flat
           icon
           large
-          @click="onToggleSearchDialog"
         >
           <search-icon />
         </v-btn>
@@ -117,6 +117,8 @@ import { ColorPropType } from '@/constant/prop-types';
 import SearchIcon from '~/assets/icons/search.svg';
 import UserBadge from '~/components/UserBadge';
 
+const SHOW_UPLOAD_BUTTON_ROUTES = new Set(['assets-id', 'search', 'id']);
+
 export default {
   name: 'the-sliding-menu',
   components: {
@@ -130,7 +132,6 @@ export default {
   data() {
     return {
       isOpen: false,
-      isSearchButtonClicked: false,
     };
   },
   computed: {
@@ -152,7 +153,10 @@ export default {
       return this.getUserInfo.likecoinId;
     },
     isShowSearchButton() {
-      return !(this.isSearchButtonClicked || this.$route.name === 'search');
+      return !this.$route.name === 'search';
+    },
+    isShowUploadButton() {
+      return SHOW_UPLOAD_BUTTON_ROUTES.has(this.$route.name);
     },
     menuItems() {
       return [
@@ -187,24 +191,12 @@ export default {
       ];
     },
   },
-  watch: {
-    $route() {
-      this.isSearchButtonClicked = false;
-    },
-  },
   methods: {
     onClickOutside() {
       this.isOpen = false;
     },
     onToggle() {
       this.isOpen = !this.isOpen;
-    },
-    onToggleSearchDialog() {
-      this.isOpen = false;
-      this.isSearchButtonClicked = true;
-    },
-    goToSearchPage() {
-      this.$router.push({ name: 'search' });
     },
   },
 };
@@ -283,22 +275,12 @@ $ths-sliding-menu__button-shadow-color: rgba(0, 0, 0, 0.5);
     }
   }
 
-  &__search-button {
-    &--slide-fade- {
-      &enter-active,
-      &leave-active {
-        transition: (
-          transform 0.6s cubic-bezier(0.3, 0, 0.5, 0.5),
-          opacity 0.4s cubic-bezier(0.3, 0, 0.5, 0.5)
-        );
-      }
-      &enter,
-      &leave-to {
-        opacity: 0 !important;
-      }
-      &leave-to {
-        transform: translateX(-30vw) !important;
-      }
+  &__upload-button {
+    position: absolute;
+    right: 48px;
+
+    .the-sliding-menu--open & {
+      opacity: 0;
     }
   }
 
@@ -431,28 +413,6 @@ $ths-sliding-menu__button-shadow-color: rgba(0, 0, 0, 0.5);
         font-size: 28px;
         line-height: 1.5;
       }
-    }
-  }
-}
-
-.the-search-transition-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  width: 100vw;
-  height: 100vh;
-
-  background-color: white;
-
-  &--fade- {
-    &enter-active,
-    &leave-active {
-      transition: opacity 0.5s cubic-bezier(0.2, 0.2, 0, 1);
-    }
-    &enter,
-    &leave-to {
-      opacity: 0;
     }
   }
 }
