@@ -3,6 +3,21 @@ import axios from '@/plugins/axios';
 import * as types from '@/store/mutation-types';
 import ethUtil from '@/util/ethUtil';
 
+export async function checkIsUser({ commit }, wallet) {
+  try {
+    const res = await axios.get(`/api/users/wallet/${wallet}`);
+    const user = res.data;
+    if (!user.challenge) {
+      commit(types.USER_SET_USER_INFO, user);
+    } else {
+      commit(types.USER_SET_IS_AUTH_NEEDED, true);
+    }
+  } catch (err) {
+    // wallet owner is not likecoin user
+    commit(types.USER_SET_IS_REGISTERED_NEEDED, true);
+  }
+}
+
 export async function loginUser({ commit, state }, wallet) {
   let user;
 
@@ -20,13 +35,12 @@ export async function loginUser({ commit, state }, wallet) {
 
   if (user.challenge) {
     let signature;
-    // Force user to sign
-    while (!signature) {
-      try {
-        signature = await ethUtil.signLogin(user.challenge); // eslint-disable-line no-await-in-loop
-      } catch (err) {
-        // Reject signing
-      }
+    try {
+      signature = await ethUtil.signLogin(user.challenge);
+    } catch (err) {
+      // Reject signing
+      this.$router.go(-1);
+      return;
     }
 
     try {
@@ -35,6 +49,8 @@ export async function loginUser({ commit, state }, wallet) {
         signature,
       });
       user = res.data;
+
+      commit(types.USER_SET_IS_AUTH_NEEDED, false);
     } catch (err) {
       console.error(err); // eslint-disable-line no-console
     }
@@ -52,7 +68,7 @@ export async function updateWallet(ctx, wallet) {
     commit(types.USER_SET_LOCAL_WALLET, wallet);
 
     if (!state.wallet) return;
-    loginUser(ctx, wallet);
+    await checkIsUser(ctx, wallet);
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
   }

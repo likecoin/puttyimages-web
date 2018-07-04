@@ -6,6 +6,7 @@ import * as getters from './getters/user';
 import * as types from '../mutation-types';
 
 const userState = {
+  isAuthNeeded: false,
   isRegisterNeeded: false,
   user: {},
   wallet: '',
@@ -23,6 +24,9 @@ const mutations = {
   },
   [types.USER_SET_IS_REGISTERED_NEEDED](state, isRegisterNeeded) {
     state.isRegisterNeeded = isRegisterNeeded;
+  },
+  [types.USER_SET_IS_AUTH_NEEDED](state, isAuthNeeded) {
+    state.isAuthNeeded = isAuthNeeded;
   },
 };
 
