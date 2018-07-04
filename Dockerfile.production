@@ -6,6 +6,10 @@ COPY package.json package-lock.json /usr/src/app/
 
 RUN npm ci
 
+ARG SENTRY_DSN
+
+ENV SENTRY_DSN ${SENTRY_DSN}
+
 COPY . /usr/src/app
 
 RUN npm run build
