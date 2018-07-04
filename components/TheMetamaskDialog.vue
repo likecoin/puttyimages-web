@@ -25,7 +25,7 @@
           class="metamask-dialog__logo"
           src="@/assets/img/metamask.png"
         >
-        <earth-icon class="metamask-dialog__earth-icon" />
+        <language-switch class="metamask-dialog__earth-icon" />
       </v-card-title>
 
       <v-card-text class="metamask-dialog__text">
@@ -79,12 +79,12 @@
 </template>
 
 <script>
-import EarthIcon from '@/assets/icons/earth.svg';
+import LanguageSwitch from '@/components/LanguageSwitch';
 
 export default {
   name: 'the-metamask-dialog',
   components: {
-    EarthIcon,
+    LanguageSwitch,
   },
   props: {
     getWeb3Message: {
@@ -140,10 +140,7 @@ export default {
 }
 .metamask-dialog__earth-icon {
   position: absolute;
-  right: 18px;
-
-  width: 21px;
-  height: 21px;
+  right: 8px;
 }
 .metamask-dialog__text {
   @extend .text--align-left, .text--size-16, .text--height-1-2, .px-40, .mt-20;

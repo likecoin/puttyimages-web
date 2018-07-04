@@ -46,29 +46,10 @@
           </nav>
 
           <div class="the-sliding-menu__menu-footer">
-            <v-menu
-              open-on-hover
-              top
-              offset-y
-            >
-              <v-btn
-                slot="activator"
-                class="btn--likecoin"
-                color="primary"
-                flat
-                small
-              >
-                <v-icon>language</v-icon><span>Language</span>
-              </v-btn>
-              <v-list>
-                <v-list-tile>
-                  <v-list-tile-title>English</v-list-tile-title>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-title>中文</v-list-tile-title>
-                </v-list-tile>
-              </v-list>
-            </v-menu>
+            <language-switch
+              :menuProps="{ top: true }"
+              hasLabel
+            />
           </div>
 
         </div>
@@ -114,12 +95,14 @@ import { mapGetters } from 'vuex';
 
 import { ColorPropType } from '@/constant/prop-types';
 
+import LanguageSwitch from '~/components/LanguageSwitch';
 import SearchIcon from '~/assets/icons/search.svg';
 import UserBadge from '~/components/UserBadge';
 
 export default {
   name: 'the-sliding-menu',
   components: {
+    LanguageSwitch,
     SearchIcon,
     UserBadge,
   },
