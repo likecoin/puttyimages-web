@@ -47,8 +47,8 @@
 
           <div class="the-sliding-menu__menu-footer">
             <language-switch
-              :menuProps="{ top: true }"
-              hasLabel
+              :menu-props="{ top: true }"
+              has-label
             />
           </div>
 

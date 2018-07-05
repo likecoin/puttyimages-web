@@ -25,9 +25,6 @@ const mutations = {
   },
   [types.UI_SET_LOCALE](state, locale) {
     state.locale = locale;
-    if (!process.server && window.localStorage) {
-      window.localStorage.language = locale;
-    }
   },
 };
 

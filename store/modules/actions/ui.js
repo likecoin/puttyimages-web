@@ -1,3 +1,6 @@
+import VueCookie from '~/plugins/vue-cookie';
+
+import { COOKIE_EXPIRE_TIME } from '~/config/client';
 import * as types from '../../mutation-types';
 
 export const setWeb3Message = ({ commit, state }, message) => {
@@ -18,6 +21,14 @@ export const closeErrorDialog = ({ commit }) => {
   commit(types.UI_CLOSE_ERROR_DIALOG);
 };
 
-export const setLocale = ({ commit }, locale) => {
+export async function setLocale({ commit }, locale) {
+  await this.app.i18n.setLocaleAsync(locale);
+  if (process.client) {
+    VueCookie.set('language', locale, { expires: COOKIE_EXPIRE_TIME });
+    if (window.localStorage) {
+      window.localStorage.language = locale;
+    }
+  }
+
   commit(types.UI_SET_LOCALE, locale);
-};
+}

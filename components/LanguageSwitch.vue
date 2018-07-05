@@ -67,8 +67,6 @@ export default {
   methods: {
     ...mapActions(['setLocale']),
     onChangeLocale(locale) {
-      this.$i18n.loadLocaleAsync(locale);
-      this.$cookie.set('language', locale, { expires: '1M' });
       this.setLocale(locale);
     },
   },

@@ -11,14 +11,12 @@ import {
 
 Vue.use(VueI18n);
 
-const setI18nLocale = (i18n, locale) => {
+function setLocale(i18n, locale) {
   i18n.locale = locale;
   axios.defaults.headers.common['Accept-Language'] = locale;
+}
 
-  return locale;
-};
-
-async function loadLocaleAsync(i18n, locale) {
+async function setLocaleAsync(i18n, locale) {
   if (!i18n.loadedLanguages) {
     i18n.loadedLanguages = [DEFAULT_LOCALE];
   }
@@ -28,29 +26,30 @@ async function loadLocaleAsync(i18n, locale) {
     i18n.setLocaleMessage(locale, msgs);
     i18n.loadedLanguages.push(locale);
   }
-  return setI18nLocale(i18n, locale);
+
+  setLocale(i18n, locale);
 }
 
 export default async ({ app, store, req, res, query }) => {
   let locale = DEFAULT_LOCALE;
 
-  if (!process.server) {
-    let navLang =
+  if (process.client) {
+    let detecedLocale =
       navigator.language ||
       (navigator.languages && navigator.languages[0]) ||
       DEFAULT_LOCALE;
 
-    navLang = navLang.toLowerCase();
+    detecedLocale = detecedLocale.toLowerCase();
     SUPPORTED_LOCALES.forEach((key) => {
-      if (navLang.includes(key)) {
-        navLang = key;
+      if (detecedLocale.includes(key)) {
+        detecedLocale = key;
       }
     });
 
     locale =
       query.language ||
       (window.localStorage && window.localStorage.language) ||
-      navLang;
+      detecedLocale;
 
     if (!SUPPORTED_LOCALES.includes(locale)) {
       locale = DEFAULT_LOCALE;
@@ -73,8 +72,7 @@ export default async ({ app, store, req, res, query }) => {
     locale,
     messages: DEFAULT_MESSAGE,
   });
-  app.i18n.loadLocaleAsync = (lang) => loadLocaleAsync(app.i18n, lang);
+  app.i18n.setLocaleAsync = (lang) => setLocaleAsync(app.i18n, lang);
 
-  await app.i18n.loadLocaleAsync(locale);
   store.dispatch('setLocale', locale);
 };

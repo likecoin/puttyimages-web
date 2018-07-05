@@ -98,7 +98,11 @@ $class-style-map: (
   a {
     text-decoration: underline;
 
-    color: currentColor !important;
+    color: currentColor;
+
+    &:hover {
+      color: currentColor;
+    }
   }
 }
 
