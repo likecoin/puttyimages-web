@@ -141,13 +141,6 @@ import {
 
 const SUPPORTED_FILE_TYPES = [...SUPPORTED_IMAGE_TYPE];
 
-const isValidFileExtension = (filename) =>
-  filename
-    .toLowerCase()
-    .match(
-      new RegExp(`(${SUPPORTED_FILE_TYPES.join('|').replace(/\./g, '\\.')})$`)
-    );
-
 export default {
   components: {
     TheImageUploadForm,
@@ -159,10 +152,7 @@ export default {
       isExceedMaxSize: false,
       isImageLoading: false,
       isShowUploadImageForm: false,
-      isUnsupportedFormat: false,
-      acceptInput: SUPPORTED_FILE_TYPES.reduce(
-        (acc, current) => `image/${acc}, ${current}`
-      ),
+      acceptInput: SUPPORTED_FILE_TYPES.map((e) => `image/${e}`).join(', '),
       supportedFileTypes: SUPPORTED_FILE_TYPES.reduce(
         (acc, current) => `${acc}, ${current}`
       ),
@@ -170,12 +160,10 @@ export default {
   },
   computed: {
     isInvalidImage() {
-      return this.isExceedMaxSize || this.isUnsupportedFormat;
+      return this.isExceedMaxSize;
     },
     invalidImageDescription() {
-      if (this.isUnsupportedFormat) {
-        return this.$t('Upload.error.invalidFormat');
-      } else if (this.isExceedMaxSize) {
+      if (this.isExceedMaxSize) {
         return this.$t('Upload.error.fileTooLarge', {
           size: MAX_IMAGE_SIZE_MB,
         });
@@ -194,10 +182,6 @@ export default {
     },
     onImageInputChange({ target }) {
       if (target.value.length === 0) {
-        return;
-      }
-      if (!isValidFileExtension(target.value)) {
-        this.isUnsupportedFormat = true;
         return;
       }
 
@@ -240,7 +224,6 @@ export default {
       });
     },
     closeInvalidImageError() {
-      this.isUnsupportedFormat = false;
       this.isExceedMaxSize = false;
     },
   },

@@ -1,6 +1,6 @@
 export const ONE_DATE_IN_MS = 86400000;
 
-export const SUPPORTED_IMAGE_TYPE = new Set(['jpg', 'png']);
+export const SUPPORTED_IMAGE_TYPE = new Set(['jpeg', 'png']);
 
 export const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10M
 export const MAX_IMAGE_SIZE_MB = '10MB';
