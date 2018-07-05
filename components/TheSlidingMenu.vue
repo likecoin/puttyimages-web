@@ -153,7 +153,7 @@ export default {
       return this.getUserInfo.likecoinId;
     },
     isShowSearchButton() {
-      return !this.$route.name === 'search';
+      return this.$route.name !== 'search';
     },
     isShowUploadButton() {
       return SHOW_UPLOAD_BUTTON_ROUTES.has(this.$route.name);
