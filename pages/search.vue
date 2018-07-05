@@ -14,11 +14,11 @@
       />
     </div>
 
-    <div class="mt-20">
+    <div class="mt-48">
       <masonry-images-grid
         :colCount.sync="colCount"
-        :images="images"
         @open-details="openDetails"
+        :images="masonryImages"
       />
 
       <no-ssr>
@@ -73,6 +73,7 @@ export default {
     }
 
     return {
+      featuredImages: [],
       images: [],
       isLoading: false,
       pageInfo: null,
@@ -80,6 +81,14 @@ export default {
       searchQuery,
       timer: null,
     };
+  },
+  computed: {
+    masonryImages() {
+      if (this.images.length > 0 || this.searchQuery.length > 0) {
+        return this.images;
+      }
+      return this.featuredImages;
+    },
   },
   head() {
     return {
@@ -137,6 +146,15 @@ export default {
     async onKeywordChange(e) {
       const { colCount, searchQuery } = this;
       if (searchQuery.length === 0) {
+        // fetch featured image list if no search result
+        if (this.featuredImages.length === 0) {
+          try {
+            const { data } = await axios.get('/api/assets/featured/list');
+            this.featuredImages = this.sortImagesByHeight(data, colCount);
+          } catch (err) {
+            console.error(err); // eslint-disable-line no-console
+          }
+        }
         this.isLoading = false;
         this.images = [];
         this.pageInfo = null;
