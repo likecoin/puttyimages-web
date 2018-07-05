@@ -23,9 +23,9 @@ export async function getLikeChain(payload) {
 export async function postLikeChain(payload) {
   try {
     const { likeIpfs, metadata, ownerSig } = payload;
-    const spSigString = jsonStringify({ likeIpfs, metadata });
-    const storageProviderSig = await web3Sign(spSigString);
     if (LIKECHAIN_HOST) {
+      const spSigString = jsonStringify({ likeIpfs, metadata });
+      const storageProviderSig = await web3Sign(spSigString);
       const chainRes = await axios.post(`${LIKECHAIN_HOST}/upload`, {
         likeIpfs,
         metadata,
