@@ -135,17 +135,20 @@ export default {
 
     padding: 16px 0;
 
-    transition: opacity 0.5s ease-out;
+    transition-timing-function: ease-out;
+    transition-duration: 0.5s;
+    transition-property: opacity, background-color;
     transform: translate3d(0px, -50%, 0);
 
     color: white;
     border-radius: 8px;
-    background-color: #0000004f;
+    background-color: #0000001f;
 
     @extend .mr-64--dy;
 
     &:not(:hover) {
       opacity: 0.6;
+      background-color: transparent;
     }
 
     &__button {
@@ -168,12 +171,30 @@ export default {
           transform: scaleY(-1);
         }
       }
+
+      svg {
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+      }
     }
   }
 }
 </style>
 
 <style lang="scss">
+/* stylelint-disable-next-line no-duplicate-at-import-rules */
+@import '~assets/css/classes';
+
+$pagination__bullet-interspace: 16px;
+$pagination__bullet-height: 20px;
+
+@function get-bullet-margin($i: 1) {
+  @return (
+      ($pagination__bullet-height + $pagination__bullet-interspace) * $i +
+        $pagination__bullet-interspace
+    )
+    !important;
+}
+
 .the-landing-carousel-swiper__navigation__pagination {
   height: unset !important; // Override swiper inline style
 
@@ -184,21 +205,60 @@ export default {
     display: block;
 
     width: 4px;
-    height: 20px;
-    margin: 16px 12px;
+    height: 1px;
+    margin: 0 12px;
 
     transition: (
       opacity 0.5s cubic-bezier(0.2, 0.2, 0, 1),
-      height 1s cubic-bezier(0.2, 0.2, 0, 1)
+      height 1s cubic-bezier(0.2, 0.2, 0, 1),
+      margin 1s cubic-bezier(0.2, 0.2, 0, 1)
     );
 
-    opacity: 0.3;
+    pointer-events: none;
+
+    opacity: 0;
+    border-radius: 2px;
     background-color: #fff;
 
-    &--active {
-      height: 60px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
 
-      opacity: 1;
+    &--active {
+      &-prev-prev,
+      &-prev,
+      &-main,
+      &-next,
+      &-next-next {
+        height: $pagination__bullet-height;
+        margin-top: $pagination__bullet-interspace;
+        margin-bottom: $pagination__bullet-interspace;
+
+        pointer-events: all;
+
+        opacity: 0.3;
+      }
+
+      &-prev {
+        &:first-child {
+          margin-top: get-bullet-margin();
+        }
+      }
+      &#{&}-main {
+        height: 60px;
+
+        opacity: 1;
+
+        &:first-child {
+          margin-top: get-bullet-margin(2);
+        }
+        &:last-child {
+          margin-bottom: get-bullet-margin(2);
+        }
+      }
+      &-next {
+        &:last-child {
+          margin-bottom: get-bullet-margin();
+        }
+      }
     }
   }
 }
