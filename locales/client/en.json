@@ -34,8 +34,8 @@
       "support": "@:Support.title"
     }
   },
-  "Header": {
-    "Home": {
+  "Landing": {
+    "Banner": {
       "label": {
         "sloganLine1": "Making profit with free to use photos",
         "sloganLine2": "Rewarding Contents by Proof of Creativity"
@@ -43,9 +43,7 @@
       "button": {
         "uploadImage": "Upload Your Image"
       }
-    }
-  },
-  "Landing": {
+    },
     "Credit": {
       "label": {
         "likeCount": "{amount} Like",
