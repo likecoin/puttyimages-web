@@ -8,7 +8,7 @@
 
       <div v-if="isCurrentUser">
         <div class="text--align-center text--weight-600 text--size-24">
-          My Images
+          {{ $t('MyImages.title') }}
         </div>
 
         <the-likecoin-amount

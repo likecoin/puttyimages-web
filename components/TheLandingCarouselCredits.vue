@@ -1,18 +1,23 @@
 <template>
   <div class="the-landing-carousel-credits">
     <div class="like-button">
-      <span class="like-button">{{ likeCount }} Like</span>
+      <span class="like-button">
+        {{ $t('Landing.Credit.label.likeCount', { amount: likeCount }) }}
+      </span>
     </div>
     <div>
-      <span
-        v-if="userDisplayName"
-        class="text--size-12"
-      >by</span> {{ userDisplayName }}<br v-if="userDisplayName">
+      <i18n path="Landing.Credit.label.byAuthor">
+        <span
+          v-if="userDisplayName"
+          class="text--size-12"
+          place="by"
+        >by</span><span place="author"> {{ userDisplayName }}</span>
+      </i18n><br v-if="userDisplayName">
       <a
         class="link--dark text--underline"
         href="#"
         @click="$emit('open-details', image, { isUseImage: true })"
-      >use this image</a>
+      >{{ $t('Landing.Credit.button.useThisImage') }}</a>
     </div>
   </div>
 </template>

@@ -5,6 +5,7 @@ import * as types from '../mutation-types';
 
 const uiState = {
   errorMessage: '',
+  locale: '',
   web3Message: '',
   web3Type: 'window',
 };
@@ -21,6 +22,9 @@ const mutations = {
   },
   [types.UI_CLOSE_ERROR_DIALOG](state) {
     state.errorMessage = '';
+  },
+  [types.UI_SET_LOCALE](state, locale) {
+    state.locale = locale;
   },
 };
 

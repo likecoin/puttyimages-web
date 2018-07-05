@@ -14,10 +14,10 @@
           />
 
           <h1 class="the-header__banner__slogan--line-1">
-            Making profit with free to use photos
+            {{ $t('Header.Home.label.sloganLine1') }}
           </h1>
           <h2 class="the-header__banner__slogan--line-2">
-            Rewarding Contents by Proof of Creativity
+            {{ $t('Header.Home.label.sloganLine2') }}
           </h2>
 
           <v-btn
@@ -26,7 +26,7 @@
             color="secondary"
           >
             <v-icon>add_circle_outline</v-icon>
-            <span>Upload Your Image</span>
+            <span>{{ $t('Header.Home.button.uploadImage') }}</span>
           </v-btn>
 
         </div>

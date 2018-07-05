@@ -1,5 +1,6 @@
 import express from 'express';
 import { Nuxt, Builder } from 'nuxt';
+import cookieParser from 'cookie-parser';
 
 import api from './api';
 
@@ -11,6 +12,7 @@ app.set('port', port);
 
 // Import API Routes
 app.use('/api', api);
+app.use(cookieParser());
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js');

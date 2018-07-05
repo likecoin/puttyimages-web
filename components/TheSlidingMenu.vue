@@ -29,36 +29,17 @@
                 @click="onClickOutside"
               >
                 <nuxt-link :to="item.to">
-                  {{ item.title }}
+                  {{ $t(`Menu.item.${item.key}`) }}
                 </nuxt-link>
               </li>
             </transition-group>
           </nav>
 
           <div class="the-sliding-menu__menu-footer">
-            <v-menu
-              open-on-hover
-              top
-              offset-y
-            >
-              <v-btn
-                slot="activator"
-                class="btn--likecoin"
-                color="primary"
-                flat
-                small
-              >
-                <v-icon>language</v-icon><span>Language</span>
-              </v-btn>
-              <v-list>
-                <v-list-tile>
-                  <v-list-tile-title>English</v-list-tile-title>
-                </v-list-tile>
-                <v-list-tile>
-                  <v-list-tile-title>中文</v-list-tile-title>
-                </v-list-tile>
-              </v-list>
-            </v-menu>
+            <language-switch
+              :menu-props="{ top: true }"
+              has-label
+            />
           </div>
 
         </div>
@@ -114,6 +95,7 @@ import { mapGetters } from 'vuex';
 
 import { ColorPropType } from '@/constant/prop-types';
 
+import LanguageSwitch from '~/components/LanguageSwitch';
 import SearchIcon from '~/assets/icons/search.svg';
 import UserBadge from '~/components/UserBadge';
 
@@ -122,6 +104,7 @@ const SHOW_UPLOAD_BUTTON_ROUTES = new Set(['assets-id', 'search', 'id']);
 export default {
   name: 'the-sliding-menu',
   components: {
+    LanguageSwitch,
     SearchIcon,
     UserBadge,
   },
@@ -162,12 +145,10 @@ export default {
       return [
         {
           key: 'upload',
-          title: 'Upload Image Now',
           to: { name: 'upload' },
         },
         {
           key: 'my-image',
-          title: 'My Images',
           to: {
             name: this.currentUserId ? 'id' : 'register',
             params: { id: this.currentUserId },
@@ -175,17 +156,14 @@ export default {
         },
         {
           key: 'about',
-          title: 'About puttyimages',
           to: { name: 'about' },
         },
         {
           key: 'plugins',
-          title: 'Plugins and Widgets',
           to: { name: 'plugins' },
         },
         {
           key: 'support',
-          title: 'Support',
           to: { name: 'support' },
         },
       ];

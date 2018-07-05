@@ -36,10 +36,10 @@
           color="secondary"
           @click="onClickChooseFile"
         >
-          Choose a file
+          {{ $t('Upload.button.chooseFile') }}
         </v-btn>
         <span class="upload-image-page__upload-image-section__supported-type-label">
-          We support {{ supportedFileTypes }} file types only
+          {{ $t('Upload.label.supportedTypes', { types: supportedFileTypes }) }}
         </span>
       </section>
 
@@ -69,7 +69,7 @@
             color="primary"
             @click="onClickNext"
           >
-            Next
+            {{ $t('General.button.next') }}
           </v-btn>
           <v-btn
             :disabled="isImageLoading"
@@ -79,7 +79,7 @@
             @click="onClickChooseFile"
           >
             <span class="text--size-16">
-              Choose another file
+              {{ $t('Upload.button.chooseAnotherFile') }}
             </span>
           </v-btn>
         </div>
@@ -99,7 +99,7 @@
             class="snackbar--likecoin center"
             color="warning"
           >
-            Please only upload photos that you own the rights to.
+            {{ $t('Upload.label.uploadWarning') }}
           </v-snackbar>
 
           <div>
@@ -114,7 +114,7 @@
               >
                 arrow_back
               </v-icon>
-              Back
+              {{ $t('General.button.back') }}
             </v-btn>
 
             <the-image-upload-form
@@ -174,9 +174,11 @@ export default {
     },
     invalidImageDescription() {
       if (this.isUnsupportedFormat) {
-        return 'File format not supported';
+        return this.$t('Upload.error.invalidFormat');
       } else if (this.isExceedMaxSize) {
-        return `File size exceed limit (${MAX_IMAGE_SIZE_MB})`;
+        return this.$t('Upload.error.fileTooLarge', {
+          size: MAX_IMAGE_SIZE_MB,
+        });
       }
       return null;
     },

@@ -32,13 +32,7 @@
         v-if="isShowLanguageButton"
         class="base-dialog__header--right"
       >
-        <v-btn
-          fab
-          icon
-          small
-        >
-          <earth-icon class="base-dialog__earth-icon" />
-        </v-btn>
+        <language-switch />
       </div>
     </header>
 
@@ -50,11 +44,13 @@
 
 <script>
 import EarthIcon from '@/assets/icons/earth.svg';
+import LanguageSwitch from '@/components/LanguageSwitch';
 
 export default {
   name: 'base-dialog',
   components: {
     EarthIcon,
+    LanguageSwitch,
   },
   props: {
     dialogProps: {
