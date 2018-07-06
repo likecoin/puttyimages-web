@@ -89,7 +89,8 @@
     "title": "My Images",
     "label": {
       "id": "LikeCoin ID:",
-      "amountEarned": "Amount of LikeCoin Received via Puttyimage"
+      "amountEarned": "Amount of LikeCoin Received via Puttyimage",
+      "placeholder": "No image upload yet"
     }
   },
   "About": {

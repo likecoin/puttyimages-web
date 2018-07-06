@@ -12,7 +12,7 @@
         </div>
 
         <the-likecoin-amount
-          :amount="58.2500"
+          :amount="0"
           :avatar="getUserInfo.avatar"
           :likecoinId="getUserInfo.likecoinId"
           class="my-48"
@@ -29,6 +29,23 @@
         :colCount.sync="colCount"
         :images="images"
       />
+
+      <section class="text-xs-center">
+        <p class="text--size-18">
+          {{ $t('MyImages.label.placeholder') }}
+        </p>
+
+        <v-btn
+          v-if="isCurrentUser"
+          :to="{ name: 'upload' }"
+          class="btn--likecoin px-24 my-12"
+          color="secondary"
+        >
+          <v-icon>add_circle_outline</v-icon>
+          <span>{{ $t('Landing.Banner.button.uploadImage') }}</span>
+        </v-btn>
+      </section>
+
     </div>
   </section>
 </template>

@@ -17,7 +17,6 @@
     <div class="mt-48">
       <masonry-images-grid
         :colCount.sync="colCount"
-        @open-details="openDetails"
         :images="masonryImages"
       />
 
@@ -43,7 +42,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
 import InfiniteLoading from 'vue-infinite-loading';
 
 import axios from '@/plugins/axios';
@@ -102,7 +100,6 @@ export default {
     this.onKeywordChange();
   },
   methods: {
-    ...mapActions(['toggleImageDetailsDialog']),
     async infiniteHandler($state) {
       const { colCount, pageInfo, rawImages } = this;
       if (pageInfo && pageInfo.hasNextPage) {
@@ -162,6 +159,7 @@ export default {
         this.timer = setTimeout(() => this.onKeywordChange(), 300);
         return;
       }
+
       this.isLoading = true;
       try {
         const { data, pageInfo } = (await axios.get(
@@ -183,14 +181,6 @@ export default {
       } catch (err) {
         this.isLoading = false;
       }
-    },
-    openDetails(image, options) {
-      this.toggleImageDetailsDialog({
-        ...options,
-        image,
-        isFetched: true,
-        isOpen: true,
-      });
     },
   },
 };
