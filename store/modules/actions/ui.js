@@ -1,3 +1,4 @@
+import axios from '~/plugins/axios';
 import VueCookie from '~/plugins/vue-cookie';
 
 import { COOKIE_EXPIRE_TIME } from '~/config/client';
@@ -31,4 +32,13 @@ export async function setLocale({ commit }, locale) {
   }
 
   commit(types.UI_SET_LOCALE, locale);
+}
+
+export async function fetchFeaturedImages({ commit }) {
+  try {
+    const { data } = await axios.get('/api/assets/featured/list');
+    commit(types.UI_SET_FEATURED_IMAGES, data);
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
 }

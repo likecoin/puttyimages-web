@@ -46,6 +46,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import InfiniteLoading from 'vue-infinite-loading';
 
 import noResultsImage from '@/assets/img/no-results.png';
@@ -89,6 +90,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['getFeaturedImages']),
     masonryImages() {
       if (this.images.length > 0 || this.searchQuery.length > 0) {
         return this.images;
@@ -103,10 +105,26 @@ export default {
       }Search Images | puttyimages`,
     };
   },
+  watch: {
+    getFeaturedImages(l) {
+      if (l.length > 0) {
+        this.featuredImages = this.sortImagesByHeight(l, this.colCount);
+      }
+    },
+  },
   mounted() {
+    const { colCount, getFeaturedImages } = this;
+
     this.onKeywordChange();
+    if (getFeaturedImages.length > 0) {
+      this.featuredImages = this.sortImagesByHeight(
+        getFeaturedImages,
+        colCount
+      );
+    }
   },
   methods: {
+    ...mapActions(['fetchFeaturedImages']),
     async infiniteHandler($state) {
       const { colCount, pageInfo, rawImages } = this;
       if (pageInfo && pageInfo.hasNextPage) {
@@ -145,16 +163,10 @@ export default {
       }
     },
     async onKeywordChange(e) {
-      const { colCount, searchQuery } = this;
+      const { colCount, getFeaturedImages, searchQuery } = this;
       if (searchQuery.length === 0) {
-        // fetch featured image list if no search result
-        if (this.featuredImages.length === 0) {
-          try {
-            const { data } = await axios.get('/api/assets/featured/list');
-            this.featuredImages = this.sortImagesByHeight(data, colCount);
-          } catch (err) {
-            console.error(err); // eslint-disable-line no-console
-          }
+        if (getFeaturedImages.length === 0) {
+          this.fetchFeaturedImages();
         }
         this.isLoading = false;
         this.images = [];

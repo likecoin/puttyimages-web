@@ -5,6 +5,7 @@ import * as types from '../mutation-types';
 
 const uiState = {
   errorMessage: '',
+  featuredImages: [],
   locale: '',
   web3Message: '',
   web3Type: 'window',
@@ -25,6 +26,9 @@ const mutations = {
   },
   [types.UI_SET_LOCALE](state, locale) {
     state.locale = locale;
+  },
+  [types.UI_SET_FEATURED_IMAGES](state, images) {
+    state.featuredImages = images;
   },
 };
 
