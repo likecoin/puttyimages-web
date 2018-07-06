@@ -32,7 +32,11 @@
             slot="no-results"
             class="search-page__no-results"
           >
-            {{ $t('Search.label.placeholder', { searchQuery } ) }}
+            <p>{{ $t('Search.label.placeholder', { searchQuery } ) }}</p>
+            <img
+              :src="noResultsImage"
+              class="mt-40"
+            >
           </div>
         </infinite-loading>
       </no-ssr>
@@ -43,6 +47,8 @@
 
 <script>
 import InfiniteLoading from 'vue-infinite-loading';
+
+import noResultsImage from '@/assets/img/no-results.png';
 
 import axios from '@/plugins/axios';
 
@@ -75,6 +81,7 @@ export default {
       featuredImages: [],
       images: [],
       isLoading: false,
+      noResultsImage,
       pageInfo: null,
       rawImages: [],
       searchQuery,
@@ -223,5 +230,10 @@ export default {
   color: color(gray-4a);
 
   @extend .text--size-18, .py-48;
+
+  img {
+    width: 248px;
+    height: 176px;
+  }
 }
 </style>
