@@ -80,7 +80,6 @@ export default {
     }
 
     return {
-      featuredImages: [],
       images: [],
       isLoading: false,
       noResultsImage,
@@ -92,6 +91,9 @@ export default {
   },
   computed: {
     ...mapGetters(['getFeaturedImages']),
+    featuredImages() {
+      return this.sortImagesByHeight(this.getFeaturedImages, this.colCount);
+    },
     masonryImages() {
       if (this.images.length > 0 || this.searchQuery.length > 0) {
         return this.images;
@@ -106,24 +108,9 @@ export default {
       }Search Images | puttyimages`,
     };
   },
-  watch: {
-    getFeaturedImages(l) {
-      if (l.length > 0) {
-        this.featuredImages = this.sortImagesByHeight(l, this.colCount);
-      }
-    },
-  },
   mounted() {
-    const { colCount, getFeaturedImages, searchQuery } = this;
-
     this.onKeywordChange();
-    if (getFeaturedImages.length > 0) {
-      this.featuredImages = this.sortImagesByHeight(
-        getFeaturedImages,
-        colCount
-      );
-    }
-    if (!searchQuery) {
+    if (!this.searchQuery) {
       this.$refs.searchField.focus();
     }
   },
