@@ -50,6 +50,11 @@
       }
     }
   },
+  "Search": {
+    "label": {
+      "placeholder": "Sorry, there are no image for {searchQuery} yet"
+    }
+  },
   "Upload": {
     "title": "Upload Image Now",
     "label": {

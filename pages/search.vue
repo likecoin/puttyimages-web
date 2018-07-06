@@ -25,15 +25,16 @@
         <infinite-loading
           v-if="searchQuery.length"
           ref="infiniteLoading"
+          spinner="spiral"
           @infinite="infiniteHandler"
         >
           <span slot="no-more" />
-          <v-card
+          <div
             slot="no-results"
-            class="text-xs-center py-20"
+            class="search-page__no-results"
           >
-            No Result Found
-          </v-card>
+            {{ $t('Search.label.placeholder', { searchQuery } ) }}
+          </div>
         </infinite-loading>
       </no-ssr>
     </div>
@@ -98,9 +99,7 @@ export default {
     };
   },
   mounted() {
-    if (this.searchQuery) {
-      this.onKeywordChange();
-    }
+    this.onKeywordChange();
   },
   methods: {
     ...mapActions(['toggleImageDetailsDialog']),
@@ -120,8 +119,6 @@ export default {
         } catch (err) {
           this.isLoading = false;
         }
-      } else {
-        $state.complete();
       }
     },
     matchRouteToSearchQuery() {
@@ -170,20 +167,19 @@ export default {
         const { data, pageInfo } = (await axios.get(
           `/api/search?q=${encodeURIComponent(searchQuery)}`
         )).data;
-        this.isLoading = false;
         this.rawImages = data;
         this.images = this.sortImagesByHeight(data, colCount);
         this.pageInfo = pageInfo;
+
         const { stateChanger } = this.$refs.infiniteLoading;
-        if (pageInfo.hasNextPage) {
-          stateChanger.reset();
-        } else {
-          if (data.length) {
-            stateChanger.loaded();
-          }
-          stateChanger.complete();
+        stateChanger.reset();
+        if (data.length) {
+          stateChanger.loaded();
         }
         this.matchRouteToSearchQuery();
+
+        this.isLoading = false;
+        stateChanger.complete();
       } catch (err) {
         this.isLoading = false;
       }
@@ -231,5 +227,11 @@ export default {
 }
 .search-page__input /deep/ input::placeholder {
   text-align: center;
+}
+
+.search-page__no-results {
+  color: color(gray-4a);
+
+  @extend .text--size-18, .py-48;
 }
 </style>
