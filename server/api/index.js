@@ -15,6 +15,7 @@ const errorHandler = (err, req, res, next) => {
   if (res.headersSent) {
     return next(err);
   }
+  console.error(err); // eslint-disable-line no-console
   res.status(500);
   return res.json({
     code: err.code || 10000,
