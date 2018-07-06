@@ -4,6 +4,7 @@
     <div class="search-page__field">
       <search-icon class="search-page__icon" />
       <v-text-field
+        ref="searchField"
         v-model="searchQuery"
         :loading="isLoading"
         class="search-page__input"
@@ -113,7 +114,7 @@ export default {
     },
   },
   mounted() {
-    const { colCount, getFeaturedImages } = this;
+    const { colCount, getFeaturedImages, searchQuery } = this;
 
     this.onKeywordChange();
     if (getFeaturedImages.length > 0) {
@@ -121,6 +122,9 @@ export default {
         getFeaturedImages,
         colCount
       );
+    }
+    if (!searchQuery) {
+      this.$refs.searchField.focus();
     }
   },
   methods: {
