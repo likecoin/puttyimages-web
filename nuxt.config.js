@@ -74,6 +74,7 @@ module.exports = {
     ],
     title: 'starter',
   },
+  modules: ['@nuxtjs/sentry'],
   plugins: [
     '~/plugins/vuetify',
     { src: '~/plugins/ethUtil', ssr: false },

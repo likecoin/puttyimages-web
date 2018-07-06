@@ -4,6 +4,8 @@ services:
   nuxt:
     build:
       context: .
+      args:
+        SENTRY_DSN: ${SENTRY_DSN}
     depends_on:
     - db
     - ipfs
@@ -23,6 +25,7 @@ services:
       LIKECOIN_AUTH_URL: https://api.rinkeby.like.co/api/users/challenge
       PROVIDER_ADDRESS: ${PROVIDER_ADDRESS}
       PROVIDER_PRIVATE_KEY: ${PROVIDER_PRIVATE_KEY}
+      SENTRY_DSN: ${SENTRY_DSN}
 
   db:
     image: postgres:10.4
