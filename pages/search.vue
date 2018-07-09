@@ -4,6 +4,7 @@
     <div class="search-page__field">
       <search-icon class="search-page__icon" />
       <v-text-field
+        ref="searchField"
         v-model="searchQuery"
         :loading="isLoading"
         class="search-page__input"
@@ -14,26 +15,30 @@
       />
     </div>
 
-    <div class="mt-20">
+    <div class="mt-48">
       <masonry-images-grid
         :colCount.sync="colCount"
-        :images="images"
-        @open-details="openDetails"
+        :images="masonryImages"
       />
 
       <no-ssr>
         <infinite-loading
           v-if="searchQuery.length"
           ref="infiniteLoading"
+          spinner="spiral"
           @infinite="infiniteHandler"
         >
           <span slot="no-more" />
-          <v-card
+          <div
             slot="no-results"
-            class="text-xs-center py-20"
+            class="search-page__no-results"
           >
-            No Result Found
-          </v-card>
+            <p>{{ $t('Search.label.placeholder', { searchQuery } ) }}</p>
+            <img
+              :src="noResultsImage"
+              class="mt-40"
+            >
+          </div>
         </infinite-loading>
       </no-ssr>
     </div>
@@ -42,8 +47,10 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import InfiniteLoading from 'vue-infinite-loading';
+
+import noResultsImage from '@/assets/img/no-results.png';
 
 import axios from '@/plugins/axios';
 
@@ -75,11 +82,24 @@ export default {
     return {
       images: [],
       isLoading: false,
+      noResultsImage,
       pageInfo: null,
       rawImages: [],
       searchQuery,
       timer: null,
     };
+  },
+  computed: {
+    ...mapGetters(['getFeaturedImages']),
+    featuredImages() {
+      return this.sortImagesByHeight(this.getFeaturedImages, this.colCount);
+    },
+    masonryImages() {
+      if (this.images.length > 0 || this.searchQuery.length > 0) {
+        return this.images;
+      }
+      return this.featuredImages;
+    },
   },
   head() {
     return {
@@ -89,12 +109,13 @@ export default {
     };
   },
   mounted() {
-    if (this.searchQuery) {
-      this.onKeywordChange();
+    this.onKeywordChange();
+    if (!this.searchQuery) {
+      this.$refs.searchField.focus();
     }
   },
   methods: {
-    ...mapActions(['toggleImageDetailsDialog']),
+    ...mapActions(['fetchFeaturedImages']),
     async infiniteHandler($state) {
       const { colCount, pageInfo, rawImages } = this;
       if (pageInfo && pageInfo.hasNextPage) {
@@ -111,8 +132,6 @@ export default {
         } catch (err) {
           this.isLoading = false;
         }
-      } else {
-        $state.complete();
       }
     },
     matchRouteToSearchQuery() {
@@ -135,8 +154,11 @@ export default {
       }
     },
     async onKeywordChange(e) {
-      const { colCount, searchQuery } = this;
+      const { colCount, getFeaturedImages, searchQuery } = this;
       if (searchQuery.length === 0) {
+        if (getFeaturedImages.length === 0) {
+          this.fetchFeaturedImages();
+        }
         this.isLoading = false;
         this.images = [];
         this.pageInfo = null;
@@ -147,36 +169,28 @@ export default {
         this.timer = setTimeout(() => this.onKeywordChange(), 300);
         return;
       }
+
       this.isLoading = true;
       try {
         const { data, pageInfo } = (await axios.get(
           `/api/search?q=${encodeURIComponent(searchQuery)}`
         )).data;
-        this.isLoading = false;
         this.rawImages = data;
         this.images = this.sortImagesByHeight(data, colCount);
         this.pageInfo = pageInfo;
+
         const { stateChanger } = this.$refs.infiniteLoading;
-        if (pageInfo.hasNextPage) {
-          stateChanger.reset();
-        } else {
-          if (data.length) {
-            stateChanger.loaded();
-          }
-          stateChanger.complete();
+        stateChanger.reset();
+        if (data.length) {
+          stateChanger.loaded();
         }
         this.matchRouteToSearchQuery();
+
+        this.isLoading = false;
+        stateChanger.complete();
       } catch (err) {
         this.isLoading = false;
       }
-    },
-    openDetails(image, options) {
-      this.toggleImageDetailsDialog({
-        ...options,
-        image,
-        isFetched: true,
-        isOpen: true,
-      });
     },
   },
 };
@@ -213,5 +227,16 @@ export default {
 }
 .search-page__input /deep/ input::placeholder {
   text-align: center;
+}
+
+.search-page__no-results {
+  color: color(gray-4a);
+
+  @extend .text--size-18, .py-48;
+
+  img {
+    width: 248px;
+    height: 176px;
+  }
 }
 </style>

@@ -16,7 +16,7 @@
 
     <v-select
       v-model="tags"
-      :label="$t('Upload.placeholder.addTags')"
+      :label="$t('Upload.label.addTags')"
       :placeholder="$t('Upload.placeholder.tags')"
       :rules="tagsRules"
       append-icon=""

@@ -67,6 +67,7 @@
           flat
           icon
           large
+          @click="isOpen = false"
         >
           <search-icon />
         </v-btn>
@@ -139,7 +140,7 @@ export default {
       return this.$route.name !== 'search';
     },
     isShowUploadButton() {
-      return SHOW_UPLOAD_BUTTON_ROUTES.has(this.$route.name);
+      return SHOW_UPLOAD_BUTTON_ROUTES.has(this.$route.name) && !this.isOpen;
     },
     menuItems() {
       return [

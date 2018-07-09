@@ -1,7 +1,7 @@
 <template>
   <div class="landing-page">
 
-    <the-landing-carousel :images="images" />
+    <the-landing-carousel :images="getFeaturedImages" />
 
     <div class="landing-page__banner">
       <h1 class="landing-page__banner__slogan--line-1">
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import axios from '~/plugins/axios';
+import { mapGetters } from 'vuex';
 
 import TheLandingCarousel from '@/components/TheLandingCarousel';
 
@@ -34,16 +34,18 @@ export default {
   components: {
     TheLandingCarousel,
   },
-  asyncData() {
-    return axios
-      .get('/api/assets/featured/list')
-      .then((res) => ({ images: res.data }))
-      .catch(() => ({ images: [] }));
+  async fetch({ store }) {
+    if (store.state.ui.featuredImages.length === 0) {
+      await store.dispatch('fetchFeaturedImages');
+    }
   },
   data() {
     return {
       images: [],
     };
+  },
+  computed: {
+    ...mapGetters(['getFeaturedImages']),
   },
   head() {
     return {

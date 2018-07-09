@@ -13,6 +13,7 @@
       <user-badge
         :user="image.user"
         class="masonry-images-grid__button masonry-images-grid__button--user"
+        type="upload"
       />
       <like-button
         :count="image.like.count"
@@ -30,6 +31,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 import LikeButton from '~/components/LikeButton';
 import UserBadge from '~/components/UserBadge';
 
@@ -65,8 +68,14 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['toggleImageDetailsDialog']),
     openDetails(image, options = {}) {
-      this.$emit('open-details', image, options);
+      this.toggleImageDetailsDialog({
+        ...options,
+        image,
+        isFetched: true,
+        isOpen: true,
+      });
     },
   },
 };
@@ -167,6 +176,8 @@ export const mixin = {
     &--user {
       top: 20px;
       left: 18px;
+
+      width: auto;
     }
   }
 

@@ -12,7 +12,7 @@
         </div>
 
         <the-likecoin-amount
-          :amount="58.2500"
+          :amount="0"
           :avatar="getUserInfo.avatar"
           :likecoinId="getUserInfo.likecoinId"
           class="my-48"
@@ -29,6 +29,29 @@
         :colCount.sync="colCount"
         :images="images"
       />
+
+      <section
+        v-if="images.length === 0"
+        class="user-page__no-results"
+      >
+        <p class="text--size-18">
+          {{ $t('MyImages.label.placeholder') }}
+        </p>
+
+        <v-btn
+          v-if="isCurrentUser"
+          :to="{ name: 'upload' }"
+          class="btn--likecoin px-24 mt-12 mb-64"
+          color="secondary"
+        >
+          <v-icon>add_circle_outline</v-icon>
+          <span>{{ $t('Landing.Banner.button.uploadImage') }}</span>
+        </v-btn>
+        <br>
+
+        <img :src="noResultsImage">
+      </section>
+
     </div>
   </section>
 </template>
@@ -44,6 +67,8 @@ import MasonryImagesGrid, {
 import TheLikeCoinAmount from '~/components/TheLikeCoinAmount';
 import UserBadge from '~/components/UserBadge';
 
+import noResultsImage from '~/assets/img/no-results.png';
+
 export default {
   name: 'id',
   components: {
@@ -52,6 +77,11 @@ export default {
     UserBadge,
   },
   mixins: [masonryImagesGridMixin],
+  data() {
+    return {
+      noResultsImage,
+    };
+  },
   computed: {
     ...mapGetters(['getUserInfo']),
     isCurrentUser() {
@@ -95,5 +125,16 @@ export default {
     padding-left: 0 !important;
   }
   @extend .pb-32;
+}
+
+.user-page {
+  &__no-results {
+    @extend .text--align-center;
+
+    img {
+      width: 248px;
+      height: 176px;
+    }
+  }
 }
 </style>
