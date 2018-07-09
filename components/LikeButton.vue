@@ -1,20 +1,31 @@
 <template>
   <v-btn
-    v-bind="{ block, flat, loading }"
+    v-bind="{ block, color, flat, loading }"
     class="btn--likecoin"
-    color="likecoin"
     depressed
     @click="onClick"
-  >{{ formattedCount }}</v-btn>
+  >
+    <clap-icon />
+    {{ formattedCount }}
+  </v-btn>
 </template>
 
 <script>
+import ClapIcon from '@/assets/icons/clap.svg';
+
 export default {
   name: 'like-button',
+  components: {
+    ClapIcon,
+  },
   props: {
     block: {
       type: [String, Boolean],
       default: false,
+    },
+    color: {
+      type: String,
+      default: 'likecoin',
     },
     flat: {
       type: [String, Boolean],
@@ -52,3 +63,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import '~assets/css/classes';
+
+svg {
+  width: 32px;
+  height: 32px;
+
+  @extend .mr-8;
+}
+</style>

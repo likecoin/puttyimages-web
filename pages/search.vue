@@ -199,6 +199,10 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/css/classes';
 
+.search-page.page-container {
+  @extend .px-0--xs, .pb-64;
+}
+
 .application .search-page__input /deep/ .input-group__details:before {
   background-color: transparent;
 }

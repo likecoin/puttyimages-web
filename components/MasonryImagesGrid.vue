@@ -5,27 +5,39 @@
       :key="image.url"
       class="masonry-images-grid__item"
     >
-      <img
-        :src="image.url"
-        class="masonry-images-grid__image"
+      <div
+        class="masonry-images-grid__item-overlay"
         @click="openDetails(image)"
-      >
+      />
+
       <user-badge
         :user="image.user"
         class="masonry-images-grid__button masonry-images-grid__button--user"
         type="upload"
       />
-      <like-button
-        :count="image.like.count"
-        class="masonry-images-grid__button masonry-images-grid__button--like"
-      />
-      <v-btn
-        class="btn--likecoin masonry-images-grid__button masonry-images-grid__button--use"
-        color="secondary"
-        @click="openDetails(image, { isUseImage: true })"
+
+      <img
+        :src="image.url"
+        class="masonry-images-grid__image"
+        @click="openDetails(image)"
       >
-        Use Image
-      </v-btn>
+
+      <div class="masonry-images-grid__actions">
+        <like-button
+          :count="image.like.count"
+          class="masonry-images-grid__button masonry-images-grid__button--like"
+          color="white"
+        />
+
+        <v-btn
+          class="btn--likecoin masonry-images-grid__button masonry-images-grid__button--use"
+          color="secondary"
+          depressed
+          @click="openDetails(image, { isUseImage: true })"
+        >
+          {{ $t('General.button.useImage') }}
+        </v-btn>
+      </div>
     </div>
   </div>
 </template>
@@ -121,7 +133,6 @@ export const mixin = {
 
 .masonry-images-grid {
   column-gap: 10px;
-
   @include desktop-and-up {
     column-count: 3;
   }
@@ -136,53 +147,100 @@ export const mixin = {
     position: relative;
 
     display: flex;
-    align-items: center;
     justify-content: center;
-
-    break-inside: avoid;
-    page-break-inside: avoid;
 
     min-height: 180px;
 
-    padding-bottom: 10px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    @extend .mb-12;
+    @include tablet-and-up {
+      flex-direction: row;
+    }
+    @include mobile-only {
+      flex-direction: column;
+    }
+
+    &:not(:first-child) {
+      @extend .mt-64--xs;
+    }
+
+    &-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      opacity: 0;
+      background-color: rgba(0, 0, 0, 0.53);
+
+      @extend .hide--xs;
+    }
   }
 
   &__image {
+    align-self: center;
+
     max-width: 100%;
     max-height: (920 / 3) * 2px;
   }
 
-  &__button {
-    position: absolute;
+  &__button--user,
+  &__actions {
+    @include tablet-and-up {
+      position: absolute;
 
-    visibility: hidden;
-
-    width: 138px;
-
-    &--like {
-      bottom: 15px;
-      left: 15px;
-
-      font-size: 14px;
-    }
-
-    &--use {
-      right: 12px;
-      bottom: 15px;
-
-      font-size: 16px;
-    }
-
-    &--user {
-      top: 20px;
-      left: 18px;
-
-      width: auto;
+      opacity: 0;
     }
   }
 
-  &__item:hover .masonry-images-grid__button {
-    visibility: visible;
+  &__button--user {
+    top: 20px;
+    left: 16px;
+
+    @extend .pa-16--xs;
+    @include tablet-and-up {
+      :global(a) {
+        color: color(white);
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    width: 100%;
+
+    @extend .pa-4;
+    @include tablet-and-up {
+      bottom: 8px;
+    }
+  }
+
+  &__item > * {
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  &__item:hover > * {
+    opacity: 1;
+  }
+
+  &__button {
+    min-width: 138px;
+
+    border-radius: 0;
+
+    &--like {
+      @extend .text--size-14;
+    }
+
+    &--use {
+      @extend .text--size-16;
+    }
   }
 }
 </style>
