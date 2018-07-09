@@ -4,7 +4,10 @@
     :class="classObject"
   >
     <div @click="onClick">
-      <nuxt-link :to="userRoute">
+      <nuxt-link
+        :to="userRoute"
+        class="d-flex"
+      >
         <img
           :src="avatar"
           class="user-badge__avatar"

@@ -21,6 +21,10 @@ $class-style-map: (
   green: (
     color: color(white),
     bg-color: color(like-green),
+  ),
+  white: (
+    color: color(like-green),
+    bg-color: color(white),
   )
 );
 
