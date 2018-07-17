@@ -152,7 +152,7 @@ export default {
       isExceedMaxSize: false,
       isImageLoading: false,
       isShowUploadImageForm: false,
-      acceptInput: SUPPORTED_FILE_TYPES.map((e) => `image/${e}`).join(', '),
+      acceptInput: SUPPORTED_FILE_TYPES.join(', '),
       supportedFileTypes: SUPPORTED_FILE_TYPES.reduce(
         (acc, current) => `${acc}, ${current}`
       ),
