@@ -42,7 +42,7 @@ export function validateImage(img, inputSHA256, checkSHA256) {
   if (img.size > MAX_IMAGE_SIZE)
     throw new ValidationError('image size too large');
   const type = imageType(img.buffer);
-  if (!SUPPORTED_IMAGE_TYPE.has(type && type.ext))
+  if (!SUPPORTED_IMAGE_TYPE.has(type && type.mime))
     throw new ValidationError('unsupported file format!');
   if (checkSHA256 !== inputSHA256)
     throw new ValidationError('image SHA not match');
