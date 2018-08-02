@@ -2,7 +2,7 @@
   "General": {
     "label": {
       "puttyimages": "puttyimages",
-      "sponsor": "Supported by LikeCoin",
+      "sponsor": "Powered by LikeCoin",
       "welcome": "Welcome!"
     },
     "button": {
@@ -38,8 +38,8 @@
   "Landing": {
     "Banner": {
       "label": {
-        "sloganLine1": "Making profit with free to use photos",
-        "sloganLine2": "Rewarding Contents by Proof of Creativity"
+        "sloganLine1": "Making passive income with Creative Commons photos",
+        "sloganLine2": ""
       },
       "button": {
         "uploadImage": "Upload Your Image"
