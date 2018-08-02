@@ -1,0 +1,104 @@
+version: 2
+jobs:
+  test:
+    working_directory: ~/puttyimages-web
+    docker:
+      - image: node:10
+      - image: postgres:9.4.1
+      - image: ipfs/go-ipfs:v0.4.15
+    environment:
+      - API_HOST: http://nuxt:3000
+      - CDN_HOST: http://localhost:8080
+      - IPFS_HOST: http://localhost:5001
+      - IPFS_MASTER: http://localhost:5001
+      - DB_HOSTNAME: localhost
+    steps:
+      - run:
+          name: update host file
+          command: |
+            echo 127.0.0.1 nuxt | tee -a /etc/hosts
+            cat /etc/hosts
+      - run: apt update && apt install git
+      - checkout
+      - restore_cache:
+          key: puttyimages-web-{{ .Environment.CACHE_UUID }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}-{{ checksum ".circleci/config.yml" }}
+      - run:
+          name: Dependencies
+          command: npm install
+      - run:
+          name: Lint Test
+          command: npm run lint
+      - run:
+          name: Build
+          command: npm run build
+      - run:
+          name: Server Test
+          command: npm start
+          background: true
+      - run:
+          name: wget Test
+          command: |
+            sleep 5
+            wget -O- --retry-connrefused --waitretry=5 -t 10 http://127.0.0.1:3000/ > /dev/null
+      - run:
+          name: API Test
+          command: npm test
+      - save_cache:
+          key: puttyimages-web-{{ .Environment.CACHE_UUID }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}-{{ checksum ".circleci/config.yml" }}
+          paths:
+            - ./node_modules
+  deploy_rinkeby:
+    working_directory: ~/puttyimages-web
+    docker:
+      - image: lakoo/node-gcloud-docker
+    environment:
+      - DEBIAN_FRONTEND: noninteractive
+      - TERM: dumb
+      - GOOGLE_APPLICATION_CREDENTIALS: /tmp/account-auth.json
+    steps:
+      - checkout
+      - run:
+          name: Setup gcloud
+          command: |
+            echo ${GCLOUD_SERVICE_KEY} | base64 -d > /account-auth.json
+            gcloud auth activate-service-account --key-file /account-auth.json
+            gcloud config set project ${TEST_PROJECT_NAME}
+            gcloud --quiet config set container/cluster ${TEST_CLUSTER_NAME}
+            gcloud config set compute/zone ${CLOUDSDK_COMPUTE_ZONE}
+            gcloud --quiet container clusters get-credentials ${TEST_CLUSTER_NAME}
+      - setup_docker_engine
+      - run:
+          name: Build image
+          command: |
+            gcloud docker -- pull us.gcr.io/${TEST_PROJECT_NAME}/puttyimages-web:latest || true
+            docker build . -t puttyimages-web --cache-from us.gcr.io/${TEST_PROJECT_NAME}/puttyimages-web:latest \
+            --build-arg SENTRY_DSN=${TEST_SENTRY_DSN}
+            docker tag puttyimages-web:latest us.gcr.io/${TEST_PROJECT_NAME}/puttyimages-web:latest
+            docker tag puttyimages-web:latest us.gcr.io/${TEST_PROJECT_NAME}/puttyimages-web:${CIRCLE_SHA1}
+      - run:
+          name: Push images
+          command: |
+            gcloud docker -- push us.gcr.io/${TEST_PROJECT_NAME}/puttyimages-web:latest
+            gcloud docker -- push us.gcr.io/${TEST_PROJECT_NAME}/puttyimages-web:${CIRCLE_SHA1}
+      - deploy:
+          name: Deploy
+          command: |
+            kubectl patch deployment puttyimages-web -p '{"spec":{"template":{"spec":{"containers":[{"name":"puttyimages","image":"us.gcr.io/'"$PROJECT_NAME"'/puttyimages-web:'"$CIRCLE_SHA1"'"}]}}}}'
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test
+      - hold_deploy_rinkeby:
+          type: approval
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+                - /feature.*/
+          requires:
+           - test
+      - deploy_rinkeby:
+          requires:
+            - hold_deploy_rinkeby
