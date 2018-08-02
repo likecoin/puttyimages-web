@@ -71,7 +71,7 @@ jobs:
           name: Build image
           command: |
             gcloud docker -- pull us.gcr.io/${TEST_PROJECT_NAME}/puttyimages-web:latest || true
-            docker build . -t puttyimages-web --cache-from us.gcr.io/${TEST_PROJECT_NAME}/puttyimages-web:latest \
+            docker build . -f Dockerfile.production -t puttyimages-web --cache-from us.gcr.io/${TEST_PROJECT_NAME}/puttyimages-web:latest \
             --build-arg SENTRY_DSN=${TEST_SENTRY_DSN}
             docker tag puttyimages-web:latest us.gcr.io/${TEST_PROJECT_NAME}/puttyimages-web:latest
             docker tag puttyimages-web:latest us.gcr.io/${TEST_PROJECT_NAME}/puttyimages-web:${CIRCLE_SHA1}
@@ -83,7 +83,7 @@ jobs:
       - deploy:
           name: Deploy
           command: |
-            kubectl patch deployment puttyimages-web -p '{"spec":{"template":{"spec":{"containers":[{"name":"puttyimages","image":"us.gcr.io/'"$PROJECT_NAME"'/puttyimages-web:'"$CIRCLE_SHA1"'"}]}}}}'
+            kubectl patch deployment puttyimages-web -p '{"spec":{"template":{"spec":{"containers":[{"name":"puttyimages","image":"us.gcr.io/'"$TEST_PROJECT_NAME"'/puttyimages-web:'"$CIRCLE_SHA1"'"}]}}}}'
 workflows:
   version: 2
   build_and_test:
