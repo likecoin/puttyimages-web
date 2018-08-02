@@ -83,7 +83,7 @@ jobs:
       - deploy:
           name: Deploy
           command: |
-            kubectl patch deployment puttyimages-web -p '{"spec":{"template":{"spec":{"containers":[{"name":"puttyimages","image":"us.gcr.io/'"$PROJECT_NAME"'/puttyimages-web:'"$CIRCLE_SHA1"'"}]}}}}'
+            kubectl patch deployment puttyimages-web -p '{"spec":{"template":{"spec":{"containers":[{"name":"puttyimages","image":"us.gcr.io/'"$TEST_PROJECT_NAME"'/puttyimages-web:'"$CIRCLE_SHA1"'"}]}}}}'
 workflows:
   version: 2
   build_and_test:
