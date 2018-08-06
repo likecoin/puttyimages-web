@@ -7,10 +7,10 @@
         ref="searchField"
         v-model="searchQuery"
         :loading="isLoading"
+        :placeholder="$t('Search.label.searchAnyImage')"
         class="search-page__input"
         color="brown"
         hide-details
-        placeholder="Search for any image"
         @keyup.native="onKeywordChange"
       />
     </div>
@@ -129,6 +129,7 @@ export default {
           this.images = this.sortImagesByHeight(this.rawImages, colCount);
           this.pageInfo = nextPageInfo;
           $state.loaded();
+          this.checkIsSearchCompleted();
         } catch (err) {
           this.isLoading = false;
         }
@@ -187,9 +188,14 @@ export default {
         this.matchRouteToSearchQuery();
 
         this.isLoading = false;
-        stateChanger.complete();
+        this.checkIsSearchCompleted();
       } catch (err) {
         this.isLoading = false;
+      }
+    },
+    checkIsSearchCompleted() {
+      if (this.pageInfo && !this.pageInfo.hasNextPage) {
+        this.$refs.infiniteLoading.stateChanger.complete();
       }
     },
   },

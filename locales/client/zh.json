@@ -53,7 +53,8 @@
   },
   "Search": {
     "label": {
-      "placeholder": "Sorry, there are no image for {searchQuery} yet"
+      "placeholder": "Sorry, there are no image for {searchQuery} yet",
+      "searchAnyImage": "Search for any images"
     }
   },
   "Upload": {
