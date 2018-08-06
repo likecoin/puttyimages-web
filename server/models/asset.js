@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
       },
       description: DataTypes.TEXT,
+      exif: DataTypes.JSONB,
       fingerprint: {
         allowNull: false,
         get() {
@@ -49,6 +50,12 @@ module.exports = (sequelize, DataTypes) => {
           key: 'name',
           model: 'license',
         },
+        type: DataTypes.TEXT,
+      },
+      link: DataTypes.TEXT,
+      type: {
+        allowNull: false,
+        defaultValue: '',
         type: DataTypes.TEXT,
       },
       updatedAt: {
@@ -124,6 +131,11 @@ module.exports = (sequelize, DataTypes) => {
         model: db.user,
         required: userRequired,
         where: userWhere,
+      },
+      {
+        as: 'stats',
+        attributes: ['viewCount', 'downloadCount'],
+        model: db.assetStats,
       },
     ];
   };

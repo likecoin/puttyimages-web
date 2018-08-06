@@ -10,6 +10,7 @@ const config = require('../../config/database');
 const asset = require('./asset');
 const assetLike = require('./asset_like');
 const assetTag = require('./asset_tag');
+const assetStats = require('./asset_stats');
 const license = require('./license');
 const tag = require('./tag');
 const user = require('./user');
@@ -25,6 +26,7 @@ const db = {};
 db.asset = sequelize.import('asset', asset);
 db.assetLike = sequelize.import('assetLike', assetLike);
 db.assetTag = sequelize.import('assetTag', assetTag);
+db.assetStats = sequelize.import('assetStats', assetStats);
 db.license = sequelize.import('license', license);
 db.tag = sequelize.import('tag', tag);
 db.user = sequelize.import('user', user);
@@ -42,6 +44,11 @@ db.asset.belongsTo(db.license, { as: 'assetLicense', foreignKey: 'license' });
 db.asset.belongsTo(db.user, { foreignKey: 'wallet', targetKey: 'wallet' });
 db.asset.hasOne(db.assetLike, { as: 'like', foreignKey: 'asset_fingerprint' });
 db.assetLike.belongsTo(db.asset, { foreignKey: 'asset_fingerprint' });
+db.asset.hasOne(db.assetStats, {
+  as: 'stats',
+  foreignKey: 'asset_fingerprint',
+});
+db.assetStats.belongsTo(db.asset, { foreignKey: 'asset_fingerprint' });
 db.license.hasMany(db.asset, { foreignKey: 'license' });
 
 db.asset.belongsToMany(db.tag, {
