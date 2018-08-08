@@ -10,6 +10,8 @@ $color-map: (
   primary: color(like-green),
   secondary: color(like-brown),
   white: white,
+  gray-73: color(gray-73),
+  gray-9b: color(gray-9b),
 );
 @mixin color-modifiers {
   @each $key, $value in $color-map {

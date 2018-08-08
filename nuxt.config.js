@@ -62,7 +62,7 @@ module.exports = {
       { href: '/favicon.png', rel: 'icon', type: 'image/x-icon' },
       {
         href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons',
+          'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Material+Icons',
         rel: 'stylesheet',
         type: 'text/css',
       },
