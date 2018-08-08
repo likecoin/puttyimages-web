@@ -8,7 +8,13 @@
         :to="userRoute"
         class="d-flex"
       >
+        <!-- placeholder icon div without likecoin id -->
+        <div
+          v-if="!!link"
+          class="user-badge__avatar-placeholder"
+        />
         <img
+          v-else
           :src="avatar"
           class="user-badge__avatar"
         >
@@ -25,8 +31,20 @@
         class="user-badge__likecoin-id"
         @click="onClick"
       >
-        <nuxt-link :to="userRoute">
-          {{ label }}
+        <a
+          v-if="link"
+          :href="link"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {{ formattedLabel }}
+          <slot name="from" />
+        </a>
+        <nuxt-link
+          v-else
+          :to="userRoute"
+        >
+          {{ formattedLabel }}
         </nuxt-link>
       </div>
     </div>
@@ -51,6 +69,14 @@ export default {
     color: {
       ...ColorPropType,
       default: 'primary',
+    },
+    label: {
+      default: '',
+      type: String,
+    },
+    link: {
+      default: '',
+      type: String,
     },
     type: {
       default: 'min',
@@ -77,7 +103,8 @@ export default {
     isShowGreeting() {
       return this.type === USER_BADGE_TYPE.MENU;
     },
-    label() {
+    formattedLabel() {
+      if (this.label) return this.label;
       switch (this.type) {
         case USER_BADGE_TYPE.UPLOAD:
           return `Uploaded by ${this.user.displayName}`;
@@ -117,13 +144,21 @@ export default {
   }
 }
 
-.user-badge__avatar {
+.user-badge__avatar,
+.user-badge__avatar-placeholder {
   width: 50px;
   height: 50px;
   margin-right: 12px;
 
   border-radius: 50%;
-  background-color: #ddd;
+}
+
+.user-badge__avatar {
+  background-color: #fff;
+
+  &-placeholder {
+    background-color: color(gray-e6);
+  }
 
   .user-badge--large & {
     width: 84px;
@@ -136,5 +171,9 @@ export default {
 .user-badge__greeting {
   opacity: 0.5;
   color: inherit;
+}
+
+.user-badge__likecoin-id {
+  @extend .text--height-1-2;
 }
 </style>

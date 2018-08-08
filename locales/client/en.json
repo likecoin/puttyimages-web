@@ -129,11 +129,25 @@
   },
   "ImageDetails": {
     "label": {
-      "description": "Image Description",
-      "tags": "Tags"
+      "cc0": "CC0 Creative Commons",
+      "cc0-details": "Free for commercial use<br>No attribution is required",
+      "cc-by-sa": "CC BY-SA Attribution-ShareAlike",
+      "cc-by-sa-details": "Free for commerical<br>Attribution is required<br>Distribute under the same license",
+      "cc-by": "CC BY Attribution",
+      "cc-by-details": "Free for commerical use<br>Attribution is required<br>No additional restriction",
+      "cc-by-nd": "CC BY-ND Attribution-NoDerivatives",
+      "cc-by-nd-details": "Attribution is required<br>Distribution for derivatives is not allowed",
+      "imageType": "Image type",
+      "resolution": "Resolution",
+      "created": "Created",
+      "uploaded": "Uploaded",
+      "views": "0 View | 1 View | {count} Views",
+      "downloads": "0 Download | 1 Download | {count} Downloads",
+      "from": "from {0}",
+      "claimPhoto": "I am this photographer"
     },
     "button": {
-      "useOrDownload": "Use or Download This Image",
+      "download": "Download",
       "reportAbuse": "Report Image Right Violations / Abuse"
     }
   },
@@ -191,5 +205,9 @@
     "button": {
       "register": "Register LikeCoin Account"
     }
+  },
+  "DownloadImageDialog": {
+    "title": "Image Downloading",
+    "content": "Like this image? Please don’t hesitate to give your {0}. Each Like you given will help the photographer generate {1}"
   }
 }

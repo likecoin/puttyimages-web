@@ -1,3 +1,5 @@
+export const IS_DEV = process.env.NODE_ENV !== 'production';
+
 export const ONE_DATE_IN_MS = 86400000;
 
 export const SUPPORTED_IMAGE_TYPE = new Set(['image/jpeg', 'image/png']);

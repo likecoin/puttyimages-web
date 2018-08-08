@@ -94,6 +94,11 @@ const actions = {
     }
   },
 };
+
+const getters = {
+  getIsImageDetailsDialogOpen({ isOpen }) {
+    return isOpen;
+  },
 };
 
 const mutations = {
@@ -106,6 +111,7 @@ const mutations = {
 
 export default {
   actions,
+  getters,
   mutations,
   namespaced: true,
   state: initialState,

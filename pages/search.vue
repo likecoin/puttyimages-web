@@ -1,48 +1,50 @@
 <template>
-  <div class="search-page page-container page-container--fluid">
-
-    <div class="search-page__field">
-      <search-icon class="search-page__icon" />
-      <v-text-field
-        ref="searchField"
-        v-model="searchQuery"
-        :loading="isLoading"
-        :placeholder="$t('Search.label.searchAnyImage')"
-        class="search-page__input"
-        color="brown"
-        hide-details
-        @keyup.native="onKeywordChange"
-      />
+  <div class="search-page">
+    <div class="page-container page-container--fluid">
+      <div class="search-page__field">
+        <search-icon class="search-page__icon" />
+        <v-text-field
+          ref="searchField"
+          v-model="searchQuery"
+          :loading="isLoading"
+          :placeholder="$t('Search.label.searchAnyImage')"
+          class="search-page__input"
+          color="brown"
+          hide-details
+          @keyup.native="onKeywordChange"
+        />
+      </div>
     </div>
 
-    <div class="mt-48">
-      <masonry-images-grid
-        :colCount.sync="colCount"
-        :images="masonryImages"
-      />
+    <div class="page-container page-container--wide">
+      <div class="mt-48">
+        <masonry-images-grid
+          :colCount.sync="colCount"
+          :images="masonryImages"
+        />
 
-      <no-ssr>
-        <infinite-loading
-          v-if="searchQuery.length"
-          ref="infiniteLoading"
-          spinner="spiral"
-          @infinite="infiniteHandler"
-        >
-          <span slot="no-more" />
-          <div
-            slot="no-results"
-            class="search-page__no-results"
+        <no-ssr>
+          <infinite-loading
+            v-if="searchQuery.length"
+            ref="infiniteLoading"
+            spinner="spiral"
+            @infinite="infiniteHandler"
           >
-            <p>{{ $t('Search.label.placeholder', { searchQuery } ) }}</p>
-            <img
-              :src="noResultsImage"
-              class="mt-40"
+            <span slot="no-more" />
+            <div
+              slot="no-results"
+              class="search-page__no-results"
             >
-          </div>
-        </infinite-loading>
-      </no-ssr>
+              <p>{{ $t('Search.label.placeholder', { searchQuery } ) }}</p>
+              <img
+                :src="noResultsImage"
+                class="mt-40"
+              >
+            </div>
+          </infinite-loading>
+        </no-ssr>
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -59,13 +61,15 @@ import MasonryImagesGrid, {
 } from '~/components/MasonryImagesGrid';
 import SearchIcon from '~/assets/icons/search.svg';
 
+import ipldMixin from '~/util/mixins/ipld';
+
 export default {
   components: {
     InfiniteLoading,
     MasonryImagesGrid,
     SearchIcon,
   },
-  mixins: [masonryImagesGridMixin],
+  mixins: [masonryImagesGridMixin, ipldMixin],
   data() {
     const { q, tags } = this.$route.query;
 
@@ -94,9 +98,15 @@ export default {
     featuredImages() {
       return this.sortImagesByHeight(this.getFeaturedImages, this.colCount);
     },
+    imagesWithIpld() {
+      return this.images.map((image, i) => ({
+        ...image,
+        ...this.iplds[i],
+      }));
+    },
     masonryImages() {
-      if (this.images.length > 0 || this.searchQuery.length > 0) {
-        return this.images;
+      if (this.imagesWithIpld.length > 0 || this.searchQuery.length > 0) {
+        return this.imagesWithIpld;
       }
       return this.featuredImages;
     },
@@ -107,6 +117,11 @@ export default {
         this.searchQuery ? `${this.searchQuery} - ` : ''
       }Search Images | puttyimages`,
     };
+  },
+  watch: {
+    images(list) {
+      this.fetchIplds(list.map(({ ipld }) => ipld));
+    },
   },
   mounted() {
     this.onKeywordChange();
@@ -205,36 +220,45 @@ export default {
 <style lang="scss" scoped>
 @import '~assets/css/classes';
 
-.search-page.page-container {
-  @extend .px-0--xs, .pb-64;
-}
-
 .application .search-page__input /deep/ .input-group__details:before {
   background-color: transparent;
 }
+
+.search-page {
+  @extend .pb-32;
+
+  .page-container {
+    @extend .px-0--xs;
+  }
+}
+
 .search-page__field {
   display: flex;
   align-items: center;
 
-  @include desktop-and-up {
-    width: 60%;
-  }
   margin: 0 auto;
-  padding: 0 16px;
 
   border-radius: 2px;
   background: #efefef;
+
+  @extend .px-16, .mx-12--xs;
+  @include desktop-and-up {
+    width: 60%;
+  }
 }
+
 .search-page__icon {
   width: 23px;
   height: 23px;
 
   color: #aaa;
 }
+
 .search-page__input {
   margin-left: 14px;
   padding: 14px 0;
 }
+
 .search-page__input /deep/ input::placeholder {
   text-align: center;
 }

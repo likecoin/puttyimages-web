@@ -55,6 +55,12 @@ module.exports = {
     '~/assets/css/main.scss',
   ],
   /*
+  ** Share environment variables for the client and server-side.
+  */
+  env: {
+    CDN_HOST: process.env.CDN_HOST,
+  },
+  /*
   ** Headers of the page
   */
   head: {
