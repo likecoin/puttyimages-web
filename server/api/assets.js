@@ -14,7 +14,9 @@ import { ONE_DATE_IN_MS, MAX_IMAGE_SIZE } from '../../constant';
 import { postLikeChain } from '../util/likechain';
 
 const bs58 = require('bs58');
+const exifParser = require('exif-parser');
 const imageSize = require('image-size');
+const imageType = require('image-type');
 const Multer = require('multer');
 const sha256 = require('js-sha256');
 
@@ -54,16 +56,16 @@ router.post(
       const metadata = JSON.parse(message);
 
       const {
-        creator,
         dateCreated,
         description,
         license,
         likeFingerprint,
         likeFootprint,
+        likeOwner,
         likePreviousVersion,
         uploadDate,
       } = metadata;
-      const userObj = await sequelize.user.findById(creator[0], {
+      const userObj = await sequelize.user.findById(likeOwner[0], {
         raw: true,
       });
       const { wallet } = userObj;
@@ -94,12 +96,39 @@ router.post(
         throw new ValidationError('license invalid');
       }
 
-      // check asset
       const { file: asset } = req;
       const hash256 = sha256(asset.buffer);
       const { height, width } = imageSize(asset.buffer);
       validateImage(asset, likeFingerprint, hash256);
       const hash256Bytes = Buffer.from(hash256, 'hex');
+
+      const type = imageType(req.file.buffer).ext;
+      const parser = exifParser.create(req.file.buffer);
+      const imageExif = parser.parse();
+
+      const {
+        DateTimeOriginal,
+        ExposureTime,
+        FNumber,
+        FocalLength,
+        ISO,
+        LensMake,
+        LensModel,
+        Make,
+        Model,
+      } = imageExif.tags;
+      const exif = {
+        DateTimeOriginal,
+        ExposureTime,
+        FNumber,
+        FocalLength,
+        ISO,
+        // trim as some camera may have extra unknonw padding for the following info
+        LensMake: typeof LensMake === 'string' ? LensMake.trim() : LensMake,
+        LensModel: typeof LensModel === 'string' ? LensModel.trim() : LensModel,
+        Make: typeof Make === 'string' ? Make.trim() : Make,
+        Model: typeof Model === 'string' ? Model.trim() : Model,
+      };
 
       const ipfs = await IpfsClient();
       const ipfsAdd = await ipfs.files.add(asset.buffer);
@@ -124,11 +153,13 @@ router.post(
         await sequelize.asset.create(
           {
             description,
+            exif,
             fingerprint: hash256Bytes,
             height,
             ipfs: bs58.decode(ipfsAdd[0].hash),
             ipld: bs58.decode(ipld.toBaseEncodedString()),
             license: licenseId,
+            type,
             wallet,
             width,
           },
@@ -143,6 +174,13 @@ router.post(
           { transaction }
         );
 
+        await sequelize.assetStats.create(
+          {
+            assetFingerprint: hash256Bytes,
+          },
+          { transaction }
+        );
+
         await sequelize.assetTag.bulkCreate(
           tags.map((name) => ({
             assetFingerprint: hash256Bytes,
@@ -153,13 +191,13 @@ router.post(
       });
 
       res.json({
-        creator,
         dateCreated,
         description,
         fingerprint: likeFingerprint,
         footprint: likeFootprint,
         ipfs: ipfsAdd[0].hash,
         license,
+        likeOwner,
         previousVersion: likePreviousVersion,
         uploadDate,
       });
@@ -193,6 +231,36 @@ router.get('/assets/featured/list', async (req, res, next) => {
   try {
     const assets = await sequelize.asset.getFeatured(sequelize);
     res.json(assets || []);
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.post('/assets/:id/view', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const assetStats = await sequelize.assetStats.findOrCreate({
+      where: { assetFingerprint: Buffer.from(id, 'hex') },
+    });
+    await assetStats[0].increment('view_count');
+
+    res.sendStatus(200);
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.post('/assets/:id/download', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const assetStats = await sequelize.assetStats.findOrCreate({
+      where: { assetFingerprint: Buffer.from(id, 'hex') },
+    });
+    await assetStats[0].increment('download_count');
+
+    res.sendStatus(200);
   } catch (e) {
     next(e);
   }

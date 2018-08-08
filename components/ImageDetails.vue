@@ -85,6 +85,7 @@
 
 <script>
 import LikeButton from '~/components/LikeButton';
+import { mapActions } from 'vuex';
 import ReportImageDialog from '~/components/ReportImageDialog';
 import UseImageDialog from '~/components/UseImageDialog';
 import UserBadge from '~/components/UserBadge';
@@ -124,9 +125,11 @@ export default {
     },
   },
   mounted() {
+    this.viewImage(this.image.fingerprint);
     this.openSubDialogIfNeeded();
   },
   methods: {
+    ...mapActions('ImageDetailsDialog', ['viewImage']),
     onImageLoaded() {
       this.isImageLoaded = true;
     },
