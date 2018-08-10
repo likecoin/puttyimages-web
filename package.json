@@ -16,7 +16,7 @@
     "sequelize:reseed": "npm run sequelize db:seed:undo:all && npm run sequelize db:seed:all",
     "start": "cross-env NODE_ENV=production node build/main.js",
     "stylelint": "stylelint -i .gitignore '**/*.{scss,vue}'",
-    "test": "jest"
+    "test": "jest && codecov"
   },
   "engines": {
     "node": ">=10.0.0"
@@ -72,6 +72,7 @@
     "babel-eslint": "^8.2.3",
     "babel-jest": "^23.0.1",
     "backpack-core": "^0.7.0",
+    "codecov": "^3.0.4",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -91,10 +92,12 @@
     "vue-svg-loader": "^0.5.0"
   },
   "jest": {
+    "collectCoverage": true,
     "collectCoverageFrom": [
       "server/**/*.js",
       "!server/seeders/*.js"
     ],
+    "coverageDirectory": "./coverage/",
     "globalSetup": "<rootDir>/__tests__/setup.js",
     "testMatch": [
       "<rootDir>/__tests__/**/*.test.js"
