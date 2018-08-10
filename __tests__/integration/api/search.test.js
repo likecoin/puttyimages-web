@@ -1,6 +1,6 @@
-const axios = require('axios');
-
 const api = require('./api');
+
+const { axios } = api;
 
 beforeAll(() => {
   jest.setTimeout(15000);
