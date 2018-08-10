@@ -5,4 +5,4 @@ docker_compose_test := docker-compose -f docker-compose.yml \
 
 test:
 	$(docker_compose_test) build 1>/dev/null 2>&1
-	$(docker_compose_test) run --rm test bash -c 'npm run lint && npm test'
+	$(docker_compose_test) run --rm nuxt bash -c 'npm run lint && npm test'
