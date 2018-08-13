@@ -16,7 +16,7 @@
     "sequelize:reseed": "npm run sequelize db:seed:undo:all && npm run sequelize db:seed:all",
     "start": "cross-env NODE_ENV=production node build/main.js",
     "stylelint": "stylelint -i .gitignore '**/*.{scss,vue}'",
-    "test": "jest"
+    "test": "jest --detectOpenHandles --forceExit"
   },
   "engines": {
     "node": ">=10.0.0"
