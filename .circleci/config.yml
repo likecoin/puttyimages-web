@@ -24,7 +24,7 @@ jobs:
           key: puttyimages-web-{{ .Environment.CACHE_UUID }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}-{{ checksum ".circleci/config.yml" }}
       - run:
           name: Dependencies
-          command: npm install
+          command: npm install && npm install -g codecov
       - run:
           name: Lint Test
           command: npm run lint
@@ -33,7 +33,7 @@ jobs:
           command: npm run build
       - run:
           name: API Test
-          command: npm test
+          command: npm test && codecov
       - run:
           name: Server Test
           command: npm start
