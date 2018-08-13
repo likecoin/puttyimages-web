@@ -1,8 +1,14 @@
-const axios = require('axios');
+import axiosist from 'axiosist';
+import express from 'express';
+import api from '../../../server/api';
 
-const { API_HOST } = process.env;
+const app = express();
+app.use('/api', api);
+
+const axios = axiosist(app);
 
 module.exports = {
-  get: (url) => axios.get(`${API_HOST}/api/${url}`),
-  post: (url, data) => axios.post(`${API_HOST}/api/${url}`, data),
+  axios,
+  get: (url) => axios.get(`/api/${url}`),
+  post: (url, data) => axios.post(`/api/${url}`, data),
 };

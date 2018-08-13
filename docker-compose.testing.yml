@@ -2,26 +2,20 @@ version: '3'
 
 services:
   nuxt:
-    environment:
-      API_HOST: http://nuxt:3000
-      LIKECOIN_AUTH_URL:
-
-  test:
     build:
       context: .
     depends_on:
     - db
     - ipfs
-    - nuxt
     image: puttyimages_test_nuxt:latest
     volumes:
       - ./:/usr/src/app
       - /usr/src/app/node_modules
     environment:
-      API_HOST: http://nuxt:3000
-      CDN_HOST: http://ipfs:8080
-      HOST: nuxt
+      API_HOST: http://localhost:3000
+      CDN_HOST: http://localhost:8080
+      HOST: localhost
       IPFS_HOST: http://ipfs:5001
       IPFS_MASTER: http://ipfs:5001
       LIKECHAIN_HOST: ${LIKECHAIN_HOST}
-      LIKECOIN_AUTH_URL: https://api.rinkeby.like.co/api/users/challenge
+      LIKECOIN_AUTH_URL:
