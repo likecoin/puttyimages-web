@@ -123,7 +123,7 @@ router.post(
         FNumber,
         FocalLength,
         ISO,
-        // trim as some camera may have extra unknonw padding for the following info
+        // trim as some camera may have extra unknown padding for the following info
         LensMake: typeof LensMake === 'string' ? LensMake.trim() : LensMake,
         LensModel: typeof LensModel === 'string' ? LensModel.trim() : LensModel,
         Make: typeof Make === 'string' ? Make.trim() : Make,
