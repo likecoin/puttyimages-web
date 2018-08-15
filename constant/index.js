@@ -21,7 +21,7 @@ export const LICENSE = {
   'cc-by': 'https://creativecommons.org/licenses/by/4.0/',
   'cc-by-nd': 'https://creativecommons.org/licenses/by-nd/4.0/',
   'cc-by-sa': 'https://creativecommons.org/licenses/by-sa/4.0/',
-  cc0: 'http://creativecommons.org/licenses/publicdomain/',
+  cc0: 'https://creativecommons.org/licenses/publicdomain/',
 };
 
 export const SUPPORTED_LICENSE = new Set(Object.keys(LICENSE));
