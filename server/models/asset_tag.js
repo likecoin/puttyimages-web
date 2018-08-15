@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         references: {
           key: 'fingerprint',
           model: 'asset',
+          onDelete: 'cascade',
         },
         type: DataTypes.BLOB,
       },

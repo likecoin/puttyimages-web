@@ -42,11 +42,16 @@ db.Sequelize = Sequelize;
 
 db.asset.belongsTo(db.license, { as: 'assetLicense', foreignKey: 'license' });
 db.asset.belongsTo(db.user, { foreignKey: 'wallet', targetKey: 'wallet' });
-db.asset.hasOne(db.assetLike, { as: 'like', foreignKey: 'asset_fingerprint' });
+db.asset.hasOne(db.assetLike, {
+  as: 'like',
+  foreignKey: 'asset_fingerprint',
+  onDelete: 'cascade',
+});
 db.assetLike.belongsTo(db.asset, { foreignKey: 'asset_fingerprint' });
 db.asset.hasOne(db.assetStats, {
   as: 'stats',
   foreignKey: 'asset_fingerprint',
+  onDelete: 'cascade',
 });
 db.assetStats.belongsTo(db.asset, { foreignKey: 'asset_fingerprint' });
 db.license.hasMany(db.asset, { foreignKey: 'license' });
