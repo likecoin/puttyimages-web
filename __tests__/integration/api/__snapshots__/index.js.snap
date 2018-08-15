@@ -1,0 +1,1469 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`get asset info 1`] = `
+Object {
+  "createdAt": "2018-06-20T00:00:00.000Z",
+  "description": "avocado",
+  "exif": null,
+  "fingerprint": "04f01eb90f7be1b1628218c5a9f1f87c5704bc79548f15673695a3e7264ba88b",
+  "height": 15,
+  "ipfs": "QmfEcrSyPS3K7WNRZLseGu3TqSpQqRToJsvT4svUe1UDmd",
+  "ipld": "zdpuAqoWEAALng3FeUcF8GY66UsK17wd3fGxr9XbXu6baoKLN",
+  "license": "cc0",
+  "like": Object {
+    "count": 0,
+  },
+  "link": null,
+  "stats": null,
+  "tags": Array [
+    Object {
+      "name": "avocado",
+    },
+    Object {
+      "name": "fruit",
+    },
+    Object {
+      "name": "berry",
+    },
+  ],
+  "type": "",
+  "updatedAt": "2018-06-20T00:00:00.000Z",
+  "url": "http://localhost:8080/ipfs/QmfEcrSyPS3K7WNRZLseGu3TqSpQqRToJsvT4svUe1UDmd",
+  "user": Object {
+    "avatar": null,
+    "displayName": "Alexandre",
+    "likecoinId": "likecoin_id_1",
+    "wallet": "address 1",
+  },
+  "wallet": "address 1",
+  "width": 20,
+}
+`;
+
+exports[`get featured assets 1`] = `
+Array [
+  Object {
+    "createdAt": "2018-06-20T00:50:00.000Z",
+    "description": "feijoa",
+    "exif": null,
+    "fingerprint": "cbc6631a005b10dcd9f45c86e0daa9a95319e568d85bfd5749d010cee1f05ecf",
+    "height": 150,
+    "ipfs": "QmWpZvgF4j9RuoPrj7o7xs6f8akDm9iGXBnQiUCqQw95xF",
+    "ipld": "zdpuAmpgiNUXWxpJALeJi9hfjdzvNFRkUu8ptEvaoAZm6zbEb",
+    "license": "cc-by",
+    "like": Object {
+      "count": 50,
+    },
+    "link": null,
+    "stats": null,
+    "tags": Array [
+      Object {
+        "name": "feijoa",
+      },
+      Object {
+        "name": "fruit",
+      },
+    ],
+    "type": "",
+    "updatedAt": "2018-06-20T00:50:00.000Z",
+    "url": "http://localhost:8080/ipfs/QmWpZvgF4j9RuoPrj7o7xs6f8akDm9iGXBnQiUCqQw95xF",
+    "user": Object {
+      "avatar": null,
+      "displayName": "Sébastien",
+      "likecoinId": "likecoin_id_3",
+      "wallet": "address 3",
+    },
+    "wallet": "address 3",
+    "width": 200,
+  },
+  Object {
+    "createdAt": "2018-06-20T00:40:00.000Z",
+    "description": "elderberry",
+    "exif": null,
+    "fingerprint": "706109d9762f6304f1c2fcc603bb2435efebb041d07459f2fc90e410917e1bdc",
+    "height": 300,
+    "ipfs": "QmWLPCfEQMLDY5nxM3NGEFjQBHucLmGPmRU72R6RNUDwiC",
+    "ipld": "zdpuB31BxhWgsdidbhMxawbLvguKn59WzP82sU4zKU2kzcHBj",
+    "license": "cc0",
+    "like": Object {
+      "count": 40,
+    },
+    "link": null,
+    "stats": null,
+    "tags": Array [
+      Object {
+        "name": "elderberry",
+      },
+      Object {
+        "name": "fruit",
+      },
+    ],
+    "type": "",
+    "updatedAt": "2018-06-20T00:40:00.000Z",
+    "url": "http://localhost:8080/ipfs/QmWLPCfEQMLDY5nxM3NGEFjQBHucLmGPmRU72R6RNUDwiC",
+    "user": Object {
+      "avatar": null,
+      "displayName": "Pooya",
+      "likecoinId": "likecoin_id_2",
+      "wallet": "address 2",
+    },
+    "wallet": "address 2",
+    "width": 400,
+  },
+  Object {
+    "createdAt": "2018-06-20T00:30:00.000Z",
+    "description": "dragonfruit",
+    "exif": null,
+    "fingerprint": "b53322cf5c9d946fcf796e36ca5a8c3f921241cc0e34565c1471d7ac142403af",
+    "height": 150,
+    "ipfs": "QmaADwDYHmkJrYcPyVF3YWFkuwYWB1VyhEtdefn1TpHowt",
+    "ipld": "zdpuAn5TQWWNZxG1kfgSq3v3f7wEe3pTJEVQjdhDhM3ebm3Fr",
+    "license": "cc-by-nd",
+    "like": Object {
+      "count": 30,
+    },
+    "link": null,
+    "stats": null,
+    "tags": Array [
+      Object {
+        "name": "fruit",
+      },
+      Object {
+        "name": "berry",
+      },
+      Object {
+        "name": "dragonfruit",
+      },
+    ],
+    "type": "",
+    "updatedAt": "2018-06-20T00:30:00.000Z",
+    "url": "http://localhost:8080/ipfs/QmaADwDYHmkJrYcPyVF3YWFkuwYWB1VyhEtdefn1TpHowt",
+    "user": Object {
+      "avatar": null,
+      "displayName": "Alexandre",
+      "likecoinId": "likecoin_id_1",
+      "wallet": "address 1",
+    },
+    "wallet": "address 1",
+    "width": 200,
+  },
+  Object {
+    "createdAt": "2018-06-20T01:30:00.000Z",
+    "description": "kiwifruit",
+    "exif": null,
+    "fingerprint": "b345cbc239feb011fb24640b75db37e4a329f7485f5d5331c3fedbbd74b54864",
+    "height": 200,
+    "ipfs": "QmVj5TG7RbzgVEgEuECoqZ1cucvYwPasy6YduAs2Shmsv5",
+    "ipld": "zdpuAwvtnzskcuS9t4dN8FHnZ8RdPWYSHWCHTCkdtTPTNLCx5",
+    "license": "cc-by",
+    "like": Object {
+      "count": 30,
+    },
+    "link": null,
+    "stats": null,
+    "tags": Array [
+      Object {
+        "name": "kiwifruit",
+      },
+      Object {
+        "name": "fruit",
+      },
+    ],
+    "type": "",
+    "updatedAt": "2018-06-20T01:30:00.000Z",
+    "url": "http://localhost:8080/ipfs/QmVj5TG7RbzgVEgEuECoqZ1cucvYwPasy6YduAs2Shmsv5",
+    "user": Object {
+      "avatar": null,
+      "displayName": "Alexandre",
+      "likecoinId": "likecoin_id_1",
+      "wallet": "address 1",
+    },
+    "wallet": "address 1",
+    "width": 150,
+  },
+  Object {
+    "createdAt": "2018-06-20T00:20:00.000Z",
+    "description": "cherry",
+    "exif": null,
+    "fingerprint": "8b0d0ba9e502d6e39771e129076a605036b4871cefa986352993e736495803ce",
+    "height": 300,
+    "ipfs": "QmTtSSQyJ5HyCAo9k478SapXQ7anf4YxEjhsRz1KuZdJBN",
+    "ipld": "zdpuAqNBiRBbEEsie4G44A3X5mSuNX3Bk1k9D5Y8b2Fmg1e33",
+    "license": "cc-by-sa",
+    "like": Object {
+      "count": 20,
+    },
+    "link": null,
+    "stats": null,
+    "tags": Array [
+      Object {
+        "name": "cherry",
+      },
+      Object {
+        "name": "fruit",
+      },
+      Object {
+        "name": "berry",
+      },
+    ],
+    "type": "",
+    "updatedAt": "2018-06-20T00:20:00.000Z",
+    "url": "http://localhost:8080/ipfs/QmTtSSQyJ5HyCAo9k478SapXQ7anf4YxEjhsRz1KuZdJBN",
+    "user": Object {
+      "avatar": null,
+      "displayName": "Sébastien",
+      "likecoinId": "likecoin_id_3",
+      "wallet": "address 3",
+    },
+    "wallet": "address 3",
+    "width": 400,
+  },
+  Object {
+    "createdAt": "2018-06-20T01:20:00.000Z",
+    "description": "jackfruit",
+    "exif": null,
+    "fingerprint": "d73adb98f680ee85f4fedd88bfa69e1928c864660b560097f41a912f30fa6e60",
+    "height": 400,
+    "ipfs": "Qmas9MoA9GAz5cgy9LuZqGD6iAPcKPARcaqT4wd5488jFn",
+    "ipld": "zdpuAzN4Jt95XEEptW9LrUsUHxvbiJNcx316fVo2E8HPD7cfM",
+    "license": "cc0",
+    "like": Object {
+      "count": 20,
+    },
+    "link": null,
+    "stats": null,
+    "tags": Array [
+      Object {
+        "name": "jackfruit",
+      },
+      Object {
+        "name": "fruit",
+      },
+    ],
+    "type": "",
+    "updatedAt": "2018-06-20T01:20:00.000Z",
+    "url": "http://localhost:8080/ipfs/Qmas9MoA9GAz5cgy9LuZqGD6iAPcKPARcaqT4wd5488jFn",
+    "user": Object {
+      "avatar": null,
+      "displayName": "Sébastien",
+      "likecoinId": "likecoin_id_3",
+      "wallet": "address 3",
+    },
+    "wallet": "address 3",
+    "width": 300,
+  },
+  Object {
+    "createdAt": "2018-06-20T00:10:00.000Z",
+    "description": "banana",
+    "exif": null,
+    "fingerprint": "537777bd7a5fc4ed91a74ef6fa7d8c26dc2385af90a9e48c0482a4b27d891b3f",
+    "height": 150,
+    "ipfs": "QmXfjc79upANgieA3CsaDg5bSJLGmdiHFJ4YRPtKM5ZB5m",
+    "ipld": "zdpuAqxDjsBiXnDkNfj3LwLWp7EhPoej52hXtYLcuVxa1SwcY",
+    "license": "cc-by",
+    "like": Object {
+      "count": 10,
+    },
+    "link": null,
+    "stats": null,
+    "tags": Array [
+      Object {
+        "name": "fruit",
+      },
+      Object {
+        "name": "banana",
+      },
+      Object {
+        "name": "berry",
+      },
+    ],
+    "type": "",
+    "updatedAt": "2018-06-20T00:10:00.000Z",
+    "url": "http://localhost:8080/ipfs/QmXfjc79upANgieA3CsaDg5bSJLGmdiHFJ4YRPtKM5ZB5m",
+    "user": Object {
+      "avatar": null,
+      "displayName": "Pooya",
+      "likecoinId": "likecoin_id_2",
+      "wallet": "address 2",
+    },
+    "wallet": "address 2",
+    "width": 200,
+  },
+  Object {
+    "createdAt": "2018-06-20T01:10:00.000Z",
+    "description": "honeyberry",
+    "exif": null,
+    "fingerprint": "2ccbdcc246b1d2905e66b9b1917957e5da3a555b4ba3265f0c4818107afa059f",
+    "height": 200,
+    "ipfs": "QmPuwRC1aihWD4Cap2yYqZFQhArdfSRPfuUjVn4LKT9rtr",
+    "ipld": "zdpuAwvvfbqutNn7eRUpJdwq8AYzmYGRy54fcqr5Ew72orG4o",
+    "license": "cc-by-nd",
+    "like": Object {
+      "count": 10,
+    },
+    "link": null,
+    "stats": null,
+    "tags": Array [
+      Object {
+        "name": "fruit",
+      },
+      Object {
+        "name": "honeyberry",
+      },
+    ],
+    "type": "",
+    "updatedAt": "2018-06-20T01:10:00.000Z",
+    "url": "http://localhost:8080/ipfs/QmPuwRC1aihWD4Cap2yYqZFQhArdfSRPfuUjVn4LKT9rtr",
+    "user": Object {
+      "avatar": null,
+      "displayName": "Pooya",
+      "likecoinId": "likecoin_id_2",
+      "wallet": "address 2",
+    },
+    "wallet": "address 2",
+    "width": 150,
+  },
+  Object {
+    "createdAt": "2018-06-20T00:00:00.000Z",
+    "description": "avocado",
+    "exif": null,
+    "fingerprint": "04f01eb90f7be1b1628218c5a9f1f87c5704bc79548f15673695a3e7264ba88b",
+    "height": 15,
+    "ipfs": "QmfEcrSyPS3K7WNRZLseGu3TqSpQqRToJsvT4svUe1UDmd",
+    "ipld": "zdpuAqoWEAALng3FeUcF8GY66UsK17wd3fGxr9XbXu6baoKLN",
+    "license": "cc0",
+    "like": Object {
+      "count": 0,
+    },
+    "link": null,
+    "stats": null,
+    "tags": Array [
+      Object {
+        "name": "fruit",
+      },
+      Object {
+        "name": "berry",
+      },
+      Object {
+        "name": "avocado",
+      },
+    ],
+    "type": "",
+    "updatedAt": "2018-06-20T00:00:00.000Z",
+    "url": "http://localhost:8080/ipfs/QmfEcrSyPS3K7WNRZLseGu3TqSpQqRToJsvT4svUe1UDmd",
+    "user": Object {
+      "avatar": null,
+      "displayName": "Alexandre",
+      "likecoinId": "likecoin_id_1",
+      "wallet": "address 1",
+    },
+    "wallet": "address 1",
+    "width": 20,
+  },
+  Object {
+    "createdAt": "2018-06-20T01:00:00.000Z",
+    "description": "grape",
+    "exif": null,
+    "fingerprint": "758cbe3689c4833c2219f795839b83c05f420c91088132ffc61123b5226f1a04",
+    "height": 20,
+    "ipfs": "Qme19Y2ZHXHatSZMH2bzXiXMzV2uau7YJwsQLrTSWgjgM8",
+    "ipld": "zdpuAmh7AAL14HJTHJGbiaEB5g4EfRxZcjYfkXN55LvqPZpcN",
+    "license": "cc-by-sa",
+    "like": Object {
+      "count": 0,
+    },
+    "link": null,
+    "stats": null,
+    "tags": Array [
+      Object {
+        "name": "fruit",
+      },
+      Object {
+        "name": "grape",
+      },
+    ],
+    "type": "",
+    "updatedAt": "2018-06-20T01:00:00.000Z",
+    "url": "http://localhost:8080/ipfs/Qme19Y2ZHXHatSZMH2bzXiXMzV2uau7YJwsQLrTSWgjgM8",
+    "user": Object {
+      "avatar": null,
+      "displayName": "Alexandre",
+      "likecoinId": "likecoin_id_1",
+      "wallet": "address 1",
+    },
+    "wallet": "address 1",
+    "width": 15,
+  },
+]
+`;
+
+exports[`get user info by id 1`] = `
+Object {
+  "avatar": null,
+  "displayName": "Alexandre",
+  "likecoinId": "likecoin_id_1",
+  "wallet": "address 1",
+}
+`;
+
+exports[`get user info by wallet 1`] = `
+Object {
+  "challenge": "local",
+  "wallet": "0x0000000000000000000000000000000000000000",
+}
+`;
+
+exports[`get users list 1`] = `
+Array [
+  Object {
+    "avatar": null,
+    "displayName": "Alexandre",
+    "likecoinId": "likecoin_id_1",
+    "wallet": "address 1",
+  },
+  Object {
+    "avatar": null,
+    "displayName": "Pooya",
+    "likecoinId": "likecoin_id_2",
+    "wallet": "address 2",
+  },
+  Object {
+    "avatar": null,
+    "displayName": "Sébastien",
+    "likecoinId": "likecoin_id_3",
+    "wallet": "address 3",
+  },
+]
+`;
+
+exports[`post user login 1`] = `
+Object {
+  "avatar": null,
+  "displayName": "local",
+  "likecoinId": "local",
+  "wallet": "0x0000000000000000000000000000000000000000",
+}
+`;
+
+exports[`search with empty result 1`] = `
+Object {
+  "data": Array [],
+  "error": false,
+  "pageInfo": Object {
+    "endCursor": null,
+    "hasNextPage": false,
+    "hasPrevPage": false,
+    "next": null,
+    "prev": null,
+    "startCursor": null,
+    "totalCount": 0,
+  },
+}
+`;
+
+exports[`search with keyword 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "createdAt": "2018-06-20T01:30:00.000Z",
+      "description": "kiwifruit",
+      "exif": null,
+      "fingerprint": "b345cbc239feb011fb24640b75db37e4a329f7485f5d5331c3fedbbd74b54864",
+      "height": 200,
+      "ipfs": "QmVj5TG7RbzgVEgEuECoqZ1cucvYwPasy6YduAs2Shmsv5",
+      "ipld": "zdpuAwvtnzskcuS9t4dN8FHnZ8RdPWYSHWCHTCkdtTPTNLCx5",
+      "license": "cc-by",
+      "like": Object {
+        "count": 30,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "kiwifruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T01:30:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmVj5TG7RbzgVEgEuECoqZ1cucvYwPasy6YduAs2Shmsv5",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 150,
+    },
+    Object {
+      "createdAt": "2018-06-20T00:30:00.000Z",
+      "description": "dragonfruit",
+      "exif": null,
+      "fingerprint": "b53322cf5c9d946fcf796e36ca5a8c3f921241cc0e34565c1471d7ac142403af",
+      "height": 150,
+      "ipfs": "QmaADwDYHmkJrYcPyVF3YWFkuwYWB1VyhEtdefn1TpHowt",
+      "ipld": "zdpuAn5TQWWNZxG1kfgSq3v3f7wEe3pTJEVQjdhDhM3ebm3Fr",
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 30,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "berry",
+        },
+        Object {
+          "name": "dragonfruit",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T00:30:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmaADwDYHmkJrYcPyVF3YWFkuwYWB1VyhEtdefn1TpHowt",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 200,
+    },
+    Object {
+      "createdAt": "2018-06-20T01:20:00.000Z",
+      "description": "jackfruit",
+      "exif": null,
+      "fingerprint": "d73adb98f680ee85f4fedd88bfa69e1928c864660b560097f41a912f30fa6e60",
+      "height": 400,
+      "ipfs": "Qmas9MoA9GAz5cgy9LuZqGD6iAPcKPARcaqT4wd5488jFn",
+      "ipld": "zdpuAzN4Jt95XEEptW9LrUsUHxvbiJNcx316fVo2E8HPD7cfM",
+      "license": "cc0",
+      "like": Object {
+        "count": 20,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "jackfruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T01:20:00.000Z",
+      "url": "http://localhost:8080/ipfs/Qmas9MoA9GAz5cgy9LuZqGD6iAPcKPARcaqT4wd5488jFn",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+        "wallet": "address 3",
+      },
+      "wallet": "address 3",
+      "width": 300,
+    },
+  ],
+  "error": false,
+  "pageInfo": Object {
+    "endCursor": null,
+    "hasNextPage": false,
+    "hasPrevPage": false,
+    "next": null,
+    "prev": null,
+    "startCursor": null,
+    "totalCount": 3,
+  },
+}
+`;
+
+exports[`search with pagination 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "createdAt": "2018-06-20T00:20:00.000Z",
+      "description": "cherry",
+      "exif": null,
+      "fingerprint": "8b0d0ba9e502d6e39771e129076a605036b4871cefa986352993e736495803ce",
+      "height": 300,
+      "ipfs": "QmTtSSQyJ5HyCAo9k478SapXQ7anf4YxEjhsRz1KuZdJBN",
+      "ipld": "zdpuAqNBiRBbEEsie4G44A3X5mSuNX3Bk1k9D5Y8b2Fmg1e33",
+      "license": "cc-by-sa",
+      "like": Object {
+        "count": 20,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "berry",
+        },
+        Object {
+          "name": "cherry",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T00:20:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmTtSSQyJ5HyCAo9k478SapXQ7anf4YxEjhsRz1KuZdJBN",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+        "wallet": "address 3",
+      },
+      "wallet": "address 3",
+      "width": 400,
+    },
+    Object {
+      "createdAt": "2018-06-20T00:10:00.000Z",
+      "description": "banana",
+      "exif": null,
+      "fingerprint": "537777bd7a5fc4ed91a74ef6fa7d8c26dc2385af90a9e48c0482a4b27d891b3f",
+      "height": 150,
+      "ipfs": "QmXfjc79upANgieA3CsaDg5bSJLGmdiHFJ4YRPtKM5ZB5m",
+      "ipld": "zdpuAqxDjsBiXnDkNfj3LwLWp7EhPoej52hXtYLcuVxa1SwcY",
+      "license": "cc-by",
+      "like": Object {
+        "count": 10,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "banana",
+        },
+        Object {
+          "name": "berry",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T00:10:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmXfjc79upANgieA3CsaDg5bSJLGmdiHFJ4YRPtKM5ZB5m",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Pooya",
+        "likecoinId": "likecoin_id_2",
+        "wallet": "address 2",
+      },
+      "wallet": "address 2",
+      "width": 200,
+    },
+    Object {
+      "createdAt": "2018-06-20T00:00:00.000Z",
+      "description": "avocado",
+      "exif": null,
+      "fingerprint": "04f01eb90f7be1b1628218c5a9f1f87c5704bc79548f15673695a3e7264ba88b",
+      "height": 15,
+      "ipfs": "QmfEcrSyPS3K7WNRZLseGu3TqSpQqRToJsvT4svUe1UDmd",
+      "ipld": "zdpuAqoWEAALng3FeUcF8GY66UsK17wd3fGxr9XbXu6baoKLN",
+      "license": "cc0",
+      "like": Object {
+        "count": 0,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "avocado",
+        },
+        Object {
+          "name": "berry",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T00:00:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmfEcrSyPS3K7WNRZLseGu3TqSpQqRToJsvT4svUe1UDmd",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 20,
+    },
+  ],
+  "error": false,
+  "pageInfo": Object {
+    "endCursor": null,
+    "hasNextPage": false,
+    "hasPrevPage": true,
+    "next": null,
+    "prev": "http://localhost:3000/api/search?q=%23fruit&before=eyJvZmZzZXQiOjE1LCJxIjoiI2ZydWl0In0",
+    "startCursor": "eyJvZmZzZXQiOjE1LCJxIjoiI2ZydWl0In0",
+    "totalCount": 18,
+  },
+}
+`;
+
+exports[`search with tag 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "createdAt": "2018-06-20T02:50:00.000Z",
+      "description": "strawberry",
+      "exif": null,
+      "fingerprint": "01e7368d91fb0e804ab0ed7d0c97eb51b1acb175b0dc5ae782032a9244bef544",
+      "height": 200,
+      "ipfs": "QmRL2d4hcrkiCiucB1rd6mQkAXPc3fEqGJaNpXeprPo7aF",
+      "ipld": "zdpuAyyuhXVVhcKPXUiGheAfRKKzmarVJDkn6e5KbeSkSXk9L",
+      "license": "cc-by",
+      "like": Object {
+        "count": 50,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "strawberry",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T02:50:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmRL2d4hcrkiCiucB1rd6mQkAXPc3fEqGJaNpXeprPo7aF",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+        "wallet": "address 3",
+      },
+      "wallet": "address 3",
+      "width": 200,
+    },
+    Object {
+      "createdAt": "2018-06-20T01:50:00.000Z",
+      "description": "mango",
+      "exif": null,
+      "fingerprint": "3164e75ef2ef4b2609fd902d748b097396936eb2a5ca0a36f1e6a2c851857a19",
+      "height": 200,
+      "ipfs": "QmXScHMburuanQNekLAbGFF27ChAv6M9mAnvrLy2embkj1",
+      "ipld": "zdpuAznYtfuEQzYK2pXRujoeFKRFo1y9iPyDECuDPryPgz9NC",
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 50,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "mango",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T01:50:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmXScHMburuanQNekLAbGFF27ChAv6M9mAnvrLy2embkj1",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+        "wallet": "address 3",
+      },
+      "wallet": "address 3",
+      "width": 150,
+    },
+    Object {
+      "createdAt": "2018-06-20T00:50:00.000Z",
+      "description": "feijoa",
+      "exif": null,
+      "fingerprint": "cbc6631a005b10dcd9f45c86e0daa9a95319e568d85bfd5749d010cee1f05ecf",
+      "height": 150,
+      "ipfs": "QmWpZvgF4j9RuoPrj7o7xs6f8akDm9iGXBnQiUCqQw95xF",
+      "ipld": "zdpuAmpgiNUXWxpJALeJi9hfjdzvNFRkUu8ptEvaoAZm6zbEb",
+      "license": "cc-by",
+      "like": Object {
+        "count": 50,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "feijoa",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T00:50:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmWpZvgF4j9RuoPrj7o7xs6f8akDm9iGXBnQiUCqQw95xF",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+        "wallet": "address 3",
+      },
+      "wallet": "address 3",
+      "width": 200,
+    },
+    Object {
+      "createdAt": "2018-06-20T02:40:00.000Z",
+      "description": "raspberry",
+      "exif": null,
+      "fingerprint": "f9abe186365ce24740347bf17f90753be023335a5c6b838b39c77ff0e8c7b383",
+      "height": 400,
+      "ipfs": "QmP9iDBGsncLuG99vhswNuEvujXEYLikkQrHQKqpfPQomU",
+      "ipld": "zdpuAy12ZnL8ZvQKX1LZnNge4diYdSH6NAmmbcRNQhUTX3eJT",
+      "license": "cc0",
+      "like": Object {
+        "count": 40,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "raspberry",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T02:40:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmP9iDBGsncLuG99vhswNuEvujXEYLikkQrHQKqpfPQomU",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Pooya",
+        "likecoinId": "likecoin_id_2",
+        "wallet": "address 2",
+      },
+      "wallet": "address 2",
+      "width": 400,
+    },
+    Object {
+      "createdAt": "2018-06-20T01:40:00.000Z",
+      "description": "lychee",
+      "exif": null,
+      "fingerprint": "23353fa356908d4889cffbd28c65e276aafd1f600b724b4c521d861dfa48b7ad",
+      "height": 400,
+      "ipfs": "QmWn8bF56TSrSrzEhbR7YhHiMNgQxj7ub8kpUYcA832u1g",
+      "ipld": "zdpuAt45HfMvAmYBCFmhMphYR6ugceKx1NLiSmyzyT14e39tP",
+      "license": "cc-by-sa",
+      "like": Object {
+        "count": 40,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "lychee",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T01:40:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmWn8bF56TSrSrzEhbR7YhHiMNgQxj7ub8kpUYcA832u1g",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Pooya",
+        "likecoinId": "likecoin_id_2",
+        "wallet": "address 2",
+      },
+      "wallet": "address 2",
+      "width": 300,
+    },
+    Object {
+      "createdAt": "2018-06-20T00:40:00.000Z",
+      "description": "elderberry",
+      "exif": null,
+      "fingerprint": "706109d9762f6304f1c2fcc603bb2435efebb041d07459f2fc90e410917e1bdc",
+      "height": 300,
+      "ipfs": "QmWLPCfEQMLDY5nxM3NGEFjQBHucLmGPmRU72R6RNUDwiC",
+      "ipld": "zdpuB31BxhWgsdidbhMxawbLvguKn59WzP82sU4zKU2kzcHBj",
+      "license": "cc0",
+      "like": Object {
+        "count": 40,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "elderberry",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T00:40:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmWLPCfEQMLDY5nxM3NGEFjQBHucLmGPmRU72R6RNUDwiC",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Pooya",
+        "likecoinId": "likecoin_id_2",
+        "wallet": "address 2",
+      },
+      "wallet": "address 2",
+      "width": 400,
+    },
+    Object {
+      "createdAt": "2018-06-20T02:30:00.000Z",
+      "description": "quince",
+      "exif": null,
+      "fingerprint": "bc9f283b9638500bb7575e0a3c32b4c7efed8cd2e7d48aa326cf35641309face",
+      "height": 200,
+      "ipfs": "QmVxdPw8fWf43cSgF1TMYct5GfDG31bGsE7ukyyRu5qPQV",
+      "ipld": "zdpuB1Nna9FjsEP4UfBiwVZmELBaESfgdW3T3rk6dwTRXprBU",
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 30,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "quince",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T02:30:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmVxdPw8fWf43cSgF1TMYct5GfDG31bGsE7ukyyRu5qPQV",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 200,
+    },
+    Object {
+      "createdAt": "2018-06-20T01:30:00.000Z",
+      "description": "kiwifruit",
+      "exif": null,
+      "fingerprint": "b345cbc239feb011fb24640b75db37e4a329f7485f5d5331c3fedbbd74b54864",
+      "height": 200,
+      "ipfs": "QmVj5TG7RbzgVEgEuECoqZ1cucvYwPasy6YduAs2Shmsv5",
+      "ipld": "zdpuAwvtnzskcuS9t4dN8FHnZ8RdPWYSHWCHTCkdtTPTNLCx5",
+      "license": "cc-by",
+      "like": Object {
+        "count": 30,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "kiwifruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T01:30:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmVj5TG7RbzgVEgEuECoqZ1cucvYwPasy6YduAs2Shmsv5",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 150,
+    },
+    Object {
+      "createdAt": "2018-06-20T00:30:00.000Z",
+      "description": "dragonfruit",
+      "exif": null,
+      "fingerprint": "b53322cf5c9d946fcf796e36ca5a8c3f921241cc0e34565c1471d7ac142403af",
+      "height": 150,
+      "ipfs": "QmaADwDYHmkJrYcPyVF3YWFkuwYWB1VyhEtdefn1TpHowt",
+      "ipld": "zdpuAn5TQWWNZxG1kfgSq3v3f7wEe3pTJEVQjdhDhM3ebm3Fr",
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 30,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "berry",
+        },
+        Object {
+          "name": "dragonfruit",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T00:30:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmaADwDYHmkJrYcPyVF3YWFkuwYWB1VyhEtdefn1TpHowt",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 200,
+    },
+    Object {
+      "createdAt": "2018-06-20T02:20:00.000Z",
+      "description": "peach",
+      "exif": null,
+      "fingerprint": "ee4fcf0619346aecb10d67c0f23fe4661b8a866cc6f3b37424f3be7606b23da6",
+      "height": 400,
+      "ipfs": "QmcqicPR7UogYEyxns14f3xbLj3wtZmQ7Zux3GsQMUoSYo",
+      "ipld": "zdpuAuNg1bj8YqAbKYTYqJ5ywuUeuQ3s3CXvSF8EdNf2hte75",
+      "license": "cc-by-sa",
+      "like": Object {
+        "count": 20,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "peach",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T02:20:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmcqicPR7UogYEyxns14f3xbLj3wtZmQ7Zux3GsQMUoSYo",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+        "wallet": "address 3",
+      },
+      "wallet": "address 3",
+      "width": 400,
+    },
+    Object {
+      "createdAt": "2018-06-20T01:20:00.000Z",
+      "description": "jackfruit",
+      "exif": null,
+      "fingerprint": "d73adb98f680ee85f4fedd88bfa69e1928c864660b560097f41a912f30fa6e60",
+      "height": 400,
+      "ipfs": "Qmas9MoA9GAz5cgy9LuZqGD6iAPcKPARcaqT4wd5488jFn",
+      "ipld": "zdpuAzN4Jt95XEEptW9LrUsUHxvbiJNcx316fVo2E8HPD7cfM",
+      "license": "cc0",
+      "like": Object {
+        "count": 20,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "jackfruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T01:20:00.000Z",
+      "url": "http://localhost:8080/ipfs/Qmas9MoA9GAz5cgy9LuZqGD6iAPcKPARcaqT4wd5488jFn",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Sébastien",
+        "likecoinId": "likecoin_id_3",
+        "wallet": "address 3",
+      },
+      "wallet": "address 3",
+      "width": 300,
+    },
+    Object {
+      "createdAt": "2018-06-20T02:10:00.000Z",
+      "description": "orange",
+      "exif": null,
+      "fingerprint": "31ec4cfe15f8008442c9fe11f7e85703e0ab1b4c77861e2d1d6c58032cf0044d",
+      "height": 200,
+      "ipfs": "QmY8LScyCqYd1cQCvEfuBjn5oxNLu4n3dk3YqR8w54UTHP",
+      "ipld": "zdpuAr6Ms7NXEBiZYDuyGwSwSqJkRGZrNJvT7h8mGisv3E2BK",
+      "license": "cc-by",
+      "like": Object {
+        "count": 10,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "orange",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T02:10:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmY8LScyCqYd1cQCvEfuBjn5oxNLu4n3dk3YqR8w54UTHP",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Pooya",
+        "likecoinId": "likecoin_id_2",
+        "wallet": "address 2",
+      },
+      "wallet": "address 2",
+      "width": 200,
+    },
+    Object {
+      "createdAt": "2018-06-20T01:10:00.000Z",
+      "description": "honeyberry",
+      "exif": null,
+      "fingerprint": "2ccbdcc246b1d2905e66b9b1917957e5da3a555b4ba3265f0c4818107afa059f",
+      "height": 200,
+      "ipfs": "QmPuwRC1aihWD4Cap2yYqZFQhArdfSRPfuUjVn4LKT9rtr",
+      "ipld": "zdpuAwvvfbqutNn7eRUpJdwq8AYzmYGRy54fcqr5Ew72orG4o",
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 10,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "honeyberry",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T01:10:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmPuwRC1aihWD4Cap2yYqZFQhArdfSRPfuUjVn4LKT9rtr",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Pooya",
+        "likecoinId": "likecoin_id_2",
+        "wallet": "address 2",
+      },
+      "wallet": "address 2",
+      "width": 150,
+    },
+    Object {
+      "createdAt": "2018-06-20T02:00:00.000Z",
+      "description": "nectarine",
+      "exif": null,
+      "fingerprint": "8288b775f4907e87ed4fc675b1aaca74f267b794ecf5cb69ee7083db342fd44f",
+      "height": 20,
+      "ipfs": "QmdWGDsEUch9FesSNq2mYwmLvWcSgYu6AVpr1yh55aZWvz",
+      "ipld": "zdpuAzTmvPfc8gu2FmmKB1Mw1FaBjDRMNb8Cm5GhUqTwTFRmK",
+      "license": "cc0",
+      "like": Object {
+        "count": 0,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "nectarine",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T02:00:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmdWGDsEUch9FesSNq2mYwmLvWcSgYu6AVpr1yh55aZWvz",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 20,
+    },
+    Object {
+      "createdAt": "2018-06-20T01:00:00.000Z",
+      "description": "grape",
+      "exif": null,
+      "fingerprint": "758cbe3689c4833c2219f795839b83c05f420c91088132ffc61123b5226f1a04",
+      "height": 20,
+      "ipfs": "Qme19Y2ZHXHatSZMH2bzXiXMzV2uau7YJwsQLrTSWgjgM8",
+      "ipld": "zdpuAmh7AAL14HJTHJGbiaEB5g4EfRxZcjYfkXN55LvqPZpcN",
+      "license": "cc-by-sa",
+      "like": Object {
+        "count": 0,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "grape",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T01:00:00.000Z",
+      "url": "http://localhost:8080/ipfs/Qme19Y2ZHXHatSZMH2bzXiXMzV2uau7YJwsQLrTSWgjgM8",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 15,
+    },
+  ],
+  "error": false,
+  "pageInfo": Object {
+    "endCursor": "eyJvZmZzZXQiOjE1LCJxIjoiI2ZydWl0In0",
+    "hasNextPage": true,
+    "hasPrevPage": false,
+    "next": "http://localhost:3000/api/search?q=%23fruit&after=eyJvZmZzZXQiOjE1LCJxIjoiI2ZydWl0In0",
+    "prev": null,
+    "startCursor": null,
+    "totalCount": 18,
+  },
+}
+`;
+
+exports[`search with user 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "createdAt": "2018-06-20T02:30:00.000Z",
+      "description": "quince",
+      "exif": null,
+      "fingerprint": "bc9f283b9638500bb7575e0a3c32b4c7efed8cd2e7d48aa326cf35641309face",
+      "height": 200,
+      "ipfs": "QmVxdPw8fWf43cSgF1TMYct5GfDG31bGsE7ukyyRu5qPQV",
+      "ipld": "zdpuB1Nna9FjsEP4UfBiwVZmELBaESfgdW3T3rk6dwTRXprBU",
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 30,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "quince",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T02:30:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmVxdPw8fWf43cSgF1TMYct5GfDG31bGsE7ukyyRu5qPQV",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 200,
+    },
+    Object {
+      "createdAt": "2018-06-20T01:30:00.000Z",
+      "description": "kiwifruit",
+      "exif": null,
+      "fingerprint": "b345cbc239feb011fb24640b75db37e4a329f7485f5d5331c3fedbbd74b54864",
+      "height": 200,
+      "ipfs": "QmVj5TG7RbzgVEgEuECoqZ1cucvYwPasy6YduAs2Shmsv5",
+      "ipld": "zdpuAwvtnzskcuS9t4dN8FHnZ8RdPWYSHWCHTCkdtTPTNLCx5",
+      "license": "cc-by",
+      "like": Object {
+        "count": 30,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "kiwifruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T01:30:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmVj5TG7RbzgVEgEuECoqZ1cucvYwPasy6YduAs2Shmsv5",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 150,
+    },
+    Object {
+      "createdAt": "2018-06-20T00:30:00.000Z",
+      "description": "dragonfruit",
+      "exif": null,
+      "fingerprint": "b53322cf5c9d946fcf796e36ca5a8c3f921241cc0e34565c1471d7ac142403af",
+      "height": 150,
+      "ipfs": "QmaADwDYHmkJrYcPyVF3YWFkuwYWB1VyhEtdefn1TpHowt",
+      "ipld": "zdpuAn5TQWWNZxG1kfgSq3v3f7wEe3pTJEVQjdhDhM3ebm3Fr",
+      "license": "cc-by-nd",
+      "like": Object {
+        "count": 30,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "berry",
+        },
+        Object {
+          "name": "dragonfruit",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T00:30:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmaADwDYHmkJrYcPyVF3YWFkuwYWB1VyhEtdefn1TpHowt",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 200,
+    },
+    Object {
+      "createdAt": "2018-06-20T02:00:00.000Z",
+      "description": "nectarine",
+      "exif": null,
+      "fingerprint": "8288b775f4907e87ed4fc675b1aaca74f267b794ecf5cb69ee7083db342fd44f",
+      "height": 20,
+      "ipfs": "QmdWGDsEUch9FesSNq2mYwmLvWcSgYu6AVpr1yh55aZWvz",
+      "ipld": "zdpuAzTmvPfc8gu2FmmKB1Mw1FaBjDRMNb8Cm5GhUqTwTFRmK",
+      "license": "cc0",
+      "like": Object {
+        "count": 0,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "nectarine",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T02:00:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmdWGDsEUch9FesSNq2mYwmLvWcSgYu6AVpr1yh55aZWvz",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 20,
+    },
+    Object {
+      "createdAt": "2018-06-20T01:00:00.000Z",
+      "description": "grape",
+      "exif": null,
+      "fingerprint": "758cbe3689c4833c2219f795839b83c05f420c91088132ffc61123b5226f1a04",
+      "height": 20,
+      "ipfs": "Qme19Y2ZHXHatSZMH2bzXiXMzV2uau7YJwsQLrTSWgjgM8",
+      "ipld": "zdpuAmh7AAL14HJTHJGbiaEB5g4EfRxZcjYfkXN55LvqPZpcN",
+      "license": "cc-by-sa",
+      "like": Object {
+        "count": 0,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "fruit",
+        },
+        Object {
+          "name": "grape",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T01:00:00.000Z",
+      "url": "http://localhost:8080/ipfs/Qme19Y2ZHXHatSZMH2bzXiXMzV2uau7YJwsQLrTSWgjgM8",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 15,
+    },
+    Object {
+      "createdAt": "2018-06-20T00:00:00.000Z",
+      "description": "avocado",
+      "exif": null,
+      "fingerprint": "04f01eb90f7be1b1628218c5a9f1f87c5704bc79548f15673695a3e7264ba88b",
+      "height": 15,
+      "ipfs": "QmfEcrSyPS3K7WNRZLseGu3TqSpQqRToJsvT4svUe1UDmd",
+      "ipld": "zdpuAqoWEAALng3FeUcF8GY66UsK17wd3fGxr9XbXu6baoKLN",
+      "license": "cc0",
+      "like": Object {
+        "count": 0,
+      },
+      "link": null,
+      "stats": null,
+      "tags": Array [
+        Object {
+          "name": "avocado",
+        },
+        Object {
+          "name": "berry",
+        },
+        Object {
+          "name": "fruit",
+        },
+      ],
+      "type": "",
+      "updatedAt": "2018-06-20T00:00:00.000Z",
+      "url": "http://localhost:8080/ipfs/QmfEcrSyPS3K7WNRZLseGu3TqSpQqRToJsvT4svUe1UDmd",
+      "user": Object {
+        "avatar": null,
+        "displayName": "Alexandre",
+        "likecoinId": "likecoin_id_1",
+        "wallet": "address 1",
+      },
+      "wallet": "address 1",
+      "width": 20,
+    },
+  ],
+  "error": false,
+  "pageInfo": Object {
+    "endCursor": null,
+    "hasNextPage": false,
+    "hasPrevPage": false,
+    "next": null,
+    "prev": null,
+    "startCursor": null,
+    "totalCount": 6,
+  },
+}
+`;
