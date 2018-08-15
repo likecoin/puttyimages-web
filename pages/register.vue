@@ -11,7 +11,15 @@ export default {
     ...mapGetters(['getUserInfo']),
   },
   watch: {
-    getUserInfo({ wallet, likecoinId }) {
+    getUserInfo(info) {
+      this.redirectIfUserLoggedIn(info);
+    },
+  },
+  mounted() {
+    this.redirectIfUserLoggedIn(this.getUserInfo);
+  },
+  methods: {
+    redirectIfUserLoggedIn({ wallet, likecoinId }) {
       if (wallet) {
         this.$router.push({
           name: 'id',

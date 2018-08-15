@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const assetTag = sequelize.define(
-    'assetTag',
+  const assetStats = sequelize.define(
+    'assetStats',
     {
       assetFingerprint: {
         allowNull: false,
@@ -9,26 +9,29 @@ module.exports = (sequelize, DataTypes) => {
         references: {
           key: 'fingerprint',
           model: 'asset',
-          onDelete: 'cascade',
         },
         type: DataTypes.BLOB,
       },
-      tagName: {
+      downloadCount: {
         allowNull: false,
-        field: 'tag_name',
-        primaryKey: true,
-        references: {
-          key: 'name',
-          model: 'tag',
-        },
-        type: DataTypes.TEXT,
+        defaultValue: 0,
+        field: 'download_count',
+        type: DataTypes.INTEGER,
+      },
+      viewCount: {
+        allowNull: false,
+        defaultValue: 0,
+        field: 'view_count',
+        type: DataTypes.INTEGER,
       },
     },
     {
+      createdAt: false,
       freezeTableName: true,
-      tableName: 'asset_tag',
+      tableName: 'asset_stats',
       timestamps: false,
     }
   );
-  return assetTag;
+
+  return assetStats;
 };

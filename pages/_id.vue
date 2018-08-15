@@ -1,6 +1,6 @@
 <template>
-  <section class="page-container">
-    <div class="user-page">
+  <div class="user-page">
+    <section class="page-container">
       <div class="px-12 mb-32 hidden-sm-and-up">
         <!-- TODO: search button here -->
         Search
@@ -19,15 +19,16 @@
         />
       </div>
       <div v-else>
-        <UserBadge
+        <user-badge
           :user="user"
           class="my-32"
         />
       </div>
-
+    </section>
+    <section class="page-container page-container--wide">
       <masonry-images-grid
         :colCount.sync="colCount"
-        :images="images"
+        :images="imagesWithIpld"
       />
 
       <section
@@ -51,9 +52,8 @@
 
         <img :src="noResultsImage">
       </section>
-
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -67,6 +67,8 @@ import MasonryImagesGrid, {
 import TheLikeCoinAmount from '~/components/TheLikeCoinAmount';
 import UserBadge from '~/components/UserBadge';
 
+import ipldMixin from '~/util/mixins/ipld';
+
 import noResultsImage from '~/assets/img/no-results.png';
 
 export default {
@@ -76,7 +78,7 @@ export default {
     'the-likecoin-amount': TheLikeCoinAmount,
     UserBadge,
   },
-  mixins: [masonryImagesGridMixin],
+  mixins: [masonryImagesGridMixin, ipldMixin],
   data() {
     return {
       noResultsImage,
@@ -86,6 +88,12 @@ export default {
     ...mapGetters(['getUserInfo']),
     isCurrentUser() {
       return this.getUserInfo.wallet === this.user.wallet;
+    },
+    imagesWithIpld() {
+      return this.images.map((image, i) => ({
+        ...image,
+        ...this.iplds[i],
+      }));
     },
   },
   async asyncData({ params, error }) {
@@ -108,6 +116,9 @@ export default {
 
     return { user, images };
   },
+  mounted() {
+    this.fetchIplds(this.images.map(({ ipld }) => ipld));
+  },
   head() {
     return {
       title: `User: ${this.user.displayName}`,
@@ -124,10 +135,11 @@ export default {
     padding-right: 0 !important;
     padding-left: 0 !important;
   }
-  @extend .pb-32;
 }
 
 .user-page {
+  @extend .pb-32;
+
   &__no-results {
     @extend .text--align-center;
 

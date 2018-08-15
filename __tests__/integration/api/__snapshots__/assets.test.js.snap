@@ -4,6 +4,7 @@ exports[`get asset info 1`] = `
 Object {
   "createdAt": "2018-06-20T00:00:00.000Z",
   "description": "avocado",
+  "exif": null,
   "fingerprint": "04f01eb90f7be1b1628218c5a9f1f87c5704bc79548f15673695a3e7264ba88b",
   "height": 15,
   "ipfs": "QmfEcrSyPS3K7WNRZLseGu3TqSpQqRToJsvT4svUe1UDmd",
@@ -12,6 +13,8 @@ Object {
   "like": Object {
     "count": 0,
   },
+  "link": null,
+  "stats": null,
   "tags": Array [
     Object {
       "name": "avocado",
@@ -23,6 +26,7 @@ Object {
       "name": "berry",
     },
   ],
+  "type": "",
   "updatedAt": "2018-06-20T00:00:00.000Z",
   "url": "http://localhost:8080/ipfs/QmfEcrSyPS3K7WNRZLseGu3TqSpQqRToJsvT4svUe1UDmd",
   "user": Object {
@@ -41,6 +45,7 @@ Array [
   Object {
     "createdAt": "2018-06-20T00:50:00.000Z",
     "description": "feijoa",
+    "exif": null,
     "fingerprint": "cbc6631a005b10dcd9f45c86e0daa9a95319e568d85bfd5749d010cee1f05ecf",
     "height": 150,
     "ipfs": "QmWpZvgF4j9RuoPrj7o7xs6f8akDm9iGXBnQiUCqQw95xF",
@@ -49,6 +54,8 @@ Array [
     "like": Object {
       "count": 50,
     },
+    "link": null,
+    "stats": null,
     "tags": Array [
       Object {
         "name": "feijoa",
@@ -57,6 +64,7 @@ Array [
         "name": "fruit",
       },
     ],
+    "type": "",
     "updatedAt": "2018-06-20T00:50:00.000Z",
     "url": "http://localhost:8080/ipfs/QmWpZvgF4j9RuoPrj7o7xs6f8akDm9iGXBnQiUCqQw95xF",
     "user": Object {
@@ -71,6 +79,7 @@ Array [
   Object {
     "createdAt": "2018-06-20T00:40:00.000Z",
     "description": "elderberry",
+    "exif": null,
     "fingerprint": "706109d9762f6304f1c2fcc603bb2435efebb041d07459f2fc90e410917e1bdc",
     "height": 300,
     "ipfs": "QmWLPCfEQMLDY5nxM3NGEFjQBHucLmGPmRU72R6RNUDwiC",
@@ -79,6 +88,8 @@ Array [
     "like": Object {
       "count": 40,
     },
+    "link": null,
+    "stats": null,
     "tags": Array [
       Object {
         "name": "elderberry",
@@ -87,6 +98,7 @@ Array [
         "name": "fruit",
       },
     ],
+    "type": "",
     "updatedAt": "2018-06-20T00:40:00.000Z",
     "url": "http://localhost:8080/ipfs/QmWLPCfEQMLDY5nxM3NGEFjQBHucLmGPmRU72R6RNUDwiC",
     "user": Object {
@@ -101,6 +113,7 @@ Array [
   Object {
     "createdAt": "2018-06-20T00:30:00.000Z",
     "description": "dragonfruit",
+    "exif": null,
     "fingerprint": "b53322cf5c9d946fcf796e36ca5a8c3f921241cc0e34565c1471d7ac142403af",
     "height": 150,
     "ipfs": "QmaADwDYHmkJrYcPyVF3YWFkuwYWB1VyhEtdefn1TpHowt",
@@ -109,6 +122,8 @@ Array [
     "like": Object {
       "count": 30,
     },
+    "link": null,
+    "stats": null,
     "tags": Array [
       Object {
         "name": "fruit",
@@ -120,6 +135,7 @@ Array [
         "name": "dragonfruit",
       },
     ],
+    "type": "",
     "updatedAt": "2018-06-20T00:30:00.000Z",
     "url": "http://localhost:8080/ipfs/QmaADwDYHmkJrYcPyVF3YWFkuwYWB1VyhEtdefn1TpHowt",
     "user": Object {
@@ -134,6 +150,7 @@ Array [
   Object {
     "createdAt": "2018-06-20T01:30:00.000Z",
     "description": "kiwifruit",
+    "exif": null,
     "fingerprint": "b345cbc239feb011fb24640b75db37e4a329f7485f5d5331c3fedbbd74b54864",
     "height": 200,
     "ipfs": "QmVj5TG7RbzgVEgEuECoqZ1cucvYwPasy6YduAs2Shmsv5",
@@ -142,6 +159,8 @@ Array [
     "like": Object {
       "count": 30,
     },
+    "link": null,
+    "stats": null,
     "tags": Array [
       Object {
         "name": "kiwifruit",
@@ -150,6 +169,7 @@ Array [
         "name": "fruit",
       },
     ],
+    "type": "",
     "updatedAt": "2018-06-20T01:30:00.000Z",
     "url": "http://localhost:8080/ipfs/QmVj5TG7RbzgVEgEuECoqZ1cucvYwPasy6YduAs2Shmsv5",
     "user": Object {
@@ -164,6 +184,7 @@ Array [
   Object {
     "createdAt": "2018-06-20T00:20:00.000Z",
     "description": "cherry",
+    "exif": null,
     "fingerprint": "8b0d0ba9e502d6e39771e129076a605036b4871cefa986352993e736495803ce",
     "height": 300,
     "ipfs": "QmTtSSQyJ5HyCAo9k478SapXQ7anf4YxEjhsRz1KuZdJBN",
@@ -172,6 +193,8 @@ Array [
     "like": Object {
       "count": 20,
     },
+    "link": null,
+    "stats": null,
     "tags": Array [
       Object {
         "name": "cherry",
@@ -183,6 +206,7 @@ Array [
         "name": "berry",
       },
     ],
+    "type": "",
     "updatedAt": "2018-06-20T00:20:00.000Z",
     "url": "http://localhost:8080/ipfs/QmTtSSQyJ5HyCAo9k478SapXQ7anf4YxEjhsRz1KuZdJBN",
     "user": Object {
@@ -197,6 +221,7 @@ Array [
   Object {
     "createdAt": "2018-06-20T01:20:00.000Z",
     "description": "jackfruit",
+    "exif": null,
     "fingerprint": "d73adb98f680ee85f4fedd88bfa69e1928c864660b560097f41a912f30fa6e60",
     "height": 400,
     "ipfs": "Qmas9MoA9GAz5cgy9LuZqGD6iAPcKPARcaqT4wd5488jFn",
@@ -205,6 +230,8 @@ Array [
     "like": Object {
       "count": 20,
     },
+    "link": null,
+    "stats": null,
     "tags": Array [
       Object {
         "name": "jackfruit",
@@ -213,6 +240,7 @@ Array [
         "name": "fruit",
       },
     ],
+    "type": "",
     "updatedAt": "2018-06-20T01:20:00.000Z",
     "url": "http://localhost:8080/ipfs/Qmas9MoA9GAz5cgy9LuZqGD6iAPcKPARcaqT4wd5488jFn",
     "user": Object {
@@ -227,6 +255,7 @@ Array [
   Object {
     "createdAt": "2018-06-20T00:10:00.000Z",
     "description": "banana",
+    "exif": null,
     "fingerprint": "537777bd7a5fc4ed91a74ef6fa7d8c26dc2385af90a9e48c0482a4b27d891b3f",
     "height": 150,
     "ipfs": "QmXfjc79upANgieA3CsaDg5bSJLGmdiHFJ4YRPtKM5ZB5m",
@@ -235,6 +264,8 @@ Array [
     "like": Object {
       "count": 10,
     },
+    "link": null,
+    "stats": null,
     "tags": Array [
       Object {
         "name": "fruit",
@@ -246,6 +277,7 @@ Array [
         "name": "berry",
       },
     ],
+    "type": "",
     "updatedAt": "2018-06-20T00:10:00.000Z",
     "url": "http://localhost:8080/ipfs/QmXfjc79upANgieA3CsaDg5bSJLGmdiHFJ4YRPtKM5ZB5m",
     "user": Object {
@@ -260,6 +292,7 @@ Array [
   Object {
     "createdAt": "2018-06-20T01:10:00.000Z",
     "description": "honeyberry",
+    "exif": null,
     "fingerprint": "2ccbdcc246b1d2905e66b9b1917957e5da3a555b4ba3265f0c4818107afa059f",
     "height": 200,
     "ipfs": "QmPuwRC1aihWD4Cap2yYqZFQhArdfSRPfuUjVn4LKT9rtr",
@@ -268,6 +301,8 @@ Array [
     "like": Object {
       "count": 10,
     },
+    "link": null,
+    "stats": null,
     "tags": Array [
       Object {
         "name": "fruit",
@@ -276,6 +311,7 @@ Array [
         "name": "honeyberry",
       },
     ],
+    "type": "",
     "updatedAt": "2018-06-20T01:10:00.000Z",
     "url": "http://localhost:8080/ipfs/QmPuwRC1aihWD4Cap2yYqZFQhArdfSRPfuUjVn4LKT9rtr",
     "user": Object {
@@ -290,6 +326,7 @@ Array [
   Object {
     "createdAt": "2018-06-20T00:00:00.000Z",
     "description": "avocado",
+    "exif": null,
     "fingerprint": "04f01eb90f7be1b1628218c5a9f1f87c5704bc79548f15673695a3e7264ba88b",
     "height": 15,
     "ipfs": "QmfEcrSyPS3K7WNRZLseGu3TqSpQqRToJsvT4svUe1UDmd",
@@ -298,6 +335,8 @@ Array [
     "like": Object {
       "count": 0,
     },
+    "link": null,
+    "stats": null,
     "tags": Array [
       Object {
         "name": "fruit",
@@ -309,6 +348,7 @@ Array [
         "name": "avocado",
       },
     ],
+    "type": "",
     "updatedAt": "2018-06-20T00:00:00.000Z",
     "url": "http://localhost:8080/ipfs/QmfEcrSyPS3K7WNRZLseGu3TqSpQqRToJsvT4svUe1UDmd",
     "user": Object {
@@ -323,6 +363,7 @@ Array [
   Object {
     "createdAt": "2018-06-20T01:00:00.000Z",
     "description": "grape",
+    "exif": null,
     "fingerprint": "758cbe3689c4833c2219f795839b83c05f420c91088132ffc61123b5226f1a04",
     "height": 20,
     "ipfs": "Qme19Y2ZHXHatSZMH2bzXiXMzV2uau7YJwsQLrTSWgjgM8",
@@ -331,6 +372,8 @@ Array [
     "like": Object {
       "count": 0,
     },
+    "link": null,
+    "stats": null,
     "tags": Array [
       Object {
         "name": "fruit",
@@ -339,6 +382,7 @@ Array [
         "name": "grape",
       },
     ],
+    "type": "",
     "updatedAt": "2018-06-20T01:00:00.000Z",
     "url": "http://localhost:8080/ipfs/Qme19Y2ZHXHatSZMH2bzXiXMzV2uau7YJwsQLrTSWgjgM8",
     "user": Object {

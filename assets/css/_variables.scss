@@ -6,8 +6,13 @@ $colors: (
   like-light-brown: #8B572A,
   like-cyan: #D0F0F0,
   gray-4a: #4A4A4A,
+  gray-73: #737373,
+  gray-9b: #9B9B9B,
   gray-a: #AAA,
-  white: #FFF
+  gray-e6: #E6E6E6,
+  gray-f7: #F7F7F7,
+  white: #FFF,
+  dark-brown-2: #462405,
 );
 
 $gradient-likecoin: linear-gradient(292deg, map-get($colors, like-cyan), #F0E6B4);
@@ -22,7 +27,7 @@ $breakpoints: (
 
 /// Text styling
 
-$font-size-list: 12, 14, 16, 18, 20, 24, 28, 32, 44, 48, 52, 64;
+$font-size-list: 10, 12, 14, 16, 18, 20, 24, 28, 32, 44, 48, 52, 64;
 $font-weight-list: 300 400 600;
 $line-height-map: (
   1: 1,

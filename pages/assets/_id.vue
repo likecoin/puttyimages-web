@@ -11,6 +11,7 @@
 import axios from '~/plugins/axios';
 
 import ImageDetails from '~/components/ImageDetails';
+import { getIpldLink } from '~/util/index';
 
 export default {
   components: {
@@ -23,6 +24,22 @@ export default {
       .catch(() => {
         error({ statusCode: 404, message: 'Image not found' });
       });
+  },
+  async mounted() {
+    // fetch asset ipld
+    try {
+      const res = await axios.get(getIpldLink(this.image.ipld), {
+        withCredentials: false,
+      });
+      const { type, license: licenseUrl, ...ipldData } = res.data;
+      this.image = {
+        ...this.image,
+        ...ipldData,
+        licenseUrl,
+      };
+    } catch (err) {
+      console.error(err); // eslint-disable-line no-console
+    }
   },
   head() {
     return {

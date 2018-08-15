@@ -93,10 +93,11 @@ export default {
   @extend .py-24--sm;
 
   &__close-btn {
-    margin: 40px 0 24px -16px;
+    margin: 40px 0 24px 40px;
 
     @include tablet-and-below {
       margin-top: 24px;
+      margin-left: -16px;
     }
   }
 

@@ -128,6 +128,10 @@ import {
 export default {
   name: 'the-image-upload-form',
   props: {
+    exif: {
+      required: true,
+      type: Object,
+    },
     file: {
       required: true,
       type: process.browser ? File : Object,
@@ -196,10 +200,11 @@ export default {
         this.isUploading = true;
 
         const assetInfo = {
-          creator: [this.getUserInfo.likecoinId],
           assetFile: this.file,
+          dateCreated: new Date(this.exif.tags.DateTimeOriginal * 1000), // from unix timestamp
           description: this.description.trim(),
           license: this.license,
+          likeOwner: [this.getUserInfo.likecoinId],
           tags: this.tags,
           wallet: ethUtil.getWallet(),
         };

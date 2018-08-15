@@ -34,6 +34,13 @@ const initialState = {
 };
 
 const actions = {
+  async downloadImage(_, assetFingerprint) {
+    try {
+      await axios.post(`/api/assets/${assetFingerprint}/download`);
+    } catch (err) {
+      console.error(err); // eslint-disable-line no-console
+    }
+  },
   async setState({ commit }, inputState) {
     const {
       isError = false,
@@ -79,6 +86,19 @@ const actions = {
     },
     root: true,
   },
+  async viewImage(_, assetFingerprint) {
+    try {
+      await axios.post(`/api/assets/${assetFingerprint}/view`);
+    } catch (err) {
+      console.error(err); // eslint-disable-line no-console
+    }
+  },
+};
+
+const getters = {
+  getIsImageDetailsDialogOpen({ isOpen }) {
+    return isOpen;
+  },
 };
 
 const mutations = {
@@ -91,6 +111,7 @@ const mutations = {
 
 export default {
   actions,
+  getters,
   mutations,
   namespaced: true,
   state: initialState,

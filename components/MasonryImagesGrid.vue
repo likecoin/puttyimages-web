@@ -11,10 +11,27 @@
       />
 
       <user-badge
+        :label="image.likeOwner ? image.likeOwner[0] : ''"
+        :link="image.link"
         :user="image.user"
         class="masonry-images-grid__button masonry-images-grid__button--user"
-        type="upload"
-      />
+        type="min"
+      >
+        <template
+          v-if="checkIsLikeEscrow(image)"
+          slot="from"
+        >
+          <i18n
+            class="masonry-images-grid__escrow-label"
+            path="ImageDetails.label.from"
+            tag="span"
+          >
+            <span>
+              {{ getImageSourceFromUrl(image.link) }}
+            </span>
+          </i18n>
+        </template>
+      </user-badge>
 
       <img
         :src="image.url"
@@ -22,9 +39,10 @@
         @click="openDetails(image)"
       >
 
-      <div class="masonry-images-grid__actions">
+      <!-- TODO: need to wait for small like button design -->
+      <!-- <div class="masonry-images-grid__actions">
         <like-button
-          :count="image.like.count"
+          :count="0"
           class="masonry-images-grid__button masonry-images-grid__button--like"
           color="white"
         />
@@ -37,7 +55,7 @@
         >
           {{ $t('General.button.useImage') }}
         </v-btn>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -47,6 +65,8 @@ import { mapActions } from 'vuex';
 
 import LikeButton from '~/components/LikeButton';
 import UserBadge from '~/components/UserBadge';
+
+import { getImageSourceFromUrl } from '~/util/index';
 
 const MIN_HEIGHT = 180;
 
@@ -89,6 +109,10 @@ export default {
         isOpen: true,
       });
     },
+    checkIsLikeEscrow({ likeEscrow }) {
+      return !!likeEscrow;
+    },
+    getImageSourceFromUrl,
   },
 };
 
@@ -240,6 +264,16 @@ export const mixin = {
 
     &--use {
       @extend .text--size-16;
+    }
+  }
+
+  &__escrow-label {
+    color: color(gray-e6);
+
+    @extend .text--size-10, .text--weight-600, .text--color-gray-9b--xs;
+
+    span {
+      @extend .text--underline, .text--capitalize;
     }
   }
 }

@@ -118,6 +118,7 @@
             </v-btn>
 
             <the-image-upload-form
+              :exif="imageExif"
               :file="imageFile"
               @upload="onUpload"
             />
@@ -131,6 +132,8 @@
 </template>
 
 <script>
+import ExifParser from 'exif-parser';
+
 import TheImageUploadForm from '@/components/TheImageUploadForm';
 
 import {
@@ -148,6 +151,7 @@ export default {
   data() {
     return {
       image: null,
+      imageExif: {},
       imageFile: null,
       isExceedMaxSize: false,
       isImageLoading: false,
@@ -197,9 +201,10 @@ export default {
 
         this.image = null;
         this.isImageLoading = true;
-        const reader = new FileReader();
+        const dataUrlReader = new FileReader();
+        const arrayBufferReader = new FileReader();
 
-        reader.onload = (e) => {
+        dataUrlReader.onload = (e) => {
           this.closeInvalidImageError();
 
           const img = new Image();
@@ -210,7 +215,13 @@ export default {
           };
           img.src = e.target.result;
         };
-        reader.readAsDataURL(files[0]);
+        dataUrlReader.readAsDataURL(files[0]);
+
+        arrayBufferReader.onload = (e) => {
+          const parser = ExifParser.create(e.target.result);
+          this.imageExif = parser.parse();
+        };
+        arrayBufferReader.readAsArrayBuffer(files[0]);
       }
     },
     onClickNext() {

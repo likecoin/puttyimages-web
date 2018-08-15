@@ -16,6 +16,22 @@
             :alt="image.description"
             @load="onImageLoaded"
           >
+          <transition name="page">
+            <div
+              v-if="isDownloadImageDialogOpen"
+              class="image-preview__overlay"
+            />
+          </transition>
+        </div>
+        <div class="image-details__panel--left-bottom">
+          <!-- TODO: LikeButton here -->
+          <div class="my-32">
+            <p class="text--color-gray-9b">
+              {{ $tc('ImageDetails.label.views', viewCount, { count: viewCount }) }}
+              /
+              {{ $tc('ImageDetails.label.downloads', downloadCount, { count: downloadCount }) }}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -23,14 +39,68 @@
         <div class="image-details-content">
           <section class="image-details-content__credits">
             <user-badge
+              :label="image.likeOwner ? image.likeOwner[0] : ''"
+              :link="image.link"
               :user="image.user"
-              type="upload"
-            />
+              type="min"
+            >
+              <template
+                v-if="!isUploaderImageOwner"
+                slot="from"
+              >
+                <i18n
+                  class="text--color-gray-9b text--size-10 text--weight-600"
+                  path="ImageDetails.label.from"
+                  tag="span"
+                >
+                  <span class="text--underline text--capitalize">
+                    {{ getImageSourceFromUrl(image.link) }}
+                  </span>
+                </i18n>
+              </template>
+            </user-badge>
+            <a
+              v-if="!isUploaderImageOwner"
+              class="pl-64 text--color-primary text--size-10 text--underline"
+            >{{ $t('ImageDetails.label.claimPhoto') }}</a>
           </section>
+
+          <hr class="my-24">
+
+          <section class="image-details-content__actions">
+            <ul>
+              <li>
+                <v-btn
+                  block
+                  class="btn--likecoin text--size-20"
+                  color="green"
+                  depressed
+                  @click="downloadImage"
+                >{{ $t('ImageDetails.button.download') }}</v-btn>
+              </li>
+            </ul>
+          </section>
+
+          <section class="image-details-content__license">
+            <a
+              :href="licenseLink"
+              class="text--size-14 text--underline text--weight-600"
+              rel="noopener noreferrer"
+              target="_blank"
+            >{{ $t(`ImageDetails.label.${image.license}`) }}</a>
+            <p
+              class="mt-4"
+              v-html="$t(`ImageDetails.label.${image.license}-details`)"
+            />
+            <a
+              class="text--underline text--size-12 text--color-gray-9b"
+              @click="reportImage"
+            >{{ $t('ImageDetails.button.reportAbuse') }}</a>
+          </section>
+
+          <hr class="mt-32 mb-24">
+
           <section class="image-details-content__meta">
-            <h1>{{ $t('ImageDetails.label.description') }}</h1>
-            <p>{{ image.description }}</p>
-            <h1>{{ $t('ImageDetails.label.tags') }}</h1>
             <ul>
               <li
                 v-for="(tag) in image.tags"
@@ -41,32 +111,52 @@
                 >{{ tag.name }}</nuxt-link>
               </li>
             </ul>
+            <p class="text--size-14 mt-16 mb-24">
+              {{ image.description }}
+            </p>
           </section>
-          <section class="image-details-content__actions">
+
+          <section
+            class="image-details-content__exif"
+          >
+            <h1 v-if="image.exif.Make || image.exif.Model">
+              {{ image.exif.Make }} {{ image.exif.Model }}
+            </h1>
+            <span class="text--color-gray-9b">
+              <span v-if="image.exif.LensMake || image.exif.LensModel">
+                {{ image.exif.LensMake }} {{ image.exif.LensModel }}<br>
+              </span>
+              <span v-if="image.exif.FocalLength">
+                {{ image.exif.FocalLength }}mm
+              </span>
+              <span v-if="image.exif.FNumber">
+                · f/{{ image.exif.FNumber }}
+              </span>
+              <span v-if="image.exif.ExposureTime">
+                · 1/{{ 1 / (image.exif.ExposureTime) }}s
+              </span>
+              <span v-if="image.exif.ISO">
+                · ISO {{ image.exif.ISO }} ↯
+              </span>
+            </span>
             <ul>
-              <li>
-                <v-btn
-                  class="btn--likecoin text--size-14"
-                  color="primary"
-                  depressed
-                  block
-                  @click="useImage"
-                >{{ $t('ImageDetails.button.useOrDownload') }}</v-btn>
+              <li v-if="image.type">
+                <span>{{ $t('ImageDetails.label.imageType') }}</span>
+                <span class="image-details-content__type">{{ image.type }}</span>
               </li>
               <li>
-                <like-button
-                  :count="image.like.count"
-                  block
-                />
+                <span>{{ $t('ImageDetails.label.resolution') }}</span>
+                <span>{{ image.width }} x {{ image.height }}</span>
+              </li>
+              <li v-if="image.dateCreated">
+                <span>{{ $t('ImageDetails.label.created') }}</span>
+                <span>{{ formatDate(image.dateCreated) }}</span>
+              </li>
+              <li>
+                <span>{{ $t('ImageDetails.label.uploaded') }}</span>
+                <span>{{ relativeUploadTime }}</span>
               </li>
             </ul>
-          </section>
-          <section class="image-details-content__license">
-            <p>{{ image.license.name }}</p>
-            <a
-              class="text--underline text--size-12"
-              @click="reportImage"
-            >{{ $t('ImageDetails.button.reportAbuse') }}</a>
           </section>
         </div>
       </div>
@@ -76,25 +166,30 @@
       :image="image"
       :is-open.sync="isReportImageDialogOpen"
     />
-    <use-image-dialog
+    <download-image-dialog
       :image="image"
-      :is-open.sync="isUseImageDialogOpen"
+      :is-open.sync="isDownloadImageDialogOpen"
     />
   </div>
 </template>
 
 <script>
-import LikeButton from '~/components/LikeButton';
+import { mapActions } from 'vuex';
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
+import format from 'date-fns/format';
+
+import DownloadImageDialog from '~/components/DownloadImageDialog';
 import ReportImageDialog from '~/components/ReportImageDialog';
-import UseImageDialog from '~/components/UseImageDialog';
 import UserBadge from '~/components/UserBadge';
+
+import { getImageSourceFromUrl } from '~/util/index';
+import { LICENSE } from '~/constant/index';
 
 export default {
   name: 'image-details',
   components: {
-    LikeButton,
+    DownloadImageDialog,
     ReportImageDialog,
-    UseImageDialog,
     UserBadge,
   },
   props: {
@@ -115,8 +210,30 @@ export default {
     return {
       isImageLoaded: false,
       isReportImageDialogOpen: false,
-      isUseImageDialogOpen: false,
+      isDownloadImageDialogOpen: false,
     };
+  },
+  computed: {
+    isUploaderImageOwner() {
+      return !this.image.likeEscrow;
+    },
+    licenseLink() {
+      return this.image.licenseUrl || LICENSE[this.image.license] || null;
+    },
+    relativeUploadTime() {
+      return distanceInWordsToNow(this.image.updatedAt, {
+        addSuffix: true,
+      });
+    },
+    downloadCount() {
+      return (this.image.stats || {}).downloadCount || 0;
+    },
+    viewCount() {
+      return (this.image.stats || {}).viewCount || 0;
+    },
+    hasExif() {
+      return this.image.exif && Object.keys(this.image.exif).length > 0;
+    },
   },
   watch: {
     image() {
@@ -124,24 +241,30 @@ export default {
     },
   },
   mounted() {
+    this.viewImage(this.image.fingerprint);
     this.openSubDialogIfNeeded();
   },
   methods: {
+    ...mapActions('ImageDetailsDialog', ['viewImage']),
     onImageLoaded() {
       this.isImageLoaded = true;
     },
     openSubDialogIfNeeded() {
       this.openSubDialogTimer = setTimeout(() => {
         this.isReportImageDialogOpen = this.isReportImage;
-        this.isUseImageDialogOpen = this.isUseImage;
+        this.isDownloadImageDialogOpen = this.isUseImage;
       }, 500);
     },
     reportImage() {
       this.isReportImageDialogOpen = true;
     },
-    useImage() {
-      this.isUseImageDialogOpen = true;
+    downloadImage() {
+      this.isDownloadImageDialogOpen = true;
     },
+    formatDate(date) {
+      return format(date, 'MMMM D, YYYY');
+    },
+    getImageSourceFromUrl,
   },
 };
 </script>
@@ -153,14 +276,6 @@ export default {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-
-  &__close-btn {
-    margin: 40px 0 24px -16px;
-
-    @include tablet-and-below {
-      margin-top: 24px;
-    }
-  }
 
   &__panel-wrapper {
     flex-grow: 1;
@@ -175,31 +290,50 @@ export default {
   &__panel--left {
     flex-grow: 1;
 
-    @extend .px-64, .px-24--sm, .pb-64, .pb-0--sm;
-
+    @extend .px-24--sm;
     @include desktop-and-up {
       display: flex;
       flex-direction: column;
+    }
+
+    &-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      @extend .pl-40, .pr-24;
+      @include mobile-only {
+        flex-direction: column;
+      }
+
+      iframe {
+        height: 120px;
+      }
     }
   }
 
   &__panel--right {
     width: 100%;
 
+    background-color: color(gray-f7);
+
     @include desktop-and-up {
       position: relative;
 
       overflow-y: auto;
-
       flex-shrink: 0;
 
-      width: 316px;
+      width: 288px;
       height: inherit;
 
       border-left: solid 1px #ccc;
     }
+    @extend .px-24, .px-24--sm, .py-48, .pt-24--sm;
 
-    @extend .px-40, .px-24--sm, .py-40, .pt-24--sm;
+    hr {
+      border: none;
+      border-top: 1px solid color(gray-e6);
+    }
   }
 }
 
@@ -207,6 +341,8 @@ export default {
   position: relative;
 
   flex-grow: 1;
+
+  @extend .my-24;
 
   &__image {
     display: block;
@@ -219,7 +355,6 @@ export default {
 
     object-fit: contain;
     object-position: center;
-
     @include desktop-and-up {
       position: absolute;
       top: 50%;
@@ -235,6 +370,19 @@ export default {
       opacity: 1;
     }
   }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    content: ' ';
+
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 }
 
 .image-details-content {
@@ -243,8 +391,12 @@ export default {
 
   font-size: 12px;
 
+  > *:not(.image-details-content__actions) {
+    @extend .px-8;
+  }
+
   h1 {
-    margin: 24px 0 12px;
+    margin: 0 0 4px;
 
     color: color(like-green);
 
@@ -252,26 +404,41 @@ export default {
     font-weight: 600;
   }
 
-  &__credits {
-    @extend .mt-32--sm;
+  &__type {
+    text-transform: uppercase;
   }
 
-  &__meta {
+  &__credits {
+    @extend .mt-32--sm;
+
+    :global(.user-badge__likecoin-id) {
+      @extend .text--size-18, .text--weight-600;
+    }
+  }
+
+  &__exif {
+    @extend .mt-16;
+
     ul {
       list-style: none;
 
-      > li {
-        display: inline;
+      @extend .mt-8;
 
-        &:not(:last-child)::after {
-          content: ', ';
+      li {
+        display: flex;
+        justify-content: space-between;
+
+        @extend .text--height-1-8;
+
+        span:last-child {
+          text-align: right;
         }
       }
     }
   }
 
   &__actions {
-    @extend .mt-48, .mt-8--sm;
+    @extend .mt-8--sm;
 
     ul {
       margin: -8px;
@@ -293,23 +460,27 @@ export default {
     }
   }
 
-  &__license {
-    @extend .mt-48, .mt-32--sm;
+  &__meta {
+    ul {
+      list-style: none;
+
+      > li {
+        display: inline-block;
+
+        @extend .text--underline;
+
+        &:not(:first-child) {
+          margin-left: 4px;
+        }
+        &:not(:last-child)::after {
+          content: ',';
+        }
+      }
+    }
   }
 
-  @include tablet-and-below {
-    &__credits {
-      order: 2;
-    }
-    &__meta {
-      order: 3;
-    }
-    &__actions {
-      order: 1;
-    }
-    &__license {
-      order: 4;
-    }
+  &__license {
+    @extend .mt-24, .mt-32--sm;
   }
 }
 </style>

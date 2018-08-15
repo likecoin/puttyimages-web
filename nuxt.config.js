@@ -55,6 +55,12 @@ module.exports = {
     '~/assets/css/main.scss',
   ],
   /*
+  ** Share environment variables for the client and server-side.
+  */
+  env: {
+    CDN_HOST: process.env.CDN_HOST,
+  },
+  /*
   ** Headers of the page
   */
   head: {
@@ -62,7 +68,7 @@ module.exports = {
       { href: '/favicon.png', rel: 'icon', type: 'image/x-icon' },
       {
         href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons',
+          'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Material+Icons',
         rel: 'stylesheet',
         type: 'text/css',
       },

@@ -1,16 +1,18 @@
+import isDateValid from 'date-fns/is_valid';
+import jsonStringify from 'json-stable-stringify';
+
 import ethUtil from './ethUtil';
 import { blobToArrayBuffer, arrayBufferToSha256 } from './fileUtil';
 import { LICENSE } from '../constant';
-
-const jsonStringify = require('json-stable-stringify');
 
 const assetUtil = {
   async formatAndSignAsset(assetInfo) {
     const {
       assetFile,
-      creator,
+      dateCreated,
       description,
       license,
+      likeOwner,
       tags,
       wallet,
     } = assetInfo;
@@ -21,12 +23,14 @@ const assetUtil = {
       assetSHA256 = await arrayBufferToSha256(assetBuf);
     }
     const payload = jsonStringify({
-      creator,
-      dateCreated: nowDateTime,
+      dateCreated: isDateValid(dateCreated)
+        ? dateCreated.toISOString()
+        : undefined,
       description,
       license: LICENSE[license],
       likeFingerprint: assetSHA256,
       likeFootprint: [],
+      likeOwner,
       likePreviousVersion: null,
       type: 'ImageObject',
       uploadDate: nowDateTime,
