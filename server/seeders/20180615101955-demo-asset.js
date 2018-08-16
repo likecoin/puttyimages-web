@@ -15,18 +15,28 @@ module.exports = {
     new Promise(async (resolve) => {
       const assets = [];
       const ipfs = await IpfsClient();
+      // assets for size test
+      const numOfSizeAssets = 18;
       const sizes = ['landscape', 'portrait', 'square'];
-      const allSizes = new Array(18)
+      const allAssets = new Array(numOfSizeAssets)
         .fill('')
         .map((e, i) => `${sizes[Math.floor(i / 6)]}${(i % 6) + 1}.png`);
+      // assets for stat test
+      allAssets.push('stat1.png');
       await Promise.all(
-        allSizes.map(async (path, index) => {
+        allAssets.map(async (path, index) => {
           const content = fs.readFileSync(`./assets/seed/${path}`);
           const hash256 = sha256(content);
           const { height, width } = imageSize(content);
           const ipfsAdd = await ipfs.files.add({ content, path });
           const indexedDate = new Date(+fixedDate + 600000 * index);
-          const wallet = `address ${(index % 3) + 1}`;
+          let wallet;
+          if (index < numOfSizeAssets) {
+            // size test
+            wallet = `address ${(index % 3) + 1}`;
+          } else {
+            wallet = 'address stat';
+          }
 
           const mediaObj = {
             creator: [wallet],
@@ -46,7 +56,7 @@ module.exports = {
           });
           const asset = {
             created_at: indexedDate,
-            description: tags[index].name,
+            description: tags[index] ? tags[index].name : path,
             fingerprint: Buffer.from(hash256, 'hex'),
             height,
             ipfs: bs58.decode(ipfsAdd[0].hash),
