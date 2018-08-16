@@ -119,10 +119,13 @@
           <section
             class="image-details-content__exif"
           >
-            <h1 v-if="image.exif.Make || image.exif.Model">
+            <h1 v-if="hasExif && (image.exif.Make || image.exif.Model)">
               {{ image.exif.Make }} {{ image.exif.Model }}
             </h1>
-            <span class="text--color-gray-9b">
+            <span
+              v-if="hasExif"
+              class="text--color-gray-9b"
+            >
               <span v-if="image.exif.LensMake || image.exif.LensModel">
                 {{ image.exif.LensMake }} {{ image.exif.LensModel }}<br>
               </span>
