@@ -9,6 +9,13 @@ Object {
 }
 `;
 
+exports[`get user info by wallet 1`] = `
+Object {
+  "challenge": "local",
+  "wallet": "0x0000000000000000000000000000000000000000",
+}
+`;
+
 exports[`get users list 1`] = `
 Array [
   Object {
@@ -29,14 +36,13 @@ Array [
     "likecoinId": "likecoin_id_3",
     "wallet": "address 3",
   },
+  Object {
+    "avatar": null,
+    "displayName": "stat test asset owner",
+    "likecoinId": "likecoin_id_4",
+    "wallet": "address stat",
+  },
 ]
-`;
-
-exports[`get user info by wallet 1`] = `
-Object {
-  "challenge": "local",
-  "wallet": "0x0000000000000000000000000000000000000000",
-}
 `;
 
 exports[`post user login 1`] = `

@@ -16,6 +16,11 @@ module.exports = {
         display_name: 'Sébastien',
         wallet: 'address 3',
       },
+      {
+        likecoin_id: 'likecoin_id_4',
+        display_name: 'stat test asset owner',
+        wallet: 'address stat',
+      },
     ]),
   down: (queryInterface) => queryInterface.bulkDelete('user', null, {}),
 };

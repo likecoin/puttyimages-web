@@ -103,9 +103,7 @@
     "coverageDirectory": "./coverage/",
     "globalSetup": "<rootDir>/__tests__/setup.js",
     "testMatch": [
-      "<rootDir>/__tests__/unit/*.test.js",
-      "<rootDir>/__tests__/integration/ipfs/*.test.js",
-      "<rootDir>/__tests__/integration/api/index.js"
+      "<rootDir>/__tests__/**/*.test.js"
     ],
     "testEnvironment": "node",
     "transform": {
