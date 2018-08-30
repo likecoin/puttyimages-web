@@ -88,10 +88,13 @@
               rel="noopener noreferrer"
               target="_blank"
             >{{ $t(`ImageDetails.label.${image.license}`) }}</a>
+            <!-- TODO: figure out a good way to avoid v-html -->
+            <!-- eslint-disable vue/no-v-html -->
             <p
               class="mt-4"
               v-html="$t(`ImageDetails.label.${image.license}-details`)"
             />
+            <!-- eslint-enable vue/no-v-html -->
             <a
               class="text--underline text--size-12 text--color-gray-9b"
               @click="reportImage"
