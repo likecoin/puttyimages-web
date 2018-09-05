@@ -63,7 +63,7 @@
 <script>
 import { mapActions } from 'vuex';
 
-import LikeButton from '~/components/LikeButton';
+// import LikeButton from '~/components/LikeButton';
 import UserBadge from '~/components/UserBadge';
 
 import { getImageSourceFromUrl } from '~/util/index';
@@ -86,7 +86,7 @@ function sortImagesByHeight(images, colCount) {
 export default {
   name: 'masonry-images-grid',
   components: {
-    LikeButton,
+    // LikeButton,
     UserBadge,
   },
   props: {

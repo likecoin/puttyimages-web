@@ -26,8 +26,8 @@
         <div v-else>
           <!-- Chrome Dialog start (ask when user use browser like Safari) -->
           <v-dialog
-            v-if="shouldShowChromeDialog"
             v-model="isDialogOpen"
+            v-if="shouldShowChromeDialog"
             max-width="290"
             @keydown.esc="isDialogOpen = false"
           >

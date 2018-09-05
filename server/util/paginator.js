@@ -1,6 +1,6 @@
 import { Base64 } from 'js-base64';
 
-import { isNumber } from '../util';
+import { isNumber } from '.';
 import { RESULT_PER_PAGE } from '../../constant';
 import { ValidationError } from '../models/validator';
 

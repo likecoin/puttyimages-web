@@ -4,8 +4,8 @@
       <div class="search-page__field">
         <search-icon class="search-page__icon" />
         <v-text-field
-          ref="searchField"
           v-model="searchQuery"
+          ref="searchField"
           :loading="isLoading"
           :placeholder="$t('Search.label.searchAnyImage')"
           class="search-page__input"
@@ -180,7 +180,8 @@ export default {
         this.pageInfo = null;
         this.matchRouteToSearchQuery();
         return;
-      } else if (e) {
+      }
+      if (e) {
         clearTimeout(this.timer);
         this.timer = setTimeout(() => this.onKeywordChange(), 300);
         return;

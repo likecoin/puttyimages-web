@@ -1,7 +1,7 @@
 <template>
   <v-form
-    ref="form"
     v-model="formValid"
+    ref="form"
     class="the-upload-image-form mx-auto"
     lazy-validation
   >
@@ -27,8 +27,8 @@
       @input="onTagChange"
     >
       <template
-        slot="selection"
         slot-scope="data"
+        slot="selection"
       >
         <v-chip
           :selected="data.selected"

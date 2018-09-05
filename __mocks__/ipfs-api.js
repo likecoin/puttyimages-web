@@ -62,6 +62,7 @@ class IPFSApi {
         Promise.resolve(dagNode, options)
       ),
   };
+
   swarm = {
     localAddrs: jest
       .fn()

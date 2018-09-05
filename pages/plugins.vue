@@ -18,9 +18,9 @@
               <h2>{{ $t('Plugins.label.widget') }}</h2>
               <div>
                 <v-select
+                  v-model="widgetSize"
                   :items="['Large Button', 'Icon']"
                   :label="$t('Plugins.label.chooseSize')"
-                  v-model="widgetSize"
                   append-icon="expand_more"
                   class="input-text--likecoin mt-16"
                 />
@@ -74,14 +74,14 @@
 
 <script>
 import CodeBlock from '~/components/CodeBlock';
-import LikeCoinIcon from '~/assets/logo/icon.svg';
+// import LikeCoinIcon from '~/assets/logo/icon.svg';
 
 import { EMBEDDED_SCRIPT_IN_HEAD } from '~/constant/index';
 
 export default {
   components: {
     CodeBlock,
-    LikeCoinIcon,
+    // LikeCoinIcon,
   },
   data() {
     return {

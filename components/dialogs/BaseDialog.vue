@@ -43,13 +43,13 @@
 
 
 <script>
-import EarthIcon from '@/assets/icons/earth.svg';
+// import EarthIcon from '@/assets/icons/earth.svg';
 import LanguageSwitch from '@/components/LanguageSwitch';
 
 export default {
   name: 'base-dialog',
   components: {
-    EarthIcon,
+    // EarthIcon,
     LanguageSwitch,
   },
   props: {

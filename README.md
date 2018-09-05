@@ -1,4 +1,4 @@
-# puttyimages [![CircleCI](https://circleci.com/gh/likecoin/puttyimages-web.svg?style=svg)](https://circleci.com/gh/likecoin/puttyimages-web) [![codecov](https://codecov.io/gh/likecoin/puttyimages-web/branch/master/graph/badge.svg)](https://codecov.io/gh/likecoin/puttyimages-web)
+# puttyimages [![CircleCI](https://circleci.com/gh/likecoin/puttyimages-web.svg?style=svg)](https://circleci.com/gh/likecoin/puttyimages-web) [![codecov](https://codecov.io/gh/likecoin/puttyimages-web/branch/master/graph/badge.svg)](https://codecov.io/gh/likecoin/puttyimages-web) [![Greenkeeper badge](https://badges.greenkeeper.io/likecoin/puttyimages-web.svg)](https://greenkeeper.io/)
 
 Puttyimegs is an open stock image DApp that live within the
 [LikeCoin](https://like.co/) ecosystem.

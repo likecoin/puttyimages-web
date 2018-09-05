@@ -51,9 +51,9 @@
             </v-flex>
 
             <v-text-field
+              v-model="comments"
               :disabled="isSubmitting"
               :label="$t('ReportImageDialog.label.comments')"
-              v-model="comments"
               class="mt-16"
             />
 
