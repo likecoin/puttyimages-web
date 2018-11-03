@@ -75,7 +75,7 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
     "babel-jest": "^23.0.1",
-    "backpack-core": "^0.7.0",
+    "backpack-core": "^0.8.2",
     "eslint": "^5.4.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^3.0.1",
