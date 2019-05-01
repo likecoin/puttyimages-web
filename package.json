@@ -53,7 +53,7 @@
     "pg": "^7.4.3",
     "pg-hstore": "^2.3.2",
     "sass-loader": "^7.0.2",
-    "sequelize": "^4.37.10",
+    "sequelize": "^5.8.2",
     "sequelize-cli": "^4.0.0",
     "source-map-support": "^0.5.6",
     "umzug": "^2.1.0",
