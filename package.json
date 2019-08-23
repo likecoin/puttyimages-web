@@ -31,7 +31,7 @@
     "bs58": "^4.0.1",
     "cookie-parser": "^1.4.3",
     "cross-env": "^5.1.6",
-    "date-fns": "^1.29.0",
+    "date-fns": "^2.0.1",
     "eth-sig-util": "^2.0.2",
     "ethereumjs-abi": "^0.6.5",
     "exif-parser": "^0.1.12",
