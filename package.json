@@ -90,7 +90,7 @@
     "eslint-plugin-vue": "^5.0.0-beta.3",
     "stylelint": "^9.5.0",
     "stylelint-config-recommended-scss": "^3.2.0",
-    "stylelint-order": "^1.0.0",
+    "stylelint-order": "^3.1.0",
     "stylelint-scss": "^3.1.0",
     "vue-svg-loader": "^0.8.0"
   },
