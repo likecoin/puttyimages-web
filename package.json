@@ -32,7 +32,7 @@
     "cookie-parser": "^1.4.3",
     "cross-env": "^5.1.6",
     "date-fns": "^1.29.0",
-    "eth-sig-util": "^2.0.2",
+    "eth-sig-util": "^2.5.2",
     "ethereumjs-abi": "^0.6.5",
     "exif-parser": "^0.1.12",
     "express": "^4.16.3",
