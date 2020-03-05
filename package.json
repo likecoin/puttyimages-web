@@ -62,7 +62,7 @@
     "vue-clipboard2": "^0.2.0",
     "vue-cookie": "^1.1.4",
     "vue-i18n": "^8.0.0",
-    "vue-infinite-loading": "^2.3.1",
+    "vue-infinite-loading": "2.4.4",
     "vue-server-renderer": "^2.5.17",
     "vue-template-compiler": "^2.5.17",
     "vuetify": "^1.0.18",
