@@ -16,7 +16,9 @@
     "sequelize:reseed": "npm run sequelize db:seed:undo:all && npm run sequelize db:seed:all",
     "start": "cross-env NODE_ENV=production node build/main.js",
     "stylelint": "stylelint -i .gitignore '**/*.{scss,vue}'",
-    "test": "jest --detectOpenHandles --forceExit"
+    "test": "jest --detectOpenHandles --forceExit",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "engines": {
     "node": ">=10.0.0"
@@ -68,7 +70,8 @@
     "vuetify": "^1.0.18",
     "vuex": "^3.0.1",
     "web3-utils": "^1.0.0-beta.34",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "axiosist": "^0.1.1",
@@ -109,5 +112,6 @@
     "transform": {
       "^.+\\.js$": "babel-jest"
     }
-  }
+  },
+  "snyk": true
 }
