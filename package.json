@@ -24,7 +24,7 @@
   "dependencies": {
     "@likecoin/ethereum-blockies": "^0.1.2",
     "@likecoin/likecoin-eth-util": "^1.0.1",
-    "@nuxtjs/sentry": "^1.1.0",
+    "@nuxtjs/sentry": "^4.0.3",
     "axios": "^0.18.0",
     "babel-register": "^6.26.0",
     "body-parser": "^1.18.3",
